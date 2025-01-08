@@ -36,5 +36,5 @@ EOF
 
 inputs = {
   provider_aws_tags   = local.common.cloud.tags
-  provider_aws_region = local.region.name
+  provider_aws_region = local.region.region
 }

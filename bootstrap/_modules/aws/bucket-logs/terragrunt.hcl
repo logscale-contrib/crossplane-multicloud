@@ -26,5 +26,5 @@ locals {
 
 inputs = {
 
-  name = "cloud-${local.partition.name}-${local.region.name}"
+  name = "cloud-${local.partition.name}-${local.region.region}"
 }

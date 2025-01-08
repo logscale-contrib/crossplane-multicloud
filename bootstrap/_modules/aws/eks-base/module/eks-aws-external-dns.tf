@@ -5,7 +5,8 @@ module "edns_irsa" {
   version = "5.52.1"
 
   role_name_prefix = "external-dns"
-
+  role_path = var.iam_role_path
+  
   attach_external_dns_policy = true
 
   oidc_providers = {

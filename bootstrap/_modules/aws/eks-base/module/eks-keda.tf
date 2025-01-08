@@ -6,6 +6,7 @@ module "keda_irsa" {
 
   role_name_prefix = "keda-operator"
 
+  role_path = var.iam_role_path
 
   oidc_providers = {
     main = {

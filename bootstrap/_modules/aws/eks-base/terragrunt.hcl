@@ -47,6 +47,8 @@ inputs = {
   cluster_version = local.region.kubernetes.version
   component_versions =local.region.kubernetes.componentVersions
 
+  iam_role_path = local.platform.aws.iam_role_path
+
   kms_key_administrators = local.platform.aws.kms.additional_key_owners
   access_entries         = local.region.kubernetes.access_entries
 

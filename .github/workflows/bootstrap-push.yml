@@ -53,7 +53,7 @@ jobs:
 
       - name: Cache terragrunt
         id: cache-terragrunt
-        # if: steps.changes.outputs.tf == 'true'
+        if: steps.changes.outputs.tf == 'true'
         uses: actions/cache@v4
         with:
           path: ${{ env.TERRAGRUNT_DOWNLOAD }}
@@ -61,7 +61,8 @@ jobs:
       
       - name: tg init-upgrade
         uses: gruntwork-io/terragrunt-action@v2        
-        # if: steps.changes.outputs.tf == 'true'
+        if: steps.changes.outputs.tf == 'true'
+        continue-on-error: true
         env:
           TERRAGRUNT_DOWNLOAD: ${{ env.TERRAGRUNT_DOWNLOAD }}
         with:

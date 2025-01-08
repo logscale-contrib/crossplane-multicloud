@@ -1,5 +1,5 @@
 
-variable "partition_name" {
+variable "name" {
 
 }
 

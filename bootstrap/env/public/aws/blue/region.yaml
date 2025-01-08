@@ -8,7 +8,7 @@ kubernetes:
   access_entries:
     gh:
       kubernetes_groups: []
-      principal_arn: arn:aws:iam::042445652404:role/github-terragrunt-logscale-multicloud
+      principal_arn: arn:aws:iam::042445652404:role/github-crossplane-multicloud
       policy_associations:
         cluster-admin:
           policy_arn: "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"

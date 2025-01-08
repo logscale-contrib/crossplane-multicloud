@@ -2,7 +2,7 @@ type: aws
 aws:
   region: us-east-1
   #must have leading but not trailing slash
-  iam_role_path_prefix: "/cloud"
+  iam_role_path: "/cloud/"
   iam_policy_path_prefix: "/cloud"
   iam_policy_name_prefix: "cloud"
   kms:

@@ -56,7 +56,30 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: 'Checkout'
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
+
+      - name: Cache terragrunt
+        id: cache-terragrunt
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
+
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            tf:
+              - 'bootstrap/_modules/**/versions.tf'
+      - name: tg init-upgrade
+        uses: gruntwork-io/terragrunt-action@v2        
+        if: steps.changes.outputs.tf == 'true'
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'run-all init-upgrade'          
+        
 
       - name: Plan
         uses: gruntwork-io/terragrunt-action@v2
@@ -81,6 +104,13 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@main
 
+      - name: Cache terragrunt
+        id: cache-terragrunt
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
+        
       - name: Deploy
         uses: gruntwork-io/terragrunt-action@v2
         with:

@@ -15,7 +15,7 @@ env:
   working_dir: 'bootstrap/env/public' 
   AWS_REGION : us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
-  TERRAGRUNT_DOWNLOAD: /work/.terragrunt-cache
+  TERRAGRUNT_DOWNLOAD: /${ runner.temp }/.terragrunt-cache
   
 permissions:
       id-token: write   # This is required for requesting the JWT
@@ -42,16 +42,25 @@ jobs:
           tg_version: ${{ env.tg_version }}
           tg_dir: ${{ env.working_dir }}
           tg_command: 'hclfmt --terragrunt-check --terragrunt-diff'
-
+     
       - uses: dorny/paths-filter@v3
         id: changes
         with:
           filters: |
             tf:
               - 'bootstrap/_modules/**/versions.tf'
+
+      - name: Cache terragrunt
+        id: cache-terragrunt
+        # if: steps.changes.outputs.tf == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
+      
       - name: tg init-upgrade
         uses: gruntwork-io/terragrunt-action@v2        
-        if: steps.changes.outputs.tf == 'true'
+        # if: steps.changes.outputs.tf == 'true'
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}

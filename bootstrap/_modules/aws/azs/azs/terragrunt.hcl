@@ -14,14 +14,14 @@ include "root" {
   path = find_in_parent_folders()
 }
 include "root" {
-  path = "${dirname(find_in_parent_folders())}/_providers/terragrunt_aws_regional.hcl"
+  path = "${dirname(find_in_parent_folders())}/bootstrap/_providers/terragrunt_aws_regional.hcl"
 }
 
 
 # Include the envcommon configuration for the component. The envcommon configuration contains settings that are common
 # for the component across all environments.
 include "module" {
-  path   = "${dirname(find_in_parent_folders())}/_modules/aws/azs/terragrunt.hcl"
+  path   = "${dirname(find_in_parent_folders())}/bootstrap/_modules/aws/azs/terragrunt.hcl"
   expose = true
 }
 

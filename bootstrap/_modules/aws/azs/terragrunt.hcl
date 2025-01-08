@@ -11,7 +11,7 @@
 # deployed version.
 
 terraform {
-  source = "${dirname(find_in_parent_folders())}/_modules/aws/azs/module/"
+  source = "${dirname(find_in_parent_folders())}/bootstrap/_modules/aws/azs/module/"
 }
 
 

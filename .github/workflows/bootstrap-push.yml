@@ -15,7 +15,7 @@ env:
   working_dir: 'bootstrap/env/public' 
   AWS_REGION : us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
-  TERRAGRUNT_DOWNLOAD: ~/.terragrunt-cache
+  TERRAGRUNT_DOWNLOAD: ${{ github.workspace }}/.terragrunt-cache
   
   
 permissions:
@@ -56,12 +56,14 @@ jobs:
         # if: steps.changes.outputs.tf == 'true'
         uses: actions/cache@v4
         with:
-          path: ~/.terragrunt-cache/
+          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
       
       - name: tg init-upgrade
         uses: gruntwork-io/terragrunt-action@v2        
         # if: steps.changes.outputs.tf == 'true'
+        env:
+          TERRAGRUNT_DOWNLOAD: ${{ env.TERRAGRUNT_DOWNLOAD }}
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}
@@ -87,11 +89,13 @@ jobs:
         id: cache-terragrunt
         uses: actions/cache@v4
         with:
-          path: ~/.terragrunt-cache/
+          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
         
       - name: Deploy
         uses: gruntwork-io/terragrunt-action@v2
+        env:
+          TERRAGRUNT_DOWNLOAD: ${{ env.TERRAGRUNT_DOWNLOAD }}
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}

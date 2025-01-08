@@ -37,12 +37,9 @@ jobs:
 
       - name: tg unlock
         uses: gruntwork-io/terragrunt-action@v2        
-        if: steps.changes.outputs.tf == 'true'
         continue-on-error: true
-        env:
-          TERRAGRUNT_DOWNLOAD: ${{ env.TERRAGRUNT_DOWNLOAD }}
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}
-          tg_dir: ${{ inputs.path }}
+          tg_dir: bootstrap/env/${{ inputs.path }}
           tg_command: 'force-unlock -force ${{ inputs.id }}'                    

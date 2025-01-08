@@ -3,11 +3,11 @@ on:
   pull_request:
     paths:
       - bootstrap/**
-      - .github/workflows/bootstrap.yml
+      - .github/workflows/bootstrap*.yml
   push:
     paths:
       - bootstrap/**
-      - .github/workflows/bootstrap.yml
+      - .github/workflows/bootstrap*.yml
 
 env:
   tf_version: '1.10.2'

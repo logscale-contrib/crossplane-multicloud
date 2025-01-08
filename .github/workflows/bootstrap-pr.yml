@@ -1,0 +1,83 @@
+name: 'Crossplane bootstrap pull'
+on:
+  pull_request:
+    paths:
+      - bootstrap/**
+      - .github/workflows/bootstrap.yml
+
+env:
+  tf_version: '1.10.2'
+  tg_version: '0.69.0'
+  working_dir: 'bootstrap/env/public' 
+  AWS_REGION : us-east-1
+  AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
+  TERRAGRUNT_DOWNLOAD: /work/.terragrunt-cache
+  
+permissions:
+      id-token: write   # This is required for requesting the JWT
+      contents: read    # This is required for actions/checkout
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}
+          role-session-name: crossplane-multicloud_bootstrap
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: 'Checkout'
+        uses: actions/checkout@main
+
+      - name: Check terragrunt HCL
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'hclfmt --terragrunt-check --terragrunt-diff'
+
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            tf:
+              - 'bootstrap/_modules/**/versions.tf'
+      - name: tg init-upgrade
+        uses: gruntwork-io/terragrunt-action@v2        
+        if: steps.changes.outputs.tf == 'true'
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'run-all init-upgrade'          
+  plan:
+    runs-on: ubuntu-latest
+    needs: [ checks ]
+    steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}
+          role-session-name: crossplane-multicloud_bootstrap
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: Cache terragrunt
+        id: cache-terragrunt
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
+
+      - name: Plan
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'run-all plan'

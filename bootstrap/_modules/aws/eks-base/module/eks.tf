@@ -16,6 +16,7 @@ module "eks" {
   cluster_version                = var.cluster_version
   cluster_endpoint_public_access = true
 
+  iam_role_path = var.iam_role_path
 
   # IPV6
   cluster_ip_family = "ipv6"

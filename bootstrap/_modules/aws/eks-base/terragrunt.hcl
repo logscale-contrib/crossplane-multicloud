@@ -40,7 +40,7 @@ dependency "bucket" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  name    = dependency.vpc.outputs.name
+  name    = "${dependency.vpc.outputs.name}-cp"
   vpc_id  = dependency.vpc.outputs.vpc_id
   subnets = dependency.vpc.outputs.private_subnets
 

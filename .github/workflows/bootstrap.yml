@@ -1,9 +1,13 @@
-name: 'Terragrunt GitHub Actions'
+name: 'Crossplane bootstrap'
 on:
-  - pull_request:
+  pull_request:
+    paths:
       - bootstrap/**
-  - push:
+      - .github/workflows/bootstrap.yml
+  push:
+    paths:
       - bootstrap/**
+      - .github/workflows/bootstrap.yml
 
 env:
   tf_version: '1.10.2'

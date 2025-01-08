@@ -1,0 +1,10 @@
+cloud:
+  tags:
+    logsr.life/partition: public
+    logsr.life/owner: rfaircloth
+    logsr.life/environment: production
+    logsr.life/tier: control-plane
+kubernetes:
+  labels:
+    owner: ryanfaircloth
+    project: logsrlife

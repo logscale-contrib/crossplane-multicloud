@@ -56,7 +56,7 @@ jobs:
         # if: steps.changes.outputs.tf == 'true'
         uses: actions/cache@v4
         with:
-          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+          path: .terragrunt-cache
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
       
       - name: tg init-upgrade
@@ -87,7 +87,7 @@ jobs:
         id: cache-terragrunt
         uses: actions/cache@v4
         with:
-          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+          path: .terragrunt-cache
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
         
       - name: Deploy

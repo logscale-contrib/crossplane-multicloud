@@ -22,19 +22,6 @@ permissions:
       contents: read    # This is required for actions/checkout
 
 jobs:
-  AssumeRoleAndCallIdentity:
-    runs-on: ubuntu-latest
-    steps:
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1.7.0
-        with:
-          role-to-assume: ${{ env.AWS_ROLE }}
-          role-session-name: crossplane-multicloud_bootstrap
-          aws-region: ${{ env.AWS_REGION }}
-      # Hello from AWS: WhoAmI
-      - name: Sts GetCallerIdentity
-        run: |
-          aws sts get-caller-identity
   checks:
     runs-on: ubuntu-latest
     steps:

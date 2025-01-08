@@ -15,7 +15,8 @@ env:
   working_dir: 'bootstrap/env/public' 
   AWS_REGION : us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
-  TERRAGRUNT_DOWNLOAD: /${ runner.temp }/.terragrunt-cache
+  TERRAGRUNT_DOWNLOAD: /home/runner/work/.terragrunt-cache
+  
   
 permissions:
       id-token: write   # This is required for requesting the JWT

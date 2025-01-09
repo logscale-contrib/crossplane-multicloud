@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   checks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
@@ -72,7 +72,7 @@ jobs:
           tg_command: 'run-all init -upgrade'                    
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [ checks ]
     # environment: 'prod'
     if: github.ref == 'refs/heads/main'

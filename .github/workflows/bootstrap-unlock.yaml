@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   unlock:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2

@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   checks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
@@ -54,7 +54,7 @@ jobs:
           tg_dir: ${{ env.working_dir }}
           tg_command: 'run-all init -upgrade'          
   plan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [ checks ]
     steps:
       - name: configure aws credentials

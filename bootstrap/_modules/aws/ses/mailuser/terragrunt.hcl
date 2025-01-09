@@ -25,7 +25,7 @@ locals {
 }
 
 dependency "smtp" {
-  config_path = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.name}/ses/"
+  config_path = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.activeName}/ses/"
 }
 
 inputs = {

@@ -10,6 +10,7 @@ module "karpenter" {
   irsa_oidc_provider_arn = module.eks.oidc_provider_arn
 
   iam_role_path = var.iam_role_path
+  iam_policy_path = var.iam_role_path
   # create_node_iam_role = false
   # # Since the nodegroup role will already have an access entry
   # create_access_entry = false

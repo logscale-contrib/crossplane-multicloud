@@ -17,6 +17,8 @@ module "eks" {
   cluster_endpoint_public_access = true
 
   iam_role_path = var.iam_role_path
+  node_iam_role_path = var.iam_role_path
+  cluster_encryption_policy_path = var.iam_role_path
 
   # IPV6
   cluster_ip_family = "ipv6"
@@ -30,7 +32,7 @@ module "eks" {
       before_compute              = true
     }
     coredns = {
-      addon_version               = "v1.11.3-eksbuild.1"
+      addon_version               = "v1.11.4-eksbuild.2"
       resolve_conflicts_on_create = "OVERWRITE"
       resolve_conflicts_on_update = "OVERWRITE"
       preserve                    = true

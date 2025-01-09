@@ -11,6 +11,7 @@ module "karpenter" {
 
   iam_role_path = var.iam_role_path
   iam_policy_path = var.iam_role_path
+  node_iam_role_path = var.iam_role_path
   # create_node_iam_role = false
   # # Since the nodegroup role will already have an access entry
   # create_access_entry = false

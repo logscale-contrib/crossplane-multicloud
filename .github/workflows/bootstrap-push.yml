@@ -47,9 +47,10 @@ jobs:
       - uses: dorny/paths-filter@v3
         id: changes
         with:
+          list-files: 'shell'
           filters: |
             tf:
-              - 'bootstrap/_modules/**/versions.tf'
+              - '**/module/versions.tf'
 
       - name: Cache terragrunt
         id: cache-terragrunt

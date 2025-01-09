@@ -27,7 +27,7 @@ module "otel-policy" {
   version = "5.52.2"
 
   name_prefix = "otel"
-  # path        = var.iam_policy_path
+  path        = var.iam_policy_path
 
 
   policy = jsonencode({

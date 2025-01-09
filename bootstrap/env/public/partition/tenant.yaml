@@ -1,0 +1,23 @@
+name: partition
+platform: aws
+region: us-east-1
+dr:
+  blue: us-west-1
+  green: us-east-1
+kafka:
+  deployment: tenant
+  kafka:
+    prefixIncrement: 1
+logscale:
+  management-cluster:
+    - akadmin
+    - noplaceforkeys
+  management-organization:
+    - akadmin
+    - noplaceforkeys
+  users:
+    - akadmin
+    - noplaceforkeys
+    - matt.smith1
+  kafka:
+    prefixIncrement: 6

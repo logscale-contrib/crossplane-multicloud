@@ -1,4 +1,4 @@
-name: green
+name: blue
 region: us-west-1
 az_exclude_names: []
 kubernetes:

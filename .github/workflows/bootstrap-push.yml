@@ -60,7 +60,7 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
       
       - name: tg init-upgrade
-        run: terragrunt run-all init -upgrade
+        run: terragrunt run-all init -upgrade --terragrunt-non-interactive
         working-directory: ${{ env.working_dir }}
         if: steps.changes.outputs.tf == 'true'
         continue-on-error: true
@@ -95,5 +95,5 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
         
       - name: Deploy
-        run: terragrunt run-all apply
+        run: terragrunt run-all apply --terragrunt-non-interactive
         working-directory: ${{ env.working_dir }}

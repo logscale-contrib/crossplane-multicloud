@@ -26,6 +26,14 @@ jobs:
   checks:
     runs-on: ubuntu-24.04
     steps:
+      - uses: eLco/setup-terragrunt@v1
+        with:
+          terragrunt_version: ${{ env.tg_version }}
+      - name: HashiCorp - Setup Terraform            
+        uses: hashicorp/setup-terraform@v3.1.2
+        with:
+          terraform_version: ${{ env.tf_version }}
+
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
@@ -35,15 +43,7 @@ jobs:
 
       - name: 'Checkout'
         uses: actions/checkout@main
-
-      - name: Check terragrunt HCL
-        uses: gruntwork-io/terragrunt-action@v2
-        with:
-          tf_version: ${{ env.tf_version }}
-          tg_version: ${{ env.tg_version }}
-          tg_dir: ${{ env.working_dir }}
-          tg_command: 'hclfmt --terragrunt-check --terragrunt-diff'
-     
+    
       - uses: dorny/paths-filter@v3
         id: changes
         with:
@@ -60,16 +60,10 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
       
       - name: tg init-upgrade
-        uses: gruntwork-io/terragrunt-action@v2        
+        run: terragrunt run-all init -upgrade
+        working-directory: ${{ env.working_dir }}
         if: steps.changes.outputs.tf == 'true'
         continue-on-error: true
-        env:
-          TERRAGRUNT_DOWNLOAD: ${{ env.TERRAGRUNT_DOWNLOAD }}
-        with:
-          tf_version: ${{ env.tf_version }}
-          tg_version: ${{ env.tg_version }}
-          tg_dir: ${{ env.working_dir }}
-          tg_command: 'run-all init -upgrade'                    
 
   deploy:
     runs-on: ubuntu-24.04
@@ -77,6 +71,13 @@ jobs:
     # environment: 'prod'
     if: github.ref == 'refs/heads/main'
     steps:
+      - uses: eLco/setup-terragrunt@v1
+        with:
+          terragrunt_version: ${{ env.tg_version }}
+      - name: HashiCorp - Setup Terraform            
+        uses: hashicorp/setup-terraform@v3.1.2
+        with:
+          terraform_version: ${{ env.tf_version }}
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
@@ -94,11 +95,5 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
         
       - name: Deploy
-        uses: gruntwork-io/terragrunt-action@v2
-        env:
-          TERRAGRUNT_DOWNLOAD: ${{ env.TERRAGRUNT_DOWNLOAD }}
-        with:
-          tf_version: ${{ env.tf_version }}
-          tg_version: ${{ env.tg_version }}
-          tg_dir: ${{ env.working_dir }}
-          tg_command: 'run-all apply'
+        run: terragrunt run-all apply
+        working-directory: ${{ env.working_dir }}

@@ -147,6 +147,7 @@ module "eks" {
 
   eks_managed_node_groups = {
     system = {
+      iam_role_path = var.iam_role_path
       instance_types = ["m7g.2xlarge",
         "m6g.2xlarge"
       ]

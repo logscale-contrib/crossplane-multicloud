@@ -58,7 +58,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ env.TERRAGRUNT_DOWNLOAD }}
-          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
+          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
       
       - name: tg init-upgrade
         run: terragrunt run-all init -upgrade --terragrunt-non-interactive
@@ -93,7 +93,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ env.TERRAGRUNT_DOWNLOAD }}
-          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
+          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
         
       - name: Deploy
         run: terragrunt run-all apply --terragrunt-non-interactive

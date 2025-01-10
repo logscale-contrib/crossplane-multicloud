@@ -7,8 +7,9 @@ variable "host_name" {
   default     = "identity"
   description = "(optional) describe your variable"
 }
-variable "admin_email" {
+variable "sso_secret" {
   type        = string
+  default = "cloud/pub/sso"
   description = "(optional) describe your variable"
 }
 

@@ -21,8 +21,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   global = yamldecode(file(find_in_parent_folders("global.yaml")))
-  identity = yamldecode(file(find_in_parent_folders("identity.yaml")))
-
+  
 }
 
 dependency "kubernetes_cluster" {
@@ -46,8 +45,7 @@ dependency "mailuser" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
   domain_name = dependency.partition_zone.outputs.zone_name
-  admin_email = local.identity.adminEmail
-
+  
   smtp_user     = dependency.mailuser.outputs.smtp_user
   smtp_password = dependency.mailuser.outputs.smtp_password
   smtp_server   = dependency.smtp.outputs.smtp_server

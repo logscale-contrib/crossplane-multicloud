@@ -35,12 +35,12 @@ resource "kubectl_manifest" "strimzi-operator" {
   yaml_body = templatefile("./manifests/helm-manifests/strimzi-operator.yaml", {})
 }
 
-resource "kubectl_manifest" "zalando" {
-  depends_on = [
-    time_sleep.external_services
-  ]
-  yaml_body = templatefile("./manifests/helm-manifests/zalando.yaml", { region = var.region })
-}
+# resource "kubectl_manifest" "zalando" {
+#   depends_on = [
+#     time_sleep.external_services
+#   ]
+#   yaml_body = templatefile("./manifests/helm-manifests/zalando.yaml", { region = var.region })
+# }
 # resource "kubectl_manifest" "zalando-ui" {
 #   depends_on = [
 #     time_sleep.external_services,

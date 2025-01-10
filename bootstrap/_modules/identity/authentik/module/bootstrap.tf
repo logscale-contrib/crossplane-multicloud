@@ -9,6 +9,9 @@ resource "random_password" "bootstrap_token" {
 data "aws_secretsmanager_secret" "sso" {
   name = var.sso_secret
 }
+data "aws_secretsmanager_secret_version" "sso" {
+  secret_id = data.aws_secretsmanager_secret.sso.id
+}
 
 resource "kubernetes_secret" "bootstrap" {
   depends_on = []
@@ -20,7 +23,7 @@ resource "kubernetes_secret" "bootstrap" {
   data = {
     password = random_password.bootstrap_password.result
     token    = random_password.bootstrap_token.result
-    email    = jsondecode(data.aws_secretsmanager_secret.sso.secret_string)["akadminEmail"]
+    email    = jsondecode(data.aws_secretsmanager_secret_version.sso.secret_string)["akadminEmail"]
 
   }
   type = "Opaque"

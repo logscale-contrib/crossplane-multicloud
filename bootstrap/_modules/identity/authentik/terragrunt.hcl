@@ -26,7 +26,7 @@ locals {
 }
 
 dependency "kubernetes_cluster" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.region}/kubernetes/kubernetes-region-cluster/"
+  config_path  = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.region}/eks//"
   skip_outputs = true
 }
 

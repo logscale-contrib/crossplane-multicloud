@@ -25,7 +25,7 @@ locals {
 }
 
 dependency "kubernetes_cluster" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.name}/eks/"
+  config_path  = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.activeName}/eks/"
   skip_outputs = true
 }
 
@@ -33,7 +33,7 @@ dependency "partition_zone" {
   config_path = "${get_terragrunt_dir()}/../../dns/"
 }
 dependency "smtp" {
-  config_path = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.region}/ses/"
+  config_path = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.activeName}/ses/"
 }
 dependency "mailuser" {
   config_path = "${get_terragrunt_dir()}/../identity-email/"

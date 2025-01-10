@@ -20,7 +20,7 @@ resource "kubernetes_secret" "bootstrap" {
   data = {
     password = random_password.bootstrap_password.result
     token    = random_password.bootstrap_token.result
-    email    = jsondecode(data.aws_secretsmanager_secret.secret_string)["akadminEmail"]
+    email    = jsondecode(data.aws_secretsmanager_secret.sso.secret_string)["akadminEmail"]
 
   }
   type = "Opaque"

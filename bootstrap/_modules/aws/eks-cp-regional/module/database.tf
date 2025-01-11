@@ -68,6 +68,8 @@ resource "kubectl_manifest" "db" {
         role_arn = module.authentik_db_irsa.iam_role_arn,
         region_name = var.region_name,
         bucket_id = var.data_bucket_id
+        bucket_id_green = var.data_bucket_id_green
+        bucket_id_blue  = var.data_bucket_id_blue
         # cluster_name = module.eks.cluster_name 
    })
 

@@ -32,6 +32,12 @@ dependency "kubernetes_cluster" {
 dependency "bucket" {
   config_path  = "${get_terragrunt_dir()}/../bucket-data-dr/"
 }
+dependency "bucket_green" {
+  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.green}/bucket-data-dr/"
+}
+dependency "bucket_blue" {
+  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.blue}/bucket-data-dr/"
+}
 
 # dependency "partition_zone" {
 #   config_path = "${get_terragrunt_dir()}/../../dns/"
@@ -57,6 +63,9 @@ inputs = {
 
   data_bucket_arn = dependency.bucket.outputs.bucket_arn
   data_bucket_id = dependency.bucket.outputs.bucket_id
+
+  data_bucket_id_green = dependency.bucket_green.outputs.bucket_id
+  data_bucket_id_blue = dependency.bucket_blue.outputs.bucket_id
 
   db_primary = local.partition.shared.sso.db.primary 
   db_secondary = local.partition.shared.sso.db.secondary

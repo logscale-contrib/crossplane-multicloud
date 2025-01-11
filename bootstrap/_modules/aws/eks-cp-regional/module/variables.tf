@@ -38,3 +38,10 @@ variable "db_primary" {
 variable "db_secondary" {
   
 }
+
+variable "data_bucket_id_green" {
+  
+}
+variable "data_bucket_id_blue" {
+  
+}

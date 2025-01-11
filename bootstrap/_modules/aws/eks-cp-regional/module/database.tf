@@ -57,14 +57,14 @@ module "iam_iam-policy" {
   })
 }
 
-resource "kubectl_manifest" "db" {
+# resource "kubectl_manifest" "db" {
   
-  yaml_body = templatefile("./manifests/helm-releases/database.yaml",
-   { 
-        role_arn = module.authentik_db_irsa.iam_role_arn,
-        region_name = var.region_name,
-        bucket_id = var.data_bucket_id
-        # cluster_name = module.eks.cluster_name 
-   })
+#   yaml_body = templatefile("./manifests/helm-releases/database.yaml",
+#    { 
+#         role_arn = module.authentik_db_irsa.iam_role_arn,
+#         region_name = var.region_name,
+#         bucket_id = var.data_bucket_id
+#         # cluster_name = module.eks.cluster_name 
+#    })
 
-}
+# }

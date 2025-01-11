@@ -30,10 +30,10 @@ dependency "kubernetes_cluster" {
   config_path  = "${get_terragrunt_dir()}/../eks/"
 }
 dependency "bucket_green" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.regions[0]}/bucket-data-dir/"
+  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.regions[0]}/bucket-data-dr/"
 }
 dependency "bucket_blue" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.regions[1]}/bucket-data-dir/"
+  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.regions[1]}/bucket-data-dr/"
 }
 
 # dependency "partition_zone" {

@@ -11,10 +11,10 @@ locals {
 
   replication_role    = basename(get_terragrunt_dir())
 
-  blue = split(",",replication_role)[0]
+  blue = split("-",replication_role)[0]
   blue_region = yamldecode(file(find_in_parent_folders("/aws/${local.blue}/region.yaml")))
 
-  green = split(",",replication_role)[1]
+  green = split("-",replication_role)[1]
   green_region = yamldecode(file(find_in_parent_folders("/aws/${local.green}/region.yaml")))
 
 }

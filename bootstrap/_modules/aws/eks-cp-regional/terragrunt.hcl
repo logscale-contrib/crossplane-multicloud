@@ -27,7 +27,7 @@ locals {
 }
 
 dependency "kubernetes_cluster" {
-  config_path  = "${get_terragrunt_dir()}/../aws/${local.partition.shared.sso.region}/eks/"
+  config_path  = "${get_terragrunt_dir()}/../eks-base/"
   skip_outputs = true
 }
 

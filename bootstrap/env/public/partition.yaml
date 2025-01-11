@@ -9,6 +9,9 @@ shared:
   sso:
     enabled: true
     region: green
+    db:
+      primary: green
+      secondary: blue
     regions:
       - green
       - blue

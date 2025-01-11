@@ -31,7 +31,7 @@ spec:
       apiVersion: postgresql.cnpg.io/v1
       kind: Cluster
       metadata:
-        name: {{ .Release.Name }}
+        name: authentik-db-${region_name}
       spec:
         instances: 3
 
@@ -54,11 +54,3 @@ spec:
             annotations:
               eks.amazonaws.com/role-arn: ${role_arn}
           automountServiceAccountToken: true
-    - |
-      apiVersion: postgresql.cnpg.io/v1
-      kind: Backup
-      metadata:
-        name: {{ .Release.Name }}
-      spec:
-        cluster:
-          name: {{ .Release.Name }}

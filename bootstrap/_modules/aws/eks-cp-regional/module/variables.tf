@@ -30,3 +30,11 @@ variable "data_bucket_arn" {
   type        = string
   description = "(optional) describe your variable"  
 }
+
+
+variable "db_primary" {
+  
+}
+variable "db_secondary" {
+  
+}

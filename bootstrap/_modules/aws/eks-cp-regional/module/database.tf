@@ -57,14 +57,32 @@ module "iam_iam-policy" {
   })
 }
 
-resource "kubectl_manifest" "db" {
-  
-  yaml_body = templatefile("./manifests/helm-releases/database.yaml",
-   { 
-        role_arn = module.authentik_db_irsa.iam_role_arn,
-        region_name = var.region_name,
-        bucket_id = var.data_bucket_id
-        # cluster_name = module.eks.cluster_name 
-   })
-
+locals {
+  db_template = var.region_name == var.db_primary ? "primary" : "secondary"
 }
+
+# resource "kubectl_manifest" "db" {
+  
+#   yaml_body = templatefile("./manifests/helm-releases/database-${local.db_template}.yaml",
+#    { 
+#         role_arn = module.authentik_db_irsa.iam_role_arn,
+#         region_name = var.region_name,
+#         bucket_id = var.data_bucket_id
+#         # cluster_name = module.eks.cluster_name 
+#    })
+
+# }
+
+# resource "kubectl_manifest" "db-backup" {
+
+  # count = db_template == "primary" ? 1 : 0
+  
+#   yaml_body = templatefile("./manifests/helm-releases/database-${local.db_template}.yaml",
+#    { 
+#         role_arn = module.authentik_db_irsa.iam_role_arn,
+#         region_name = var.region_name,
+#         bucket_id = var.data_bucket_id
+#         # cluster_name = module.eks.cluster_name 
+#    })
+
+# }

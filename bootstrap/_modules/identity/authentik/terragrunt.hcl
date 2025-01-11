@@ -20,12 +20,12 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  global = yamldecode(file(find_in_parent_folders("global.yaml")))
-  
+  partition    = yamldecode(file(find_in_parent_folders("partition.yaml")))  
+  region = yamldecode(file(find_in_parent_folders("/aws/${local.partition.shared.sso.region}/region.yaml")))  
 }
 
 dependency "kubernetes_cluster" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.activeName}/eks/"
+  config_path  = "${get_terragrunt_dir()}/../../aws/${local.partition.shared.sso.region}/eks/"
   skip_outputs = true
 }
 
@@ -33,7 +33,7 @@ dependency "partition_zone" {
   config_path = "${get_terragrunt_dir()}/../../dns/"
 }
 dependency "smtp" {
-  config_path = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.activeName}/ses/"
+  config_path = "${get_terragrunt_dir()}/../../aws/${local.global.activeName}/ses/"
 }
 dependency "mailuser" {
   config_path = "${get_terragrunt_dir()}/../identity-email/"

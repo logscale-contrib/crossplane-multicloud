@@ -7,9 +7,8 @@
 
 locals {
   common    = yamldecode(file(find_in_parent_folders("common.yaml")))
-  global    = yamldecode(file(find_in_parent_folders("global.yaml")))  
   partition    = yamldecode(file(find_in_parent_folders("partition.yaml")))  
-  region = yamldecode(file(find_in_parent_folders("/${local.global.provider}/${local.global.activeName}/region.yaml")))
+  region = yamldecode(file(find_in_parent_folders("/aws/${local.partition.shared.sso.region}/region.yaml")))
 }
 
 generate "provider_aws" {

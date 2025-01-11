@@ -21,11 +21,10 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  global    = yamldecode(file(find_in_parent_folders("global.yaml")))
 }
 
 dependency "smtp" {
-  config_path = "${get_terragrunt_dir()}/../../${local.global.provider}/${local.global.activeName}/ses/"
+  config_path = "${get_terragrunt_dir()}/../../aws/${local.partition.shared.sso.region}/ses/"
 }
 
 inputs = {

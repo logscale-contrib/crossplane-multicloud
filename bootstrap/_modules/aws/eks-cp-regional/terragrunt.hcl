@@ -29,6 +29,12 @@ locals {
 dependency "kubernetes_cluster" {
   config_path  = "${get_terragrunt_dir()}/../eks/"
 }
+dependency "bucket_green" {
+  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.regions[0]}/bucket-data-dir/"
+}
+dependency "bucket_blue" {
+  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.regions[1]}/bucket-data-dir/"
+}
 
 # dependency "partition_zone" {
 #   config_path = "${get_terragrunt_dir()}/../../dns/"
@@ -49,6 +55,8 @@ inputs = {
 
   oidc_provider_arn = dependency.kubernetes_cluster.outputs.oidc_provider_arn
 
+  data_bucket_arn_green = dependency.bucket_green.outputs.bucket_arn
+  data_bucket_arn_blue = dependency.bucket_blue.outputs.bucket_arn
   # domain_name = dependency.partition_zone.outputs.zone_name
   
   # smtp_user     = dependency.mailuser.outputs.smtp_user

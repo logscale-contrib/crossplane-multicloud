@@ -9,3 +9,6 @@ shared:
   sso:
     enabled: true
     region: green
+    regions:
+      - green
+      - blue

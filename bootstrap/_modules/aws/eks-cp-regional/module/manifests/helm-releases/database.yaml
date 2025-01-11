@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: db
+  name: authentik-db
   namespace: authentik
 spec:
   interval: 10m
@@ -15,7 +15,7 @@ spec:
         name: bedag
         namespace: flux-repos
       interval: 5m
-  releaseName: db
+  releaseName: authentik-db
   targetNamespace: authentik
   install:
     remediation:
@@ -31,7 +31,7 @@ spec:
       apiVersion: postgresql.cnpg.io/v1
       kind: Cluster
       metadata:
-        name: authentik-db
+        name: {{ .Release.Name }}
       spec:
         instances: 3
 
@@ -54,3 +54,11 @@ spec:
             annotations:
               eks.amazonaws.com/role-arn: ${role_arn}
           automountServiceAccountToken: true
+    - |
+      apiVersion: postgresql.cnpg.io/v1
+      kind: Backup
+      metadata:
+        name: {{ .Release.Name }}
+      spec:
+        cluster:
+          name: {{ .Release.Name }}

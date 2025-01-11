@@ -28,7 +28,6 @@ locals {
 
 dependency "kubernetes_cluster" {
   config_path  = "${get_terragrunt_dir()}/../eks/"
-  skip_outputs = true
 }
 
 # dependency "partition_zone" {

@@ -1,6 +1,6 @@
-output "data-dr_bucket_arn" {
+output "bucket_arn" {
   value = module.data-dr.s3_bucket_arn
 }
-output "data-dr_bucket_id" {
+output "bucket_id" {
   value = module.data-dr.s3_bucket_id
 }

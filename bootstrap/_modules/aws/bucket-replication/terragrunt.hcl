@@ -26,19 +26,19 @@ locals {
 }
 
 dependency "bucket-blue" {
-  config_path = "${get_terragrunt_dir()}/../../../${blue}/bucket-data-dr"
+  config_path = "${get_terragrunt_dir()}/../../../${local.blue}/bucket-data-dr"
 }
 dependency "bucket-green" {
-  config_path = "${get_terragrunt_dir()}/../../../${green}/bucket-data-dr"
+  config_path = "${get_terragrunt_dir()}/../../../${local.green}/bucket-data-dr"
 }
 
 
 inputs = {
-  bucket_id_blue  = dependency.bucket-blue.outputs.logscale_sgreenrage_bucket_id
-  bucket_id_green = dependency.bucket-green.outputs.logscale_sgreenrage_bucket_id
+  bucket_id_blue  = dependency.bucket-blue.outputs.bucket_id
+  bucket_id_green = dependency.bucket-green.outputs.bucket_id
 
-  bucket_arn_blue  = dependency.bucket-blue.outputs.logscale_sgreenrage_bucket_arn
-  bucket_arn_green = dependency.bucket-green.outputs.logscale_sgreenrage_bucket_arn
+  bucket_arn_blue  = dependency.bucket-blue.outputs.bucket_arn
+  bucket_arn_green = dependency.bucket-green.outputs.bucket_arn
 
   replication_role_name_prefix = "cloud-${local.partition.name}-${replication_role}"
 

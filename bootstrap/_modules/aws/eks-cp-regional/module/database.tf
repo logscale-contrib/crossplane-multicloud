@@ -14,7 +14,7 @@ module "authentik_db_irsa" {
   oidc_providers = {
     main = {
       provider_arn               = var.oidc_provider_arn
-      namespace_service_accounts = ["${var.authentik_namespace}:${var.authentik_service_account}"]
+      namespace_service_accounts = ["${var.authentik_namespace}:${var.authentik_service_account}-${var.region_name}"]
     }
   }
 }

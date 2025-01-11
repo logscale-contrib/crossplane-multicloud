@@ -15,7 +15,7 @@ spec:
         name: bedag
         namespace: flux-repos
       interval: 5m
-  releaseName: authentik-db
+  releaseName: authentik-db-${region_name}
   targetNamespace: authentik
   install:
     remediation:

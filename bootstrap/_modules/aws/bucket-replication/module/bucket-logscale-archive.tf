@@ -101,7 +101,6 @@ resource "aws_s3_bucket_replication_configuration" "blue_green" {
 
     destination {
       bucket        = var.bucket_arn_green
-      storage_class = "STANDARD_IA"
     }
   }
 }
@@ -128,7 +127,6 @@ resource "aws_s3_bucket_replication_configuration" "green_blue" {
 
     destination {
       bucket        = var.bucket_arn_blue
-      storage_class = "STANDARD_IA"
     }
   }
 }

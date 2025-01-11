@@ -42,7 +42,7 @@ spec:
       # Backup properties
       backup:
         barmanObjectStore:
-          destinationPath: s3://${bucketid}/partition/authentik/${region_name}
+          destinationPath: s3://${bucket_id}/partition/authentik/${region_name}
           s3Credentials:
             inheritFromIAMRole: true
           wal:

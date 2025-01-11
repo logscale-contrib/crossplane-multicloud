@@ -40,7 +40,7 @@ inputs = {
   bucket_arn_blue  = dependency.bucket-blue.outputs.bucket_arn
   bucket_arn_green = dependency.bucket-green.outputs.bucket_arn
 
-  replication_role_name_prefix = "cloud-${local.partition.name}-${replication_role}"
+  replication_role_name_prefix = "cloud-${local.partition.name}-${local.replication_role}"
 
    iam_role_path = local.platform.aws.iam_role_path
 

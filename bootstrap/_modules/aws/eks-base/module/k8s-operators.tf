@@ -39,11 +39,8 @@ resource "kubectl_manifest" "strimzi-operator" {
 
 resource "time_sleep" "operators" {
   depends_on = [
-    kubectl_manifest.logscale-operator,
     kubectl_manifest.otel-operator,
-    kubectl_manifest.redis-operator,
-    kubectl_manifest.strimzi-operator,
-    kubectl_manifest.zalando
+    kubectl_manifest.strimzi-operator
   ]
   destroy_duration = "180s"
 }

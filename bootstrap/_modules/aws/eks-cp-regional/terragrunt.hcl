@@ -27,7 +27,7 @@ locals {
 }
 
 dependency "kubernetes_cluster" {
-  config_path  = "${get_terragrunt_dir()}/../eks-base/"
+  config_path  = "${get_terragrunt_dir()}/../eks/"
   skip_outputs = true
 }
 

@@ -1,14 +1,12 @@
 name: 'Crossplane bootstrap'
 on:
-  pull_request:
-    paths:
-      - bootstrap/**
-      - .github/workflows/bootstrap*.yml
   push:
     paths:
       - bootstrap/**
       - .github/workflows/bootstrap*.yml
-
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  
 env:
   tf_version: '1.10.2'
   tg_version: '0.69.0'

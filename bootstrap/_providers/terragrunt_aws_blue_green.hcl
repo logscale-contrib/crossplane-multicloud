@@ -66,6 +66,6 @@ EOF
 inputs = {
   provider_aws_tags         = local.common.cloud.tags
   provider_aws_region       = local.partition.shared.provider.region
-  provider_aws_blue_region  = local.blue_region.name
-  provider_aws_green_region = local.green_region.name
+  provider_aws_blue_region  = local.blue_region.region
+  provider_aws_green_region = local.green_region.region
 }

@@ -1,3 +1,7 @@
+variable "region_name" {
+  
+}
+
 variable "iam_role_path" {
   
 }

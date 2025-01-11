@@ -36,7 +36,18 @@ spec:
         instances: 3
 
         storage:
+          storageClass: gp3
           size: 50Gi
+
+      # Backup properties
+      backup:
+        barmanObjectStore:
+          destinationPath: s3://${bucketid}/partition/authentik/${region_name}
+          s3Credentials:
+            inheritFromIAMRole: true
+          wal:
+            compression: bzip2
+            maxParallel: 4
 
         ServiceAccountTemplate:
           metadata:

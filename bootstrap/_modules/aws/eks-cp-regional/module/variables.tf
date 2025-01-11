@@ -18,11 +18,11 @@ variable "authentik_service_account" {
   description = "(optional) describe your variable"
   
 }
-variable "data_bucket_arn_green" {
+variable "data_bucket_id" {
   type        = string
   description = "(optional) describe your variable"  
 }
-variable "data_bucket_arn_blue" {
+variable "data_bucket_arn" {
   type        = string
   description = "(optional) describe your variable"  
 }

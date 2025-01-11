@@ -35,9 +35,6 @@ variable "data_bucket_arn" {
 variable "db_primary" {
   
 }
-variable "db_secondary" {
-  
-}
 
 variable "data_bucket_id_green" {
   

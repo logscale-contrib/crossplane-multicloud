@@ -10,6 +10,7 @@ shared:
     enabled: true
     region: green
     db:
+      primary: green
       green: green
       blue: blue
     

@@ -49,11 +49,11 @@ spec:
             compression: bzip2
             maxParallel: 4
 
-        ServiceAccountTemplate:
-          metadata:
-            annotations:
-              eks.amazonaws.com/role-arn: ${role_arn}
-          automountServiceAccountToken: true
+      serviceAccountTemplate:
+        metadata:
+          annotations:
+            eks.amazonaws.com/role-arn: ${role_arn}
+        automountServiceAccountToken: true
     - |
       apiVersion: postgresql.cnpg.io/v1
       kind: Backup

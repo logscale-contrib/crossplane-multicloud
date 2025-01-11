@@ -1,14 +1,22 @@
 # ---------------------------------------------------------------------------------------------------------------------
 # TERRAGRUNT CONFIGURATION
-# Terragrunt is a thin wrapper for Terraform that provides extra tools for working with multiple Terraform modules,
+# Terragrunt is a thin wrapper for Terraform that provides extra greenols for working with multiple Terraform modules,
 # remote state, and locking: https://github.com/gruntwork-io/terragrunt
 # ---------------------------------------------------------------------------------------------------------------------
 
 
 locals {
   common     = yamldecode(file(find_in_parent_folders("common.yaml")))
-  blue_green = yamldecode(file("${path_relative_to_include()}/blue_green.yaml"))
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
+
+  replication_role    = basename(dirname(get_terragrunt_dir()))
+
+  blue = split(",",replication_role)[0]
+  blue_region = yamldecode(file(find_in_parent_folders("/aws/${local.blue}/region.yaml")))
+
+  green = split(",",replication_role)[1]
+  green_region = yamldecode(file(find_in_parent_folders("/aws/${local.green}/region.yaml")))
+
 }
 
 

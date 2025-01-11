@@ -41,4 +41,7 @@ inputs = {
   bucket_arn_green = dependency.bucket-green.outputs.logscale_sgreenrage_bucket_arn
 
   replication_role_name_prefix = "cloud-${local.partition.name}-${replication_role}"
+
+   iam_role_path = local.platform.aws.iam_role_path
+
 }

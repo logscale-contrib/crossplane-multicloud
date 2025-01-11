@@ -65,11 +65,19 @@ resource "aws_iam_role" "replication" {
   name_prefix = var.replication_role_name_prefix
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  path = var.iam_role_path
+}
 
-  inline_policy {
-    name   = "replication"
-    policy = data.aws_iam_policy_document.replication.json
-  }
+resource "aws_iam_policy" "replication" {
+  name   = "${var.replication_role_name_prefix}-replication"
+  policy = data.aws_iam_policy_document.replication.json
+
+  path = var.iam_role_path
+}
+
+resource "aws_iam_role_policy_attachment" "replication" {
+  role       = aws_iam_role.replication.name
+  policy_arn = aws_iam_policy.replication.arn
 }
 
 resource "aws_s3_bucket_replication_configuration" "blue_green" {

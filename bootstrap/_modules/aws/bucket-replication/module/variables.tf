@@ -19,3 +19,7 @@ variable "bucket_arn_blue" {
   type        = string
   description = "(optional) describe your variable"
 }
+
+variable "iam_role_path" {
+  
+}

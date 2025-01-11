@@ -19,6 +19,7 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
+  platform  = yamldecode(file(find_in_parent_folders("platform.yaml")))
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
   replication_role    = basename(get_terragrunt_dir())
   blue = split("-",local.replication_role)[0]
@@ -42,6 +43,6 @@ inputs = {
 
   replication_role_name_prefix = "cloud-${local.partition.name}-${local.replication_role}"
 
-   iam_role_path = local.platform.aws.iam_role_path
+  iam_role_path = local.platform.aws.iam_role_path
 
 }

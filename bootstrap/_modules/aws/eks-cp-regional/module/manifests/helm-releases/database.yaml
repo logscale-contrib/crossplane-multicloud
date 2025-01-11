@@ -39,21 +39,21 @@ spec:
           storageClass: gp3
           size: 50Gi
 
-      # Backup properties
-      backup:
-        barmanObjectStore:
-          destinationPath: s3://${bucket_id}/partition/authentik/${region_name}
-          s3Credentials:
-            inheritFromIAMRole: true
-          wal:
-            compression: bzip2
-            maxParallel: 4
+        # Backup properties
+        backup:
+          barmanObjectStore:
+            destinationPath: s3://${bucket_id}/partition/authentik/${region_name}
+            s3Credentials:
+              inheritFromIAMRole: true
+            wal:
+              compression: bzip2
+              maxParallel: 4
 
-      serviceAccountTemplate:
-        metadata:
-          annotations:
-            eks.amazonaws.com/role-arn: ${role_arn}
-        automountServiceAccountToken: true
+        serviceAccountTemplate:
+          metadata:
+            annotations:
+              eks.amazonaws.com/role-arn: ${role_arn}
+          automountServiceAccountToken: true
     - |
       apiVersion: postgresql.cnpg.io/v1
       kind: Backup

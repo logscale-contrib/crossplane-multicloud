@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "replication" {
     actions = [
       "s3:GetReplicationConfiguration",
       "s3:ListBucket",
-      "s3:PutInvengreenryConfiguration"
+      "s3:PutInventoryConfiguration"
     ]
 
     resources = [
@@ -18,9 +18,9 @@ data "aws_iam_policy_document" "replication" {
     effect = "Allow"
 
     actions = [
-      "s3:GegreenbjectVersionForReplication",
-      "s3:GegreenbjectVersionAcl",
-      "s3:GegreenbjectVersionTagging",
+      "s3:GetObjectVersionForReplication",
+      "s3:GetObjectVersionAcl",
+      "s3:GetObjectVersionTagging",
     ]
 
     resources = [
@@ -68,16 +68,17 @@ resource "aws_iam_role" "replication" {
   path = var.iam_role_path
 }
 
-resource "aws_iam_policy" "replication" {
-  name   = "${var.replication_role_name_prefix}-replication"
+resource "aws_iam_policy" "replication_policy" {
+  name   = "blue-green-blue"
   policy = data.aws_iam_policy_document.replication.json
-
+  
   path = var.iam_role_path
+  
 }
 
-resource "aws_iam_role_policy_attachment" "replication" {
+resource "aws_iam_role_policy_attachment" "replication_policy_attachment" {
   role       = aws_iam_role.replication.name
-  policy_arn = aws_iam_policy.replication.arn
+  policy_arn = aws_iam_policy.replication_policy.arn
 }
 
 resource "aws_s3_bucket_replication_configuration" "blue_green" {
@@ -100,7 +101,7 @@ resource "aws_s3_bucket_replication_configuration" "blue_green" {
 
     destination {
       bucket        = var.bucket_arn_green
-      sgreenrage_class = "STANDARD_IA"
+      storage_class = "STANDARD_IA"
     }
   }
 }
@@ -127,7 +128,7 @@ resource "aws_s3_bucket_replication_configuration" "green_blue" {
 
     destination {
       bucket        = var.bucket_arn_blue
-      sgreenrage_class = "STANDARD_IA"
+      storage_class = "STANDARD_IA"
     }
   }
 }

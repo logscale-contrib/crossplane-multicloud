@@ -20,7 +20,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  replication_role    = basename(dirname(get_terragrunt_dir()))
+  replication_role    = dirname(get_terragrunt_dir())
   blue = split(",",local.replication_role)[0]
   green = split(",",local.replication_role)[1]
 }

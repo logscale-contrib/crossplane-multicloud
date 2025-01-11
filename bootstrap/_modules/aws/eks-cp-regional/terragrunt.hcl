@@ -58,9 +58,9 @@ inputs = {
   data_bucket_arn = dependency.bucket.outputs.bucket_arn
   data_bucket_id = dependency.bucket.outputs.bucket_id
 
-  db_primary = local.partition.sso.db.primary 
-  db_secondary = local.partition.sso.db.secondary
-  
+  db_primary = local.partition.shared.sso.db.primary 
+  db_secondary = local.partition.shared.sso.db.secondary
+
   # domain_name = dependency.partition_zone.outputs.zone_name
   
   # smtp_user     = dependency.mailuser.outputs.smtp_user

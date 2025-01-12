@@ -77,7 +77,7 @@ resource "kubectl_manifest" "db" {
 
 resource "kubectl_manifest" "db-backup" {
   depends_on = [ kubectl_manifest.db ]
-  count = db_template == "primary" ? 1 : 0
+  count = local.db_template == "primary" ? 1 : 0
   
   yaml_body = templatefile("./manifests/helm-releases/database-${local.db_template}.yaml",
    { 

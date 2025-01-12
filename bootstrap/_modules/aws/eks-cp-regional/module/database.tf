@@ -73,6 +73,7 @@ resource "kubectl_manifest" "db_green" {
         bucket_id_blue  = var.data_bucket_id_blue
         green = var.db_green
         blue = var.db_blue
+        primary = var.db_primary
         # cluster_name = module.eks.cluster_name 
    })
 

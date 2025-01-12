@@ -141,6 +141,6 @@ inputs = {
   provider_aws_eks_cluster_name = "${local.partition.name}-${local.region.name}"
 
   partition_aws_region           = local.partition.shared.provider.region
-  provider_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.region.name}-cp"
+  partition_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.region.name}-cp"
 
 }

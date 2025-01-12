@@ -77,7 +77,7 @@ resource "kubectl_manifest" "db" {
         green = var.db_green
         blue = var.db_blue
         primary = var.db_primary
-        source = var.region_name == var.db_primary ? var.db_primary : var.db_secondary
+        source = var.db_primary
    })
 
 }

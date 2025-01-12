@@ -14,7 +14,7 @@ include "root" {
   path = find_in_parent_folders()
 }
 include "root" {
-  path = "${dirname(find_in_parent_folders())}/_providers/terragrunt_aws_eks_partition_region.hcl"
+  path = "${dirname(find_in_parent_folders())}/_providers/terragrunt_aws_regional_eks.hcl"
 }
 
 

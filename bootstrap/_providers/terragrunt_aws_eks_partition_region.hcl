@@ -37,9 +37,9 @@ generate "provider_aws_eks_helm" {
   if_exists = "overwrite_terragrunt"
   contents  = <<-EOF
 
-    variable "provider_aws_eks_cluster_name" {
-      type = string
-    }
+  variable "provider_aws_eks_cluster_name" {
+    type = string
+  }
 
   data "aws_eks_cluster" "this" {
     name = var.provider_aws_eks_cluster_name
@@ -138,7 +138,7 @@ EOF
 inputs = {
   provider_aws_tags             = local.common.cloud.tags
   provider_aws_region           = local.region.region
-  provider_aws_eks_cluster_name = "${local.partition.name}-${local.region.name}"
+  provider_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.region.name}-cp"
 
   partition_aws_region           = local.region.region
   partition_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.region.name}-cp"

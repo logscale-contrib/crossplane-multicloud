@@ -52,6 +52,6 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
         
       - name: Deploy
-        run: terragrunt run-all apply --terragrunt-non-interactive
+        run: terragrunt run-all destroy --terragrunt-non-interactive
         working-directory: ${{ inputs.path }}
           

@@ -24,7 +24,7 @@ locals {
 }
 
 dependency "smtp" {
-  config_path = "${get_terragrunt_dir()}/../ses/"
+  config_path = "${get_terragrunt_dir()}/../../aws/${local.partition.shared.sso.db.primary}/ses/"
 }
 
 inputs = {

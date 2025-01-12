@@ -15,6 +15,7 @@ env:
   working_dir: 'bootstrap/env/public' 
   AWS_REGION : us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
+  TERRAGRUNT_DOWNLOAD: ${{ github.workspace }}/.terragrunt-cache
   
   
 permissions:

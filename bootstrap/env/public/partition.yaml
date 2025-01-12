@@ -13,9 +13,8 @@ shared:
       # values for primary
       # bootstrap: initial deployment of the primary
       # blue|green reference to the region that is currently primary
-      primary: green
+      primary: bootstrap
       # Values for secondary are
-      # - none (no secondary) must be used during initial deployment of the primary
       # - region name (blue|green) which region is currently secondary
       secondary: blue
       # values to identify green and blue regions these can only be changed if being replaced by a new region      

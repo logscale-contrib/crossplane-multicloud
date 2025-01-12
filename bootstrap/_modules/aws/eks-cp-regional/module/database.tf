@@ -64,7 +64,7 @@ locals {
 resource "kubectl_manifest" "db" {
   # count = var.region_name == var.db_primary ? 1 : 0
   
-  yaml_body = templatefile("./manifests/helm-releases/database-primary-normal.yaml",
+  yaml_body = templatefile("./manifests/helm-releases/database-normal.yaml",
    { 
         role_arn = module.authentik_db_irsa.iam_role_arn,
         region_name = var.region_name,

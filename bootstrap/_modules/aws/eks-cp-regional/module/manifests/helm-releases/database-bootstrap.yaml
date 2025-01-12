@@ -1,0 +1,55 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: authentik-db
+  namespace: authentik
+spec:
+  interval: 10m
+  timeout: 5m
+  chart:
+    spec:
+      chart: raw
+      version: "2.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: bedag
+        namespace: flux-repos
+      interval: 5m
+  releaseName: authentik-db-${region_name}
+  targetNamespace: authentik
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: false
+  values:
+    templates:  
+    - |
+      apiVersion: postgresql.cnpg.io/v1
+      kind: Cluster
+      metadata:
+        name: authentik-db-${region_name}
+      spec:
+        instances: 3
+
+        storage:
+          storageClass: cluster-block-base-ext4
+          size: 50Gi
+
+        # Backup properties
+        backup:
+          barmanObjectStore:
+            destinationPath: s3://${bucket_id}/partition/authentik/${region_name}
+            s3Credentials:
+              inheritFromIAMRole: true
+            wal:
+              compression: bzip2
+              maxParallel: 4
+        serviceAccountTemplate:
+          metadata:
+            annotations:
+              eks.amazonaws.com/role-arn: ${role_arn}
+          automountServiceAccountToken: true

@@ -7,10 +7,14 @@ shared:
     name: aws
     region: green
   sso:
-    enabled: true
-    primary: green
+    # sso should be disabled during a partition's primary deployment
+    enabled: false
     db:
+      # values for primary (blue|green) which region is currently primary
       primary: green
-      green: green
-      blue: blue
+      # Values for secondary are
+      # - none (no secondary) must be used during initial deployment of the primary
+      # - bootstrap (start secondary after first backup of primary)
+      # - region name (blue|green) which region is currently secondary
+      secondary: none
     

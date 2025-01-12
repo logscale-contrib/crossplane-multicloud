@@ -1,0 +1,56 @@
+name: 'Crossplane bootstrap unlock'
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: path to destroy
+        required: true    
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  
+env:
+  tf_version: '1.10.2'
+  tg_version: '0.69.0'
+  working_dir: 'bootstrap/env/public' 
+  AWS_REGION : us-east-1
+  AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
+  
+  
+permissions:
+    id-token: write   # This is required for requesting the JWT
+    contents: read    # This is required for actions/checkout
+
+jobs:
+  unlock:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: eLco/setup-terragrunt@v1
+        with:
+          terragrunt_version: ${{ env.tg_version }}
+      - name: HashiCorp - Setup Terraform            
+        uses: hashicorp/setup-terraform@v3.1.2
+        with:
+          terraform_version: ${{ env.tf_version }}      
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}
+          role-session-name: crossplane-multicloud_bootstrap
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: 'Checkout'
+        uses: actions/checkout@main
+
+
+      - name: Cache terragrunt
+        id: cache-terragrunt
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
+        
+      - name: Deploy
+        run: terragrunt run-all apply --terragrunt-non-interactive
+        working-directory: ${{ inputs.path }}
+          

@@ -68,7 +68,11 @@ inputs = {
   data_bucket_id_blue = dependency.bucket_blue.outputs.bucket_id
 
   db_primary = local.partition.shared.sso.db.primary
+  db_secondary = local.partition.shared.sso.db.secondary
 
+  db_green = local.partition.shared.sso.db.green
+  db_blue = local.partition.shared.sso.db.blue
+  
   # domain_name = dependency.partition_zone.outputs.zone_name
   
   # smtp_user     = dependency.mailuser.outputs.smtp_user

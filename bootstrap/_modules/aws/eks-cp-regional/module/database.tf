@@ -79,6 +79,7 @@ resource "kubectl_manifest" "db_green" {
 }
 
 resource "kubectl_manifest" "db-primary-backup" {
+  depends_on = [ kubectl_manifest.db_green ]
   count =  var.region_name == var.db_primary ? 1 : 0
   
   yaml_body = templatefile("./manifests/helm-releases/database-backup.yaml",

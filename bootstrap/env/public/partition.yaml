@@ -13,7 +13,7 @@ shared:
       # values for primary
       # bootstrap: initial deployment of the primary
       # blue|green reference to the region that is currently primary
-      primary: bootstrap
+      primary: green
       # Values for secondary are
       # - region name (blue|green) which region is currently secondary
       secondary: blue

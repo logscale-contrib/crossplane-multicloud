@@ -61,29 +61,29 @@ locals {
   db_green_template = var.region_name == var.db_primary ? "primary" : "secondary"
 }
 
-resource "kubectl_manifest" "db_green" {
-  count = var.region_name == var.db_primary ? 1 : 0
+# resource "kubectl_manifest" "db_green" {
+#   count = var.region_name == var.db_primary ? 1 : 0
   
-  yaml_body = templatefile("./manifests/helm-releases/database-primary.yaml",
-   { 
-        role_arn = module.authentik_db_irsa.iam_role_arn,
-        region_name = var.region_name,
-        bucket_id = var.data_bucket_id
-        bucket_id_green = var.data_bucket_id_green
-        bucket_id_blue  = var.data_bucket_id_blue
-        green = var.db_green
-        blue = var.db_blue
-        # cluster_name = module.eks.cluster_name 
-   })
+#   yaml_body = templatefile("./manifests/helm-releases/database-primary.yaml",
+#    { 
+#         role_arn = module.authentik_db_irsa.iam_role_arn,
+#         region_name = var.region_name,
+#         bucket_id = var.data_bucket_id
+#         bucket_id_green = var.data_bucket_id_green
+#         bucket_id_blue  = var.data_bucket_id_blue
+#         green = var.db_green
+#         blue = var.db_blue
+#         # cluster_name = module.eks.cluster_name 
+#    })
 
-}
+# }
 
-resource "kubectl_manifest" "db-primary-backup" {
-  count =  var.region_name == var.db_primary ? 1 : 0
+# resource "kubectl_manifest" "db-primary-backup" {
+#   count =  var.region_name == var.db_primary ? 1 : 0
   
-  yaml_body = templatefile("./manifests/helm-releases/database-backup.yaml",
-   { 
-        region_name = var.region_name,
-   })
+#   yaml_body = templatefile("./manifests/helm-releases/database-backup.yaml",
+#    { 
+#         region_name = var.region_name,
+#    })
 
-}
+# }

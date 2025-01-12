@@ -75,7 +75,6 @@ resource "kubectl_manifest" "db" {
         blue = var.db_blue
         primary = var.db_primary
         source = var.region_name == var.db_primary ? var.db_secondary : var.db_primary
-        # cluster_name = module.eks.cluster_name 
    })
 
 }

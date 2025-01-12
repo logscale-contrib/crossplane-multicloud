@@ -10,13 +10,14 @@ shared:
     # sso should be disabled during a partition's primary deployment
     enabled: false
     db:
-      # values for primary (blue|green) which region is currently primary
-      # Note: during partition deployment initial primary must be green
-      primary: bootstrap
+      # values for primary
+      # bootstrap: initial deployment of the primary
+      # blue|green reference to the region that is currently primary
+      primary: green
       # Values for secondary are
       # - none (no secondary) must be used during initial deployment of the primary
       # - region name (blue|green) which region is currently secondary
-      secondary: none
+      secondary: blue
       # values to identify green and blue regions these can only be changed if being replaced by a new region      
       green: green
       blue: blue

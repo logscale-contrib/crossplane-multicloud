@@ -62,7 +62,7 @@ locals {
 }
 
 resource "kubectl_manifest" "db" {
-  # count = var.region_name == var.db_primary ? 1 : 0
+  count = var.db_primary != "bootstrap" ? 1 : 0
   
   yaml_body = templatefile("./manifests/helm-releases/database-${local.db_template}.yaml",
    { 

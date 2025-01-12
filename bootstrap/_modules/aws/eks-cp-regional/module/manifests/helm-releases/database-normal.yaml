@@ -47,7 +47,7 @@ spec:
         # Backup properties
         backup:
           barmanObjectStore:
-            destinationPath: s3://${bucket_id}/partition/authentik/backup/${region_name}
+            destinationPath: s3://${bucket_id}/partition/authentik/${region_name}
             s3Credentials:
               inheritFromIAMRole: true
             wal:
@@ -56,12 +56,12 @@ spec:
         externalClusters:
         - name: authentik-db-${green}
           barmanObjectStore:
-            destinationPath: s3://${bucket_id}/partition/authentik/replication/${green}
+            destinationPath: s3://${bucket_id}/partition/authentik/${green}
             s3Credentials:
               inheritFromIAMRole: true
         - name: authentik-db-${blue}
           barmanObjectStore:
-            destinationPath: s3://${bucket_id}/partition/authentik/replication/${blue}
+            destinationPath: s3://${bucket_id}/partition/authentik/${blue}
             s3Credentials:
               inheritFromIAMRole: true
         serviceAccountTemplate:

@@ -40,7 +40,6 @@ spec:
           size: 50Gi
 
         replica:
-          enabled: true
           primary: authentik-db-${primary}
           source: authentik-db-${source}
 

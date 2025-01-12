@@ -1,4 +1,4 @@
-name: 'Crossplane bootstrap unlock'
+name: 'Crossplane bootstrap destroy'
 on:
   workflow_dispatch:
     inputs:

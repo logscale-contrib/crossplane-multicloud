@@ -11,12 +11,13 @@ shared:
     enabled: false
     db:
       # values for primary (blue|green) which region is currently primary
+      # Note: during partition deployment initial primary must be green
       primary: green
       # Values for secondary are
       # - none (no secondary) must be used during initial deployment of the primary
       # - bootstrap (start secondary after first backup of primary)
       # - region name (blue|green) which region is currently secondary
-      secondary: none
+      secondary: bootstrap
       # values to identify green and blue regions these can only be changed if being replaced by a new region      
       green: green
       blue: blue

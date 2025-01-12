@@ -83,7 +83,10 @@ locals {
 }
 
 resource "kubectl_manifest" "db_blue" {
-  count = (var.region_name != var.db_primary && var.db_secondary!= "none") ? 1 : 0
+  count = (
+    var.region_name != var.db_primary 
+    # && var.db_secondary!= "none"
+    ) ? 1 : 0
   
   yaml_body = templatefile("./manifests/helm-releases/database-secondary-${local.secondary_template}.yaml",
    { 

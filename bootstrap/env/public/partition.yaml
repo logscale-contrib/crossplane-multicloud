@@ -8,7 +8,7 @@ shared:
     region: green
   sso:
     enabled: true
-    region: green
+    primary: green
     db:
       primary: green
       green: green

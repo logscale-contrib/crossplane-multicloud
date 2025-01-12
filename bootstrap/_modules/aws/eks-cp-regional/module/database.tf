@@ -63,7 +63,7 @@ locals {
 
 resource "kubectl_manifest" "db" {
   count = ( 
-    var.db_primary == var.region_name
+    var.db_primary != "bootstrap"
     || (var.db_primary == "bootstrap" && var.region_name == var.db_green)
   ) ? 1 : 0
   
@@ -86,7 +86,7 @@ resource "kubectl_manifest" "db" {
 resource "kubectl_manifest" "db-primary-backup" {
   depends_on = [ kubectl_manifest.db ]
   count = ( 
-    var.db_primary == var.region_name
+    var.db_primary != "bootstrap"
     || (var.db_primary == "bootstrap" && var.region_name == var.db_green)
   ) ? 1 : 0
 

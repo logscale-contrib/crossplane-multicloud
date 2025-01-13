@@ -32,21 +32,11 @@ variable "data_bucket_arn" {
 }
 
 
-variable "db_primary" {
-  
-}
-variable "db_secondary" {
-  
-}
-variable "db_green" {
-  
-}
-variable "db_blue" {
-  
-}
-variable "data_bucket_id_green" {
-  
-}
-variable "data_bucket_id_blue" {
-  
+variable "db_state" {
+  type = map(object({
+    mode   = string
+    name_prefix = string
+    replicaPrimary     = string
+    replicaSource      = string
+  }))
 }

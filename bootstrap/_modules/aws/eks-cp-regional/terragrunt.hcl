@@ -67,11 +67,8 @@ inputs = {
   data_bucket_id_green = dependency.bucket_green.outputs.bucket_id
   data_bucket_id_blue = dependency.bucket_blue.outputs.bucket_id
 
-  db_primary = local.partition.shared.sso.db.primary
-  db_secondary = local.partition.shared.sso.db.secondary
 
-  db_green = local.partition.shared.sso.db.green
-  db_blue = local.partition.shared.sso.db.blue
+  db_state = local.partition.shared.sso.db
   
   # domain_name = dependency.partition_zone.outputs.zone_name
   

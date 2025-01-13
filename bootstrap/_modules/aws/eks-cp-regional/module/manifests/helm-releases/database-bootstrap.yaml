@@ -52,6 +52,17 @@ spec:
             wal:
               compression: bzip2
               maxParallel: 4
+        externalClusters:
+        - name: authentik-db-${green}
+          barmanObjectStore:
+            destinationPath: s3://${bucket_id}/partition/authentik/${green}
+            s3Credentials:
+              inheritFromIAMRole: true
+        - name: authentik-db-${blue}
+          barmanObjectStore:
+            destinationPath: s3://${bucket_id}/partition/authentik/${blue}
+            s3Credentials:
+              inheritFromIAMRole: true              
         serviceAccountTemplate:
           metadata:
             annotations:

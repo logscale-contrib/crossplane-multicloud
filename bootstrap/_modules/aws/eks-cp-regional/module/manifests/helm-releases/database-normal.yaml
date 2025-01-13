@@ -26,49 +26,68 @@ spec:
   test:
     enable: false
   values:
-    templates:  
-    - |
-      apiVersion: postgresql.cnpg.io/v1
-      kind: Cluster
-      metadata:
-        name: authentik-db-${region_name}
-      spec:
-        instances: 3
+    templates:
+      - |
+        apiVersion: postgresql.cnpg.io/v1
+        kind: Cluster
+        metadata:
+          name: authentik-db-${region_name}
+        spec:
+          instances: 3
 
-        storage:
-          storageClass: cluster-block-base-ext4
-          size: 50Gi
+          storage:
+            storageClass: cluster-block-base-ext4
+            size: 50Gi
 
-        bootstrap:
-          recovery:
-            source: authentik-db-${primary}
-            
-        replica:
-          primary: authentik-db-${primary}
-          source: authentik-db-${source}
-
-        # Backup properties
-        backup:
-          barmanObjectStore:
-            destinationPath: s3://${bucket_id}/partition/authentik/${region_name}
-            s3Credentials:
-              inheritFromIAMRole: true
-            wal:
-              compression: bzip2
-              maxParallel: 4
-        externalClusters:
-        - name: authentik-db-${green}
-          barmanObjectStore:
-            destinationPath: s3://${bucket_id}/partition/authentik/${green}
-            s3Credentials:
-              inheritFromIAMRole: true
-        - name: authentik-db-${blue}
-          barmanObjectStore:
-            destinationPath: s3://${bucket_id}/partition/authentik/${blue}
-            s3Credentials:
-              inheritFromIAMRole: true
-        serviceAccountTemplate:
-          metadata:
-            annotations:
-              eks.amazonaws.com/role-arn: ${role_arn}
-          automountServiceAccountToken: true
+          bootstrap:
+            recovery:
+              source: authentik-db-${primary}
+              
+          replica:
+            primary: authentik-db-${primary}
+            source: authentik-db-${source}
+          managed:
+              roles:
+              - name: authentik
+                ensure: present
+                comment: authentik
+                login: true
+                superuser: false
+                passwordSecret:
+                  name: authentik-db
+          # Backup properties
+          backup:
+            barmanObjectStore:
+              destinationPath: s3://${bucket_id}/partition/authentik/${region_name}
+              s3Credentials:
+                inheritFromIAMRole: true
+              wal:
+                compression: bzip2
+                maxParallel: 4
+          externalClusters:
+          - name: authentik-db-${green}
+            barmanObjectStore:
+              destinationPath: s3://${bucket_id}/partition/authentik/${green}
+              s3Credentials:
+                inheritFromIAMRole: true
+          - name: authentik-db-${blue}
+            barmanObjectStore:
+              destinationPath: s3://${bucket_id}/partition/authentik/${blue}
+              s3Credentials:
+                inheritFromIAMRole: true
+          serviceAccountTemplate:
+            metadata:
+              annotations:
+                eks.amazonaws.com/role-arn: ${role_arn}
+            automountServiceAccountToken: true
+      - |
+        apiVersion: postgresql.cnpg.io/v1
+        kind: Database
+        metadata:
+          generation: 1
+          name: authentik
+        spec:
+          cluster:
+            name: authentik-db-${region_name}
+          name: authentik
+          owner: authentik

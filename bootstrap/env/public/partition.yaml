@@ -11,7 +11,9 @@ shared:
     enabled: false
     db:
       green: 
-        mode: primary
+        # Valid values for mode are
+        # - bootstrap
+        mode: bootstrap
         name: green
         replicaPrimary: green
         replicaSource: blue

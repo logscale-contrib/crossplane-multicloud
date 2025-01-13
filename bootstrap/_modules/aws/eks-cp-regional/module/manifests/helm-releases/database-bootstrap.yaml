@@ -39,6 +39,10 @@ spec:
           storageClass: cluster-block-base-ext4
           size: 50Gi
 
+        replica:
+          primary: authentik-db-${primary}
+          source: authentik-db-${source}
+
         # Backup properties
         backup:
           barmanObjectStore:

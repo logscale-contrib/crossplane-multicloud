@@ -76,7 +76,7 @@ resource "kubectl_manifest" "db_green" {
         green = var.db_state["green"].name
         blue = var.db_state["blue"].name
         primary = var.db_state["green"].replicaPrimary
-        source = primary = var.db_state["green"].replicaSource
+        source = var.db_state["green"].replicaSource
    })
 
 }

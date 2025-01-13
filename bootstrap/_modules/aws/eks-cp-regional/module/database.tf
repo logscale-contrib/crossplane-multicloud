@@ -95,7 +95,7 @@ resource "kubectl_manifest" "db_blue" {
     var.db_state.blue["name"] == var.region_name
   ) ? 1 : 0
   
-  yaml_body = templatefile("./manifests/helm-releases/database-${local.db_template}.yaml",
+  yaml_body = templatefile("./manifests/helm-releases/database-${var.db_state.blue["mode"]}.yaml",
    { 
         role_arn = module.authentik_db_irsa.iam_role_arn,
         region_name = var.region_name,

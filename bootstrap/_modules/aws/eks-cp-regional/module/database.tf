@@ -58,12 +58,12 @@ module "iam_iam-policy" {
 }
 
 locals {
-  db_template = var.db_primary == "bootstrap" ? "bootstrap" : "normal"
+  db_template = var.db_state.green["mode"] == "bootstrap" ? "bootstrap" : "normal"
 }
 
 resource "kubectl_manifest" "db_green" {
   count = ( 
-    var.db_state.green.name == var.region_name
+    var.db_state.green["name"] == var.region_name
   ) ? 1 : 0
   
   yaml_body = templatefile("./manifests/helm-releases/database-${local.db_template}.yaml",
@@ -75,8 +75,8 @@ resource "kubectl_manifest" "db_green" {
         bucket_id_blue  = var.data_bucket_id_blue
         green = var.db_state.green.name
         blue = var.db_state.blue.name
-        primary = var.db_state.green.replicaPrimary
-        source = var.db_state.green.replicaSource
+        primary = var.db_state.green["replicaPrimary"]
+        source = var.db_state.green["replicaSource"]
    })
 
 }
@@ -85,12 +85,12 @@ resource "kubectl_manifest" "db_green" {
 resource "kubectl_manifest" "db_green_backup" {
   depends_on = [ kubectl_manifest.db ]
   count = ( 
-    var.db_state.green.name == var.region_name
+    var.db_state.green["name"] == var.region_name
   ) ? 1 : 0
 
   yaml_body = templatefile("./manifests/helm-releases/database-backup.yaml",
    { 
-        region_name = var.db_state.green.name ,
+        region_name = var.db_state.green["name"]
    })
 
 }

@@ -13,13 +13,16 @@ shared:
       green: 
         # Valid values for mode are
         # - bootstrap
-        mode: bootstrap
+        # - normal operations
+        mode: normal
         name: green
+        backup: true
         replicaPrimary: green
         replicaSource: blue
       blue: 
-        mode: replica
+        mode: normal
         name: blue
+        backup: false
         replicaPrimary: green
         replicaSource: green
     

@@ -33,10 +33,10 @@ dependency "bucket" {
   config_path  = "${get_terragrunt_dir()}/../bucket-data-dr/"
 }
 dependency "bucket_green" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.green}/bucket-data-dr/"
+  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.green.name}/bucket-data-dr/"
 }
 dependency "bucket_blue" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.blue}/bucket-data-dr/"
+  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.blue.name}/bucket-data-dr/"
 }
 
 # dependency "partition_zone" {
@@ -69,7 +69,7 @@ inputs = {
 
 
   db_state = local.partition.shared.sso.db
-  
+
   # domain_name = dependency.partition_zone.outputs.zone_name
   
   # smtp_user     = dependency.mailuser.outputs.smtp_user

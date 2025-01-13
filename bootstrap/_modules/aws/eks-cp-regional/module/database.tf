@@ -83,7 +83,7 @@ resource "kubectl_manifest" "db_green" {
 
 
 resource "kubectl_manifest" "db_green_backup" {
-  depends_on = [ kubectl_manifest.db ]
+  depends_on = [ kubectl_manifest.db_green ]
   count = ( 
     var.db_state.green["name"] == var.region_name
   ) ? 1 : 0

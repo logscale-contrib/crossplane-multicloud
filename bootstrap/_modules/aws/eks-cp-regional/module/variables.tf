@@ -31,6 +31,12 @@ variable "data_bucket_arn" {
   description = "(optional) describe your variable"  
 }
 
+variable "data_bucket_id_green" {
+  
+}
+variable "data_bucket_id_blue" {
+  
+}
 
 variable "db_state" {
   type = map(object({

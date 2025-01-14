@@ -7,7 +7,7 @@
 
 locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region = yamldecode(file(find_in_parent_folders("region.yaml")))
+  region =  basename(get_terragrunt_dir(".."))
 }
 
 
@@ -36,5 +36,5 @@ EOF
 
 inputs = {
   provider_aws_tags   = local.partition.shared.provider.aws.tags
-  provider_aws_region = local.region.region
+  provider_aws_region = local.partition.shared.provider.aws.region[local.region]
 }

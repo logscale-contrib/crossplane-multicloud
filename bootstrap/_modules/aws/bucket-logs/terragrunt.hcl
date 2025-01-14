@@ -20,11 +20,11 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = yamldecode(file(find_in_parent_folders("region.yaml")))
+  region =  basename(dirname("${get_terragrunt_dir()}/../.."))
 }
 
 
 inputs = {
 
-  name = "cloud-${local.partition.name}-${local.region.region}"
+  name = "cloud-${local.partition.name}-${local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].region}"
 }

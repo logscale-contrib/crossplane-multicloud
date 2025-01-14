@@ -19,9 +19,11 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  region = yamldecode(file(find_in_parent_folders("region.yaml")))
+  partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
+  region =  basename(dirname("${get_terragrunt_dir()}/../.."))
 }
 
 inputs = {
-  exclude_names = local.region.az_exclude_names
+  exclude_names = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].az_exclude_names
+  
 }

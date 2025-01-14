@@ -8,14 +8,7 @@
 locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
 
-  replication_role    = basename(get_terragrunt_dir())
-
-  blue = split("-",local.replication_role)[0]
-  blue_region = yamldecode(file(find_in_parent_folders("/aws/${local.blue}/region.yaml")))
-
-  green = split("-",local.replication_role)[1]
-  green_region = yamldecode(file(find_in_parent_folders("/aws/${local.green}/region.yaml")))
-
+  
 }
 
 
@@ -65,6 +58,6 @@ EOF
 inputs = {
   provider_aws_tags         = local.partition.shared.provider.aws.tags
   provider_aws_region       = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].region
-  provider_aws_blue_region  = local.blue_region.region
-  provider_aws_green_region = local.green_region.region
+  provider_aws_green_region = local.partition.shared.provider.aws.region["green"].region
+  provider_aws_blue_region  = local.partition.shared.provider.aws.region["blue"].region
 }

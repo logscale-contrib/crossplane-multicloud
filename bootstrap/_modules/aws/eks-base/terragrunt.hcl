@@ -22,7 +22,7 @@ terraform {
 locals {
 
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = yamldecode(file(find_in_parent_folders("region.yaml")))
+  region =  basename(dirname("${get_terragrunt_dir()}/../.."))
 
 }
 
@@ -53,5 +53,5 @@ inputs = {
 
   log_s3_bucket_id = dependency.bucket.outputs.log_s3_bucket_id
 
-  region = local.region.region
+  region = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].region
 }

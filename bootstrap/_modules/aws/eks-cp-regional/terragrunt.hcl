@@ -19,10 +19,9 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
-locals {
-  
-  partition    = yamldecode(file(find_in_parent_folders("partition.yaml")))  
-  region = yamldecode(file(find_in_parent_folders("region.yaml")))  
+locals {  
+  partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
+  region =  basename(dirname("${get_terragrunt_dir()}/../.."))
 }
 
 dependency "kubernetes_cluster" {
@@ -54,7 +53,7 @@ dependency "bucket_blue" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
 
-  region_name = local.region.name
+  region_name = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].name
 
   iam_role_path = local.partition.shared.provider.aws.iam_role_path
 

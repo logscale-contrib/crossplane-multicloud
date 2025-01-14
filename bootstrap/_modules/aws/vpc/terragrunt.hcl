@@ -22,7 +22,7 @@ terraform {
 locals {
 
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = yamldecode(file(find_in_parent_folders("region.yaml")))
+  region =  basename(dirname("${get_terragrunt_dir()}/../.."))
 
 }
 
@@ -35,7 +35,7 @@ dependency "azs" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  name = "cloud-${local.partition.name}-${local.region.name}"
+  name = "cloud-${local.partition.name}-${local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].name}"
 
   azs                          = dependency.azs.outputs.az_names
   cidr                         = dependency.azs.outputs.cidr

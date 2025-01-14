@@ -20,8 +20,7 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  partition    = yamldecode(file(find_in_parent_folders("partition.yaml")))  
-  region = yamldecode(file(find_in_parent_folders("/aws/${local.partition.shared.sso.region}/region.yaml")))  
+  partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
 }
 
 dependency "kubernetes_cluster" {

@@ -39,9 +39,9 @@ spec:
             storageClass: cluster-block-base-ext4
             size: 50Gi
 
-          bootstrap:
-            recovery:
-              source: authentik-db-${primary}
+          # bootstrap:
+          #   recovery:
+          #     source: authentik-db-${primary}
               
           replica:
             primary: authentik-db-${primary}

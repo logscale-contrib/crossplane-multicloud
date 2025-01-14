@@ -6,7 +6,6 @@ shared:
   provider:
     name: aws
     aws:
-      region: us-east-1
       #must have leading but not trailing slash
       iam_role_path: "/cloud/"
       iam_policy_path_prefix: "/cloud"
@@ -44,17 +43,17 @@ shared:
                   type: cluster
                   namespaces: []
 
-    region: 
-      global: green
-      green:
-        name: green
-        region: us-east-1
-        az_exclude_names:
-          - us-east-1e        
-      blue:
-        name: blue
-        region: us-west-1
-        az_exclude_names: []
+      region: 
+        global: green
+        green:
+          name: green
+          region: us-east-1
+          az_exclude_names:
+            - us-east-1e        
+        blue:
+          name: blue
+          region: us-west-1
+          az_exclude_names: []
   sso:
     # sso should be disabled during a partition's primary deployment
     enabled: false

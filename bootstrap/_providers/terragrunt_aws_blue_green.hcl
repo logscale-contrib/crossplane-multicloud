@@ -64,7 +64,7 @@ EOF
 
 inputs = {
   provider_aws_tags         = local.partition.shared.provider.aws.tags
-  provider_aws_region       = local.partition.shared.provider.region[local.partition.shared.provider.aws.region.global].region
+  provider_aws_region       = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].region
   provider_aws_blue_region  = local.blue_region.region
   provider_aws_green_region = local.green_region.region
 }

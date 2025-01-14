@@ -2,26 +2,3 @@ name: green
 region: us-east-1
 az_exclude_names:
   - us-east-1e
-kubernetes:
-  version: 1.31
-  componentVersions:
-    cilium: 1.16.5
-  access_entries:
-    gh:
-      kubernetes_groups: []
-      principal_arn: arn:aws:iam::042445652404:role/github-crossplane-multicloud
-      policy_associations:
-        cluster-admin:
-          policy_arn: "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-          access_scope:
-            type: cluster
-            namespaces: []
-    accountRoot:
-      kubernetes_groups: []
-      principal_arn: arn:aws:iam::042445652404:role/CS-Okta-Full-Admins-Write
-      policy_associations:
-        cluster-admin:
-          policy_arn: "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-          access_scope:
-            type: cluster
-            namespaces: []

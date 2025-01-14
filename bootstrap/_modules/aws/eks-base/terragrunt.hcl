@@ -43,13 +43,13 @@ inputs = {
   vpc_id  = dependency.vpc.outputs.vpc_id
   subnets = dependency.vpc.outputs.private_subnets
 
-  cluster_version = local.region.kubernetes.version
-  component_versions =local.region.kubernetes.componentVersions
+  cluster_version = local.partition.shared.provider.aws.kubernetes.version
+  component_versions =local.partition.shared.provider.aws.kubernetes.componentVersions
 
   iam_role_path = local.partition.shared.provider.aws.iam_role_path
 
   kms_key_administrators = local.partition.shared.provider.aws.kms.additional_key_owners
-  access_entries         = local.region.kubernetes.access_entries
+  access_entries         = local.partition.shared.provider.aws.kubernetes.access_entries
 
   log_s3_bucket_id = dependency.bucket.outputs.log_s3_bucket_id
 

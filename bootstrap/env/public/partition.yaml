@@ -16,7 +16,7 @@ shared:
           - "arn:aws:iam::042445652404:role/CS-Okta-Full-Admins-Write"
           - "arn:aws:iam::042445652404:role/github-crossplane-multicloud"    
     region: 
-      global: us-east-1
+      global: green
       green:
         region: us-east-1
       blue:

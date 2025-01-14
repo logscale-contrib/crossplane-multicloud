@@ -9,7 +9,7 @@ locals {
   common     = yamldecode(file(find_in_parent_folders("common.yaml")))
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
 
-  shared_region = yamldecode(file(find_in_parent_folders("/aws/${local.partition.shared.provider.region}/region.yaml")))
+  shared_region = yamldecode(file(find_in_parent_folders("/aws/${local.partition.shared.provider.region.global}/region.yaml")))
 
   replication_role    = basename(get_terragrunt_dir())
 

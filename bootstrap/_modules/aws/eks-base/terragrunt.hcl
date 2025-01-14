@@ -22,7 +22,6 @@ terraform {
 locals {
 
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  platform  = yamldecode(file(find_in_parent_folders("platform.yaml")))
   region    = yamldecode(file(find_in_parent_folders("region.yaml")))
 
 }
@@ -47,9 +46,9 @@ inputs = {
   cluster_version = local.region.kubernetes.version
   component_versions =local.region.kubernetes.componentVersions
 
-  iam_role_path = local.platform.aws.iam_role_path
+  iam_role_path = local.partition.shared.provider.aws.iam_role_path
 
-  kms_key_administrators = local.platform.aws.kms.additional_key_owners
+  kms_key_administrators = local.partition.shared.provider.aws.kms.additional_key_owners
   access_entries         = local.region.kubernetes.access_entries
 
   log_s3_bucket_id = dependency.bucket.outputs.log_s3_bucket_id

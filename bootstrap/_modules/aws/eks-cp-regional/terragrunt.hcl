@@ -20,7 +20,6 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  platform    = yamldecode(file(find_in_parent_folders("platform.yaml")))  
   
   partition    = yamldecode(file(find_in_parent_folders("partition.yaml")))  
   region = yamldecode(file(find_in_parent_folders("region.yaml")))  
@@ -57,7 +56,7 @@ inputs = {
 
   region_name = local.region.name
 
-  iam_role_path = local.platform.aws.iam_role_path
+  iam_role_path = local.partition.shared.provider.aws.iam_role_path
 
   oidc_provider_arn = dependency.kubernetes_cluster.outputs.oidc_provider_arn
 

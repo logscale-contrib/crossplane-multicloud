@@ -15,6 +15,11 @@ shared:
         additional_key_owners:
           - "arn:aws:iam::042445652404:role/CS-Okta-Full-Admins-Write"
           - "arn:aws:iam::042445652404:role/github-crossplane-multicloud"    
+      tags:
+        logsr.life/partition: public
+        logsr.life/owner: rfaircloth
+        logsr.life/environment: production
+        logsr.life/tier: control-plane
     region: 
       global: green
       green:

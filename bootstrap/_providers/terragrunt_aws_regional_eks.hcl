@@ -6,7 +6,6 @@
 
 
 locals {
-  common = yamldecode(file(find_in_parent_folders("common.yaml")))
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
   region = yamldecode(file(find_in_parent_folders("region.yaml")))
 }
@@ -76,7 +75,7 @@ EOF
 
 
 inputs = {
-    provider_aws_tags   = local.common.cloud.tags
+    provider_aws_tags   = local.partition.shared.provider.aws.tags
     provider_aws_region = local.region.region
     provider_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.region.name}-cp"
 }

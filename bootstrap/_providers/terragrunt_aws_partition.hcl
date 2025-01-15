@@ -18,10 +18,13 @@ generate "provider_aws" {
     variable "provider_aws_tags" {
       type = map
     }
+    variable "provider_aws_region" {
+      type = string
+    }
      provider "aws" {
         # Note this is hard coded for public partition AWS cloud "global"
         # Resources are generally managed here
-        region = "us-east-1"
+        region = var.provider_aws_region
         default_tags {
             tags = var.provider_aws_tags
         }
@@ -34,5 +37,5 @@ EOF
 
 inputs = {
   provider_aws_tags             = local.partition.shared.provider.aws.tags
-  provider_aws_eks_cluster_name = "${local.partition.name}-${local.partition.shared.provider.aws.region[local.region].region}"
+  provider_aws_region = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].region
 }

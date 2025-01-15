@@ -38,5 +38,5 @@ inputs = {
   region         = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].name
 
 
-  email_user_name_prefix = "${local.partition.name}-${local.region.name}"
+  email_user_name_prefix = "${local.partition.name}-${local.region}"
 }

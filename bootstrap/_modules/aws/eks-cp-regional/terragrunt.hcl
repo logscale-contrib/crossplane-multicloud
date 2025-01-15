@@ -53,7 +53,7 @@ dependency "bucket_blue" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
 
-  region_name = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].name
+  region_name = local.partition.shared.provider.aws.region[local.region].name
 
   iam_role_path = local.partition.shared.provider.aws.iam_role_path
 

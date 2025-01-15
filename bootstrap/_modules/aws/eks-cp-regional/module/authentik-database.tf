@@ -4,7 +4,7 @@ module "authentik_db_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "5.52.2"
 
-  role_name_prefix = "${var.authentik_namespace}"
+  role_name_prefix = var.authentik_namespace
   role_path        = var.iam_role_path
 
   role_policy_arns = {
@@ -59,8 +59,8 @@ module "iam_iam-policy" {
 
 
 resource "random_password" "authentik_db_password" {
-  length           = 16
-  special          = true
+  length  = 16
+  special = true
 }
 
 module "authentik_db_password" {
@@ -74,16 +74,16 @@ module "authentik_db_password" {
   create_policy       = true
   block_public_policy = true
   policy_statements = {
-    
+
     read = {
       sid = "AllowAccountRead"
       principals = [{
-        type        = "AWS"
+        type = "AWS"
         identifiers = [
           module.authentik_db_irsa.iam_role_arn
         ]
       }]
-      actions   = [
+      actions = [
         "secretsmanager:GetSecretValue",
         "secretsmanager:DescribeSecret"
       ]
@@ -109,72 +109,72 @@ module "authentik_db_password" {
 
 resource "kubectl_manifest" "db_green" {
   depends_on = [
-     module.authentik_db_password 
+    module.authentik_db_password
   ]
-  count = ( 
+  count = (
     var.db_state.green["name"] == var.region_name
   ) ? 1 : 0
-  
+
   yaml_body = templatefile("./manifests/helm-releases/database-${var.db_state.green["mode"]}.yaml",
-   { 
-        role_arn = module.authentik_db_irsa.iam_role_arn,
-        region_name = var.region_name,
-        bucket_id = var.data_bucket_id
-        bucket_id_green = var.data_bucket_id_green
-        bucket_id_blue  = var.data_bucket_id_blue
-        green = var.db_state.green.name
-        blue = var.db_state.blue.name
-        primary = var.db_state.green["replicaPrimary"]
-        source = var.db_state.green["replicaSource"]
-   })
+    {
+      role_arn        = module.authentik_db_irsa.iam_role_arn,
+      region_name     = var.region_name,
+      bucket_id       = var.data_bucket_id
+      bucket_id_green = var.data_bucket_id_green
+      bucket_id_blue  = var.data_bucket_id_blue
+      green           = var.db_state.green.name
+      blue            = var.db_state.blue.name
+      primary         = var.db_state.green["replicaPrimary"]
+      source          = var.db_state.green["replicaSource"]
+  })
 
 }
 
 resource "kubectl_manifest" "db_green_backup" {
-  depends_on = [ kubectl_manifest.db_green ]
-  count = ( 
+  depends_on = [kubectl_manifest.db_green]
+  count = (
     var.db_state.green["backup"]
   ) ? 1 : 0
 
   yaml_body = templatefile("./manifests/helm-releases/database-backup.yaml",
-   { 
-        region_name = var.db_state.green["name"]
-   })
+    {
+      region_name = var.db_state.green["name"]
+  })
 }
 
 
 resource "kubectl_manifest" "db_blue" {
-  depends_on = [ 
+  depends_on = [
     module.authentik_db_password
   ]
-  count = ( 
+  count = (
     var.db_state.blue["name"] == var.region_name
   ) ? 1 : 0
-  
+
   yaml_body = templatefile("./manifests/helm-releases/database-${var.db_state.blue["mode"]}.yaml",
-   { 
-        role_arn = module.authentik_db_irsa.iam_role_arn,
-        region_name = var.region_name,
-        bucket_id = var.data_bucket_id
-        bucket_id_green = var.data_bucket_id_green
-        bucket_id_blue  = var.data_bucket_id_blue
-        green = var.db_state.green.name
-        blue = var.db_state.blue.name
-        primary = var.db_state.blue["replicaPrimary"]
-        source = var.db_state.blue["replicaSource"]
-   })
+    {
+      role_arn        = module.authentik_db_irsa.iam_role_arn,
+      region_name     = var.region_name,
+      bucket_id       = var.data_bucket_id
+      bucket_id_green = var.data_bucket_id_green
+      bucket_id_blue  = var.data_bucket_id_blue
+      green           = var.db_state.green.name
+      blue            = var.db_state.blue.name
+      primary         = var.db_state.blue["replicaPrimary"]
+      source          = var.db_state.blue["replicaSource"]
+  })
 
 }
 
 
 resource "kubectl_manifest" "db_blue_backup" {
-  depends_on = [ kubectl_manifest.db_blue ]
-  count = ( 
-    var.db_state.blue["backup"] 
+  depends_on = [kubectl_manifest.db_blue]
+  count = (
+    var.db_state.blue["backup"]
   ) ? 1 : 0
 
   yaml_body = templatefile("./manifests/helm-releases/database-backup.yaml",
-   { 
-        region_name = var.db_state.blue["name"]
-   })
+    {
+      region_name = var.db_state.blue["name"]
+  })
 }

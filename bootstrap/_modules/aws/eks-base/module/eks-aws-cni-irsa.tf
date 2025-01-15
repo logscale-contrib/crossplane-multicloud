@@ -3,8 +3,8 @@ module "vpc_cni_irsa" {
   version = "5.52.2"
 
   role_name_prefix = "vpc_cni"
-  role_path = var.iam_role_path
-  
+  role_path        = var.iam_role_path
+
 
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv6   = true

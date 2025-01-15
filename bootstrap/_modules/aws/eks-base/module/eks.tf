@@ -16,8 +16,8 @@ module "eks" {
   cluster_version                = var.cluster_version
   cluster_endpoint_public_access = true
 
-  iam_role_path = var.iam_role_path
-  node_iam_role_path = var.iam_role_path
+  iam_role_path                  = var.iam_role_path
+  node_iam_role_path             = var.iam_role_path
   cluster_encryption_policy_path = var.iam_role_path
 
   # IPV6

@@ -5,8 +5,8 @@ module "otel_irsa" {
 
 
   role_name_prefix = "otel-sa"
-  role_path = var.iam_role_path
-  
+  role_path        = var.iam_role_path
+
 
   role_policy_arns = {
     "DescribeInstances" = module.otel-policy.arn

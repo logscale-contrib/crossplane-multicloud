@@ -65,15 +65,15 @@ resource "aws_iam_role" "replication" {
   name_prefix = var.replication_role_name_prefix
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
-  path = var.iam_role_path
+  path               = var.iam_role_path
 }
 
 resource "aws_iam_policy" "replication_policy" {
   name   = "blue-green-blue"
   policy = data.aws_iam_policy_document.replication.json
-  
+
   path = var.iam_role_path
-  
+
 }
 
 resource "aws_iam_role_policy_attachment" "replication_policy_attachment" {
@@ -100,7 +100,7 @@ resource "aws_s3_bucket_replication_configuration" "blue_green" {
     }
 
     destination {
-      bucket        = var.bucket_arn_green
+      bucket = var.bucket_arn_green
     }
   }
 }
@@ -126,7 +126,7 @@ resource "aws_s3_bucket_replication_configuration" "green_blue" {
     }
 
     destination {
-      bucket        = var.bucket_arn_blue
+      bucket = var.bucket_arn_blue
     }
   }
 }

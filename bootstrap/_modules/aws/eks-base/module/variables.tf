@@ -40,5 +40,5 @@ variable "log_s3_bucket_id" {
 }
 
 variable "iam_role_path" {
-  type=string
+  type = string
 }

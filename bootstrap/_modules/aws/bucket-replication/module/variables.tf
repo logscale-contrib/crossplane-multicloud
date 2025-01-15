@@ -21,5 +21,5 @@ variable "bucket_arn_blue" {
 }
 
 variable "iam_role_path" {
-  
+
 }

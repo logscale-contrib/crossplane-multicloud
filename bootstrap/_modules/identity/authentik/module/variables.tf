@@ -9,7 +9,7 @@ variable "host_name" {
 }
 variable "sso_secret" {
   type        = string
-  default = "cloud/pub/sso"
+  default     = "cloud/pub/sso"
   description = "(optional) describe your variable"
 }
 

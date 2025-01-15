@@ -4,8 +4,8 @@ module "efs_irsa" {
 
 
   role_name_prefix = "efs_csi"
-  role_path = var.iam_role_path
-  
+  role_path        = var.iam_role_path
+
   attach_efs_csi_policy = true
 
   oidc_providers = {

@@ -66,7 +66,17 @@ inputs = {
   data_bucket_id_blue = dependency.bucket_blue.outputs.bucket_id
 
 
-  db_state = local.partition.shared.sso.db
+  db_state = merge(
+    local.partition.shared.sso.db,
+    {
+      green = {
+        region = 
+      }
+      blue = {
+        region = 
+      }
+    }
+    )
 
   # domain_name = dependency.partition_zone.outputs.zone_name
   

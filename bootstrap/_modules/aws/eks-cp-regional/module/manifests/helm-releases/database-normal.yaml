@@ -47,14 +47,14 @@ spec:
             primary: authentik-db-${primary}
             source: authentik-db-${source}
           managed:
-              roles:
-              - name: authentik
-                ensure: present
-                comment: authentik
-                login: true
-                superuser: false
-                passwordSecret:
-                  name: authentik-db
+            roles:
+            - name: authentik
+              ensure: present
+              comment: authentik
+              login: true
+              superuser: false
+              passwordSecret:
+                name: authentik-db-appid
           # Backup properties
           backup:
             barmanObjectStore:

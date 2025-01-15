@@ -57,7 +57,60 @@ module "iam_iam-policy" {
   })
 }
 
+
+resource "random_password" "authentik_db_password" {
+  length           = 16
+  special          = true
+}
+
+module "authentik_db_password" {
+  source = "terraform-aws-modules/secrets-manager/aws"
+
+  # Secret
+  name_prefix             = "authentik-db"
+  recovery_window_in_days = 7
+
+  # Policy
+  create_policy       = true
+  block_public_policy = true
+  policy_statements = {
+    
+    read = {
+      sid = "AllowAccountRead"
+      principals = [{
+        type        = "AWS"
+        identifiers = [
+          module.authentik_db_irsa.iam_role_arn
+        ]
+      }]
+      actions   = [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret"
+      ]
+      resources = ["*"]
+    }
+  }
+
+  # Version
+  # ignore_secret_changes = true
+  secret_string = jsonencode({
+    username = "authentik",
+    password = authentik_db_password.result,
+  })
+  replica = {
+    # Can set region as key
+    replica = {
+      # Or as attribute
+      region = var.db_state.blue["name"]
+    }
+  }
+
+}
+
 resource "kubectl_manifest" "db_green" {
+  depends_on = [
+     module.authentik_db_password 
+  ]
   count = ( 
     var.db_state.green["name"] == var.region_name
   ) ? 1 : 0
@@ -91,6 +144,9 @@ resource "kubectl_manifest" "db_green_backup" {
 
 
 resource "kubectl_manifest" "db_blue" {
+  depends_on = [ 
+    module.authentik_db_password
+  ]
   count = ( 
     var.db_state.blue["name"] == var.region_name
   ) ? 1 : 0

@@ -22,7 +22,7 @@ terraform {
 locals {
 
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region =  basename(dirname("${get_terragrunt_dir()}/../.."))
+  region    = basename(dirname("${get_terragrunt_dir()}/../.."))
 
 }
 
@@ -43,8 +43,8 @@ inputs = {
   vpc_id  = dependency.vpc.outputs.vpc_id
   subnets = dependency.vpc.outputs.private_subnets
 
-  cluster_version = local.partition.shared.provider.aws.kubernetes.version
-  component_versions =local.partition.shared.provider.aws.kubernetes.componentVersions
+  cluster_version    = local.partition.shared.provider.aws.kubernetes.version
+  component_versions = local.partition.shared.provider.aws.kubernetes.componentVersions
 
   iam_role_path = local.partition.shared.provider.aws.iam_role_path
 

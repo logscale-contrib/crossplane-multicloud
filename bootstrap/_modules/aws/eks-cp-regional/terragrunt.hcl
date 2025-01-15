@@ -19,22 +19,22 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
-locals {  
+locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region =  basename(dirname("${get_terragrunt_dir()}/../.."))
+  region    = basename(dirname("${get_terragrunt_dir()}/../.."))
 }
 
 dependency "kubernetes_cluster" {
-  config_path  = "${get_terragrunt_dir()}/../eks/"
+  config_path = "${get_terragrunt_dir()}/../eks/"
 }
 dependency "bucket" {
-  config_path  = "${get_terragrunt_dir()}/../bucket-data-dr/"
+  config_path = "${get_terragrunt_dir()}/../bucket-data-dr/"
 }
 dependency "bucket_green" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.green.name}/bucket-data-dr/"
+  config_path = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.green.name}/bucket-data-dr/"
 }
 dependency "bucket_blue" {
-  config_path  = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.blue.name}/bucket-data-dr/"
+  config_path = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.blue.name}/bucket-data-dr/"
 }
 
 # dependency "partition_zone" {
@@ -60,10 +60,10 @@ inputs = {
   oidc_provider_arn = dependency.kubernetes_cluster.outputs.oidc_provider_arn
 
   data_bucket_arn = dependency.bucket.outputs.bucket_arn
-  data_bucket_id = dependency.bucket.outputs.bucket_id
+  data_bucket_id  = dependency.bucket.outputs.bucket_id
 
   data_bucket_id_green = dependency.bucket_green.outputs.bucket_id
-  data_bucket_id_blue = dependency.bucket_blue.outputs.bucket_id
+  data_bucket_id_blue  = dependency.bucket_blue.outputs.bucket_id
 
 
   db_state = merge(
@@ -76,10 +76,10 @@ inputs = {
         region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.blue.name].region
       }
     }
-    )
+  )
 
   # domain_name = dependency.partition_zone.outputs.zone_name
-  
+
   # smtp_user     = dependency.mailuser.outputs.smtp_user
   # smtp_password = dependency.mailuser.outputs.smtp_password
   # smtp_server   = dependency.smtp.outputs.smtp_server

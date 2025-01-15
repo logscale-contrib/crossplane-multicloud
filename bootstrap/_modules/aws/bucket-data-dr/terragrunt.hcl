@@ -30,6 +30,6 @@ dependency "bucket-logs" {
 
 inputs = {
 
-  name    = "cloud-${local.partition.name}-data-dr-"
+  name              = "cloud-${local.partition.name}-data-dr-"
   logs_s3_bucket_id = dependency.bucket-logs.outputs.bucket_id
 }

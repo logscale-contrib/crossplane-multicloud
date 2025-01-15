@@ -20,7 +20,7 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  tenant   = yamldecode(file(find_in_parent_folders("tenant.yaml")))
+  tenant = yamldecode(file(find_in_parent_folders("tenant.yaml")))
 }
 
 dependency "smtp" {
@@ -29,7 +29,7 @@ dependency "smtp" {
 
 inputs = {
 
-  email_user_name_prefix = "${local.tenant.name}-logscale"
-  arn_raw = dependency.smtp.outputs.arn_raw
+  email_user_name_prefix          = "${local.tenant.name}-logscale"
+  arn_raw                         = dependency.smtp.outputs.arn_raw
   aws_sesv2_configuration_set_arn = dependency.smtp.outputs.aws_sesv2_configuration_set_arn
 }

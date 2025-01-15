@@ -29,7 +29,7 @@ dependency "smtp" {
 
 inputs = {
 
-  email_user_name_prefix = "${local.partition.name}"
-  arn_raw = dependency.smtp.outputs.arn_raw
+  email_user_name_prefix          = "${local.partition.name}"
+  arn_raw                         = dependency.smtp.outputs.arn_raw
   aws_sesv2_configuration_set_arn = dependency.smtp.outputs.aws_sesv2_configuration_set_arn
 }

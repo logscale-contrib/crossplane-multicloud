@@ -26,5 +26,5 @@ locals {
 
 inputs = {
 
-  name = "cloud-${local.partition.name}-${local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].region}"
+  name = "cloud-${local.partition.name}-${local.partition.shared.provider.aws.region[local.region].region}"
 }

@@ -77,5 +77,5 @@ EOF
 inputs = {
     provider_aws_tags   = local.partition.shared.provider.aws.tags
     provider_aws_region = local.partition.shared.provider.aws.region[local.partition.shared.provider.aws.region.global].region
-    provider_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.region.name}-cp"
+    provider_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.region}-cp"
 }

@@ -95,7 +95,7 @@ module "authentik_db_password" {
   # ignore_secret_changes = true
   secret_string = jsonencode({
     username = "authentik",
-    password = authentik_db_password.result,
+    password = random_password.authentik_db_password.result,
   })
   replica = {
     # Can set region as key

@@ -70,10 +70,10 @@ inputs = {
     local.partition.shared.sso.db,
     {
       green = {
-        region = local.partition.shared.aws.region[local.partition.shared.sso.db.green.name].region
+        region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.green.name].region
       }
       blue = {
-        region = local.partition.shared.aws.region[local.partition.shared.sso.db.blue.name].region
+        region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.blue.name].region
       }
     }
     )

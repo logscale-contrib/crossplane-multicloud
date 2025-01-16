@@ -43,9 +43,8 @@ shared:
                 access_scope:
                   type: cluster
                   namespaces: []
-
-      region: 
-        global: green
+      region: green
+      regions: 
         green:
           name: green
           region: us-east-1

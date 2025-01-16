@@ -35,7 +35,7 @@ dependency "azs" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  name = "cloud-${local.partition.name}-${local.partition.shared.provider.aws.region[local.region].name}"
+  name = "cloud-${local.partition.name}-${local.partition.shared.provider.aws.regions[local.region].name}"
 
   azs                          = dependency.azs.outputs.az_names
   cidr                         = dependency.azs.outputs.cidr

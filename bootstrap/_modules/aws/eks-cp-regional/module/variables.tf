@@ -38,6 +38,15 @@ variable "data_bucket_id_blue" {
 
 }
 
+variable "regions" {
+  description = "Regions configuration"
+  type = map(object({
+    name             = string
+    region           = string
+    az_exclude_names = list(string)
+  }))  
+}
+
 variable "db_state" {
   type = map(object({
     mode            = string

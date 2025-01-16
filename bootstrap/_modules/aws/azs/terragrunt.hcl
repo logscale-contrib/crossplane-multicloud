@@ -24,6 +24,6 @@ locals {
 }
 
 inputs = {
-  exclude_names = local.partition.shared.provider.aws.region[local.region].az_exclude_names
+  exclude_names = local.partition.shared.provider.aws.regions[local.region].az_exclude_names
 
 }

@@ -23,11 +23,6 @@ locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
   region    = basename(dirname("${get_terragrunt_dir()}/../.."))
 
-  db_state = local.partition.shared.sso.db
-  local.db_state.green.region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.green.name].region
-  local.db_state.blue.region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.blue.name].region
- 
-
 }
 
 dependency "kubernetes_cluster" {
@@ -59,7 +54,7 @@ dependency "bucket_blue" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
 
-  region_name = local.partition.shared.provider.aws.region[local.region].name
+  region_name = local.partition.shared.provider.aws.regions[local.region].name
 
   iam_role_path = local.partition.shared.provider.aws.iam_role_path
 
@@ -70,7 +65,9 @@ inputs = {
 
   data_bucket_id_green = dependency.bucket_green.outputs.bucket_id
   data_bucket_id_blue  = dependency.bucket_blue.outputs.bucket_id
-  db_state = local.db_state  
+  
+  regions = local.part.shared.provider.aws.regions
+  db_state = local.partition.shared.sso.db
 
   # domain_name = dependency.partition_zone.outputs.zone_name
 

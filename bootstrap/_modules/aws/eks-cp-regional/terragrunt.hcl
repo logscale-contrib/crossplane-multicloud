@@ -22,6 +22,12 @@ terraform {
 locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
   region    = basename(dirname("${get_terragrunt_dir()}/../.."))
+
+  db_state = local.partition.shared.sso.db
+  local.db_state.green.region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.green.name].region
+  local.db_state.blue.region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.blue.name].region
+ 
+
 }
 
 dependency "kubernetes_cluster" {
@@ -64,19 +70,7 @@ inputs = {
 
   data_bucket_id_green = dependency.bucket_green.outputs.bucket_id
   data_bucket_id_blue  = dependency.bucket_blue.outputs.bucket_id
-
-
-  db_state = merge(
-    local.partition.shared.sso.db,
-    {
-      green = {
-        region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.green.name].region
-      }
-      blue = {
-        region = local.partition.shared.provider.aws.region[local.partition.shared.sso.db.blue.name].region
-      }
-    }
-  )
+  db_state = local.db_state  
 
   # domain_name = dependency.partition_zone.outputs.zone_name
 

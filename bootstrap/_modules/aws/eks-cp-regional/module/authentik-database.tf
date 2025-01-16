@@ -65,8 +65,8 @@ resource "random_password" "authentik_db_password" {
 
 module "authentik_db_password" {
   source = "terraform-aws-modules/secrets-manager/aws"
-  count = var.region_name == var.db_state.green["name"] ? 1 : 0
-  
+  count  = var.region_name == var.db_state.green["name"] ? 1 : 0
+
   # Secret
   name_prefix             = "authentik-db"
   recovery_window_in_days = 7

@@ -44,15 +44,15 @@ variable "regions" {
     name             = string
     region           = string
     az_exclude_names = list(string)
-  }))  
+  }))
 }
 
 variable "db_state" {
   type = map(object({
-    mode            = string
-    name            = string
-    backup          = bool
-    replicaPrimary  = string
-    replicaSource   = string
+    mode           = string
+    name           = string
+    backup         = bool
+    replicaPrimary = string
+    replicaSource  = string
   }))
 }

@@ -101,7 +101,7 @@ module "authentik_db_password" {
     # Can set region as key
     replica = {
       # Or as attribute
-      region = var.regions[var.db_state.blue["name"]].name
+      region = var.regions[var.db_state.blue["name"]].region
     }
   }
 

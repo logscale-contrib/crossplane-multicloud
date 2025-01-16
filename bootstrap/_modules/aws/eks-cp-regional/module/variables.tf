@@ -39,7 +39,7 @@ variable "data_bucket_id_blue" {
 }
 
 variable "db_state" {
-  type = map(object({
+  type = object({
     green = object({
       mode           = string
       name           = string
@@ -56,5 +56,5 @@ variable "db_state" {
       replicaSource  = string
       region         = string
     })
-  }))
+  })
 }

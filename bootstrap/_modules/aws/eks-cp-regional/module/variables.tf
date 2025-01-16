@@ -46,6 +46,7 @@ variable "db_state" {
       backup         = bool
       replicaPrimary = string
       replicaSource  = string
+      region         = string
     })
     blue = object({
       mode           = string
@@ -53,6 +54,7 @@ variable "db_state" {
       backup         = bool
       replicaPrimary = string
       replicaSource  = string
+      region         = string
     })
   }))
 }

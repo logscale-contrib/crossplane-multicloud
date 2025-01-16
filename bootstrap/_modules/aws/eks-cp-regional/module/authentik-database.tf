@@ -122,8 +122,8 @@ resource "kubectl_manifest" "db_green" {
       bucket_id       = var.data_bucket_id
       bucket_id_green = var.data_bucket_id_green
       bucket_id_blue  = var.data_bucket_id_blue
-      green           = var.db_state.green.name
-      blue            = var.db_state.blue.name
+      green           = var.db_state.green["name"]
+      blue            = var.db_state.blue["name"]
       primary         = var.db_state.green["replicaPrimary"]
       source          = var.db_state.green["replicaSource"]
   })
@@ -158,8 +158,8 @@ resource "kubectl_manifest" "db_blue" {
       bucket_id       = var.data_bucket_id
       bucket_id_green = var.data_bucket_id_green
       bucket_id_blue  = var.data_bucket_id_blue
-      green           = var.db_state.green.name
-      blue            = var.db_state.blue.name
+      green           = var.db_state.green["name"]
+      blue            = var.db_state.blue["name"]
       primary         = var.db_state.blue["replicaPrimary"]
       source          = var.db_state.blue["replicaSource"]
   })

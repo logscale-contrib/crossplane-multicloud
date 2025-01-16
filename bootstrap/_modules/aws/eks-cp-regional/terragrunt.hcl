@@ -66,7 +66,7 @@ inputs = {
   data_bucket_id_green = dependency.bucket_green.outputs.bucket_id
   data_bucket_id_blue  = dependency.bucket_blue.outputs.bucket_id
   
-  regions = local.part.shared.provider.aws.regions
+  regions = local.partition.shared.provider.aws.regions
   db_state = local.partition.shared.sso.db
 
   # domain_name = dependency.partition_zone.outputs.zone_name

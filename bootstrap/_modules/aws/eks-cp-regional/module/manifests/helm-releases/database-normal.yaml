@@ -91,3 +91,20 @@ spec:
             name: authentik-db-${region_name}
           name: authentik
           owner: authentik
+      - |
+        apiVersion: secrets-store.csi.x-k8s.io/v1
+        kind: SecretProviderClass
+        metadata:
+          name: authentik-db-auth
+        spec:
+          provider: aws
+          parameters:
+            objects: |
+                - objectName: "${db_auth_ssm}"
+                  objectType: "secretsmanager"          
+          secretObjects:                              # [OPTIONAL] SecretObject defines the desired state of synced K8s secret objects
+          - data:
+            - key: password                           # data field to populate
+              objectName: authentik-db-auth                        # name of the mounted content to sync. this could be the object name or the object alias
+            secretName: authentik-db-auth                     # name of the Kubernetes Secret object
+            type: Opaque

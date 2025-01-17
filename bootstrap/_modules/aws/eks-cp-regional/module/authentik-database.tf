@@ -125,6 +125,7 @@ resource "kubectl_manifest" "db_green" {
       blue            = var.db_state.blue["name"]
       primary         = var.db_state.green["replicaPrimary"]
       source          = var.db_state.green["replicaSource"]
+      db_auth_ssm = module.authentik_db_password.secret_id
   })
 
 }
@@ -161,6 +162,7 @@ resource "kubectl_manifest" "db_blue" {
       blue            = var.db_state.blue["name"]
       primary         = var.db_state.blue["replicaPrimary"]
       source          = var.db_state.blue["replicaSource"]
+      db_auth_ssm = module.authentik_db_password.secret_id
   })
 
 }

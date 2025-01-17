@@ -155,9 +155,6 @@ resource "kubectl_manifest" "db_green_backup" {
 
 
 resource "kubectl_manifest" "db_blue" {
-  depends_on = [
-    module.authentik_db_password
-  ]
   count = (
     var.db_state.blue["name"] == var.region_name
   ) ? 1 : 0

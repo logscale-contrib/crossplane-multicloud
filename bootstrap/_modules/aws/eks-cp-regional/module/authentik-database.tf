@@ -97,13 +97,13 @@ module "authentik_db_password" {
     username = "authentik",
     password = random_password.authentik_db_password.result,
   })
-  replica = {
-    # Can set region as key
-    replica = {
-      # Or as attribute
-      region = var.regions[var.db_state.blue["name"]].region
-    }
-  }
+  # replica = {
+  #   # Can set region as key
+  #   replica = {
+  #     # Or as attribute
+  #     region = var.regions[var.db_state.blue["name"]].region
+  #   }
+  # }
 
 }
 

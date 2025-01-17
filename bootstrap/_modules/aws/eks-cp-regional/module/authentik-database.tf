@@ -65,10 +65,9 @@ resource "random_password" "authentik_db_password" {
 
 module "authentik_db_password" {
   source = "terraform-aws-modules/secrets-manager/aws"
-  count  = var.region_name == var.db_state.green["name"] ? 1 : 0
 
   # Secret
-  name_prefix             = "authentik-db"
+  name_prefix             = "cloud/pub/sso/authentik-db"
   recovery_window_in_days = 7
 
   # Policy
@@ -125,7 +124,7 @@ resource "kubectl_manifest" "db_green" {
       blue            = var.db_state.blue["name"]
       primary         = var.db_state.green["replicaPrimary"]
       source          = var.db_state.green["replicaSource"]
-      db_auth_ssm = module.authentik_db_password[0].secret_arn
+      db_auth_ssm = module.authentik_db_password.secret_arn
   })
 
 }
@@ -162,7 +161,7 @@ resource "kubectl_manifest" "db_blue" {
       blue            = var.db_state.blue["name"]
       primary         = var.db_state.blue["replicaPrimary"]
       source          = var.db_state.blue["replicaSource"]
-      db_auth_ssm = module.authentik_db_password[0].secret_arn
+      db_auth_ssm = module.authentik_db_password.secret_arn
   })
 
 }

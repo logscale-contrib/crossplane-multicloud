@@ -110,7 +110,7 @@ resource "random_password" "authentik_db_password" {
 resource "kubernetes_secret" "db_secret" {
   metadata {
     name = "authentik-db-appid"
-    namespace = "authentik"
+    namespace = var.authentik_namespace
   }
 
   data = {

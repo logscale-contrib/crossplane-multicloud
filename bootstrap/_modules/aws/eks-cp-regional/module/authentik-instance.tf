@@ -1,5 +1,5 @@
 
-resource "kubectl_manifest" "authentik" {
+resource "kubectl_manifest" "authentik_instance" {
   count = (
     var.authentik_state[var.region_name]["name"] == "normal"
   ) ? 1 : 0

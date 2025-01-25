@@ -38,9 +38,9 @@ dependency "bucket_blue" {
   config_path = "${get_terragrunt_dir()}/../../${local.partition.shared.sso.db.blue.name}/bucket-data-dr/"
 }
 
-# dependency "partition_zone" {
-#   config_path = "${get_terragrunt_dir()}/../../dns/"
-# }
+dependency "partition_zone" {
+  config_path = "${get_terragrunt_dir()}/../../dns/"
+}
 dependency "smtp" {
   config_path = "${get_terragrunt_dir()}/../ses/"
 }
@@ -72,7 +72,7 @@ inputs = {
   smtp_server   = dependency.smtp.outputs.smtp_server
   smtp_port     = dependency.smtp.outputs.smtp_port
   smtp_tls      = dependency.smtp.outputs.smtp_use_tls
-  
-  # from_email    = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
+
+  from_email    = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
 
 }

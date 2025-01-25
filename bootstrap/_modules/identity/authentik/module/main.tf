@@ -6,13 +6,13 @@ module "secrets_manager" {
   name_prefix             = "${var.ssm_path_prefix}/authentik-cookie-key"
   description             = "Cookie Signing Key must not change in DR"
   recovery_window_in_days = 0
-  # replica = {
-  #   # Can set region as key
-  #   another = {
-  #     # Or as attribute
-  #     region = "us-west-2"
-  #   }
-  # }
+  replica = {
+    # Can set region as key
+    another = {
+      # Or as attribute
+      region = var.regions["blue"]["region"]
+    }
+  }
 
   # Policy
   create_policy       = true
@@ -30,8 +30,8 @@ module "secrets_manager" {
   }
 
   # Version
-  create_random_password           = true
-  random_password_length           = 64
+  create_random_password = true
+  random_password_length = 64
   # random_password_override_special = "!@#$%^&*()_+"
 
   # tags = local.tags

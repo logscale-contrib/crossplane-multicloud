@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: authentik-db-backup
-  namespace: authentik
+  namespace: ${namespace}
 spec:
   interval: 10m
   timeout: 5m
@@ -16,7 +16,7 @@ spec:
         namespace: flux-repos
       interval: 5m
   releaseName: authentik-db-backup-${region_name}
-  targetNamespace: authentik
+  targetNamespace: ${namespace}
   install:
     remediation:
       retries: 3

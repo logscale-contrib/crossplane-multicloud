@@ -128,6 +128,7 @@ resource "kubectl_manifest" "db_green" {
 
   yaml_body = templatefile("./manifests/helm-releases/database-${var.db_state.green["mode"]}.yaml",
     {
+      namespace       = var.authentik_namespace,
       role_arn        = module.authentik_db_irsa.iam_role_arn,
       region_name     = var.region_name,
       bucket_id       = var.data_bucket_id
@@ -161,6 +162,7 @@ resource "kubectl_manifest" "db_blue" {
 
   yaml_body = templatefile("./manifests/helm-releases/database-${var.db_state.blue["mode"]}.yaml",
     {
+      namespace       = var.authentik_namespace,
       role_arn        = module.authentik_db_irsa.iam_role_arn,
       region_name     = var.region_name,
       bucket_id       = var.data_bucket_id

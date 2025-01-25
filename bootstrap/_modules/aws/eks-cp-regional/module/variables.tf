@@ -57,14 +57,6 @@ variable "db_state" {
   }))
 }
 
-variable "smtp_user" {
-  type        = string
-  description = "(optional) describe your variable"
-}
-variable "smtp_password" {
-  type        = string
-  description = "(optional) describe your variable"
-}
 variable "smtp_server" {
   type        = string
   description = "(optional) describe your variable"

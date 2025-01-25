@@ -13,7 +13,7 @@ shared:
       kms:
         additional_key_owners:
           - "arn:aws:iam::042445652404:role/CS-Okta-Full-Admins-Write"
-          - "arn:aws:iam::042445652404:role/github-crossplane-multicloud"    
+          - "arn:aws:iam::042445652404:role/github-crossplane-multicloud"
       tags:
         logsr.life/partition: public
         logsr.life/owner: rfaircloth
@@ -44,21 +44,27 @@ shared:
                   type: cluster
                   namespaces: []
       region: green
-      regions: 
+      regions:
         green:
           name: green
           region: us-east-1
           az_exclude_names:
-            - us-east-1e        
+            - us-east-1e
         blue:
           name: blue
           region: us-west-1
           az_exclude_names: []
   sso:
     # sso should be disabled during a partition's primary deployment
-    enabled: false
+    authentik:
+      green:
+        mode: normal
+        name: green
+      blue:
+        mode: disabled
+        name: green
     db:
-      green: 
+      green:
         # Valid values for mode are
         # - bootstrap
         # - normal operations
@@ -67,10 +73,9 @@ shared:
         backup: true
         replicaPrimary: green
         replicaSource: blue
-      blue: 
+      blue:
         mode: normal
         name: blue
         backup: false
         replicaPrimary: green
         replicaSource: green
-    

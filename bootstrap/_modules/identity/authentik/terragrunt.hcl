@@ -29,5 +29,5 @@ locals {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  ssm_name_prefix = local.partition.shared.provider.aws.ssm_name_prefix
+  ssm_path_prefix = local.partition.shared.provider.aws.ssm_path_prefix
 }

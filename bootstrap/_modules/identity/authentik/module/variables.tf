@@ -1,3 +1,3 @@
-variable "ssm_name_prefix" {
+variable "ssm_path_prefix" {
 
 }

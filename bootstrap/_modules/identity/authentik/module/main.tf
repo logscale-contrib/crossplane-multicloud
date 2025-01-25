@@ -3,7 +3,7 @@ module "secrets_manager" {
   version = "1.3.1"
 
   # Secret
-  name_prefix             = "${var.ssm_name_prefix}/authentik-cookie-key"
+  name_prefix             = "${var.ssm_path_prefix}/authentik-cookie-key"
   description             = "Cookie Signing Key must not change in DR"
   recovery_window_in_days = 0
   # replica = {

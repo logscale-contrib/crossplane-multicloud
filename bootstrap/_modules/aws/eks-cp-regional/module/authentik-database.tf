@@ -109,7 +109,7 @@ resource "random_password" "authentik_db_password" {
 
 resource "kubernetes_secret" "db_secret" {
   metadata {
-    name = "authentik-db-authentik-instance"
+    name      = "authentik-db-authentik-instance"
     namespace = var.authentik_namespace
   }
 
@@ -151,6 +151,7 @@ resource "kubectl_manifest" "db_green_backup" {
 
   yaml_body = templatefile("./manifests/helm-releases/database-backup.yaml",
     {
+      namespace   = var.authentik_namespace,
       region_name = var.db_state.green["name"]
   })
 }

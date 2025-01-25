@@ -186,6 +186,7 @@ resource "kubectl_manifest" "db_blue_backup" {
 
   yaml_body = templatefile("./manifests/helm-releases/database-backup.yaml",
     {
+      namespace   = var.authentik_namespace,
       region_name = var.db_state.blue["name"]
   })
 }

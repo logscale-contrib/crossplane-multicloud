@@ -41,9 +41,9 @@ dependency "bucket_blue" {
 # dependency "partition_zone" {
 #   config_path = "${get_terragrunt_dir()}/../../dns/"
 # }
-# dependency "smtp" {
-#   config_path = "${get_terragrunt_dir()}/../../aws/${local.global.activeName}/ses/"
-# }
+dependency "smtp" {
+  config_path = "${get_terragrunt_dir()}/../ses/"
+}
 # dependency "mailuser" {
 #   config_path = "${get_terragrunt_dir()}/../identity-email/"
 # }

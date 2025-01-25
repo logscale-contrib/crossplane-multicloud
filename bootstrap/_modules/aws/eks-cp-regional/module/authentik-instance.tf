@@ -1,7 +1,7 @@
 
 resource "kubectl_manifest" "authentik_instance" {
   count = (
-    var.authentik_state[var.region_name]["name"] == "normal"
+    var.authentik_state[var.region_name]["mode"] == "normal"
   ) ? 1 : 0
 
   yaml_body = templatefile("./manifests/helm-releases/authentik.yaml",

@@ -109,7 +109,7 @@ resource "random_password" "authentik_db_password" {
 
 resource "kubernetes_secret" "db_secret" {
   metadata {
-    name = "authentik-db-appid"
+    name = "authentik-db-authentik-instance"
     namespace = var.authentik_namespace
   }
 
@@ -120,6 +120,7 @@ resource "kubernetes_secret" "db_secret" {
 
   type = "kubernetes.io/basic-auth"
 }
+
 resource "kubectl_manifest" "db_green" {
 
   count = (

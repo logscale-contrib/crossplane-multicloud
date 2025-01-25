@@ -71,9 +71,9 @@ inputs = {
 
   # domain_name = dependency.partition_zone.outputs.zone_name
 
-  # smtp_user     = dependency.mailuser.outputs.smtp_user
-  # smtp_password = dependency.mailuser.outputs.smtp_password
-  # smtp_server   = dependency.smtp.outputs.smtp_server
+  smtp_user     = dependency.mailuser.outputs.smtp_user
+  smtp_password = dependency.mailuser.outputs.smtp_password
+  smtp_server   = dependency.smtp.outputs.smtp_server
   # from_email    = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
 
 }

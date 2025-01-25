@@ -39,5 +39,5 @@ module "iam_ses_user" {
   policy_arns = [
     aws_iam_policy.send_mail.arn
   ]
-  password_length = var.iam_role_path
+  path = var.iam_role_path
 }

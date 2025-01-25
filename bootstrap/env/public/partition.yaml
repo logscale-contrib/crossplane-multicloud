@@ -10,6 +10,7 @@ shared:
       iam_role_path: "/cloud/"
       iam_policy_path_prefix: "/cloud"
       iam_policy_name_prefix: "cloud"
+      ssm_path_prefix: "/cloud/pub"
       kms:
         additional_key_owners:
           - "arn:aws:iam::042445652404:role/CS-Okta-Full-Admins-Write"

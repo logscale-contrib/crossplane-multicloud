@@ -1,33 +1,38 @@
-data "kubectl_path_documents" "flux2-repos" {
-  pattern = "./manifests/flux-repos/*.yaml"
-}
+module "secrets_manager" {
+  source  = "terraform-aws-modules/secrets-manager/aws"
+  version = "1.3.1"
 
-resource "kubectl_manifest" "flux2-repos" {
-  depends_on = [
-    kubernetes_namespace.identity
-  ]
-  for_each  = data.kubectl_path_documents.flux2-repos.manifests
-  yaml_body = each.value
-}
+  # Secret
+  name_prefix             = "${var.ssm_name_prefix}/authentik-cookie-key"
+  description             = "Cookie Signing Key must not change in DR"
+  recovery_window_in_days = 0
+  # replica = {
+  #   # Can set region as key
+  #   another = {
+  #     # Or as attribute
+  #     region = "us-west-2"
+  #   }
+  # }
 
-data "kubectl_path_documents" "flux2-releases" {
-  pattern = "./manifests/flux-releases/*.yaml"
-  vars = {
-    smtp_user     = var.smtp_user
-    smtp_password = var.smtp_password
-    smtp_server   = var.smtp_server
-    smtp_port     = var.smtp_port
-    smtp_tls      = "${var.smtp_tls}"
-    from_email    = var.from_email
+  # Policy
+  create_policy       = true
+  block_public_policy = true
+  policy_statements = {
+    read = {
+      sid = "AllowAccountRead"
+      principals = [{
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+      }]
+      actions   = ["secretsmanager:GetSecretValue"]
+      resources = ["*"]
+    }
   }
-}
 
-resource "kubectl_manifest" "flux2-releases" {
-  depends_on = [
-    kubernetes_namespace.identity,
-    kubectl_manifest.flux2-repos,
-    kubernetes_secret.secretkey
-  ]
-  for_each  = data.kubectl_path_documents.flux2-releases.manifests
-  yaml_body = each.value
+  # Version
+  create_random_password           = true
+  random_password_length           = 64
+  # random_password_override_special = "!@#$%^&*()_+"
+
+  # tags = local.tags
 }

@@ -23,31 +23,11 @@ locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
 }
 
-dependency "kubernetes_cluster" {
-  config_path  = "${get_terragrunt_dir()}/../../aws/${local.partition.shared.sso.region}/eks/"
-  skip_outputs = true
-}
-
-dependency "partition_zone" {
-  config_path = "${get_terragrunt_dir()}/../../dns/"
-}
-dependency "smtp" {
-  config_path = "${get_terragrunt_dir()}/../../aws/${local.global.activeName}/ses/"
-}
-dependency "mailuser" {
-  config_path = "${get_terragrunt_dir()}/../identity-email/"
-}
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
 # These are the variables we have to pass in to use the module. This defines the parameters that are common across all
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  domain_name = dependency.partition_zone.outputs.zone_name
-
-  smtp_user     = dependency.mailuser.outputs.smtp_user
-  smtp_password = dependency.mailuser.outputs.smtp_password
-  smtp_server   = dependency.smtp.outputs.smtp_server
-  from_email    = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
-
+  ssm_name_prefix = local.partition.shared.provider.aws.ssm_name_prefix
 }

@@ -6,6 +6,7 @@ resource "kubectl_manifest" "authentik" {
 
   yaml_body = templatefile("./manifests/helm-releases/authentik.yaml",
     {
+      namespace     = var.authentik_namespace
       smtp_user     = module.iam_ses_user.iam_access_key_id
       smtp_password = module.iam_ses_user.iam_access_key_ses_smtp_password_v4
       smtp_server   = var.smtp_server

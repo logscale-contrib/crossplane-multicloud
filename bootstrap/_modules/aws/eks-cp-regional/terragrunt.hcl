@@ -73,6 +73,9 @@ inputs = {
   smtp_port     = dependency.smtp.outputs.smtp_port
   smtp_tls      = dependency.smtp.outputs.smtp_use_tls
 
+  arn_raw                         = dependency.smtp.outputs.arn_raw
+  aws_sesv2_configuration_set_arn = dependency.smtp.outputs.aws_sesv2_configuration_set_arn
+  
   from_email    = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
 
 }

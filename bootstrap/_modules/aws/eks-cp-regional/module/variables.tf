@@ -76,3 +76,12 @@ variable "from_email" {
   type        = string
   description = "(optional) describe your variable"
 }
+
+
+variable "arn_raw" {
+
+}
+
+variable "aws_sesv2_configuration_set_arn" {
+
+}

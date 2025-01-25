@@ -57,6 +57,16 @@ variable "db_state" {
   }))
 }
 
+variable "authentik_state" {
+  type = map(object({
+    mode           = string
+    name           = string
+    # backup         = bool
+    # replicaPrimary = string
+    # replicaSource  = string
+  }))
+}
+
 variable "smtp_server" {
   type        = string
   description = "(optional) describe your variable"

@@ -66,7 +66,8 @@ inputs = {
   
   regions = local.partition.shared.provider.aws.regions
   db_state = local.partition.shared.sso.db
-
+  authentik_state= local.partition.shared.sso.authentik
+  
   # domain_name = dependency.partition_zone.outputs.zone_name
 
   smtp_server   = dependency.smtp.outputs.smtp_server
@@ -75,7 +76,7 @@ inputs = {
 
   arn_raw                         = dependency.smtp.outputs.arn_raw
   aws_sesv2_configuration_set_arn = dependency.smtp.outputs.aws_sesv2_configuration_set_arn
-  
+
   from_email    = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
 
 }

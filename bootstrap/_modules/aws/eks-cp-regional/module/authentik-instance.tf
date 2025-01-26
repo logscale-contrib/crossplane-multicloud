@@ -42,7 +42,7 @@ resource "kubernetes_service_account" "authentik_server" {
   metadata {
     name = "authentik-server"
     annotations = {
-      "iam.amazonaws.com/role" = module.authentik_server.role_name
+      "iam.amazonaws.com/role" = module.authentik_server.iam_role_arn
     }
   }
 }
@@ -51,7 +51,7 @@ resource "kubernetes_service_account" "authentik_worker" {
   metadata {
     name = "authentik-worker"
     annotations = {
-      "iam.amazonaws.com/role" = module.authentik_worker.role_name
+      "iam.amazonaws.com/role" = module.authentik_worker.iam_role_arn
     }
   }
 }

@@ -49,7 +49,7 @@ resource "aws_iam_policy" "authentik_secrets_policy" {
         ],
         "Resource" : [
           module.authentik_cookie_key.secret_arn,
-          module.authentik_cookie_key.secret_replica[0].secret_arn
+          # module.authentik_cookie_key.secret_replica[0].secret_arn
         ],
       },
     ]

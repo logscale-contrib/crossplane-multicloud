@@ -19,19 +19,9 @@ module "authentik_cookie_key" {
   }
 
   # Policy
-  create_policy       = true
+  create_policy       = false
   block_public_policy = true
-  policy_statements = {
-    read = {
-      sid = "AllowAccountRead"
-      principals = [{
-        type        = "AWS"
-        identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
-      }]
-      actions   = ["secretsmanager:GetSecretValue"]
-      resources = ["*"]
-    }
-  }
+
 
   # Version
   create_random_password = true
@@ -39,4 +29,29 @@ module "authentik_cookie_key" {
   # random_password_override_special = "!@#$%^&*()_+"
 
   # tags = local.tags
+}
+
+resource "aws_iam_policy" "authentik_secrets_policy" {
+  name        = "authentik_read_authentik_secrets_policy"
+  path        = var.iam_role_path
+  description = "Read Authentik Secrets"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ],
+        "Resource" : [
+          module.authentik_cookie_key.arn,
+          module.authentik_cookie_key.secret_replica[0].arn
+        ],
+      },
+    ]
+  })
 }

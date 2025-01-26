@@ -1,3 +1,8 @@
+variable "iam_role_path" {
+
+}
+
+
 variable "ssm_path_prefix" {
 
 }

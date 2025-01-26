@@ -29,6 +29,9 @@ locals {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
+
+  iam_role_path = local.partition.shared.provider.aws.iam_role_path
+
   ssm_path_prefix = local.partition.shared.provider.aws.ssm_path_prefix
   region = local.partition.shared.provider.aws.region
   regions = local.partition.shared.provider.aws.regions

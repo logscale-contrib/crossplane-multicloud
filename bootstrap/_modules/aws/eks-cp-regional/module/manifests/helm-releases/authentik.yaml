@@ -44,11 +44,13 @@ spec:
     #   targetPath: authentik.secret_key
 
   values:
-    global:    
+    global:
       # envFrom:
       #   - secretRef:
       #       name: authentik-bootstrap
-      # envValueFrom:
+      env:
+        AUTHENTIK_SECRET_KEY:
+
       #   AUTHENTIK_BOOTSTRAP_PASSWORD:
       #     secretKeyRef:
       #       key: password
@@ -109,7 +111,7 @@ spec:
         - name: AUTHENTIK_LISTEN__HTTPS
           value: :9443
         - name: AUTHENTIK_LISTEN__METRICS
-          value: :9300      
+          value: :9300
     worker:
       replicas: 3
       pdb:

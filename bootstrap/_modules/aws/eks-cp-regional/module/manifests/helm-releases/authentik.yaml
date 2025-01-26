@@ -50,7 +50,7 @@ spec:
       #       name: authentik-bootstrap
       env:
         AUTHENTIK_SECRET_KEY:
-        value: "file:///mnt/secrets-store/authentik-secret-key/secretkey"
+        value: "file:///mnt/secrets-store/authentik-secrets-cookie-key/password"
 
       #   AUTHENTIK_BOOTSTRAP_PASSWORD:
       #     secretKeyRef:
@@ -64,6 +64,23 @@ spec:
       #     secretKeyRef:
       #       key: email
       #       name: authentik-bootstrap
+      # -- Additional volumeMounts to all deployed Deployments. Does not apply to GeoIP
+      # @default -- `[]` (See [values.yaml])
+      volumeMounts: 
+        - name: authentik-secrets-cookie-key
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+
+      # -- Additional volumes to all deployed Deployments.
+      # @default -- `[]` (See [values.yaml])
+      volumes: 
+      - name: authentik-secrets-cookie-key
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "authentik-secrets-cookie-key"
+
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
@@ -130,3 +147,16 @@ spec:
           value: "8"
     redis:
       enabled: true
+  additionalObjects:
+   - 
+    apiVersion: secrets-store.csi.x-k8s.io/v1
+    kind: SecretProviderClass
+    metadata:
+      name: authentik-secrets-cookie-key
+    spec:
+      provider: aws
+      parameters:
+        objects: |
+            - objectName: "${authentik_cookie_key_ssm_name}"
+              objectType: "secretsmanager"
+            

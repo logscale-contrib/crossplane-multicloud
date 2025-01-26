@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 
 data "aws_canonical_user_id" "current" {}
 
-module "secrets_manager" {
+module "authentik_cookie_key" {
   source  = "terraform-aws-modules/secrets-manager/aws"
   version = "1.3.1"
 

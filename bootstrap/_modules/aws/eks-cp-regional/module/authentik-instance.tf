@@ -6,9 +6,9 @@ module "authentik_server" {
   role_name_prefix = "${var.authentik_namespace}-server"
   role_path        = var.iam_role_path
 
-#   role_policy_arns = {
-#     "object" = module.iam_iam-policy.arn
-#   }
+  role_policy_arns = {
+    "authentik_cookie_key_policy_arn" = var.authentik_cookie_key_policy_arn
+  }
 
   oidc_providers = {
     main = {
@@ -26,9 +26,9 @@ module "authentik_worker" {
   role_name_prefix = "${var.authentik_namespace}-woker"
   role_path        = var.iam_role_path
 
-#   role_policy_arns = {
-#     "object" = module.iam_iam-policy.arn
-#   }
+  role_policy_arns = {
+    "authentik_cookie_key_policy_arn" = var.authentik_cookie_key_policy_arn
+  }
 
   oidc_providers = {
     main = {

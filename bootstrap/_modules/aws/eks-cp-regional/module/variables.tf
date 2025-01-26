@@ -59,8 +59,8 @@ variable "db_state" {
 
 variable "authentik_state" {
   type = map(object({
-    mode           = string
-    name           = string
+    mode = string
+    name = string
     # backup         = bool
     # replicaPrimary = string
     # replicaSource  = string
@@ -93,5 +93,12 @@ variable "arn_raw" {
 }
 
 variable "aws_sesv2_configuration_set_arn" {
+
+}
+
+variable "authentik_cookie_key_policy_arn" {
+
+}
+variable "authentik_cookie_key_ssm_name" {
 
 }

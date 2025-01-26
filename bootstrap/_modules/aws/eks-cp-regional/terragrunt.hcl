@@ -45,6 +45,11 @@ dependency "smtp" {
   config_path = "${get_terragrunt_dir()}/../ses/"
 }
 
+dependency "authentik" {
+  config_path = "${get_terragrunt_dir()}/../../authentik/"
+}
+
+
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
 # These are the variables we have to pass in to use the module. This defines the parameters that are common across all
@@ -67,7 +72,7 @@ inputs = {
   regions = local.partition.shared.provider.aws.regions
   db_state = local.partition.shared.sso.db
   authentik_state= local.partition.shared.sso.authentik
-  
+
   # domain_name = dependency.partition_zone.outputs.zone_name
 
   smtp_server   = dependency.smtp.outputs.smtp_server
@@ -79,4 +84,6 @@ inputs = {
 
   from_email    = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
 
+  authentik_cookie_key_policy_arn = dependency.authentik.outputs.authentik_cookie_key_policy_arn
+  authentik_cookie_key_ssm_name = dependency.authentik.outputs.authentik_cookie_key_ssm_name
 }

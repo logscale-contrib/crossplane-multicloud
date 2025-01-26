@@ -46,7 +46,7 @@ dependency "smtp" {
 }
 
 dependency "authentik" {
-  config_path = "${get_terragrunt_dir()}/../../authentik/"
+  config_path = "${get_terragrunt_dir()}/../../../partition/authentik/"
 }
 
 

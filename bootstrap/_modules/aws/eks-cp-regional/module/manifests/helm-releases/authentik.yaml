@@ -49,8 +49,8 @@ spec:
       #   - secretRef:
       #       name: authentik-bootstrap
       env:
-        AUTHENTIK_SECRET_KEY:
-        value: "file:///mnt/secrets-store/authentik-secrets-cookie-key/password"
+        - name: AUTHENTIK_SECRET_KEY
+          value: "file:///mnt/secrets-store/authentik-secrets-cookie-key/password"
 
       #   AUTHENTIK_BOOTSTRAP_PASSWORD:
       #     secretKeyRef:

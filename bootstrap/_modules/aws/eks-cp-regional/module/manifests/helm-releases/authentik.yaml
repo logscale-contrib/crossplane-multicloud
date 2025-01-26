@@ -50,6 +50,7 @@ spec:
       #       name: authentik-bootstrap
       env:
         AUTHENTIK_SECRET_KEY:
+        value: "file:///mnt/secrets-store/authentik-secret-key/secretkey"
 
       #   AUTHENTIK_BOOTSTRAP_PASSWORD:
       #     secretKeyRef:

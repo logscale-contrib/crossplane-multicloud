@@ -147,16 +147,16 @@ spec:
           value: "8"
     redis:
       enabled: true
-  additionalObjects:
-   - 
-    apiVersion: secrets-store.csi.x-k8s.io/v1
-    kind: SecretProviderClass
-    metadata:
-      name: authentik-secrets-cookie-key
-    spec:
-      provider: aws
-      parameters:
-        objects: |
-            - objectName: "${authentik_cookie_key_ssm_name}"
-              objectType: "secretsmanager"
-            
+    additionalObjects:
+    - 
+      apiVersion: secrets-store.csi.x-k8s.io/v1
+      kind: SecretProviderClass
+      metadata:
+        name: authentik-secrets-cookie-key
+      spec:
+        provider: aws
+        parameters:
+          objects: |
+              - objectName: "${authentik_cookie_key_ssm_name}"
+                objectType: "secretsmanager"
+              

@@ -38,10 +38,10 @@ spec:
   #     name: authentik-db-authentik-instance
   #     valuesKey: password
   #     targetPath: authentik.postgresql.password
-    # - kind: Secret
-    #   name: authentik-secret-key
-    #   valuesKey: secretkey
-    #   targetPath: authentik.secret_key
+  # - kind: Secret
+  #   name: authentik-secret-key
+  #   valuesKey: secretkey
+  #   targetPath: authentik.secret_key
 
   values:
     global:
@@ -75,7 +75,7 @@ spec:
       #       name: authentik-bootstrap
       # -- Additional volumeMounts to all deployed Deployments. Does not apply to GeoIP
       # @default -- `[]` (See [values.yaml])
-      volumeMounts: 
+      volumeMounts:
         - name: authentik-secrets-cookie-key
           mountPath: "/mnt/secrets-store"
           readOnly: true
@@ -85,19 +85,19 @@ spec:
 
       # -- Additional volumes to all deployed Deployments.
       # @default -- `[]` (See [values.yaml])
-      volumes: 
-      - name: authentik-secrets-cookie-key
-        csi:
-          driver: secrets-store.csi.k8s.io
-          readOnly: true
-          volumeAttributes:
-            secretProviderClass: "authentik-secrets-cookie-key"
-      - name: authentik-postgresql
-        secret:
-          secretName: authentik-db-authentik-instance
-          # items:
-          #   - key: username
-          #   - key: password
+      volumes:
+        - name: authentik-secrets-cookie-key
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "authentik-secrets-cookie-key"
+        - name: authentik-postgresql
+          secret:
+            secretName: authentik-db-authentik-instance
+            # items:
+            #   - key: username
+            #   - key: password
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
@@ -115,7 +115,8 @@ spec:
         from: ${from_email}
       error_reporting:
         enabled: false
-      postgresql: null
+      postgresql:
+        null
         # host: authentik-db-${region_name}
         # user: "file:///mnt/secrets/postgresql/username"
         # password: "file:///mnt/secrets/postgresql/password"
@@ -169,29 +170,26 @@ spec:
     redis:
       enabled: true
     additionalObjects:
-    - 
-      apiVersion: secrets-store.csi.x-k8s.io/v1
-      kind: SecretProviderClass
-      metadata:
-        name: authentik-secrets-cookie-key
-      spec:
-        provider: aws
-        parameters:
-          objects: |
+      - apiVersion: secrets-store.csi.x-k8s.io/v1
+        kind: SecretProviderClass
+        metadata:
+          name: authentik-secrets-cookie-key
+        spec:
+          provider: aws
+          parameters:
+            objects: |
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
                 objectAlias: "secret-key"
-    -          
-      apiVersion: v1
-      kind: ServiceAccount
-      metadata:
-        annotations:
-          eks.amazonaws.com/role-arn: ${sa_server_arn}
-        name: authentik-server
-    -          
-      apiVersion: v1
-      kind: ServiceAccount
-      metadata:
-        annotations:
-          eks.amazonaws.com/role-arn: ${sa_worker_arn}
-        name: authentik-worker
+      - apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          annotations:
+            eks.amazonaws.com/role-arn: ${sa_server_arn}
+          name: authentik-server
+      - apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          annotations:
+            eks.amazonaws.com/role-arn: ${sa_worker_arn}
+          name: authentik-worker

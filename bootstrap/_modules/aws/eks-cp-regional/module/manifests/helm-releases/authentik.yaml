@@ -51,7 +51,16 @@ spec:
       env:
         - name: AUTHENTIK_SECRET_KEY
           value: "file:///mnt/secrets-store/secret-key"
-
+        - name: AUTHENTIK_POSTGRESQL__HOST
+          value: "authentik-db-${region_name}"
+        - name: AUTHENTIK_POSTGRESQL__USER
+          secretKeyRef:
+            key: username
+            name: authentik-db-authentik-instance
+        - name: AUTHENTIK_POSTGRESQL__PASSWORD
+          secretKeyRef:
+            key: password
+            name: authentik-db-authentik-instance
       #   AUTHENTIK_BOOTSTRAP_PASSWORD:
       #     secretKeyRef:
       #       key: password

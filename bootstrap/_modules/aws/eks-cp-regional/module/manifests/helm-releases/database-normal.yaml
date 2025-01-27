@@ -54,7 +54,7 @@ spec:
               login: true
               superuser: false
               passwordSecret:
-                name: authentik-db-appid
+                name: authentik-db-authentik-instance
           # Backup properties
           backup:
             barmanObjectStore:

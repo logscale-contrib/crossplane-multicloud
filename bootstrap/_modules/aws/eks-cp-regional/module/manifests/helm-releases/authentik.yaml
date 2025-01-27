@@ -166,12 +166,12 @@ spec:
       kind: ServiceAccount
       metadata:
         annotations:
-          iam.amazonaws.com/role: ${sa_server_arn}
+          eks.amazonaws.com/role-arn: ${sa_server_arn}
         name: authentik-server
     -          
       apiVersion: v1
       kind: ServiceAccount
       metadata:
         annotations:
-          iam.amazonaws.com/role: ${sa_worker_arn}
+          eks.amazonaws.com/role-arn: ${sa_worker_arn}
         name: authentik-worker

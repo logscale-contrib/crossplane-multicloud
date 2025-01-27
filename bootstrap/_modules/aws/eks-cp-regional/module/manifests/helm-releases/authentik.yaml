@@ -108,7 +108,7 @@ spec:
       error_reporting:
         enabled: false
       postgresql:
-        host: authentik-db-${region_name}
+        host: authentik-db-${region_name}-rw
         user: "file:///mnt/secrets/postgresql/username"
         password: "file:///mnt/secrets/postgresql/password"
     server:

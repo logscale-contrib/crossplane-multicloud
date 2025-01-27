@@ -48,8 +48,8 @@ resource "aws_iam_policy" "authentik_secrets_policy" {
           "secretsmanager:DescribeSecret"
         ],
         "Resource" : [
-          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${module.authentik_cookie_key.secret_name}",
-          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${module.authentik_cookie_key.secret_name}"
+          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-cookie-key*",
+          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-cookie-key*"
         ],
       },
     ]

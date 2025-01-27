@@ -53,14 +53,6 @@ spec:
           value: "file:///mnt/secrets-store/secret-key"
         - name: AUTHENTIK_POSTGRESQL__HOST
           value: "authentik-db-${region_name}"
-        - name: AUTHENTIK_POSTGRESQL__USER
-          secretKeyRef:
-            key: username
-            name: authentik-db-authentik-instance
-        - name: AUTHENTIK_POSTGRESQL__PASSWORD
-          secretKeyRef:
-            key: password
-            name: authentik-db-authentik-instance
       #   AUTHENTIK_BOOTSTRAP_PASSWORD:
       #     secretKeyRef:
       #       key: password
@@ -116,10 +108,9 @@ spec:
       error_reporting:
         enabled: false
       postgresql:
-        null
-        # host: authentik-db-${region_name}
-        # user: "file:///mnt/secrets/postgresql/username"
-        # password: "file:///mnt/secrets/postgresql/password"
+        host: authentik-db-${region_name}
+        user: "file:///mnt/secrets/postgresql/username"
+        password: "file:///mnt/secrets/postgresql/password"
     server:
       ingress:
         enabled: true

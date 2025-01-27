@@ -33,11 +33,11 @@ spec:
           kind: Deployment
   dependsOn:
     - name: authentik-db
-  valuesFrom:
-    - kind: Secret
-      name: authentik-db-authentik-instance
-      valuesKey: password
-      targetPath: authentik.postgresql.password
+  # valuesFrom:
+  #   - kind: Secret
+  #     name: authentik-db-authentik-instance
+  #     valuesKey: password
+  #     targetPath: authentik.postgresql.password
     # - kind: Secret
     #   name: authentik-secret-key
     #   valuesKey: secretkey
@@ -98,8 +98,8 @@ spec:
         from: ${from_email}
       error_reporting:
         enabled: false
-      postgresql:
-        host: identity-db
+      # postgresql:
+      #   host: identity-db
     server:
       ingress:
         enabled: true
@@ -147,6 +147,8 @@ spec:
       env:
         - name: AUTHENTIK_WORKER__CONCURRENCY
           value: "8"
+    postgresql:
+      enabled: false
     redis:
       enabled: true
     additionalObjects:

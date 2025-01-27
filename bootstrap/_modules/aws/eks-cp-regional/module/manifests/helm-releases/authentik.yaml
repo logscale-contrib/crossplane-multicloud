@@ -79,6 +79,9 @@ spec:
         - name: authentik-secrets-cookie-key
           mountPath: "/mnt/secrets-store"
           readOnly: true
+        - name: authentik-postgresql
+          mountPath: "/mnt/secrets/postgresql"
+          readOnly: true
 
       # -- Additional volumes to all deployed Deployments.
       # @default -- `[]` (See [values.yaml])
@@ -89,7 +92,12 @@ spec:
           readOnly: true
           volumeAttributes:
             secretProviderClass: "authentik-secrets-cookie-key"
-
+      - name: authentik-postgresql
+        secret:
+          secretName: authentik-db-authentik-instance
+          items:
+            - key: username
+            - key: password
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
@@ -108,10 +116,9 @@ spec:
       error_reporting:
         enabled: false
       postgresql:
-        host: null
-        user: null
-        password: null
-      #   host: identity-db
+        host: authentik-db-${region_name}
+        user: "file:///mnt/secrets/postgresql/username"
+        password: "file:///mnt/secrets/postgresql/password"
     server:
       ingress:
         enabled: true
@@ -159,8 +166,6 @@ spec:
       env:
         - name: AUTHENTIK_WORKER__CONCURRENCY
           value: "8"
-    postgresql:
-      enabled: false
     redis:
       enabled: true
     additionalObjects:

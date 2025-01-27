@@ -50,7 +50,7 @@ spec:
       #       name: authentik-bootstrap
       env:
         - name: AUTHENTIK_SECRET_KEY
-          value: "file:///mnt/secrets-store/authentik-secrets-cookie-key/password"
+          value: "file:///mnt/secrets-store/secret-key"
 
       #   AUTHENTIK_BOOTSTRAP_PASSWORD:
       #     secretKeyRef:
@@ -161,7 +161,7 @@ spec:
           objects: |
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
-                objectAlias: "cookie_key"
+                objectAlias: "secret-key"
     -          
       apiVersion: v1
       kind: ServiceAccount

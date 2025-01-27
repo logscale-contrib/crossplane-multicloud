@@ -116,6 +116,7 @@ spec:
       pdb:
         enabled: true
         maxUnavailable: 1
+      serviceAccountName: authentik-server
       resources:
         requests:
           cpu: 2
@@ -135,6 +136,7 @@ spec:
       pdb:
         enabled: true
         minAvailable: 1
+      serviceAccountName: authentik-worker
       resources:
         requests:
           cpu: 1
@@ -159,4 +161,17 @@ spec:
           objects: |
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
-              
+    -          
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        annotations:
+          iam.amazonaws.com/role: ${sa_server_arn}
+        name: authentik-server
+    -          
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        annotations:
+          iam.amazonaws.com/role: ${sa_worker_arn}
+        name: authentik-worker

@@ -161,6 +161,7 @@ spec:
           objects: |
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
+                objectAlias: "cookie_key"
     -          
       apiVersion: v1
       kind: ServiceAccount

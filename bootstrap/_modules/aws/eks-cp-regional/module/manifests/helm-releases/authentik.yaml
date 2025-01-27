@@ -107,7 +107,10 @@ spec:
         from: ${from_email}
       error_reporting:
         enabled: false
-      # postgresql:
+      postgresql:
+        host: null
+        user: null
+        password: null
       #   host: identity-db
     server:
       ingress:

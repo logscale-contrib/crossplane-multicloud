@@ -115,10 +115,10 @@ spec:
         from: ${from_email}
       error_reporting:
         enabled: false
-      postgresql:
-        host: authentik-db-${region_name}
-        user: "file:///mnt/secrets/postgresql/username"
-        password: "file:///mnt/secrets/postgresql/password"
+      postgresql: null
+        # host: authentik-db-${region_name}
+        # user: "file:///mnt/secrets/postgresql/username"
+        # password: "file:///mnt/secrets/postgresql/password"
     server:
       ingress:
         enabled: true

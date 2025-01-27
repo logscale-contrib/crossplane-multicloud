@@ -95,9 +95,9 @@ spec:
       - name: authentik-postgresql
         secret:
           secretName: authentik-db-authentik-instance
-          items:
-            - key: username
-            - key: password
+          # items:
+          #   - key: username
+          #   - key: password
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone

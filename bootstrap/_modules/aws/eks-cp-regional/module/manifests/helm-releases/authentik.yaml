@@ -115,6 +115,7 @@ spec:
         annotations:
           alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
           alb.ingress.kubernetes.io/ssl-redirect: "443"
+          helm.sh/resource-policy: keep
         tls:
           - hosts:
               - ${host}.${domain_name}

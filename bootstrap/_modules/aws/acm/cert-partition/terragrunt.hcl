@@ -20,11 +20,11 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = basename(dirname("${get_terragrunt_dir()}/../../.."))  
+  region    = basename(dirname("${get_terragrunt_dir()}/../.."))  
 }
 
 dependency "partition_zone" {
-  config_path = "${get_terragrunt_dir()}/../../../../dns/"
+  config_path = "${get_terragrunt_dir()}/../../../dns/"
   mock_outputs = {
     zone_name = "example.com"
     zone_id   = "A123456789"

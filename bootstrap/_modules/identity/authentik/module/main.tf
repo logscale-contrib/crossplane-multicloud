@@ -7,7 +7,7 @@ module "authentik_cookie_key" {
   version = "1.3.1"
 
   # Secret
-  name_prefix             = "${var.ssm_path_prefix}/authentik-cookie-key-"
+  name_prefix             = "${var.ssm_path_prefix}/authentik/cookie-key-"
   description             = "Cookie Signing Key must not change in DR"
   recovery_window_in_days = 0
   replica = {
@@ -37,7 +37,7 @@ module "authentik_akadmin" {
   version = "1.3.1"
 
   # Secret
-  name_prefix             = "${var.ssm_path_prefix}/authentik-akadmin-"
+  name_prefix             = "${var.ssm_path_prefix}/authentik/akadminPassword-"
   description             = "Initial AKAdmin Password"
   recovery_window_in_days = 0
   replica = {
@@ -78,13 +78,16 @@ resource "aws_iam_policy" "authentik_secrets_policy" {
           "secretsmanager:DescribeSecret"
         ],
         "Resource" : [
-          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-cookie-key*",
-          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-cookie-key*",
-          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-akadmin*",
-          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-akadmin*"
-
+          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/cookie-key*",
+          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/cookie-key*",
+          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/akadminPassword*",
+          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/akadminPassword*",
+          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/akadminEmail*",
+          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/akadminEmail*"
         ],
       },
     ]
   })
 }
+
+

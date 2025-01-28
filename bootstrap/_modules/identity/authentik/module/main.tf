@@ -31,6 +31,36 @@ module "authentik_cookie_key" {
   # tags = local.tags
 }
 
+
+module "authentik_akadminy" {
+  source  = "terraform-aws-modules/secrets-manager/aws"
+  version = "1.3.1"
+
+  # Secret
+  name_prefix             = "${var.ssm_path_prefix}/authentik-akadmin-"
+  description             = "Initial AKAdmin Password"
+  recovery_window_in_days = 0
+  replica = {
+    # Can set region as key
+    another = {
+      # Or as attribute
+      region = var.regions["blue"]["region"]
+    }
+  }
+
+  # Policy
+  create_policy       = false
+  block_public_policy = true
+
+
+  # Version
+  create_random_password = true
+  random_password_length = 32
+  # random_password_override_special = "!@#$%^&*()_+"
+
+  # tags = local.tags
+}
+
 resource "aws_iam_policy" "authentik_secrets_policy" {
   name        = "authentik_read_authentik_secrets_policy"
   path        = var.iam_role_path
@@ -49,7 +79,10 @@ resource "aws_iam_policy" "authentik_secrets_policy" {
         ],
         "Resource" : [
           "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-cookie-key*",
-          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-cookie-key*"
+          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-cookie-key*",
+          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-akadmin*",
+          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik-akadmin*"
+
         ],
       },
     ]

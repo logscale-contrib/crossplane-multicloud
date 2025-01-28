@@ -51,6 +51,8 @@ spec:
       env:
         - name: AUTHENTIK_SECRET_KEY
           value: "file:///mnt/secrets-store/secret-key"
+        - name: AUTHENTIK_BOOTSTRAP_PASSWORD
+          value: "file:///mnt/secrets-store/akadmin"
       #   AUTHENTIK_BOOTSTRAP_PASSWORD:
       #     secretKeyRef:
       #       key: password
@@ -69,6 +71,9 @@ spec:
         - name: authentik-secrets-cookie-key
           mountPath: "/mnt/secrets-store"
           readOnly: true
+        - name: authentik-akadmin
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
         - name: authentik-postgresql
           mountPath: "/mnt/secrets/postgresql"
           readOnly: true
@@ -82,6 +87,12 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: "authentik-secrets-cookie-key"
+        - name: authentik-akadmin
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "authentik-akadmin"
         - name: authentik-postgresql
           secret:
             secretName: authentik-db-authentik-instance
@@ -171,6 +182,18 @@ spec:
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
                 objectAlias: "secret-key"
+      - apiVersion: secrets-store.csi.x-k8s.io/v1
+        kind: SecretProviderClass
+        metadata:
+          name: authentik-secrets-akadmin
+        spec:
+          provider: aws
+          parameters:
+            objects: |
+              - objectName: "${authentik_akadmin}"
+                objectType: "secretsmanager"
+                objectAlias: "akadmin"                
+                
       - apiVersion: v1
         kind: ServiceAccount
         metadata:

@@ -73,6 +73,7 @@ resource "kubectl_manifest" "authentik_instance" {
       smtp_tls                      = "${var.smtp_tls}"
       from_email                    = var.from_email
       authentik_cookie_key_ssm_name = var.authentik_cookie_key_ssm_name
+      authentik_akadmin             = var.authentik_akadmin
       sa_server_arn                 = module.authentik_server.iam_role_arn
       sa_worker_arn                 = module.authentik_worker.iam_role_arn
       host                          = var.host

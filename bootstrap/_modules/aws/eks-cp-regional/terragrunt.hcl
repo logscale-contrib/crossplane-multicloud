@@ -87,4 +87,5 @@ inputs = {
 
   authentik_cookie_key_policy_arn = dependency.authentik.outputs.authentik_cookie_key_policy_arn
   authentik_cookie_key_ssm_name = dependency.authentik.outputs.authentik_cookie_key_ssm_name
+  authentik_akadmin = dependency.authentik.outputs.authentik_akadmin_ssm_name
 }

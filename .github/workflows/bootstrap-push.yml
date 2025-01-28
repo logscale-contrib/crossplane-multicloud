@@ -33,7 +33,7 @@ jobs:
           terraform_version: ${{ env.tf_version }}
 
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v4.0.2
+        uses: aws-actions/configure-aws-credentials@v4.0.3
         with:
           role-to-assume: ${{ env.AWS_ROLE }}
           role-session-name: crossplane-multicloud_bootstrap
@@ -78,7 +78,7 @@ jobs:
         with:
           terraform_version: ${{ env.tf_version }}
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v4.0.2
+        uses: aws-actions/configure-aws-credentials@v4.0.3
         with:
           role-to-assume: ${{ env.AWS_ROLE }}
           role-session-name: crossplane-multicloud_bootstrap

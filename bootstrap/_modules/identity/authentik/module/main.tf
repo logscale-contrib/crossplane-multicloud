@@ -32,7 +32,7 @@ module "authentik_cookie_key" {
 }
 
 
-module "authentik_akadminy" {
+module "authentik_akadmin" {
   source  = "terraform-aws-modules/secrets-manager/aws"
   version = "1.3.1"
 

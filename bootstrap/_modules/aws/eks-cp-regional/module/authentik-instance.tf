@@ -75,6 +75,8 @@ resource "kubectl_manifest" "authentik_instance" {
       authentik_cookie_key_ssm_name = var.authentik_cookie_key_ssm_name
       sa_server_arn                 = module.authentik_server.iam_role_arn
       sa_worker_arn                 = module.authentik_worker.iam_role_arn
+      host                          = var.host
+      domain_name                   = var.domain_name
   })
 
 }

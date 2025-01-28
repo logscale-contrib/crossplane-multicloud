@@ -117,9 +117,9 @@ spec:
           alb.ingress.kubernetes.io/ssl-redirect: "443"
         tls:
           - hosts:
-              - identity.ref.logsr.life
+              - ${host}.${domain_name}
         hosts:
-          - identity.ref.logsr.life
+          - ${host}.${domain_name}
         ingressClassName: alb-partition
       replicas: 3
       pdb:

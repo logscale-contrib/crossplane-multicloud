@@ -102,3 +102,10 @@ variable "authentik_cookie_key_policy_arn" {
 variable "authentik_cookie_key_ssm_name" {
 
 }
+
+variable "domain_name" {
+  
+}
+variable "host" {
+  
+}

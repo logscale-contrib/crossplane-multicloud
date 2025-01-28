@@ -73,7 +73,8 @@ inputs = {
   db_state = local.partition.shared.sso.db
   authentik_state= local.partition.shared.sso.authentik
 
-  # domain_name = dependency.partition_zone.outputs.zone_name
+  domain_name = dependency.partition_zone.outputs.zone_name
+  host = "sso"
 
   smtp_server   = dependency.smtp.outputs.smtp_server
   smtp_port     = dependency.smtp.outputs.smtp_port

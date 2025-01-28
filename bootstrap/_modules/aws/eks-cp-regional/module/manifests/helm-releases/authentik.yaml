@@ -52,7 +52,7 @@ spec:
         - name: AUTHENTIK_SECRET_KEY
           value: "file:///mnt/secrets-store/secret-key/secret-key"
         - name: AUTHENTIK_BOOTSTRAP_EMAIL
-          value: "file:///mnt/secrets-store/akadminemail/akadminemail/akadminEmail"
+          value: "file:///mnt/secrets-store/akadminemail/akadminEmail"
         - name: AUTHENTIK_BOOTSTRAP_PASSWORD
           value: "file:///mnt/secrets-store/akadmin/akadmin"
 
@@ -62,8 +62,8 @@ spec:
         - name: authentik-secrets-cookie-key
           mountPath: "/mnt/secrets-store/secret-key"
           readOnly: true
-        - name: authentik-adadminemail
-          mountPath: "/mnt/secrets-store/adadminemail"
+        - name: authentik-akadminemail
+          mountPath: "/mnt/secrets-store/akadminemail"
           readOnly: true
         - name: authentik-akadminpassword
           mountPath: "/mnt/secrets-store/akadminpassword"
@@ -81,7 +81,7 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: "authentik-secrets-cookie-key"
-        - name: authentik-adadminemail
+        - name: authentik-akadminemail
           csi:
             driver: secrets-store.csi.k8s.io
             readOnly: true

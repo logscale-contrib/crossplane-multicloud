@@ -39,7 +39,7 @@ dependency "bucket_blue" {
 }
 
 dependency "partition_zone" {
-  config_path = "${get_terragrunt_dir()}/../../dns/"
+  config_path = "${get_terragrunt_dir()}/../../../dns/"
 }
 dependency "smtp" {
   config_path = "${get_terragrunt_dir()}/../ses/"

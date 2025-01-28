@@ -51,28 +51,22 @@ spec:
       env:
         - name: AUTHENTIK_SECRET_KEY
           value: "file:///mnt/secrets-store/secret-key/secret-key"
+        - name: AUTHENTIK_BOOTSTRAP_EMAIL
+          value: "file:///mnt/secrets-store/akadminemail/akadminemail/akadminEmail"
         - name: AUTHENTIK_BOOTSTRAP_PASSWORD
           value: "file:///mnt/secrets-store/akadmin/akadmin"
-      #   AUTHENTIK_BOOTSTRAP_PASSWORD:
-      #     secretKeyRef:
-      #       key: password
-      #       name: authentik-bootstrap
-      #   AUTHENTIK_BOOTSTRAP_TOKEN:
-      #     secretKeyRef:
-      #       key: token
-      #       name: authentik-bootstrap
-      #   AUTHENTIK_BOOTSTRAP_EMAIL:
-      #     secretKeyRef:
-      #       key: email
-      #       name: authentik-bootstrap
+
       # -- Additional volumeMounts to all deployed Deployments. Does not apply to GeoIP
       # @default -- `[]` (See [values.yaml])
       volumeMounts:
         - name: authentik-secrets-cookie-key
           mountPath: "/mnt/secrets-store/secret-key"
           readOnly: true
-        - name: authentik-akadmin
-          mountPath: "/mnt/secrets-store/akadmin"
+        - name: authentik-adadminemail
+          mountPath: "/mnt/secrets-store/adadminemail"
+          readOnly: true
+        - name: authentik-akadminpassword
+          mountPath: "/mnt/secrets-store/akadminpassword"
           readOnly: true
         - name: authentik-postgresql
           mountPath: "/mnt/secrets/postgresql"
@@ -87,12 +81,18 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: "authentik-secrets-cookie-key"
-        - name: authentik-akadmin
+        - name: authentik-adadminemail
           csi:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: "authentik-secrets-akadmin"
+              secretProviderClass: "authentik-secrets-akadmin-email"
+        - name: authentik-akadminpassword
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "authentik-secrets-akadminpassword"
         - name: authentik-postgresql
           secret:
             secretName: authentik-db-authentik-instance
@@ -185,15 +185,26 @@ spec:
       - apiVersion: secrets-store.csi.x-k8s.io/v1
         kind: SecretProviderClass
         metadata:
-          name: authentik-secrets-akadmin
+          name: authentik-secrets-akadmin-email
         spec:
           provider: aws
           parameters:
             objects: |
-              - objectName: "${authentik_akadmin}"
+              - objectName: "${authentik_akadmin_email_ssm_name}"
                 objectType: "secretsmanager"
-                objectAlias: "akadmin"                
-                
+                objectAlias: "akadminemail"
+      - apiVersion: secrets-store.csi.x-k8s.io/v1
+        kind: SecretProviderClass
+        metadata:
+          name: authentik-secrets-akadmin-password
+        spec:
+          provider: aws
+          parameters:
+            objects: |
+              - objectName: "${authentik_akadmin_password}"
+                objectType: "secretsmanager"
+                objectAlias: "akadminpassword"
+
       - apiVersion: v1
         kind: ServiceAccount
         metadata:

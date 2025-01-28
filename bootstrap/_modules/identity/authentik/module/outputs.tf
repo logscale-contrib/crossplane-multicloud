@@ -8,3 +8,6 @@ output "authentik_cookie_key_ssm_name" {
 output "authentik_akadmin_ssm_name" {
   value = module.authentik_akadmin.secret_name  
 }
+output "authentik_akadmin_email_ssm_name" {
+  value = "${var.ssm_path_prefix}/authentik/akadminEmail*"
+}

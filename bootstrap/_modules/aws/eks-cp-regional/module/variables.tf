@@ -102,7 +102,10 @@ variable "authentik_cookie_key_policy_arn" {
 variable "authentik_cookie_key_ssm_name" {
 
 }
-variable "authentik_akadmin" {
+variable "authentik_akadmin_password_ssm_name" {
+  
+}
+variable "authentik_akadmin_email_ssm_name" {
   
 }
 variable "domain_name" {

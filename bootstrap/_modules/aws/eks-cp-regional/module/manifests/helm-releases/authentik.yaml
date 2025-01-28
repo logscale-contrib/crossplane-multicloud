@@ -92,7 +92,7 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: "authentik-akadmin"
+              secretProviderClass: "authentik-secrets-akadmin"
         - name: authentik-postgresql
           secret:
             secretName: authentik-db-authentik-instance

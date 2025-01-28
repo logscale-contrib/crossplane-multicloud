@@ -4,22 +4,22 @@ on:
     inputs:
       path:
         description: path to unlock
-        required: true    
+        required: true
       id:
         description: id to unlock
         required: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  
+
 env:
   tf_version: '1.10.2'
   tg_version: '0.69.0'
-  working_dir: 'bootstrap/env/public' 
+  working_dir: 'bootstrap/env/public'
   AWS_REGION : us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
-  
-  
+
+
 permissions:
     id-token: write   # This is required for requesting the JWT
     contents: read    # This is required for actions/checkout
@@ -39,10 +39,10 @@ jobs:
         uses: actions/checkout@main
 
       - name: tg unlock
-        uses: gruntwork-io/terragrunt-action@v2        
+        uses: gruntwork-io/terragrunt-action@v2
         continue-on-error: true
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}
           tg_dir: bootstrap/env/${{ inputs.path }}
-          tg_command: 'force-unlock -force ${{ inputs.id }}'                    
+          tg_command: 'force-unlock -force ${{ inputs.id }}'

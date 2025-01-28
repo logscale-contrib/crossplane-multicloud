@@ -6,16 +6,16 @@ on:
       - .github/workflows/bootstrap*.yml
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  
+
 env:
   tf_version: '1.10.2'
   tg_version: '0.69.0'
-  working_dir: 'bootstrap/env/public' 
+  working_dir: 'bootstrap/env/public'
   AWS_REGION : us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
   TERRAGRUNT_DOWNLOAD: ${{ github.workspace }}/.terragrunt-cache
-  
-  
+
+
 permissions:
     id-token: write   # This is required for requesting the JWT
     contents: read    # This is required for actions/checkout
@@ -27,7 +27,7 @@ jobs:
       - uses: eLco/setup-terragrunt@v1
         with:
           terragrunt_version: ${{ env.tg_version }}
-      - name: HashiCorp - Setup Terraform            
+      - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v3.1.2
         with:
           terraform_version: ${{ env.tf_version }}
@@ -41,7 +41,7 @@ jobs:
 
       - name: 'Checkout'
         uses: actions/checkout@main
-    
+
       - uses: dorny/paths-filter@v3
         id: changes
         with:
@@ -57,7 +57,7 @@ jobs:
         with:
           path: ${{ env.TERRAGRUNT_DOWNLOAD }}
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
-      
+
       - name: tg init-upgrade
         run: terragrunt run-all init -upgrade --terragrunt-non-interactive
         working-directory: ${{ env.working_dir }}
@@ -73,7 +73,7 @@ jobs:
       - uses: eLco/setup-terragrunt@v1
         with:
           terragrunt_version: ${{ env.tg_version }}
-      - name: HashiCorp - Setup Terraform            
+      - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v3.1.2
         with:
           terraform_version: ${{ env.tf_version }}
@@ -92,7 +92,7 @@ jobs:
         with:
           path: ${{ env.TERRAGRUNT_DOWNLOAD }}
           key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
-        
+
       - name: Deploy
         run: terragrunt run-all apply --terragrunt-non-interactive
         working-directory: ${{ env.working_dir }}

@@ -81,7 +81,7 @@ module "vpc_vpc-endpoints" {
           }
         ]
       })
-      
+
       tags = { Name = "s3-vpc-endpoint" }
     },
   }

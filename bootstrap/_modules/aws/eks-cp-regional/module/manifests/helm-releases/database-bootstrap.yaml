@@ -26,7 +26,7 @@ spec:
   test:
     enable: false
   values:
-    templates:  
+    templates:
     - |
       apiVersion: postgresql.cnpg.io/v1
       kind: Cluster
@@ -62,7 +62,7 @@ spec:
           barmanObjectStore:
             destinationPath: s3://${bucket_id}/partition/authentik/${blue}
             s3Credentials:
-              inheritFromIAMRole: true              
+              inheritFromIAMRole: true
         serviceAccountTemplate:
           metadata:
             annotations:

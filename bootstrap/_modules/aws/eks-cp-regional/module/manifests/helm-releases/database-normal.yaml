@@ -42,7 +42,7 @@ spec:
           # bootstrap:
           #   recovery:
           #     source: authentik-db-${primary}
-              
+
           replica:
             primary: authentik-db-${primary}
             source: authentik-db-${source}

@@ -192,7 +192,7 @@ spec:
             objects: |
               - objectName: "${authentik_akadmin_email_ssm_name}"
                 objectType: "secretsmanager"
-                jmesPath: 
+                jmesPath:
                     - path: akadminEmail
                       objectAlias: akadminEmail
       - apiVersion: secrets-store.csi.x-k8s.io/v1

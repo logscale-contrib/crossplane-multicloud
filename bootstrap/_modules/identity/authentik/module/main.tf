@@ -89,5 +89,3 @@ resource "aws_iam_policy" "authentik_secrets_policy" {
     ]
   })
 }
-
-

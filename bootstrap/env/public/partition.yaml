@@ -57,7 +57,7 @@ shared:
           az_exclude_names: []
   sso:
     # sso should be disabled during a partition's primary deployment
-    authentik:      
+    authentik:
       green:
         mode: normal
         name: green

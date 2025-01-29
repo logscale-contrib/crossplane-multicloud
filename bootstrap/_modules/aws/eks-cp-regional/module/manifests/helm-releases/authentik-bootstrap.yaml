@@ -48,13 +48,7 @@ spec:
       # envFrom:
       #   - secretRef:
       #       name: authentik-bootstrap
-      env:
-        - name: AUTHENTIK_SECRET_KEY
-          value: "file:///mnt/secrets-store/secret-key/secret-key"
-        - name: AUTHENTIK_BOOTSTRAP_EMAIL
-          value: "file:///mnt/secrets-store/akadminemail/akadminEmail"
-        - name: AUTHENTIK_BOOTSTRAP_PASSWORD
-          value: "file:///mnt/secrets-store/akadmin/akadmin"
+      # env:
 
       # -- Additional volumeMounts to all deployed Deployments. Does not apply to GeoIP
       # @default -- `[]` (See [values.yaml])
@@ -105,6 +99,10 @@ spec:
           whenUnsatisfiable: DoNotSchedule
 
     authentik:
+      secret_key: "file:///mnt/secrets-store/secret-key/secret-key"
+      bootstrap_email: "file:///mnt/secrets-store/akadminemail/akadminEmail"
+      bootstrap_password: "file:///mnt/secrets-store/akadmin/akadmin"
+
       # This sends anonymous usage-data, stack traces on errors and
       # performance data to sentry.io, and is fully opt-in
       email:

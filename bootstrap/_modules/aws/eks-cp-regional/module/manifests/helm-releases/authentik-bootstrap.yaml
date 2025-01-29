@@ -205,18 +205,18 @@ spec:
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
                 objectAlias: "secret-key"
-        # Create k8s secret. It requires volume mount first in the pod and then sync.
-        secretObjects:
-          - secretName: authentik-bootstrap
-            type: Opaque
-            data:
-              #- objectName: <objectName> or <objectAlias>
-              - objectName: akadminEmail
-                key: email
-              - objectName: akadminpassword
-                key: password
-              - objectName: secret-key
-                key: token
+            # Create k8s secret. It requires volume mount first in the pod and then sync.
+          secretObjects:
+            - secretName: authentik-bootstrap
+              type: Opaque
+              data:
+                #- objectName: <objectName> or <objectAlias>
+                - objectName: akadminEmail
+                  key: email
+                - objectName: akadminpassword
+                  key: password
+                - objectName: secret-key
+                  key: token
       - apiVersion: v1
         kind: ServiceAccount
         metadata:

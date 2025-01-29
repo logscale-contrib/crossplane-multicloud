@@ -13,7 +13,7 @@ repos:
     rev: v0.1.25 # Get the latest from: https://github.com/gruntwork-io/pre-commit/releases
     hooks:
       - id: terragrunt-hclfmt
-      - id: terraform-fmt
+        # - id: terraform-fmt
         # - repo: https://github.com/antonbabenko/pre-commit-terraform
         #   rev: v1.97.0
         #   hooks:

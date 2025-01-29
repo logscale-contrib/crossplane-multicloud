@@ -4,7 +4,7 @@ variable "name" {
 }
 variable "region" {
   description = "region configuration"
-  type = map(object({
+  type = object({
     name   = string
     region = string
     kubernetes = map(object({
@@ -16,7 +16,7 @@ variable "region" {
         }))
       }))
     }))
-  }))
+  })
 }
 variable "cluster_version" {
   type        = string

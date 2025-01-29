@@ -43,7 +43,6 @@ variable "regions" {
   type = map(object({
     name             = string
     region           = string
-    az_exclude_names = list(string)
   }))
 }
 

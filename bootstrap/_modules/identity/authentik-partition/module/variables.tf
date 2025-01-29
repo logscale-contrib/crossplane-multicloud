@@ -1,12 +1,10 @@
+variable "host" {
 
-variable "url" {
-  type        = string
-  description = "(optional) describe your variable"
 }
-variable "token" {
-  type        = string
-  description = "(optional) describe your variable"
+variable "domain_name" {
+
 }
+
 variable "from_email" {
   type        = string
   description = "(optional) describe your variable"

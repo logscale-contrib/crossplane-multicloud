@@ -203,6 +203,9 @@ spec:
           provider: aws
           parameters:
             objects: |-
+              - objectName: "${authentik_token_ssm_name}"
+                objectType: "secretsmanager"
+                objectAlias: "token"
               - objectName: "${authentik_akadmin_password}"
                 objectType: "secretsmanager"
                 objectAlias: "akadminpassword"
@@ -225,6 +228,8 @@ spec:
                 - objectName: akadminpassword
                   key: password
                 - objectName: secret-key
+                  key: secret-key
+                - objectName: token
                   key: token
       - apiVersion: v1
         kind: ServiceAccount

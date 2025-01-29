@@ -193,15 +193,15 @@ spec:
         spec:
           provider: aws
           parameters:
-            objects: |
+            objects: |-
               - objectName: "${authentik_akadmin_password}"
                 objectType: "secretsmanager"
                 objectAlias: "akadminpassword"
               - objectName: "${authentik_akadmin_email_ssm_name}"
                 objectType: "secretsmanager"
                 jmesPath:
-                    - path: akadminEmail
-                      objectAlias: akadminEmail
+                  - path: akadminEmail
+                    objectAlias: akadminEmail
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
                 objectAlias: "secret-key"

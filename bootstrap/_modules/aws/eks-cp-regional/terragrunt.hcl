@@ -85,8 +85,10 @@ inputs = {
 
   from_email = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
 
-  authentik_cookie_key_policy_arn     = dependency.authentik.outputs.authentik_cookie_key_policy_arn
+  authentik_secrets_policy_arn = dependency.authentik.outputs.authentik_secrets_policy_arn
+
   authentik_cookie_key_ssm_name       = dependency.authentik.outputs.authentik_cookie_key_ssm_name
+  authentik_token_ssm_name            = dependency.authentik.outputs.authentik_token_ssm_name
   authentik_akadmin_email_ssm_name    = dependency.authentik.outputs.authentik_akadmin_email_ssm_name
   authentik_akadmin_password_ssm_name = dependency.authentik.outputs.authentik_akadmin_ssm_name
 }

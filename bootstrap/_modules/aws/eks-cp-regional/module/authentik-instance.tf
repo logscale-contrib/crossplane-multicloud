@@ -7,7 +7,7 @@ module "authentik_server" {
   role_path        = var.iam_role_path
 
   role_policy_arns = {
-    "authentik_cookie_key_policy_arn" = var.authentik_cookie_key_policy_arn
+    "authentik_secrets_policy_arn" = var.authentik_secrets_policy_arn
   }
 
   oidc_providers = {
@@ -37,7 +37,7 @@ module "authentik_worker" {
   role_path        = var.iam_role_path
 
   role_policy_arns = {
-    "authentik_cookie_key_policy_arn" = var.authentik_cookie_key_policy_arn
+    "authentik_secrets_policy_arn" = var.authentik_secrets_policy_arn
   }
 
   oidc_providers = {

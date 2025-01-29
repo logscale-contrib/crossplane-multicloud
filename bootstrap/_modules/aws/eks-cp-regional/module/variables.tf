@@ -41,8 +41,8 @@ variable "data_bucket_id_blue" {
 variable "regions" {
   description = "Regions configuration"
   type = map(object({
-    name             = string
-    region           = string
+    name   = string
+    region = string
   }))
 }
 
@@ -95,7 +95,7 @@ variable "aws_sesv2_configuration_set_arn" {
 
 }
 
-variable "authentik_cookie_key_policy_arn" {
+variable "authentik_secrets_policy_arn" {
 
 }
 variable "authentik_cookie_key_ssm_name" {

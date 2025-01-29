@@ -41,6 +41,45 @@ module "authentik_cookie_key" {
   }
 }
 
+module "authentik_token" {
+  source  = "terraform-aws-modules/secrets-manager/aws"
+  version = "1.3.1"
+
+  # Secret
+  name_prefix             = "${var.ssm_path_prefix}/authentik/token-"
+  description             = "Cookie Signing Key must not change in DR"
+  recovery_window_in_days = 0
+  replica = {
+    # Can set region as key
+    another = {
+      # Or as attribute
+      region = var.regions["blue"]["region"]
+    }
+  }
+
+  # Policy
+  create_policy       = false
+  block_public_policy = true
+
+
+  # Version
+  create_random_password           = true
+  random_password_length           = 50
+  random_password_override_special = ""
+
+  # tags = local.tags
+  tags = {
+
+    git_file             = "bootstrap/_modules/identity/authentik/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "authentik_token"
+    yor_trace            = "20024117-7ce2-4f6c-b420-f7a843039a71"
+  }
+}
+
 
 module "authentik_akadmin" {
   source  = "terraform-aws-modules/secrets-manager/aws"
@@ -98,6 +137,8 @@ resource "aws_iam_policy" "authentik_secrets_policy" {
           "secretsmanager:DescribeSecret"
         ],
         "Resource" : [
+          "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/token*",
+          "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/token*",
           "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/cookie-key*",
           "arn:aws:secretsmanager:${var.regions["blue"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/cookie-key*",
           "arn:aws:secretsmanager:${var.regions["green"]["region"]}:${data.aws_caller_identity.current.account_id}:secret:${var.ssm_path_prefix}/authentik/akadminPassword*",

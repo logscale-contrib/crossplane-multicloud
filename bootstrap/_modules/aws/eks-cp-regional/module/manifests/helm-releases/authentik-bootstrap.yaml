@@ -64,20 +64,12 @@ spec:
             secretKeyRef:
               name: authentik-bootstrap
               key: token
-      #               bootstrap_email: "file:///mnt/secrets-store/akadminemail/akadminEmail"
-      # bootstrap_password: "file:///mnt/secrets-store/akadminpassword/akadminpassword"
 
       # -- Additional volumeMounts to all deployed Deployments. Does not apply to GeoIP
       # @default -- `[]` (See [values.yaml])
       volumeMounts:
         - name: authentik-secrets-cookie-key
           mountPath: "/mnt/secrets-store/secret-key"
-          readOnly: true
-        - name: authentik-akadminemail
-          mountPath: "/mnt/secrets-store/akadminemail"
-          readOnly: true
-        - name: authentik-akadminpassword
-          mountPath: "/mnt/secrets-store/akadminpassword"
           readOnly: true
         - name: authentik-postgresql
           mountPath: "/mnt/secrets/postgresql"
@@ -92,18 +84,6 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: "authentik-secrets-cookie-key"
-        - name: authentik-akadminemail
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: "authentik-secrets-akadmin-email"
-        - name: authentik-akadminpassword
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: "authentik-secrets-akadmin-password"
         - name: authentik-postgresql
           secret:
             secretName: authentik-db-authentik-instance

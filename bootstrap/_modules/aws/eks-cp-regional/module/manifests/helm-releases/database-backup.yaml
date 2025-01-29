@@ -27,11 +27,11 @@ spec:
     enable: false
   values:
     templates:
-    - |
-      apiVersion: postgresql.cnpg.io/v1
-      kind: Backup
-      metadata:
-        name: authentik-db
-      spec:
-        cluster:
-          name: authentik-db-${region_name}
+      - |-
+        apiVersion: postgresql.cnpg.io/v1
+        kind: Backup
+        metadata:
+          name: authentik-db
+        spec:
+          cluster:
+            name: authentik-db-${region_name}

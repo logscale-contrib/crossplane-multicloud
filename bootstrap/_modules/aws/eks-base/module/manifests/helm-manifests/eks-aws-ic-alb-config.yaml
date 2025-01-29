@@ -74,7 +74,7 @@ spec:
             apiGroup: elbv2.k8s.aws
             kind: IngressClassParams
             name: alb-region
-      - |
+      - |-
         apiVersion: elbv2.k8s.aws/v1beta1
         kind: IngressClassParams
         metadata:

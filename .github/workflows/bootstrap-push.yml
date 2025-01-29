@@ -13,14 +13,14 @@ env:
   tf_version: '1.10.2'
   tg_version: '0.69.0'
   working_dir: 'bootstrap/env/public'
-  AWS_REGION : us-east-1
+  AWS_REGION: us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
   TERRAGRUNT_DOWNLOAD: ${{ github.workspace }}/.terragrunt-cache
 
 
 permissions:
-    id-token: write   # This is required for requesting the JWT
-    contents: read    # This is required for actions/checkout
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
 
 jobs:
   checks:
@@ -68,7 +68,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-24.04
-    needs: [ checks ]
+    needs: [checks]
     # environment: 'prod'
     if: github.ref == 'refs/heads/main'
     steps:

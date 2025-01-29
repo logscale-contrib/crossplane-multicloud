@@ -80,7 +80,7 @@ spec:
               annotations:
                 eks.amazonaws.com/role-arn: ${role_arn}
             automountServiceAccountToken: true
-      - |
+      - |-
         apiVersion: postgresql.cnpg.io/v1
         kind: Database
         metadata:

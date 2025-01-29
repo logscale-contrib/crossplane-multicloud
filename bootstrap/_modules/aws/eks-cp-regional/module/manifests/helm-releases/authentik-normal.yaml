@@ -119,13 +119,13 @@ spec:
         limits:
           cpu: 4
           memory: 4Gi
-      # env:
-      #   - name: AUTHENTIK_LISTEN__HTTP
-      #     value: :9000
-      #   - name: AUTHENTIK_LISTEN__HTTPS
-      #     value: :9443
-      #   - name: AUTHENTIK_LISTEN__METRICS
-      #     value: :9300
+          # env:
+          #   - name: AUTHENTIK_LISTEN__HTTP
+          #     value: :9000
+          #   - name: AUTHENTIK_LISTEN__HTTPS
+          #     value: :9443
+          #   - name: AUTHENTIK_LISTEN__METRICS
+          #     value: :9300
     worker:
       replicas: 3
       pdb:

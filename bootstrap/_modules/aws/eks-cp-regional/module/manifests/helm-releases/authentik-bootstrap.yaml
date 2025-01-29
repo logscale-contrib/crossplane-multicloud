@@ -133,9 +133,9 @@ spec:
         hosts:
           - ${host}.${domain_name}
         ingressClassName: alb-partition
-      replicas: 3
+      replicas: 1
       pdb:
-        enabled: true
+        enabled: false
         maxUnavailable: 1
       serviceAccountName: authentik-server
       resources:
@@ -153,9 +153,9 @@ spec:
       #   - name: AUTHENTIK_LISTEN__METRICS
       #     value: :9300
     worker:
-      replicas: 3
+      replicas: 1
       pdb:
-        enabled: true
+        enabled: false
         minAvailable: 1
       serviceAccountName: authentik-worker
       resources:

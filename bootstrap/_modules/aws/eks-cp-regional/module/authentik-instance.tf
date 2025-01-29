@@ -38,31 +38,12 @@ module "authentik_worker" {
   }
 }
 
-# resource "kubernetes_service_account" "authentik_server" {
-#   metadata {
-#     name = "authentik-server"
-#     annotations = {
-#       "iam.amazonaws.com/role" = module.authentik_server.iam_role_arn
-#     }
-#   }
-# }
-
-# resource "kubernetes_service_account" "authentik_worker" {
-#   metadata {
-#     name = "authentik-worker"
-#     annotations = {
-#       "iam.amazonaws.com/role" = module.authentik_worker.iam_role_arn
-#     }
-#   }
-# }
-
-
 resource "kubectl_manifest" "authentik_instance" {
   count = (
-    var.authentik_state[var.region_name]["mode"] == "normal"
+    var.authentik_state[var.region_name]["mode"] == "normal" || var.authentik_state[var.region_name]["mode"] == "bootstrap"
   ) ? 1 : 0
 
-  yaml_body = templatefile("./manifests/helm-releases/authentik.yaml",
+  yaml_body = templatefile("./manifests/helm-releases/authentik-${var.authentik_state[var.region_name]["mode"]}.yaml",
     {
       region_name                      = var.region_name
       namespace                        = var.authentik_namespace

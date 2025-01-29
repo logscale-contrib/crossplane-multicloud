@@ -57,27 +57,29 @@ jobs:
     runs-on: ubuntu-24.04
     needs: [ checks ]
     steps:
+      - uses: eLco/setup-terragrunt@2c5116f8979bb261072ef57c97ac026cd9c27434
+        with:
+          terragrunt_version: ${{ env.tg_version }}
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
+        with:
+          terraform_version: ${{ env.tf_version }}
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@4fc4975a852c8cd99761e2de1f4ba73402e44dd9
         with:
           role-to-assume: ${{ env.AWS_ROLE }}
           role-session-name: crossplane-multicloud_bootstrap
           aws-region: ${{ env.AWS_REGION }}
-
       - name: 'Checkout'
-        uses: actions/checkout@v4
+        uses: actions/checkout@main
 
       - name: Cache terragrunt
         id: cache-terragrunt
         uses: actions/cache@v4
         with:
           path: ${{ env.TERRAGRUNT_DOWNLOAD }}
-          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt
+          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
 
-      - name: Plan
-        uses: gruntwork-io/terragrunt-action@cf355638dbd066b6a70eb01f31ad9293870a0e34
-        with:
-          tf_version: ${{ env.tf_version }}
-          tg_version: ${{ env.tg_version }}
-          tg_dir: ${{ env.working_dir }}
-          tg_command: 'run-all plan'
+      - name: Deploy
+        run: terragrunt run-all plan --terragrunt-non-interactive
+        working-directory: ${{ env.working_dir }}

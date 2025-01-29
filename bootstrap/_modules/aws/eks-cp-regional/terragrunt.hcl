@@ -69,24 +69,24 @@ inputs = {
   data_bucket_id_green = dependency.bucket_green.outputs.bucket_id
   data_bucket_id_blue  = dependency.bucket_blue.outputs.bucket_id
 
-  regions = local.partition.shared.provider.aws.regions
-  db_state = local.partition.shared.sso.db
-  authentik_state= local.partition.shared.sso.authentik
+  regions         = local.partition.shared.provider.aws.regions
+  db_state        = local.partition.shared.sso.db
+  authentik_state = local.partition.shared.sso.authentik
 
   domain_name = dependency.partition_zone.outputs.zone_name
-  host = "sso"
+  host        = "sso"
 
-  smtp_server   = dependency.smtp.outputs.smtp_server
-  smtp_port     = dependency.smtp.outputs.smtp_port
-  smtp_tls      = dependency.smtp.outputs.smtp_use_tls
+  smtp_server = dependency.smtp.outputs.smtp_server
+  smtp_port   = dependency.smtp.outputs.smtp_port
+  smtp_tls    = dependency.smtp.outputs.smtp_use_tls
 
   arn_raw                         = dependency.smtp.outputs.arn_raw
   aws_sesv2_configuration_set_arn = dependency.smtp.outputs.aws_sesv2_configuration_set_arn
 
-  from_email    = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
+  from_email = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
 
-  authentik_cookie_key_policy_arn = dependency.authentik.outputs.authentik_cookie_key_policy_arn
-  authentik_cookie_key_ssm_name = dependency.authentik.outputs.authentik_cookie_key_ssm_name
-  authentik_akadmin_email_ssm_name = dependency.authentik.outputs.authentik_akadmin_email_ssm_name
+  authentik_cookie_key_policy_arn     = dependency.authentik.outputs.authentik_cookie_key_policy_arn
+  authentik_cookie_key_ssm_name       = dependency.authentik.outputs.authentik_cookie_key_ssm_name
+  authentik_akadmin_email_ssm_name    = dependency.authentik.outputs.authentik_akadmin_email_ssm_name
   authentik_akadmin_password_ssm_name = dependency.authentik.outputs.authentik_akadmin_ssm_name
 }

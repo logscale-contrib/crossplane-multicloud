@@ -19,7 +19,7 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-    tenant   = yamldecode(file(find_in_parent_folders("tenant.yaml")))
+  tenant = yamldecode(file(find_in_parent_folders("tenant.yaml")))
 
 }
 
@@ -35,5 +35,5 @@ inputs = {
   cert_domain    = dependency.partition_zone.outputs.zone_name
   parent_zone_id = dependency.partition_zone.outputs.zone_id
 
-  tenant                   = local.tenant.name
+  tenant = local.tenant.name
 }

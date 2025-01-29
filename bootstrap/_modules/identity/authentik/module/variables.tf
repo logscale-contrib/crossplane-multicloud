@@ -14,7 +14,7 @@ variable "region" {
 variable "regions" {
   description = "Regions configuration"
   type = map(object({
-    name             = string
-    region           = string
+    name   = string
+    region = string
   }))
 }

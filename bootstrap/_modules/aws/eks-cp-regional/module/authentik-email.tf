@@ -3,7 +3,7 @@
 resource "aws_iam_policy" "send_mail" {
   name   = "authentik-send-mail-${random_string.random.result}"
   policy = data.aws_iam_policy_document.send_mail.json
-  path = var.iam_role_path
+  path   = var.iam_role_path
 }
 
 locals {

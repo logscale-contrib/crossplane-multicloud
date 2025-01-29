@@ -69,7 +69,7 @@ shared:
         # Valid values for mode are
         # - bootstrap
         # - normal operations
-        mode: bootstrap
+        mode: normal
         name: green
         backup: true
         replicaPrimary: green

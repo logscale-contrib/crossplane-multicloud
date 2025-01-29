@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@4fc4975
+        uses: aws-actions/configure-aws-credentials@4fc4975a852c8cd99761e2de1f4ba73402e44dd9
         with:
           role-to-assume: ${{ env.AWS_ROLE }}
           role-session-name: crossplane-multicloud_bootstrap
@@ -58,7 +58,7 @@ jobs:
     needs: [ checks ]
     steps:
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@4fc4975
+        uses: aws-actions/configure-aws-credentials@4fc4975a852c8cd99761e2de1f4ba73402e44dd9
         with:
           role-to-assume: ${{ env.AWS_ROLE }}
           role-session-name: crossplane-multicloud_bootstrap

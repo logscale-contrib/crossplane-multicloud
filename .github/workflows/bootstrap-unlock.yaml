@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: tg unlock
-        uses: gruntwork-io/terragrunt-action@v2
+        uses: gruntwork-io/terragrunt-action@cf355638dbd066b6a70eb01f31ad9293870a0e34
         continue-on-error: true
         with:
           tf_version: ${{ env.tf_version }}

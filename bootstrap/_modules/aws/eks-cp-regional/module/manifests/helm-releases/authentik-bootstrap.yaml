@@ -193,17 +193,17 @@ spec:
                 jmesPath:
                     - path: akadminEmail
                       objectAlias: akadminEmail
-      - apiVersion: secrets-store.csi.x-k8s.io/v1
-        kind: SecretProviderClass
-        metadata:
-          name: authentik-secrets-akadmin-password
-        spec:
-          provider: aws
-          parameters:
-            objects: |
-              - objectName: "${authentik_akadmin_password}"
-                objectType: "secretsmanager"
-                objectAlias: "akadminpassword"
+      # - apiVersion: secrets-store.csi.x-k8s.io/v1
+      #   kind: SecretProviderClass
+      #   metadata:
+      #     name: authentik-secrets-akadmin-password
+      #   spec:
+      #     provider: aws
+      #     parameters:
+      #       objects: |
+      #         - objectName: "${authentik_akadmin_password}"
+      #           objectType: "secretsmanager"
+      #           objectAlias: "akadminpassword"
       - apiVersion: secrets-store.csi.x-k8s.io/v1
         kind: SecretProviderClass
         metadata:

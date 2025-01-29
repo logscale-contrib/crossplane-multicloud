@@ -71,6 +71,9 @@ spec:
         - name: authentik-secrets-cookie-key
           mountPath: "/mnt/secrets-store/secret-key"
           readOnly: true
+        - name: authentik-bootstrap
+          mountPath: "/mnt/secrets/bootstrap"
+          readOnly: true
         - name: authentik-postgresql
           mountPath: "/mnt/secrets/postgresql"
           readOnly: true
@@ -84,6 +87,12 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: "authentik-secrets-cookie-key"
+        - name: authentik-bootstrap
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "authentik-bootstrap"
         - name: authentik-postgresql
           secret:
             secretName: authentik-db-authentik-instance

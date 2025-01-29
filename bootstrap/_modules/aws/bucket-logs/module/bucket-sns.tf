@@ -5,7 +5,7 @@ module "AWSLogs" {
   name            = "${var.name}-log-bucket-AWSLogs"
   use_name_prefix = true
   tags = {
-    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
+
     git_file             = "bootstrap/_modules/aws/bucket-logs/module/bucket-sns.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -22,7 +22,7 @@ module "S3Logs" {
   name            = "${var.name}-log-bucket-S3Logs"
   use_name_prefix = true
   tags = {
-    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
+
     git_file             = "bootstrap/_modules/aws/bucket-logs/module/bucket-sns.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

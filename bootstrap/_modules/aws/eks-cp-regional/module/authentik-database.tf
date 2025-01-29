@@ -18,7 +18,7 @@ module "authentik_db_irsa" {
     }
   }
   tags = {
-    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
+
     git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-database.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -66,7 +66,7 @@ module "iam_iam-policy" {
     ]
   })
   tags = {
-    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
+
     git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-database.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

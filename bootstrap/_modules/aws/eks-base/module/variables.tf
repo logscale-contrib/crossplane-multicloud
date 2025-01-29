@@ -5,9 +5,8 @@ variable "name" {
 variable "region" {
   description = "region configuration"
   type = map(object({
-    name             = string
-    region           = string
-    az_exclude_names = list(string)
+    name   = string
+    region = string
     kubernetes = map(object({
       node_groups = map(object({
         system = map(object({

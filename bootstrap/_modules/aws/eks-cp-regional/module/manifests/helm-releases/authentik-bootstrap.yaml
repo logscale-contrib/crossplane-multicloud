@@ -48,7 +48,24 @@ spec:
       # envFrom:
       #   - secretRef:
       #       name: authentik-bootstrap
-      # env:
+      env:
+        - name: AUTHENTIK_BOOTSTRAP_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: email
+              key: authentik-bootstrap
+        - name: AUTHENTIK_BOOTSTRAP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: password
+              key: authentik-bootstrap
+        - name: AUTHENTIK_BOOTSTRAP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: token
+              key: authentik-bootstrap
+      #               bootstrap_email: "file:///mnt/secrets-store/akadminemail/akadminEmail"
+      # bootstrap_password: "file:///mnt/secrets-store/akadminpassword/akadminpassword"
 
       # -- Additional volumeMounts to all deployed Deployments. Does not apply to GeoIP
       # @default -- `[]` (See [values.yaml])
@@ -100,8 +117,6 @@ spec:
 
     authentik:
       secret_key: "file:///mnt/secrets-store/secret-key/secret-key"
-      bootstrap_email: "file:///mnt/secrets-store/akadminemail/akadminEmail"
-      bootstrap_password: "file:///mnt/secrets-store/akadminpassword/akadminpassword"
 
       # This sends anonymous usage-data, stack traces on errors and
       # performance data to sentry.io, and is fully opt-in
@@ -215,15 +230,26 @@ spec:
               - objectName: "${authentik_akadmin_password}"
                 objectType: "secretsmanager"
                 objectAlias: "akadminpassword"
+              - objectName: "${authentik_akadmin_email_ssm_name}"
+                objectType: "secretsmanager"
+                jmesPath:
+                    - path: akadminEmail
+                      objectAlias: akadminEmail
+              - objectName: "${authentik_cookie_key_ssm_name}"
+                objectType: "secretsmanager"
+                objectAlias: "secret-key"
           # Create k8s secret. It requires volume mount first in the pod and then sync.
           secretObjects:
             - secretName: authentik-bootstrap
               type: Opaque
               data:
                 #- objectName: <objectName> or <objectAlias>
-                - objectName: "${authentik_akadmin_password}"
+                - objectName: akadminEmail
+                  key: email
+                - objectName: akadminpassword
                   key: password
-
+                - objectName: secret-key
+                  key: token
       - apiVersion: v1
         kind: ServiceAccount
         metadata:

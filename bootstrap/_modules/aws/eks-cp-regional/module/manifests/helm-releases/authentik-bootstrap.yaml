@@ -175,19 +175,6 @@ spec:
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
                 objectAlias: "secret-key"
-      - apiVersion: secrets-store.csi.x-k8s.io/v1
-        kind: SecretProviderClass
-        metadata:
-          name: authentik-secrets-akadmin-email
-        spec:
-          provider: aws
-          parameters:
-            objects: |
-              - objectName: "${authentik_akadmin_email_ssm_name}"
-                objectType: "secretsmanager"
-                jmesPath:
-                    - path: akadminEmail
-                      objectAlias: akadminEmail
       # - apiVersion: secrets-store.csi.x-k8s.io/v1
       #   kind: SecretProviderClass
       #   metadata:
@@ -218,18 +205,18 @@ spec:
               - objectName: "${authentik_cookie_key_ssm_name}"
                 objectType: "secretsmanager"
                 objectAlias: "secret-key"
-          # Create k8s secret. It requires volume mount first in the pod and then sync.
-          secretObjects:
-            - secretName: authentik-bootstrap
-              type: Opaque
-              data:
-                #- objectName: <objectName> or <objectAlias>
-                - objectName: akadminEmail
-                  key: email
-                - objectName: akadminpassword
-                  key: password
-                - objectName: secret-key
-                  key: token
+        # Create k8s secret. It requires volume mount first in the pod and then sync.
+        secretObjects:
+          - secretName: authentik-bootstrap
+            type: Opaque
+            data:
+              #- objectName: <objectName> or <objectAlias>
+              - objectName: akadminEmail
+                key: email
+              - objectName: akadminpassword
+                key: password
+              - objectName: secret-key
+                key: token
       - apiVersion: v1
         kind: ServiceAccount
         metadata:

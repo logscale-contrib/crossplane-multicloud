@@ -25,8 +25,8 @@ module "authentik_cookie_key" {
 
   # Version
   create_random_password = true
-  random_password_length = 50
-  # random_password_override_special = "!@#$%^&*()_+"
+  random_password_length = 40
+  random_password_override_special = ""
 
   # tags = local.tags
 }
@@ -55,8 +55,8 @@ module "authentik_akadmin" {
 
   # Version
   create_random_password = true
-  random_password_length = 32
-  # random_password_override_special = "!@#$%^&*()_+"
+  random_password_length = 21
+  random_password_override_special = ""
 
   # tags = local.tags
 }

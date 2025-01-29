@@ -45,4 +45,14 @@ module "log_bucket" {
       bucket_key_enabled = true
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/bucket-logs/module/bucket-logs.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "log_bucket"
+    yor_trace            = "f0f410b0-b8bc-4b17-be9d-b7109905393b"
+  }
 }

@@ -18,6 +18,16 @@ module "otel_irsa" {
       namespace_service_accounts = ["kube-system:otel-node-opentelemetry-collector"]
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-base/module/eks-aws-otel-sa.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "otel_irsa"
+    yor_trace            = "124e2bac-5634-4fab-9f9d-a531cc40b54b"
+  }
 }
 
 
@@ -47,4 +57,14 @@ module "otel-policy" {
       }
     ]
   })
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-base/module/eks-aws-otel-sa.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "otel-policy"
+    yor_trace            = "4d56095f-7978-427a-bded-81582f3fc4dc"
+  }
 }

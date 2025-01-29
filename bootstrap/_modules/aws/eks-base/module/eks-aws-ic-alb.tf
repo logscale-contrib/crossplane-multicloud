@@ -14,6 +14,16 @@ module "alb_ing_irsa" {
       namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-base/module/eks-aws-ic-alb.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "alb_ing_irsa"
+    yor_trace            = "a908121c-36db-448f-8fcd-76fd03759e62"
+  }
 }
 
 resource "kubectl_manifest" "alb_ic" {

@@ -14,6 +14,16 @@ module "efs_irsa" {
       namespace_service_accounts = ["kube-system:efs-csi-controller-sa"]
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-base/module/eks-aws-csi-efs.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "efs_irsa"
+    yor_trace            = "60d5daf4-ade2-4273-bf65-d7a97f65cf22"
+  }
 }
 
 resource "kubectl_manifest" "efs" {

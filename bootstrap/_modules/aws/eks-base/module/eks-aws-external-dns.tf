@@ -15,6 +15,16 @@ module "edns_irsa" {
       namespace_service_accounts = ["external-dns:external-dns-sa"]
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-base/module/eks-aws-external-dns.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "edns_irsa"
+    yor_trace            = "b9289b05-26c4-49b1-9fd0-912d02f5be79"
+  }
 }
 
 resource "kubectl_manifest" "external-dns" {

@@ -17,6 +17,16 @@ module "authentik_db_irsa" {
       namespace_service_accounts = ["${var.authentik_namespace}:${var.authentik_service_account}-${var.region_name}"]
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-database.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "authentik_db_irsa"
+    yor_trace            = "3020f3b1-03a7-4ed6-ad91-ad905536aa1d"
+  }
 }
 
 module "iam_iam-policy" {
@@ -55,6 +65,16 @@ module "iam_iam-policy" {
       }
     ]
   })
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-database.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "iam_iam-policy"
+    yor_trace            = "822c1d56-45cf-4f84-861c-f358b428a187"
+  }
 }
 
 

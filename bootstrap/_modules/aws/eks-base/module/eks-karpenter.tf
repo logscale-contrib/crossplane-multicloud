@@ -24,6 +24,16 @@ module "karpenter" {
 
   irsa_namespace_service_accounts = ["kube-system:karpenter"]
   enable_v1_permissions           = true
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-base/module/eks-karpenter.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "karpenter"
+    yor_trace            = "f4873e71-a0ee-4ce9-9463-02917cdaaba3"
+  }
 }
 
 resource "kubectl_manifest" "karpenter" {

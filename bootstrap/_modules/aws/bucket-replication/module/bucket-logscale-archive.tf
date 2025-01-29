@@ -66,6 +66,16 @@ resource "aws_iam_role" "replication" {
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
   path               = var.iam_role_path
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/bucket-replication/module/bucket-logscale-archive.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "replication"
+    yor_trace            = "0a83d95a-8fa4-4535-acf5-aa1973164c1a"
+  }
 }
 
 resource "aws_iam_policy" "replication_policy" {
@@ -74,6 +84,16 @@ resource "aws_iam_policy" "replication_policy" {
 
   path = var.iam_role_path
 
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/bucket-replication/module/bucket-logscale-archive.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "replication_policy"
+    yor_trace            = "cd9208f0-1b98-4da1-a074-7550ca6cf70a"
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "replication_policy_attachment" {

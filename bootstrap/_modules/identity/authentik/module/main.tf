@@ -29,6 +29,16 @@ module "authentik_cookie_key" {
   random_password_override_special = ""
 
   # tags = local.tags
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/identity/authentik/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "authentik_cookie_key"
+    yor_trace            = "20024117-7ce2-4f6c-b420-f7a843039a71"
+  }
 }
 
 
@@ -59,6 +69,16 @@ module "authentik_akadmin" {
   random_password_override_special = ""
 
   # tags = local.tags
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/identity/authentik/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "authentik_akadmin"
+    yor_trace            = "90505d57-0f57-4934-9111-0c063020afbc"
+  }
 }
 
 resource "aws_iam_policy" "authentik_secrets_policy" {
@@ -88,4 +108,14 @@ resource "aws_iam_policy" "authentik_secrets_policy" {
       },
     ]
   })
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/identity/authentik/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "authentik_secrets_policy"
+    yor_trace            = "25186846-35f6-4db0-8841-f3730dec9712"
+  }
 }

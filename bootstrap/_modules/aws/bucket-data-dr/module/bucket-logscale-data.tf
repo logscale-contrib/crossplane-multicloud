@@ -36,4 +36,14 @@ module "data-dr" {
     }
   }
 
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/bucket-data-dr/module/bucket-logscale-data.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "data-dr"
+    yor_trace            = "4de72fb1-ea0c-4df8-b23b-6304d0168084"
+  }
 }

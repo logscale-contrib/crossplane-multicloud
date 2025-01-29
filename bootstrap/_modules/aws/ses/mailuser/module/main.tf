@@ -3,6 +3,16 @@
 resource "aws_iam_policy" "send_mail" {
   name   = "${var.email_user_name_prefix}-send-mail-${random_string.random.result}"
   policy = data.aws_iam_policy_document.send_mail.json
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/ses/mailuser/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "send_mail"
+    yor_trace            = "d664f7bc-0233-4ebf-bb56-c9e01c7f213d"
+  }
 }
 
 locals {
@@ -38,4 +48,14 @@ module "iam_ses_user" {
   policy_arns = [
     aws_iam_policy.send_mail.arn
   ]
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/ses/mailuser/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "iam_ses_user"
+    yor_trace            = "5161a6a8-5f72-4389-ae81-dc3b92aa7651"
+  }
 }

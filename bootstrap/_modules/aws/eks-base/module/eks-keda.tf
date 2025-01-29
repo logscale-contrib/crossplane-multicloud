@@ -14,6 +14,16 @@ module "keda_irsa" {
       namespace_service_accounts = ["keda-operator:keda-operator"]
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-base/module/eks-keda.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "keda_irsa"
+    yor_trace            = "6611d96e-c0d6-4e85-bbc2-bd24897fdf2b"
+  }
 }
 
 resource "kubectl_manifest" "keda" {

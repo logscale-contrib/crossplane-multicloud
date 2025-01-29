@@ -194,5 +194,13 @@ module "eks" {
 
   tags = {
     "karpenter.sh/discovery" = var.name
+    git_commit               = "dbe68892448c0a05efc87850784548ba27bc43a7"
+    git_file                 = "bootstrap/_modules/aws/eks-base/module/eks.tf"
+    git_last_modified_by     = "ryan@dss-i.com"
+    git_modifiers            = "ryan"
+    git_org                  = "logscale-contrib"
+    git_repo                 = "crossplane-multicloud"
+    yor_name                 = "eks"
+    yor_trace                = "e59f6ae5-e1eb-4b74-95ab-4109c0ed6b2c"
   }
 }

@@ -40,6 +40,16 @@ module "vpc" {
   create_flow_log_cloudwatch_iam_role             = true
   create_flow_log_cloudwatch_log_group            = true
   flow_log_cloudwatch_log_group_retention_in_days = 1
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/vpc/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "vpc"
+    yor_trace            = "acaff850-16d8-4fe2-ab35-9c8ba6c95d71"
+  }
 }
 
 module "vpc_vpc-endpoints" {
@@ -84,6 +94,16 @@ module "vpc_vpc-endpoints" {
 
       tags = { Name = "s3-vpc-endpoint" }
     },
+  }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/vpc/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "vpc_vpc-endpoints"
+    yor_trace            = "37626dcd-bc99-4ea9-932b-5cbfb34f7c6e"
   }
 }
 

@@ -7,6 +7,16 @@ module "zone" {
       comment = "Zone for partition ${var.child_domain}.${var.parent_domain}"
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/route53/zone-sub/module/main.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "zone"
+    yor_trace            = "58a5323a-d20d-4491-92b9-c3c16c4a87c7"
+  }
 }
 
 

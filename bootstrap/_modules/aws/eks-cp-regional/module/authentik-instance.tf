@@ -16,6 +16,16 @@ module "authentik_server" {
       namespace_service_accounts = ["${var.authentik_namespace}:authentik-server"]
     }
   }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-instance.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "authentik_server"
+    yor_trace            = "606c9e00-7ea8-4183-9cc3-e1c1e13ac8f1"
+  }
 }
 
 module "authentik_worker" {
@@ -35,6 +45,16 @@ module "authentik_worker" {
       provider_arn               = var.oidc_provider_arn
       namespace_service_accounts = ["${var.authentik_namespace}:authentik-worker"]
     }
+  }
+  tags = {
+    git_commit           = "N/A"
+    git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-instance.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
+    yor_name             = "authentik_worker"
+    yor_trace            = "e6bd4434-b407-4ebe-85db-97b8ffdbd852"
   }
 }
 

@@ -26,7 +26,7 @@ jobs:
   unlock:
     runs-on: ubuntu-24.04
     steps:
-      - uses: eLco/setup-terragrunt@v1
+      - uses: eLco/setup-terragrunt@2c5116f8979bb261072ef57c97ac026cd9c27434
         with:
           terragrunt_version: ${{ env.tg_version }}
       - name: HashiCorp - Setup Terraform

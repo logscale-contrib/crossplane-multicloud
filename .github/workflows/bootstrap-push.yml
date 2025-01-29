@@ -26,7 +26,7 @@ jobs:
   checks:
     runs-on: ubuntu-24.04
     steps:
-      - uses: eLco/setup-terragrunt@v1
+      - uses: eLco/setup-terragrunt@2c5116f8979bb261072ef57c97ac026cd9c27434
         with:
           terragrunt_version: ${{ env.tg_version }}
       - name: HashiCorp - Setup Terraform
@@ -44,7 +44,7 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@main
 
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
         id: changes
         with:
           list-files: 'shell'
@@ -72,7 +72,7 @@ jobs:
     # environment: 'prod'
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: eLco/setup-terragrunt@v1
+      - uses: eLco/setup-terragrunt@2c5116f8979bb261072ef57c97ac026cd9c27434
         with:
           terragrunt_version: ${{ env.tg_version }}
       - name: HashiCorp - Setup Terraform

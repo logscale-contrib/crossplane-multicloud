@@ -7,15 +7,13 @@ variable "region" {
   type = object({
     name   = string
     region = string
-    kubernetes = map(object({
+    kubernetes = object({
       node_groups = map(object({
-        system = map(object({
           min_size     = number
           max_size     = number
-          desired_size = number
-        }))
+          desired_size = number        
       }))
-    }))
+    })
   })
 }
 variable "cluster_version" {

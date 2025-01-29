@@ -52,18 +52,18 @@ spec:
         - name: AUTHENTIK_BOOTSTRAP_EMAIL
           valueFrom:
             secretKeyRef:
-              name: email
-              key: authentik-bootstrap
+              name: authentik-bootstrap
+              key: email
         - name: AUTHENTIK_BOOTSTRAP_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: password
-              key: authentik-bootstrap
+              name: authentik-bootstrap
+              key: password
         - name: AUTHENTIK_BOOTSTRAP_TOKEN
           valueFrom:
             secretKeyRef:
-              name: token
-              key: authentik-bootstrap
+              name: authentik-bootstrap
+              key: token
       #               bootstrap_email: "file:///mnt/secrets-store/akadminemail/akadminEmail"
       # bootstrap_password: "file:///mnt/secrets-store/akadminpassword/akadminpassword"
 
@@ -222,7 +222,7 @@ spec:
       - apiVersion: secrets-store.csi.x-k8s.io/v1
         kind: SecretProviderClass
         metadata:
-          name: authentik-secrets-akadmin-password
+          name: authentik-bootstrap
         spec:
           provider: aws
           parameters:

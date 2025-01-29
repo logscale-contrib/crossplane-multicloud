@@ -8,15 +8,15 @@ variable "region" {
     name             = string
     region           = string
     az_exclude_names = list(string)
-    kubernetes = object({
-      node_groups = object({
-        system = object({
+    kubernetes = map(object({
+      node_groups = map(object({
+        system = map(object({
           min_size     = number
           max_size     = number
           desired_size = number
-        })
-      })
-    })
+        }))
+      }))
+    }))
   }))
 }
 variable "cluster_version" {

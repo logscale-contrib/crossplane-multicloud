@@ -18,7 +18,7 @@ resource "aws_sesv2_configuration_set" "main" {
   }
 
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/ses/partition/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -34,7 +34,7 @@ resource "aws_sesv2_email_identity" "main" {
   configuration_set_name = aws_sesv2_configuration_set.main.configuration_set_name
 
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/ses/partition/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

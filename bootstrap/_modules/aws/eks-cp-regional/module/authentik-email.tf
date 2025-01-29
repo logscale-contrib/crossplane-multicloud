@@ -5,7 +5,7 @@ resource "aws_iam_policy" "send_mail" {
   policy = data.aws_iam_policy_document.send_mail.json
   path   = var.iam_role_path
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-email.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -51,7 +51,7 @@ module "iam_ses_user" {
   ]
   path = var.iam_role_path
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-email.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

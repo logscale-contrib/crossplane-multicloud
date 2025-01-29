@@ -24,7 +24,7 @@ repos:
     hooks:
       - id: yor
         name: yor
-        entry: yor tag --skip-tags git_last_modified_at --skip-resource-types time_sleep,kubectl_manifest -d
+        entry: yor tag --skip-tags git_commit,git_last_modified_at --skip-resource-types time_sleep,kubectl_manifest -d
         args: ["."]
         language: golang
         types: [terraform]

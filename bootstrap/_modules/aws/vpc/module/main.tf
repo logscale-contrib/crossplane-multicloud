@@ -41,7 +41,7 @@ module "vpc" {
   create_flow_log_cloudwatch_log_group            = true
   flow_log_cloudwatch_log_group_retention_in_days = 1
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/vpc/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -96,7 +96,7 @@ module "vpc_vpc-endpoints" {
     },
   }
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/vpc/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

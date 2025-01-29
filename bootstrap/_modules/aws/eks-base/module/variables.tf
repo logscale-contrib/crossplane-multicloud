@@ -3,8 +3,21 @@ variable "name" {
   description = "(optional) describe your variable"
 }
 variable "region" {
-  type        = string
-  description = "(optional) describe your variable"
+  description = "region configuration"
+  type = map(object({
+    name             = string
+    region           = string
+    az_exclude_names = list(string)
+    kubernetes = object({
+      node_groups = object({
+        system = object({
+          min_size     = number
+          max_size     = number
+          desired_size = number
+        })
+      })
+    })
+  }))
 }
 variable "cluster_version" {
   type        = string

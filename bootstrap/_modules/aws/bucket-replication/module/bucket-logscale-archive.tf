@@ -67,7 +67,7 @@ resource "aws_iam_role" "replication" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
   path               = var.iam_role_path
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/bucket-replication/module/bucket-logscale-archive.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -85,7 +85,7 @@ resource "aws_iam_policy" "replication_policy" {
   path = var.iam_role_path
 
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/bucket-replication/module/bucket-logscale-archive.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

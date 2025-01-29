@@ -4,7 +4,7 @@ resource "aws_iam_policy" "send_mail" {
   name   = "${var.email_user_name_prefix}-send-mail-${random_string.random.result}"
   policy = data.aws_iam_policy_document.send_mail.json
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/ses/tenant-mailuser/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -49,7 +49,7 @@ module "iam_ses_user" {
     aws_iam_policy.send_mail.arn
   ]
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/ses/tenant-mailuser/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

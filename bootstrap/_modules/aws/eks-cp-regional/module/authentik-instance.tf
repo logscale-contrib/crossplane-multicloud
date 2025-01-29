@@ -17,7 +17,7 @@ module "authentik_server" {
     }
   }
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-instance.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -47,7 +47,7 @@ module "authentik_worker" {
     }
   }
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-instance.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

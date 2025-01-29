@@ -152,9 +152,9 @@ module "eks" {
         "m6g.2xlarge"
       ]
 
-      min_size     = 0
-      max_size     = 9
-      desired_size = 6
+      min_size     = var.region.kubernetes.node_groups.system.min_size
+      max_size     = var.region.kubernetes.node_groups.system.max_size
+      desired_size = var.region.kubernetes.node_groups.system.desired_size
 
       ami_type                       = "AL2023_ARM_64_STANDARD"
       enable_bootstrap_user_data     = true
@@ -194,7 +194,7 @@ module "eks" {
 
   tags = {
     "karpenter.sh/discovery" = var.name
-    git_commit               = "dbe68892448c0a05efc87850784548ba27bc43a7"
+    git_commit               = "N/A"
     git_file                 = "bootstrap/_modules/aws/eks-base/module/eks.tf"
     git_last_modified_by     = "ryan@dss-i.com"
     git_modifiers            = "ryan"

@@ -30,7 +30,7 @@ module "authentik_cookie_key" {
 
   # tags = local.tags
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/identity/authentik/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -70,7 +70,7 @@ module "authentik_akadmin" {
 
   # tags = local.tags
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/identity/authentik/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
@@ -109,7 +109,7 @@ resource "aws_iam_policy" "authentik_secrets_policy" {
     ]
   })
   tags = {
-    git_commit           = "N/A"
+    git_commit           = "cade0b1748f832748786ff55c3b553aab1897963"
     git_file             = "bootstrap/_modules/identity/authentik/module/main.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"

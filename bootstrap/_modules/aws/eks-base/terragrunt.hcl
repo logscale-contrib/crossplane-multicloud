@@ -53,5 +53,5 @@ inputs = {
 
   log_s3_bucket_id = dependency.bucket.outputs.log_s3_bucket_id
 
-  region = local.partition.shared.provider.aws.regions[local.region].region
+  region = local.partition.shared.provider.aws.regions[local.region]
 }

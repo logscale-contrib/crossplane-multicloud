@@ -20,13 +20,11 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  tenant = yamldecode(file(find_in_parent_folders("tenant.yaml")))
-  # identity = yamldecode(file(find_in_parent_folders("identity.yaml")))
-
+  partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
 }
 
 dependency "authentik" {
-  config_path = "${get_terragrunt_dir()}/../identity/"
+  config_path = "${get_terragrunt_dir()}/../authentik/"
 }
 dependency "partition_zone" {
   config_path = "${get_terragrunt_dir()}/../../dns/"
@@ -37,7 +35,8 @@ dependency "partition_zone" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  # token      = dependency.authentik.outputs.admin_token
+  authentik_token_ssm_name = dependency.authentik.outputs.authentik_token_ssm_name
+
   domain_name = dependency.partition_zone.outputs.zone_name
   host        = "sso"
   from_email  = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"

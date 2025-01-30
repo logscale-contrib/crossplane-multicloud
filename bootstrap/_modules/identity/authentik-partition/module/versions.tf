@@ -1,7 +1,13 @@
 
+data "aws_secretsmanager_secret" "token" {
+  name = var.authentik_token_ssm_name
+}
+data "aws_secretsmanager_secret_version" "token" {
+  secret_id = data.aws_secretsmanager_secret.token.id
+}
 provider "authentik" {
-  url   = var.url
-  token = var.token
+  url   = "https://${var.host}.${var.domain_name}"
+  token = data.aws_secretsmanager_secret_version.token.secret_string
 }
 
 

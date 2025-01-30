@@ -7,7 +7,8 @@ data "authentik_flow" "flow_invalidation" {
 }
 
 data "authentik_flow" "flow_recovery" {
-  slug = "account-recovery"
+  depends_on = [authentik_flow.recovery]
+  slug       = "account-recovery"
 }
 
 data "authentik_flow" "flow_user_settings" {

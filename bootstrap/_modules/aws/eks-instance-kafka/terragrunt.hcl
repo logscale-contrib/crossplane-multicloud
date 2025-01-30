@@ -12,7 +12,7 @@
 
 terraform {
   //source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v19.21.0"
-  source = "${dirname(find_in_parent_folders())}/_modules/aws/eks-shared-kafka/module/"
+  source = "${dirname(find_in_parent_folders())}/_modules/aws/eks-instance-kafka/module/"
 }
 
 
@@ -21,8 +21,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = basename(dirname("${get_terragrunt_dir()}/../.."))
-
+  tenant    = basename(dirname("${get_terragrunt_dir()}/../../..")) == "aws" ? "shared" : basename(dirname("${get_terragrunt_dir()}/../.."))
 }
 
 dependency "kubernetes_cluster" {
@@ -30,11 +29,6 @@ dependency "kubernetes_cluster" {
 }
 dependency "kubernetes_cluster_cp_auth" {
   config_path  = "${get_terragrunt_dir()}/../eks-cp-auth/"
-  skip_outputs = true
-}
-
-dependency "authentik-partition" {
-  config_path  = "${get_terragrunt_dir()}/../../../partition/authentik-partition/"
   skip_outputs = true
 }
 
@@ -46,6 +40,6 @@ dependency "authentik-partition" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
   cluster_name = dependency.kubernetes_cluster.outputs.cluster_name
-  namespace    = "kafka"
+  namespace    = "${local.tenant}-kafka"
   kafka_name   = "shared"
 }

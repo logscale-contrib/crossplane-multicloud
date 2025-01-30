@@ -101,7 +101,7 @@ resource "kubernetes_secret" "db_secret" {
 }
 
 resource "kubectl_manifest" "db_green" {
-  depends_on = [time_sleep.flux2repos]
+  depends_on = [time_sleep.flux2repos, kubectl_manifest.flux2-releases]
   count = (
     var.db_state.green["name"] == var.region_name
   ) ? 1 : 0
@@ -137,7 +137,7 @@ resource "kubectl_manifest" "db_green_backup" {
 
 
 resource "kubectl_manifest" "db_blue" {
-  depends_on = [time_sleep.flux2repos]
+  depends_on = [time_sleep.flux2repos, kubectl_manifest.flux2-releases]
   count = (
     var.db_state.blue["name"] == var.region_name
   ) ? 1 : 0

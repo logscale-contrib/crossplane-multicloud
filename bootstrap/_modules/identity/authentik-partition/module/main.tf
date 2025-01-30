@@ -9,11 +9,11 @@ resource "dns_address_validation" "authentik" {
 }
 
 resource "checkmate_http_health" "authentik" {
-  url                   = "https://${dns_address_validation.authentik.name}"
+  url                   = "https://${dns_address_validation.authentik.name}/-/health/live/"
   request_timeout       = 2000
   method                = "GET"
-  interval              = 1
-  status_code           = 302
+  interval              = 12
+  status_code           = 200
   consecutive_successes = 10
   timeout               = 300000
 }

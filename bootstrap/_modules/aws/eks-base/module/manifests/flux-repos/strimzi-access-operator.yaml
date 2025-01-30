@@ -7,7 +7,7 @@ spec:
   interval: 60m
   url: https://github.com/strimzi/kafka-access-operator
   ref:
-    branch: main
+    tag: 0.1.0
   ignore: |-
     # exclude all
     /*

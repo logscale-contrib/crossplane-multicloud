@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: strimzi-access-operator
-      version: "0.1.0"
+      # version: "0.1.0"
       sourceRef:
         kind: GitRepository
         name: strimzi-access-operator

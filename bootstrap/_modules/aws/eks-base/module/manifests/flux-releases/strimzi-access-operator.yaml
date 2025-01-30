@@ -16,7 +16,7 @@ spec:
         namespace: flux-repos
       interval: 5m
   releaseName: strimzi-access-operator
-  targetNamespace: strimzi
+  targetNamespace: strimzi-operator
   install:
     remediation:
       retries: 3

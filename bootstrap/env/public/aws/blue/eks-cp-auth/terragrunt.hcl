@@ -21,7 +21,7 @@ include "root" {
 # Include the envcommon configuration for the component. The envcommon configuration contains settings that are common
 # for the component across all environments.
 include "module" {
-  path   = "${dirname(find_in_parent_folders())}/_modules/aws/eks-cp-regional/terragrunt.hcl"
+  path   = "${dirname(find_in_parent_folders())}/_modules/aws/eks-cp-auth/terragrunt.hcl"
   expose = true
 }
 

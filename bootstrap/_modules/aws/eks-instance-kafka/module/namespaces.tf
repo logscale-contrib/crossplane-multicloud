@@ -5,5 +5,5 @@ data "kubectl_path_documents" "namespaces" {
 
 resource "kubectl_manifest" "namespaces" {
   for_each  = data.kubectl_path_documents.namespaces.manifests
-  yaml_body = each.value
+  yaml_body = templatefile(each.value, { namespace = var.namespace })
 }

@@ -41,5 +41,5 @@ dependency "kubernetes_cluster_cp_auth" {
 inputs = {
   cluster_name = dependency.kubernetes_cluster.outputs.cluster_name
   namespace    = "${local.tenant}-kafka"
-  kafka_name   = "shared"
+  kafka_name   = local.tenant
 }

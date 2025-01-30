@@ -8,7 +8,7 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: strimzi-access-operator
+      chart: /packaging/helm-charts/helm3/strimzi-access-operator
       # version: "0.1.0"
       sourceRef:
         kind: GitRepository

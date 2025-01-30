@@ -83,51 +83,10 @@ resource "random_password" "authentik_db_password" {
   special = true
 }
 
-# module "authentik_db_password" {
-#   source = "terraform-aws-modules/secrets-manager/aws"
-
-#   # Secret
-#   name_prefix             = "cloud/pub/sso/authentik-db"
-#   recovery_window_in_days = 7
-
-#   # Policy
-#   create_policy       = true
-#   block_public_policy = true
-#   policy_statements = {
-
-#     read = {
-#       sid = "AllowAccountRead"
-#       principals = [{
-#         type = "AWS"
-#         identifiers = [
-#           module.authentik_db_irsa.iam_role_arn
-#         ]
-#       }]
-#       actions = [
-#         "secretsmanager:GetSecretValue",
-#         "secretsmanager:DescribeSecret"
-#       ]
-#       resources = ["*"]
-#     }
-#   }
-
-#   # Version
-#   # ignore_secret_changes = true
-#   secret_string = jsonencode({
-#     username = "authentik",
-#     password = random_password.authentik_db_password.result,
-#   })
-#   # replica = {
-#   #   # Can set region as key
-#   #   replica = {
-#   #     # Or as attribute
-#   #     region = var.regions[var.db_state.blue["name"]].region
-#   #   }
-#   # }
-
-# }
-
 resource "kubernetes_secret" "db_secret" {
+  depends_on = [
+    kubectl_manifest.namespaces
+  ]
   metadata {
     name      = "authentik-db-authentik-instance"
     namespace = var.authentik_namespace

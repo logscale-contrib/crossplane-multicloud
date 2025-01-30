@@ -6,7 +6,7 @@ data "aws_secretsmanager_secret_version" "token" {
   secret_id = data.aws_secretsmanager_secret.token.id
 }
 provider "authentik" {
-  url   = checkmate_http_health.authentik.url
+  url   = checkmate_http_health.up.url
   token = data.aws_secretsmanager_secret_version.token.secret_string
 }
 

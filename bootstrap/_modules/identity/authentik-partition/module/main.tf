@@ -8,7 +8,7 @@ resource "dns_address_validation" "authentik" {
 
 }
 
-resource "checkmate_http_health" "authentik" {
+resource "checkmate_http_health" "up" {
   url                   = "https://${dns_address_validation.authentik.name}/-/health/live/"
   request_timeout       = 2000
   method                = "GET"

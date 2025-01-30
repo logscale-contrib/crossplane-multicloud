@@ -45,7 +45,7 @@ dependency "authentik-partition" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  cluster_name = dependency.kubernetes_base.outputs.cluster_name
+  cluster_name = dependency.kubernetes_cluster.outputs.cluster_name
   namespace    = "kafka"
   kafka_name   = "shared"
 }

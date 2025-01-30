@@ -6,8 +6,12 @@ data "aws_secretsmanager_secret_version" "token" {
   secret_id = data.aws_secretsmanager_secret.token.id
 }
 provider "authentik" {
-  url   = "https://${var.host}.${var.domain_name}"
+  url   = "https://${dns_address_validation.authentik.name}"
   token = data.aws_secretsmanager_secret_version.token.secret_string
+}
+
+provider "dns-validation" {
+  # Configuration options
 }
 
 
@@ -15,6 +19,10 @@ terraform {
   required_version = ">= 1.0"
 
   required_providers {
+    dns-validation = {
+      source  = "ryanfaircloth/dns-validation"
+      version = "0.2.1"
+    }
     authentik = {
       source  = "goauthentik/authentik"
       version = "2024.12.0"

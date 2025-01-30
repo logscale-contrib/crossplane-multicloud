@@ -34,7 +34,7 @@ dependency "kubernetes_cluster_cp_auth" {
 }
 
 dependency "authentik-partition" {
-  config_path = "${get_terragrunt_dir()}/../../partition/authentik-partition/"
+  config_path = "${get_terragrunt_dir()}/../../../partition/authentik-partition/"
 }
 
 

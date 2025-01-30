@@ -9,7 +9,8 @@ spec:
   chart:
     spec:
       chart: ./packaging/helm-charts/helm3/strimzi-access-operator/
-      # version: "0.1.0"
+      reconcileStrategy: ChartVersion
+      version: "*"
       sourceRef:
         kind: GitRepository
         name: strimzi-access-operator

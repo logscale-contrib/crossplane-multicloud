@@ -6,13 +6,18 @@ data "aws_secretsmanager_secret_version" "token" {
   secret_id = data.aws_secretsmanager_secret.token.id
 }
 provider "authentik" {
-  url   = "https://${dns_address_validation.authentik.name}"
+  url   = checkmate_http_health.authentik.url
   token = data.aws_secretsmanager_secret_version.token.secret_string
 }
 
 provider "dns-validation" {
   # Configuration options
 }
+
+provider "checkmate" {
+  # Configuration options
+}
+
 
 
 terraform {
@@ -23,11 +28,15 @@ terraform {
       source  = "ryanfaircloth/dns-validation"
       version = "0.2.1"
     }
+
     authentik = {
       source  = "goauthentik/authentik"
       version = "2024.12.0"
     }
-
+    checkmate = {
+      source  = "tetratelabs/checkmate"
+      version = "2.0.0"
+    }
     random = {
       source  = "hashicorp/random"
       version = "3.6.3"

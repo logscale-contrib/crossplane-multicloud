@@ -18,7 +18,7 @@ module "authentik_server" {
   }
   tags = {
 
-    git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-instance.tf"
+    git_file             = "bootstrap/_modules/aws/eks-cp-auth/module/authentik-instance.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
     git_org              = "logscale-contrib"
@@ -48,7 +48,7 @@ module "authentik_worker" {
   }
   tags = {
 
-    git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/authentik-instance.tf"
+    git_file             = "bootstrap/_modules/aws/eks-cp-auth/module/authentik-instance.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
     git_org              = "logscale-contrib"

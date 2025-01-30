@@ -11,7 +11,7 @@ spec:
       chart: strimzi-access-operator
       version: "0.1.0"
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: strimzi-access-operator
         namespace: flux-repos
       interval: 5m

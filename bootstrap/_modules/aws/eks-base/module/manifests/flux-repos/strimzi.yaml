@@ -4,5 +4,6 @@ metadata:
   name: strimzi
   namespace: flux-repos
 spec:
+  type: oci
   interval: 60m
-  url: https://strimzi.io/charts/
+  url: oci://quay.io/strimzi-helm

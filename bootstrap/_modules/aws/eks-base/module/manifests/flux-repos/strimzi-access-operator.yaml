@@ -1,9 +1,15 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
 metadata:
   name: strimzi-access-operator
   namespace: flux-repos
 spec:
-  type: oci
-  interval: 5m
-  url: oci://quay.io/strimzi-helm
+  interval: 60m
+  url: https://github.com/strimzi/kafka-access-operator
+  ref:
+    branch: main
+  ignore: |-
+    # exclude all
+    /*
+    # include charts directory
+    !/packaging/helm-charts/helm3/

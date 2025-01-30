@@ -71,7 +71,7 @@ shared:
     # sso should be disabled during a partition's primary deployment
     authentik:
       green:
-        mode: bootstrap
+        mode: disabled
         name: green
       blue:
         mode: disabled
@@ -81,7 +81,7 @@ shared:
         # Valid values for mode are
         # - bootstrap
         # - normal operations
-        mode: normal
+        mode: bootstrap
         name: green
         backup: true
         replicaPrimary: green

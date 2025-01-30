@@ -35,7 +35,7 @@ terraform {
     }
     checkmate = {
       source  = "tetratelabs/checkmate"
-      version = "1.8.4"
+      version = "2.0.0"
     }
     random = {
       source  = "hashicorp/random"

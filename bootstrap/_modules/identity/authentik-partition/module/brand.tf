@@ -17,7 +17,7 @@ data "authentik_flow" "flow_user_settings" {
 
 
 resource "authentik_brand" "lr" {
-  domain = "ref.logsr.life"
+  domain = "${var.host}.${var.domain_name}"
 
   default = false
 

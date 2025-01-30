@@ -1,4 +1,8 @@
 
+data "kubectl_path_documents" "flux2-repos" {
+  pattern = "./manifests/flux-repos/*.yaml"
+}
+
 resource "kubectl_manifest" "flux2-repos" {
   depends_on = [
     kubectl_manifest.namespaces

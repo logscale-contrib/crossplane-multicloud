@@ -10,10 +10,10 @@ spec:
     spec:
       chart: packaging/helm-charts/helm3/strimzi-access-operator
       reconcileStrategy: ChartVersion
-      version: "*"
+      version: "0.1.1-rc1"
       sourceRef:
-        kind: GitRepository
-        name: strimzi-access-operator
+        kind: HelmRepository
+        name: strimzi
         namespace: flux-repos
       interval: 5m
   releaseName: strimzi-access-operator

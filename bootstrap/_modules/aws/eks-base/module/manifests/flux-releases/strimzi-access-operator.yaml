@@ -8,8 +8,7 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: packaging/helm-charts/helm3/strimzi-access-operator
-      reconcileStrategy: ChartVersion
+      chart: strimzi-access-operator
       version: "0.1.1-rc1"
       sourceRef:
         kind: HelmRepository

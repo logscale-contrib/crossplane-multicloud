@@ -47,7 +47,7 @@ dependency "kafka-instance" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  cluster_name = dependency.kubernetes_cluster.outputs.cluster_name
-  namespace    = dependency.kafka-instance.outputs.namespace
-  kafka_name   = dependency.kafka-instance.outputs.kafka_name
+  cluster_name    = dependency.kubernetes_cluster.outputs.cluster_name
+  kafka_namespace = dependency.kafka-instance.outputs.namespace
+  kafka_name      = dependency.kafka-instance.outputs.kafka_name
 }

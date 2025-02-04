@@ -23,7 +23,7 @@ resource "kubectl_manifest" "kafka-topics" {
       kafka_namespace    = var.kafka_namespace
       tenant             = var.tenant
       prefix             = "${format("g%03s", counters_monotonic.kafka_prefix.value)}"
-      logscale_namespace = local.namespace
+      # logscale_namespace = local.namespace
     }
   )
 }

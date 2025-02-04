@@ -37,6 +37,10 @@ dependency "authentik-partition" {
   skip_outputs = true
 }
 
+dependency "kafka-instance" {
+  config_path = "${get_terragrunt_dir()}/../eks-instance-kafka/"
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
 # These are the variables we have to pass in to use the module. This defines the parameters that are common across all
@@ -44,6 +48,6 @@ dependency "authentik-partition" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
   cluster_name = dependency.kubernetes_cluster.outputs.cluster_name
-  namespace    = "kafka"
-  kafka_name   = "shared"
+  namespace    = dependency.kafka-instance.outputs.namespace
+  kafka_name   = dependency.kafka-instance.outputs.kafka_name
 }

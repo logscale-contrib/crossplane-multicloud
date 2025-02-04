@@ -1,0 +1,47 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: ${tenant}-logscale
+  namespace: ${kafka_namespace}
+spec:
+  interval: 10m
+  timeout: 5m
+  chart:
+    spec:
+      chart: logscale-strimzi-kafka-topics
+      version: "3.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: logscale-contrib
+        namespace: flux-repos
+      interval: 5m
+  releaseName: ${tenant}-logscale
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: false
+  driftDetection:
+    mode: enabled
+  dependsOn:
+    - name: kafka
+  values:
+    config:
+      clusterName: ${kafka_name}
+      prefix: ${prefix}
+      user:
+        authentication:
+          type: scram-sha-512
+        authorization:
+          enabled: true
+          type: simple
+        secretTemplate:
+          metadata:
+            annotations:
+              reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+              reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+              reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "${logscale_namespace}"
+              reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "${logscale_namespace}"

@@ -39,7 +39,7 @@ dependency "kubernetes_cluster_cp_auth" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  cluster_name = dependency.kubernetes_cluster.outputs.cluster_name
-  namespace    = "${local.tenant}-kafka"
-  kafka_name   = local.tenant
+  cluster_name    = dependency.kubernetes_cluster.outputs.cluster_name
+  kafka_namespace = "${local.tenant}-kafka"
+  kafka_name      = local.tenant
 }

@@ -9,7 +9,7 @@ resource "counters_monotonic" "kafka_prefix" {
   initial_value = 1
   triggers = {
     admin           = var.kafka_prefix_increment,
-    region          = var.region
+    # region          = var.region
     kafka_name      = var.kafka_name
     kafka_namespace = var.kafka_namespace
   }

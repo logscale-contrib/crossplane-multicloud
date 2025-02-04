@@ -22,7 +22,7 @@ resource "kubectl_manifest" "kafka-topics" {
       kafka_name         = var.kafka_name
       kafka_namespace    = var.kafka_namespace
       prefix             = "${format("g%03s", counters_monotonic.kafka_prefix.value)}"
-      logscale_namespace = var.namespace
+      logscale_namespace = var.logscale_namespace
     }
   )
 }

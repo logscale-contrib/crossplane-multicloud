@@ -1,4 +1,4 @@
-output "namespace" {
+output "kafka_namespace" {
   value = var.namespace
 }
 output "kafka_name" {

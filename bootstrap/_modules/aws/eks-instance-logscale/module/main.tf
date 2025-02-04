@@ -4,7 +4,7 @@
 data "kubectl_path_documents" "flux2-releases" {
   pattern = "./manifests/helm-releases/*.yaml"
   vars = {
-    kafka_namespace = kafka_var.namespace
+    kafka_namespace = var.kafka_namespace
     cluster_name    = var.cluster_name
     kafka_name      = var.kafka_name
   }

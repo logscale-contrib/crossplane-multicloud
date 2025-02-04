@@ -3,7 +3,9 @@ variable "cluster_name" {
   type        = string
   description = "(optional) describe your variable"
 }
+variable "tenant" {
 
+}
 
 variable "kafka_name" {
   type        = string

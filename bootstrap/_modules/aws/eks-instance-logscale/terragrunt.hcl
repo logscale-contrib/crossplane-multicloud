@@ -50,4 +50,5 @@ inputs = {
   cluster_name    = dependency.kubernetes_cluster.outputs.cluster_name
   kafka_namespace = dependency.kafka-instance.outputs.kafka_namespace
   kafka_name      = dependency.kafka-instance.outputs.kafka_name
+  tenant          = "test"
 }

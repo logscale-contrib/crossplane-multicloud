@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: ${tenant}-logscale
+  name: ${logscale_namespace}
   namespace: ${kafka_namespace}
 spec:
   interval: 10m
@@ -15,7 +15,7 @@ spec:
         name: logscale-contrib
         namespace: flux-repos
       interval: 5m
-  releaseName: ${tenant}-logscale
+  releaseName: ${logscale_namespace}
   install:
     remediation:
       retries: 3

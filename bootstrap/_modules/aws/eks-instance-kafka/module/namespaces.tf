@@ -2,7 +2,7 @@
 data "kubectl_path_documents" "namespaces" {
   pattern = "./manifests/namespaces/*.yaml"
   vars = {
-    namespace = var.namespace
+    namespace = var.kafka_namespace
   }
 }
 

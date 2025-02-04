@@ -1,4 +1,4 @@
-variable "namespace" {
+variable "kafka_namespace" {
   type        = string
   description = "(optional) describe your variable"
 }

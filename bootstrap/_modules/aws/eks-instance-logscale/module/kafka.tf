@@ -17,7 +17,7 @@ resource "counters_monotonic" "kafka_prefix" {
 
 resource "kubectl_manifest" "kafka-topics" {
 
-  yaml_body = templatefile("./manifests/helm-manifests/kafka-topics.yaml",
+  yaml_body = templatefile("./manifests/helm-releases/kafka-topics.yaml",
     {
       kafka_name         = var.kafka_name
       kafka_namespace    = var.kafka_namespace

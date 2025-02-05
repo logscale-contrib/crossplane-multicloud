@@ -1,6 +1,9 @@
 
 data "kubectl_path_documents" "namespaces" {
   pattern = "./manifests/namespaces/*.yaml"
+  vars = {
+    namespace = var.logscale_namespace
+  }
 }
 
 resource "kubectl_manifest" "namespaces" {

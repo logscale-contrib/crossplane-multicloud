@@ -27,7 +27,7 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
-    - name: kafka
+    - name: ${kafka_namespace}
   values:
     config:
       clusterName: ${kafka_name}

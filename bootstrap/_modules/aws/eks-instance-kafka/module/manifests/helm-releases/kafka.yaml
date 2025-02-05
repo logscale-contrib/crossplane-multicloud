@@ -257,7 +257,7 @@ spec:
           tls:
             authentication:
               enabled: true
-              type: oauth
+              type: scram-sha-512
               validIssuerUri: http://keycloak:8080/realms/demo
               jwksEndpointUri: http://keycloak:8080/realms/demo/protocol/openid-connect/certs
               userNameClaim: preferred_username

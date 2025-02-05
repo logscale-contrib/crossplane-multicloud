@@ -45,3 +45,6 @@ spec:
           #       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
           #       reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "${logscale_namespace}"
           #       reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "${logscale_namespace}"
+      userAccess:
+        enabled: true
+        instanceNamespace: ${logscale_namespace}

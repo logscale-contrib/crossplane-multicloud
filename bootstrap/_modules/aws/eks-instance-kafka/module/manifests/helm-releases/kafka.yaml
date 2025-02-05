@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: kafka
-  namespace: ${namespace}-kafka
+  name: ${kafka_name}
+  namespace: ${namespace}
 spec:
   interval: 10m
   timeout: 5m
@@ -15,7 +15,7 @@ spec:
         name: logscale-contrib
         namespace: flux-repos
       interval: 5m
-  releaseName: kafka
+  releaseName: ${kafka_name}
   install:
     remediation:
       retries: 3

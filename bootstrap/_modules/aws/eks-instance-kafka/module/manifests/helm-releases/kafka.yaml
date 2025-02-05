@@ -15,7 +15,7 @@ spec:
         name: logscale-contrib
         namespace: flux-repos
       interval: 5m
-  releaseName: ${kafka_name}
+  releaseName: ${namespace}
   install:
     remediation:
       retries: 3

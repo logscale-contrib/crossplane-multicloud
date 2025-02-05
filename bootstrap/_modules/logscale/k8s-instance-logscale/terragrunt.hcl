@@ -20,8 +20,10 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = basename(dirname("${get_terragrunt_dir()}/../.."))
+  partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
+  region     = basename(dirname("${get_terragrunt_dir()}/../.."))
+  currentDir = basename(dirname(get_terragrunt_dir()))
+  nameSlug   = regex("^[^-]+-(.*)-logscale$", local.currentDir)[0]
 }
 
 dependency "kubernetes_cluster" {
@@ -50,5 +52,5 @@ inputs = {
   cluster_name       = dependency.kubernetes_cluster.outputs.cluster_name
   kafka_namespace    = dependency.kafka-instance.outputs.kafka_namespace
   kafka_name         = dependency.kafka-instance.outputs.kafka_name
-  logscale_namespace = "test-logscale"
+  logscale_namespace = "${local.nameSlug}-logscale"
 }

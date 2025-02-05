@@ -38,7 +38,7 @@ dependency "authentik-partition" {
 }
 
 dependency "kafka-instance" {
-  config_path = "${get_terragrunt_dir()}/../eks-instance-kafka/"
+  config_path = "${get_terragrunt_dir()}/../k8s-instance-kafka/"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

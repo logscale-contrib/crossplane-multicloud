@@ -22,7 +22,7 @@ terraform {
 locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
   region     = basename(dirname("${get_terragrunt_dir()}/../.."))
-  currentDir = basename(dirname(get_terragrunt_dir()))
+  currentDir = basename(dirname("${get_terragrunt_dir()}"))
   nameSlug   = regex("^[^-]+-(.*)-logscale$", local.currentDir)[0]
 }
 

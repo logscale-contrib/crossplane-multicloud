@@ -12,7 +12,7 @@
 
 terraform {
   //source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v19.21.0"
-  source = "${dirname(find_in_parent_folders())}/_modules/aws/eks-instance-kafka/module/"
+  source = "${dirname(find_in_parent_folders())}/_modules/aws/k8s-instance-kafka/module/"
 }
 
 

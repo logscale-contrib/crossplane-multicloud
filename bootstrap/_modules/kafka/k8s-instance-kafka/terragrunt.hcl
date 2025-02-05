@@ -12,7 +12,7 @@
 
 terraform {
   //source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v19.21.0"
-  source = "${dirname(find_in_parent_folders())}/_modules/aws/k8s-instance-kafka/module/"
+  source = "${dirname(find_in_parent_folders())}/_modules/kafka/k8s-instance-kafka/module/"
 }
 
 
@@ -20,8 +20,9 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  tenant    = basename(dirname("${get_terragrunt_dir()}/../../..")) == "aws" ? "shared" : basename(dirname("${get_terragrunt_dir()}/../.."))
+  partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
+  currentDir = get_terragrunt_dir()
+  nameSlug   = regex("^[^-]+-(.*)-logscale$", basename(local.currentDir))[0]
 }
 
 dependency "kubernetes_cluster" {
@@ -40,6 +41,6 @@ dependency "kubernetes_cluster_cp_auth" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
   cluster_name    = dependency.kubernetes_cluster.outputs.cluster_name
-  kafka_namespace = "${local.tenant}-kafka"
-  kafka_name      = local.tenant
+  kafka_namespace = "${local.nameSlug}-kafka"
+  kafka_name      = local.nameSlug
 }

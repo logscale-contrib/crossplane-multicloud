@@ -22,7 +22,7 @@ terraform {
 locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
   currentDir = get_terragrunt_dir()
-  nameSlug   = regex("^[^-]+-(.*)-logscale$", basename(local.currentDir))[0]
+  nameSlug   = regex("^[^-]+-(.*)-kafka$", basename(local.currentDir))[0]
 }
 
 dependency "kubernetes_cluster" {

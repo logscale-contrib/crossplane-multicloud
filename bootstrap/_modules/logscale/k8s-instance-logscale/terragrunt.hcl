@@ -23,7 +23,7 @@ locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
   region     = basename(dirname("${get_terragrunt_dir()}/../.."))
   currentDir = get_terragrunt_dir()
-  nameSlug   = regex("^[^-]+-(.*)-kafka$", basename(local.currentDir))[0]
+  nameSlug   = regex("^[^-]+-(.*)-logscale$", basename(local.currentDir))[0]
 }
 
 dependency "kubernetes_cluster" {

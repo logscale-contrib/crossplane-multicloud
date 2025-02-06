@@ -28,7 +28,9 @@ locals {
 dependency "kubernetes_cluster" {
   config_path = "${get_terragrunt_dir()}/../eks/"
 }
-
+dependency "bucket-data-dr" {
+  config_path = "${get_terragrunt_dir()}/../bucket-data-dr/"
+}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
@@ -36,7 +38,14 @@ dependency "kubernetes_cluster" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  # cluster_name    = dependency.kubernetes_cluster.outputs.cluster_name
-  # kafka_namespace = "${local.nameSlug}-kafka"
-  # kafka_name      = local.nameSlug
+  region_name = local.partition.shared.provider.aws.regions[local.region].name
+
+  iam_role_path = local.partition.shared.provider.aws.iam_role_path
+
+  oidc_provider_arn = dependency.kubernetes_cluster.outputs.oidc_provider_arn
+
+  data_bucket_arn = dependency.bucket.outputs.bucket_arn
+  data_bucket_id  = dependency.bucket.outputs.bucket_id
+
+  bucket_prefix = local.nameSlug
 }

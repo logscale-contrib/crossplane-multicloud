@@ -28,7 +28,7 @@ locals {
 dependency "kubernetes_cluster" {
   config_path = "${get_terragrunt_dir()}/../eks/"
 }
-dependency "bucket-data-dr" {
+dependency "bucket" {
   config_path = "${get_terragrunt_dir()}/../bucket-data-dr/"
 }
 

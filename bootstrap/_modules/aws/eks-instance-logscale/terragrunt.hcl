@@ -38,7 +38,6 @@ dependency "bucket-data-dr" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  region_name = local.partition.shared.provider.aws.regions[local.region].name
 
   iam_role_path = local.partition.shared.provider.aws.iam_role_path
 

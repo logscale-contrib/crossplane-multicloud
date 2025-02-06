@@ -44,8 +44,13 @@ module "sqs_awslogs" {
   }
 
   tags = {
-    yor_name  = "sqs_awslogs"
-    yor_trace = "998d31ea-494b-4caf-b2a0-7695fd8026d5"
+    yor_name             = "sqs_awslogs"
+    yor_trace            = "998d31ea-494b-4caf-b2a0-7695fd8026d5"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale-ingest/module/aws-sqs-subs.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
   }
 }
 
@@ -101,8 +106,13 @@ module "sqs_s3logs" {
   }
 
   tags = {
-    yor_name  = "sqs_s3logs"
-    yor_trace = "69501bc7-bbae-4392-b68c-84b1799cb26b"
+    yor_name             = "sqs_s3logs"
+    yor_trace            = "69501bc7-bbae-4392-b68c-84b1799cb26b"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale-ingest/module/aws-sqs-subs.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
   }
 }
 

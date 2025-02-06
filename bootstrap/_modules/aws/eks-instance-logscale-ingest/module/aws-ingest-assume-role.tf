@@ -13,8 +13,13 @@ module "ingest-role" {
     module.iam_iam-assume_ingest-actor.arn
   ]
   tags = {
-    yor_name  = "ingest-role"
-    yor_trace = "71edc877-9dee-4af3-a9d7-66d437331378"
+    yor_name             = "ingest-role"
+    yor_trace            = "71edc877-9dee-4af3-a9d7-66d437331378"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale-ingest/module/aws-ingest-assume-role.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
   }
 }
 
@@ -39,8 +44,13 @@ module "ingest-role-actor" {
   custom_role_trust_policy        = data.aws_iam_policy_document.custom_trust_policy.json
 
   tags = {
-    yor_name  = "ingest-role-actor"
-    yor_trace = "337563b8-4345-42a8-867e-c017a42258aa"
+    yor_name             = "ingest-role-actor"
+    yor_trace            = "337563b8-4345-42a8-867e-c017a42258aa"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale-ingest/module/aws-ingest-assume-role.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
   }
 }
 
@@ -87,8 +97,13 @@ module "iam_iam-assume_ingest-actor" {
     ]
   })
   tags = {
-    yor_name  = "iam_iam-assume_ingest-actor"
-    yor_trace = "4f2a8ffb-efd9-4a3b-a209-fd3728f44bed"
+    yor_name             = "iam_iam-assume_ingest-actor"
+    yor_trace            = "4f2a8ffb-efd9-4a3b-a209-fd3728f44bed"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale-ingest/module/aws-ingest-assume-role.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
   }
 }
 
@@ -128,7 +143,12 @@ module "iam_iam-policy-s3log" {
     ]
   })
   tags = {
-    yor_name  = "iam_iam-policy-s3log"
-    yor_trace = "957362c8-eaa0-4cea-b69f-cffb89a2c201"
+    yor_name             = "iam_iam-policy-s3log"
+    yor_trace            = "957362c8-eaa0-4cea-b69f-cffb89a2c201"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale-ingest/module/aws-ingest-assume-role.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
   }
 }

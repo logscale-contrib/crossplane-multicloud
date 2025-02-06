@@ -47,4 +47,7 @@ inputs = {
   data_bucket_id  = dependency.bucket.outputs.bucket_id
 
   bucket_prefix = local.nameSlug
+
+  logscale_namespace = "${local.nameSlug}-logscale"
+
 }

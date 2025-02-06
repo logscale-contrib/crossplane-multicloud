@@ -5,7 +5,7 @@ locals {
 module "logscale_service_account" {
 
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.52.1"
+  version = "5.52.2"
 
   role_name_prefix = var.logscale_namespace
   role_path        = var.iam_role_path
@@ -29,7 +29,7 @@ module "logscale_service_account" {
 
 module "logscale_bucket_access" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "5.52.1"
+  version = "5.52.2"
 
   name_prefix = "${var.logscale_namespace}_${var.logscale_namespace}"
   path        = var.iam_role_path
@@ -70,9 +70,9 @@ module "logscale_bucket_access" {
 }
 
 
-# module "iam_iam-assume_ingest-base" {
-#   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-#   version = "5.52.1"
+module "iam_iam-assume_ingest-base" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+  version = "5.52.2"
 
 #   name_prefix = "${var.logscale_namespace}_${var.logscale_namespace}-assume-ingest-base"
 #   # path        = var.iam_policy_path

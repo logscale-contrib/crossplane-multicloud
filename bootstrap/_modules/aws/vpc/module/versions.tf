@@ -9,7 +9,7 @@ terraform {
     }
     aws = {
       source  = "hashicorp/aws"
-      version = "5.85.0"
+      version = "5.86.0"
     }
     helm = {
       source  = "hashicorp/helm"

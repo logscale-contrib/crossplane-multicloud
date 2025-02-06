@@ -2,7 +2,7 @@
 module "irsa" {
 
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.52.1"
+  version = "5.52.2"
 
   role_name_prefix = local.namespace
   # role_path        = var.iam_role_path
@@ -26,7 +26,7 @@ module "irsa" {
 
 module "iam_iam-policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "5.52.1"
+  version = "5.52.2"
 
   name_prefix = "${local.namespace}_${var.service_account}"
   # path        = var.iam_policy_path
@@ -75,7 +75,7 @@ module "iam_iam-policy" {
 
 module "iam_iam-assume_ingest-base" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "5.52.1"
+  version = "5.52.2"
 
   name_prefix = "${local.namespace}_${var.service_account}-assume-ingest-base"
   # path        = var.iam_policy_path

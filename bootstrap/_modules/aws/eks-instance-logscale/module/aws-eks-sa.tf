@@ -11,7 +11,7 @@ module "logscale_service_account" {
   role_path        = var.iam_role_path
 
   role_policy_arns = {
-    "object" = module.iam_iam-policy.arn
+    "object" = module.logscale_bucket_access.arn
     # "ingest" = module.iam_iam-assume_ingest-base.arn
   }
 
@@ -22,8 +22,13 @@ module "logscale_service_account" {
     }
   }
   tags = {
-    yor_name  = "logscale_service_account"
-    yor_trace = "413aeebf-c5ba-4419-b985-bf807e08e8c9"
+    yor_name             = "logscale_service_account"
+    yor_trace            = "413aeebf-c5ba-4419-b985-bf807e08e8c9"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale/module/aws-eks-sa.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
   }
 }
 
@@ -64,15 +69,20 @@ module "logscale_bucket_access" {
     ]
   })
   tags = {
-    yor_name  = "logscale_bucket_access"
-    yor_trace = "8f32e922-7883-4007-b10d-33080defd1d4"
+    yor_name             = "logscale_bucket_access"
+    yor_trace            = "8f32e922-7883-4007-b10d-33080defd1d4"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale/module/aws-eks-sa.tf"
+    git_last_modified_by = "ryan@dss-i.com"
+    git_modifiers        = "ryan"
+    git_org              = "logscale-contrib"
+    git_repo             = "crossplane-multicloud"
   }
 }
 
 
-module "iam_iam-assume_ingest-base" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "5.52.2"
+# module "iam_iam-assume_ingest-base" {
+#   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+#   version = "5.52.2"
 
 #   name_prefix = "${var.logscale_namespace}_${var.logscale_namespace}-assume-ingest-base"
 #   # path        = var.iam_policy_path

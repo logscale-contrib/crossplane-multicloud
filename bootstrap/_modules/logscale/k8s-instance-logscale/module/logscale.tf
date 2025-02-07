@@ -3,7 +3,7 @@ data "kubectl_file_documents" "logscale" {
   content = templatefile(
     "./manifests/helm-releases/logscale.yaml",
     {
-      prefix             = "${format("g%03s", counters_monotonic.kafka_prefix.value)}"
+      kafka_prefix             = "${format("g%03s", counters_monotonic.kafka_prefix.value)}"
       logscale_namespace = var.logscale_namespace
 
       # namespace                = local.namespace

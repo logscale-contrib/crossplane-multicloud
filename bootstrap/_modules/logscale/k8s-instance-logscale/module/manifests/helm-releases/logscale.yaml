@@ -39,6 +39,8 @@ spec:
     logscale:
       buckets:
         type: none
+      auth:
+        method: single-user
       kafka:
         manager: strimziAccessOperator
         serviceBindingSecret: partition-logscale-user-access

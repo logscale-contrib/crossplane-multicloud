@@ -46,4 +46,4 @@ spec:
               data:
                 #- objectName: <objectName> or <objectAlias>
                 - objectName: logscale-license
-                  key: key
+                  key: license

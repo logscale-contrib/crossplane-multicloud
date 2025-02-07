@@ -42,8 +42,7 @@ spec:
       kafka:
         manager: strimziAccessOperator
         prefixEnable: true
-        bootstrap: ${kafka_name}-kafka-bootstrap.${kafka_namespace}.svc:9093
-        topicPrefix: ${tenant}-logscale-${kafka_prefix}
+        topicPrefix: ${logscale_namespace}-logscale-${kafka_prefix}
         commonExtraConfig:
           # receive.buffer.bytes=65536 is the default use -1 to set to OS max
           receive.buffer.bytes: -1

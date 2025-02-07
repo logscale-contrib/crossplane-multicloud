@@ -60,9 +60,9 @@ spec:
           linger.ms: 5
           config.providers: env
           config.providers.env.class: org.apache.kafka.common.config.provider.EnvVarConfigProvider
-          ssl.truststore.location: /data/truststore/bundle.jks
-          security.protocol: SASL_SSL
-          sasl.mechanism: SCRAM-SHA-512
-          sasl.jaas.config: $${env:KAFKA_JAAS}
+          # ssl.truststore.location: /data/truststore/bundle.jks
+          # security.protocol: SASL_SSL
+          # sasl.mechanism: SCRAM-SHA-512
+          # sasl.jaas.config: $${env:KAFKA_JAAS}
     setroot:
       enabled: false

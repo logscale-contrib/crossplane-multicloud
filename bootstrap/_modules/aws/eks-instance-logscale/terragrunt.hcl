@@ -43,6 +43,10 @@ inputs = {
 
   oidc_provider_arn = dependency.kubernetes_cluster.outputs.oidc_provider_arn
 
+  ssm_path_prefix = local.partition.shared.provider.aws.ssm_path_prefix
+  region          = local.partition.shared.provider.aws.region
+  regions         = local.partition.shared.provider.aws.regions
+
   data_bucket_arn = dependency.bucket.outputs.bucket_arn
   data_bucket_id  = dependency.bucket.outputs.bucket_id
 

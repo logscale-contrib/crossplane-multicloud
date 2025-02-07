@@ -4,8 +4,8 @@ data "kubectl_file_documents" "logscale-license" {
     "./manifests/helm-releases/logscale-license.yaml",
     {
       logscale_namespace = var.logscale_namespace
-
-  })
+    }
+  )
 }
 
 resource "kubectl_manifest" "logscale-license" {

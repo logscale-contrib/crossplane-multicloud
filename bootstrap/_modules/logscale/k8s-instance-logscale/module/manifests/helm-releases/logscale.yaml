@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: logscale
-      version: 7.1.0-next.7
+      version: 7.1.0-next.8
       sourceRef:
         kind: HelmRepository
         name: logscale-contrib-ls
@@ -43,6 +43,7 @@ spec:
       auth:
         method: single-user
 
+      existingLicenseSecretName: logscale-license
       extraVolumes:
         - name: logscale-license
           csi:

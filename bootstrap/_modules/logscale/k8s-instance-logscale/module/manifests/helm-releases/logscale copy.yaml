@@ -1,0 +1,330 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: logscale
+  namespace: ${namespace}
+spec:
+  interval: 10m
+  timeout: 5m
+  chart:
+    spec:
+      chart: logscale
+      version: 7.0.0-next.189
+      sourceRef:
+        kind: HelmRepository
+        name: logscale-contrib-ls
+        namespace: flux-repos
+      interval: 5m
+  releaseName: logscale
+  install:
+    disableWaitForJobs: true
+    remediation:
+      retries: 3
+  upgrade:
+    disableWaitForJobs: true
+  test:
+    enable: false
+  driftDetection:
+    mode: enabled
+    # ignore:
+    #   - paths:
+    #       - /spec/replicas
+    #     target:
+    #       kind: Deployment
+  values:
+    platform:
+      provider: aws
+    fullnameOverride: logscale
+    humio:
+      image:
+        tag: 1.163.0
+      trustManagerConfigMap: cluster-trust-bundle
+      extraENV:
+        - name: ALLOW_KAFKA_RESET_UNTIL_TIMESTAMP_MS
+          # Friday, November 14, 2025 2:09:27 PM
+          value: "1732209887000"
+        - name: HUMIO_JVM_PERFORMANCE_OPTS
+          value: -XX:+UseNUMA -XX:+UseTransparentHugePages
+        - name: HUMIO_OPTS
+          value: -Djava.security.manager=allow
+        - name: INGEST_FEED_AWS_ROLE_ARN
+          value: ${ingest_role_arn}
+        - name: HUMIO_MAX_DIRECT_MEMORY_SIZE_MB
+          value: "1024"
+        - name: MAX_SERIES_LIMIT
+          value: "1000"
+        - name: ENABLE_IOC_SERVICE
+          value: "false"
+        - name: KAFKA_JAAS
+          valueFrom:
+            secretKeyRef:
+              name: ${tenant}-logscale
+              key: sasl.jaas.config
+      kafka:
+        manager: external
+        prefixEnable: true
+        bootstrap: ${kafka_name}-kafka-bootstrap.${kafka_namespace}.svc:9093
+        topicPrefix: ${tenant}-logscale-${kafka_prefix}
+        extraConfig: >
+          # receive.buffer.bytes=65536 is the default use -1 to set to OS max
+
+          receive.buffer.bytes=-1
+
+          # send.buffer.bytes=131072 is the default use -1 to set to OS max
+
+          send.buffer.bytes=-1
+
+
+          # Additional external kafka configuration
+
+          # max.partition.fetch.bytes=1048576 is the default value 3 MB should be optimal for logscale
+
+          max.partition.fetch.bytes=3145728
+
+          # linger.ms with high partition counts and sharding this small delay allows for optimal batch sizing
+
+          # under high loads it will have no effect
+
+          linger.ms=5
+
+
+          config.providers=env
+
+          config.providers.env.class=org.apache.kafka.common.config.provider.EnvVarConfigProvider
+
+          ssl.truststore.location=/data/truststore/bundle.jks
+
+          security.protocol=SASL_SSL
+
+          sasl.mechanism=SCRAM-SHA-512
+
+          sasl.jaas.config=$${env:KAFKA_JAAS}
+      buckets:
+        prefix: ${bucket_prefix}
+        storage: ${bucket_storage}
+        region: ${region}
+        type: aws
+      fqdnInputs: ${fqdn_ingest}
+      fqdn: ${fqdn}
+      license: ${logscale_license}
+      smtp:
+        enabled: true
+        host: ${smtp_server}
+        port: "${smtp_port}"
+        startTLS: ${smtp_use_tls}
+        username: ${smtp_user}
+        password: ${smtp_password}
+        sender: ${smtp_sender}
+      config:
+        enableInternalLogger: "true"
+      serviceAccount:
+        name: ${logscale_sa_name}
+        annotations:
+          eks.amazonaws.com/role-arn: ${logscale_sa_arn}
+      auth:
+        rootUser: ${rootUser}
+        method: saml
+        saml:
+          groupMembershipAttribute: http://schemas.xmlsoap.org/claims/Group
+          signOnUrl: ${saml_url}
+          entityID: ${saml_issuer}
+          idpCertificate: ${saml_signing_certificate}
+      nodeCount: 3
+      resources:
+        requests:
+          memory: 16Gi
+          cpu: 2
+        limits:
+          memory: 32Gi
+          cpu: 12
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
+                  - key: karpenter.k8s.aws/instance-local-nvme
+                    operator: Exists
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: humio.com/node-pool
+                    operator: In
+                    values:
+                      - logscale
+                      - logscale-ingest-only
+                      - logscale-http-only
+              topologyKey: kubernetes.io/hostname
+      topologySpreadConstraints:
+        - maxSkew: 2
+          minDomains: 2
+          whenUnsatisfiable: DoNotSchedule
+          topologyKey: topology.kubernetes.io/zone
+          labelSelector:
+            matchExpressions:
+              - key: humio.com/node-pool
+                operator: In
+                values:
+                  - logscale
+      tolerations:
+        - key: topolvm.io/local
+          operator: Equal
+          value: "true"
+      dataVolumePersistentVolumeClaimSpecTemplate:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 468Gi
+        storageClassName: instancestore-nvme-ext4
+      frontEndDataVolumePersistentVolumeClaimSpecTemplate:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: cluster-block-base-ext4
+      priorityClass: partition-high
+      ingress:
+        ui:
+          className: alb-partition
+          enabled: true
+          tls: true
+          annotations:
+            alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+            alb.ingress.kubernetes.io/ssl-redirect: "443"
+        inputs:
+          className: alb-partition
+          enabled: true
+          tls: true
+          annotations:
+            alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+            alb.ingress.kubernetes.io/ssl-redirect: "443"
+      nodepools:
+        ingest:
+          priorityClass: partition-medium
+          nodeCount: 3
+          resources:
+            requests:
+              cpu: "1"
+              memory: 16Gi
+            limits:
+              cpu: "2"
+              memory: 21Gi
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                      - key: kubernetes.io/os
+                        operator: In
+                        values:
+                          - linux
+                      - key: karpenter.k8s.aws/instance-local-nvme
+                        operator: DoesNotExist
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: humio.com/node-pool
+                        operator: In
+                        values:
+                          - logscale
+                          - logscale-ingest-only
+                          - logscale-http-only
+                  topologyKey: kubernetes.io/hostname
+          topologySpreadConstraints:
+            - maxSkew: 2
+              minDomains: 2
+              whenUnsatisfiable: DoNotSchedule
+              topologyKey: topology.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                  - key: humio.com/node-pool
+                    operator: In
+                    values:
+                      - logscale-ingest-only
+        ui:
+          priorityClass: partition-low
+          nodeCount: 3
+          resources:
+            requests:
+              cpu: "1"
+              memory: 16Gi
+            limits:
+              cpu: "2"
+              memory: 32Gi
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                      - key: kubernetes.io/os
+                        operator: In
+                        values:
+                          - linux
+                      - key: karpenter.k8s.aws/instance-local-nvme
+                        operator: DoesNotExist
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: humio.com/node-pool
+                        operator: In
+                        values:
+                          - logscale
+                          - logscale-ingest-only
+                          - logscale-http-only
+                  topologyKey: kubernetes.io/hostname
+          topologySpreadConstraints:
+            - maxSkew: 2
+              minDomains: 2
+              whenUnsatisfiable: DoNotSchedule
+              topologyKey: topology.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                  - key: humio.com/node-pool
+                    operator: In
+                    values:
+                      - logscale-http-only
+    otel:
+      components:
+        inject: false
+        debug: false
+        otlpURI: http://otel-node-opentelemetry-collector.kube-system.svc.cluster.local:4317
+    setroot:
+      enabled: false
+    pdfRenderService:
+      replicas: 1
+      image:
+        repository: humio/pdf-render-service-dev
+        tag: support-http-debug-logging--build-96--sha-cf4b7c7c9c0e466fd0214e5f4f6a39651dfa6d5f
+        pullSecrets:
+          - name: rf-registry
+      config:
+        debug: "true"
+    scim:
+      enabled: true
+      replicas: 1
+      image:
+        tag: 1.1.7
+      token: ${scim_token}
+      groups:
+        managementOrganization: ${namespace}-management-organization
+        managementCluster: ${namespace}-management-cluster

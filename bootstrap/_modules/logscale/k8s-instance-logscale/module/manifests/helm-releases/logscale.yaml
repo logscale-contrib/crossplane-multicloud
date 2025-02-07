@@ -37,6 +37,7 @@ spec:
       provider: aws
 
     logscale:
+      drMode: bootstrap
       buckets:
         type: none
       auth:

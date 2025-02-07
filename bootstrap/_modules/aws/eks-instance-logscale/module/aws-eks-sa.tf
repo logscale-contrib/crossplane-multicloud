@@ -12,7 +12,7 @@ module "logscale_service_account" {
 
   role_policy_arns = {
     "object"  = module.logscale_bucket_access.arn
-    "license" = aws_iam_policy.logscale_license.arn
+    "license" = aws_iam_policy.logscale-license.arn
     # "ingest" = module.iam_iam-assume_ingest-base.arn
   }
 

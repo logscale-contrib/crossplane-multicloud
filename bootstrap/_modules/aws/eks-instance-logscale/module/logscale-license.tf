@@ -28,7 +28,7 @@ resource "aws_iam_policy" "logscale-license" {
   })
   tags = {
 
-    git_file             = "bootstrap/_modules/identity/authentik/module/main.tf"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale/module/logscale-license.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
     git_org              = "logscale-contrib"

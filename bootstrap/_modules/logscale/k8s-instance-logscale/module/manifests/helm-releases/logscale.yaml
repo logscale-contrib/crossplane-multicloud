@@ -61,3 +61,5 @@ spec:
           security.protocol: SASL_SSL
           sasl.mechanism: SCRAM-SHA-512
           sasl.jaas.config: $${env:KAFKA_JAAS}
+    setroot:
+      enabled: false

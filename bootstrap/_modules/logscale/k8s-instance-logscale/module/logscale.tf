@@ -1,0 +1,45 @@
+
+data "kubectl_file_documents" "logscale" {
+  content = templatefile(
+    "./manifests/helm-manifests/logscale.yaml",
+    {
+      kafka_name         = var.kafka_name
+      kafka_namespace    = var.kafka_namespace
+      prefix             = "${format("g%03s", counters_monotonic.kafka_prefix.value)}"
+      logscale_namespace = var.logscale_namespace
+
+      # namespace                = local.namespace
+      # region                   = var.region
+      # platformType             = "aws"
+      # kafka_namespace          = var.kafka_namespace
+      # tenant                   = var.tenant
+      # kafka_name               = var.kafka_name
+      # kafka_prefix             = "${format("g%03s", counters_monotonic.kafka_prefix.value)}"
+      # bucket_prefix            = "${local.namespace}/"
+      # bucket_storage           = var.logscale_current_storage_bucket_id
+      # bucket_export            = var.logscale_export_bucket_id
+      # bucket_archive           = var.logscale_archive_bucket_id
+      # logscale_sa_arn          = module.irsa.iam_role_arn
+      # logscale_sa_name         = var.service_account
+      # logscale_license         = var.logscale_license
+      # fqdn                     = local.fqdn
+      # fqdn_ingest              = local.fqdn_ingest
+      # saml_issuer              = var.saml_issuer
+      # saml_signing_certificate = base64encode(var.saml_signing_certificate)
+      # saml_url                 = var.saml_url
+      # rootUser                 = var.LogScaleRoot
+      # ingest_role_arn          = module.ingest-role.iam_role_arn
+      # scim_token               = var.scim_token
+      # smtp_server              = var.smtp_server
+      # smtp_port                = var.smtp_port
+      # smtp_use_tls             = var.smtp_use_tls
+      # smtp_user                = var.smtp_user
+      # smtp_password            = var.smtp_password
+      # smtp_sender              = var.smtp_sender
+  })
+}
+
+resource "kubectl_manifest" "logscale" {
+  for_each  = data.kubectl_file_documents.logscale.manifests
+  yaml_body = each.value
+}

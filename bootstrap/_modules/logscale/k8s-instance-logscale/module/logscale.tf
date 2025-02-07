@@ -1,7 +1,7 @@
 
 data "kubectl_file_documents" "logscale" {
   content = templatefile(
-    "./manifests/helm-manifests/logscale.yaml",
+    "./manifests/helm-releases/logscale.yaml",
     {
       kafka_name         = var.kafka_name
       kafka_namespace    = var.kafka_namespace

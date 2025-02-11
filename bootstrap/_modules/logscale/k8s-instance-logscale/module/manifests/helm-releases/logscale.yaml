@@ -44,17 +44,17 @@ spec:
         method: single-user
 
       existingLicenseSecretName: logscale-license
-      extraVolumes:
-        - name: logscale-license
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: "logscale-license"
-      extraHumioVolumeMounts:
-        - name: logscale-license
-          mountPath: "/mnt/logscale-license/logscale-license"
-          readOnly: true
+      # extraVolumes:
+      #   - name: logscale-license
+      #     csi:
+      #       driver: secrets-store.csi.k8s.io
+      #       readOnly: true
+      #       volumeAttributes:
+      #         secretProviderClass: "logscale-license"
+      # extraHumioVolumeMounts:
+      #   - name: logscale-license
+      #     mountPath: "/mnt/logscale-license/logscale-license"
+      #     readOnly: true
 
       kafka:
         manager: strimziAccessOperator

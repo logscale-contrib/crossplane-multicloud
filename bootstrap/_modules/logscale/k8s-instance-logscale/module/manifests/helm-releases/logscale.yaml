@@ -37,6 +37,9 @@ spec:
       provider: aws
 
     logscale:
+      image:
+        repository: "humio/humio-core"
+        tag: "1.165.1"
       drMode: bootstrap
       buckets:
         type: none
@@ -57,7 +60,19 @@ spec:
         - name: logscale-license
           mountPath: "/mnt/logscale-license/logscale-license"
           readOnly: true
-
+      resources:
+        limits:
+          cpu: "2"
+          memory: 8Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+      dataVolumePersistentVolumeClaimSpecTemplate:
+        storageClassName: cluster-block-base-ext4
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests:
+            storage: 10Gi
       kafka:
         manager: strimziAccessOperator
         serviceBindingSecret: partition-logscale-user-access

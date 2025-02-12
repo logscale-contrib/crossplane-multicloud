@@ -34,7 +34,7 @@ module "S3Logs" {
 }
 module "all_notifications" {
   source  = "terraform-aws-modules/s3-bucket/aws//modules/notification"
-  version = "4.5.0"
+  version = "4.6.0"
 
   bucket = module.log_bucket.s3_bucket_id
 

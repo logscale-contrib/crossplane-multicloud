@@ -80,7 +80,7 @@ spec:
         manager: strimziAccessOperator
         serviceBindingSecret: partition-logscale-user-access
         prefixEnable: true
-        topicPrefix: ${logscale_namespace}-logscale-${kafka_prefix}
+        topicPrefix: ${logscale_namespace}-${kafka_prefix}
         extraConfigCommon:
           # receive.buffer.bytes=65536 is the default use -1 to set to OS max
           receive.buffer.bytes: -1

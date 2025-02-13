@@ -39,7 +39,7 @@ spec:
     logscale:
       image:
         repository: "humio/humio-core"
-        tag: "1.165.1"
+        tag: "1.175.0"
       drMode: bootstrap
       buckets:
         type: none

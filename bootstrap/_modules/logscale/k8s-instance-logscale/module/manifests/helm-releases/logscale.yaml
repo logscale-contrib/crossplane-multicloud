@@ -76,6 +76,7 @@ spec:
       extraENV:
         - name: HUMIO_OPTS
           value: -Djava.security.manager=allow
+      trustManagerConfigMap: cluster-trust-bundle
       kafka:
         manager: strimziAccessOperator
         serviceBindingSecret: partition-logscale-user-access

@@ -73,6 +73,9 @@ spec:
         resources:
           requests:
             storage: 10Gi
+      extraENV:
+        - name: HUMIO_OPTS
+          value: -Djava.security.manager=allow
       kafka:
         manager: strimziAccessOperator
         serviceBindingSecret: partition-logscale-user-access

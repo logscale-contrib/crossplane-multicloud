@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: logscale
-      version: 7.1.0-next.26
+      version: 7.1.0-next.27
       sourceRef:
         kind: HelmRepository
         name: logscale-contrib-ls
@@ -78,7 +78,7 @@ spec:
           value: -Djava.security.manager=allow
       trustManagerConfigMap: cluster-trust-bundle
       kafka:
-        manager: strimziAccessOperator
+        manager: external
         serviceBindingSecret: partition-logscale-user-access
         prefixEnable: true
         topicPrefix: ${logscale_namespace}-${kafka_prefix}

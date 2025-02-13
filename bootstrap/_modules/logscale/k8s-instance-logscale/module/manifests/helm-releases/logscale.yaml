@@ -48,7 +48,7 @@ spec:
       fqdn: logscale.partition.${logscale_namespace}.pub.logsr.life
       fqdnInputs: logscale-ingest.partition.${logscale_namespace}.pub.logsr.life
 
-      existingLicenseSecretName: loggscale-license-tmp
+      existingLicenseSecretName: logscale-license-tmp
       # extraVolumes:
       #   - name: logscale-license
       #     csi:

@@ -38,9 +38,10 @@ data "kubectl_file_documents" "logscale" {
   })
 }
 
+
 resource "kubectl_manifest" "logscale" {
   for_each = data.kubectl_file_documents.logscale.manifests
-  yaml_body = merge(each.value,
+  yaml_body = merge([each.value,
     {
       values = {
         logscale = {
@@ -50,5 +51,5 @@ resource "kubectl_manifest" "logscale" {
         }
       }
     }
-  )
+  ])
 }

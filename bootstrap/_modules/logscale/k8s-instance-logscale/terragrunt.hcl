@@ -44,7 +44,7 @@ dependency "kafka-instance" {
 }
 
 dependency "infra-logscale" {
-  config_path = "${get_terragrunt_dir()}/../eks-shared-logscale/"
+  config_path = "${get_terragrunt_dir()}/../eks-partition-logscale/"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

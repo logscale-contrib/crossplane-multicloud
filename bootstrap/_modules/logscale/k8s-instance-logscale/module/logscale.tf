@@ -39,9 +39,12 @@ data "kubectl_file_documents" "logscale" {
 }
 
 
-resource "kubectl_manifest" "logscale" {
+module "logscale_values" {
+  source  = "cloudposse/config/yaml//modules/deepmerge"
+  version = "0.2.0"
+
   for_each = data.kubectl_file_documents.logscale.manifests
-  yaml_body = yamlencode(merge(yamldecode(each.value),
+  maps = yamlencode(merge(yamldecode(each.value),
     {
       spec = { values = {
         logscale = {
@@ -52,4 +55,10 @@ resource "kubectl_manifest" "logscale" {
       }
     }
   ))
+
+}
+
+resource "kubectl_manifest" "logscale" {
+  for_each  = module.logscale_values.maps
+  yaml_body = each.value
 }

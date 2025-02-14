@@ -44,7 +44,8 @@ module "logscale_values" {
   version = "1.0.2"
 
   for_each = data.kubectl_file_documents.logscale.manifests
-  maps = yamlencode(merge(yamldecode(each.value),
+  maps = [
+    yamldecode(each.value),
     {
       spec = { values = {
         logscale = {
@@ -54,8 +55,7 @@ module "logscale_values" {
         } }
       }
     }
-  ))
-
+  ]
 }
 
 resource "kubectl_manifest" "logscale" {

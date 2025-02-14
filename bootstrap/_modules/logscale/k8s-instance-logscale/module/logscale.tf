@@ -43,12 +43,12 @@ resource "kubectl_manifest" "logscale" {
   for_each = data.kubectl_file_documents.logscale.manifests
   yaml_body = yamlencode(merge(yamldecode(each.value),
     {
-      values = {
+      values = { spec = {
         logscale = {
           serviceAccount = {
             annotations = var.logscale_service_account_annotations
           }
-        }
+        } }
       }
     }
   ))

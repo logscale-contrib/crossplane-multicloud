@@ -45,8 +45,8 @@ spec:
         type: none
       auth:
         method: single-user
-      fqdn: logscale.partition.${logscale_namespace}.pub.logsr.life
-      fqdnInputs: logscale-ingest.partition.${logscale_namespace}.pub.logsr.life
+      fqdn: logscale.${logscale_name}.pub.logsr.life
+      fqdnInputs: logscale-ingest.${logscale_name}.pub.logsr.life
 
       existingLicenseSecretName: logscale-license-tmp
       # extraVolumes:

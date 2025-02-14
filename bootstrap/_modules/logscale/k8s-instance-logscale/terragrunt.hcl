@@ -52,5 +52,6 @@ inputs = {
   cluster_name       = dependency.kubernetes_cluster.outputs.cluster_name
   kafka_namespace    = dependency.kafka-instance.outputs.kafka_namespace
   kafka_name         = dependency.kafka-instance.outputs.kafka_name
+  logscale_name      = local.nameSlug
   logscale_namespace = "${local.nameSlug}-logscale"
 }

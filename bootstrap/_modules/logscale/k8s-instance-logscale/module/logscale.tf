@@ -58,7 +58,10 @@ module "logscale_values" {
   ]
 }
 
-resource "kubectl_manifest" "logscale" {
-  for_each  = module.logscale_values.merged
-  yaml_body = yamlencode(each.value)
+output "merged" {
+  value = module.logscale_values.merged
 }
+# resource "kubectl_manifest" "logscale" {
+#   for_each  = module.logscale_values.output.merged
+#   yaml_body = yamlencode(each.value)
+# }

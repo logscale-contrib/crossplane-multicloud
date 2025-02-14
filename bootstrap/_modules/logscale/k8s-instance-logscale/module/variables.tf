@@ -18,7 +18,7 @@ variable "logscale_service_account_name" {
 }
 
 variable "logscale_service_account_annotations" {
-  type    = object(any)
+  type    = map(string)
   default = {}
 }
 

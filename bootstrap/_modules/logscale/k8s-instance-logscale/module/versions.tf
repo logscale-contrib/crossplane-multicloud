@@ -26,5 +26,9 @@ terraform {
       source  = "RutledgePaulV/counters"
       version = "0.0.5"
     }
+    merge = {
+      source = "ryanfaircloth/merge"
+      version = "0.1.8"
+    }
   }
 }

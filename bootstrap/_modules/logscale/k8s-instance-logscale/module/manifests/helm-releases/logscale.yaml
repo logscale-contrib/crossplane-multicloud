@@ -41,6 +41,10 @@ spec:
         repository: "humio/humio-core"
         tag: "1.175.0"
       drMode: bootstrap
+
+      # serviceAccount:
+      #   annotations:
+
       buckets:
         type: none
       auth:

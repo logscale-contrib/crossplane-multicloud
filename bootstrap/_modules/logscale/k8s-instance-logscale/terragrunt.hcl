@@ -43,6 +43,10 @@ dependency "kafka-instance" {
   config_path = "${get_terragrunt_dir()}/../k8s-shared-kafka/"
 }
 
+dependency "infra-logscale" {
+  config_path = "${get_terragrunt_dir()}/../eks-shared-kafka/"
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
 # These are the variables we have to pass in to use the module. This defines the parameters that are common across all
@@ -54,4 +58,7 @@ inputs = {
   kafka_name         = dependency.kafka-instance.outputs.kafka_name
   logscale_name      = local.nameSlug
   logscale_namespace = "${local.nameSlug}-logscale"
+
+  logscale_service_account_name        = dependency.infra-logscale.outputs.logscale_account
+  logscale_service_account_annotations = dependency.infra-logscale.outputs.logscale_account_annotations
 }

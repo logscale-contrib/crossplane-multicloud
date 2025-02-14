@@ -11,6 +11,17 @@ variable "logscale_namespace" {
 
 }
 
+variable "logscale_service_account_name" {
+  type        = string
+  description = "(optional) describe your variable"
+  default     = "logscale"
+}
+
+variable "logscale_service_account_annotations" {
+  type    = object()
+  default = {}
+}
+
 variable "kafka_name" {
   type        = string
   description = "(optional) describe your variable"

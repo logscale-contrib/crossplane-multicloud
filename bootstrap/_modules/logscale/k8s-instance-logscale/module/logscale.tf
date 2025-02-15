@@ -38,53 +38,29 @@ data "kubectl_file_documents" "logscale" {
   })
 }
 
-
-data "merge_merge" "logscale" {
-
-  input {
-    format = "yaml"
-    data   = yamldecode(data.kubectl_file_documents.logscale.manifests[0])
-  }
-
-  input {
-    format = "yaml"
-    data = yamlencode({
-      spec = { values = {
-        logscale = {
-          serviceAccount = {
-            annotations = var.logscale_service_account_annotations
-          }
+locals {
+  logscale_template = yamldecode(values(data.kubectl_file_documents.logscale.manifests)[0])
+  logscale_service_account_annotations = {
+    spec = { values = {
+      logscale = {
+        serviceAccount = {
+          annotations = var.logscale_service_account_annotations
         }
-      } }
-    })
+      }
+    } }
   }
-
-  output_format = "yaml"
 }
 
-# module "logscale_values" {
-#   source  = "cloudposse/config/yaml//modules/deepmerge"
-#   version = "1.0.2"
+module "logscale_values" {
+  source  = "cloudposse/config/yaml//modules/deepmerge"
+  version = "1.0.2"
 
-#   for_each = data.kubectl_file_documents.logscale.manifests
-#   maps = [
-#     yamldecode(each.value),
-#     {
-#       spec = { values = {
-#         logscale = {
-#           serviceAccount = {
-#             annotations = var.logscale_service_account_annotations
-#           }
-#         }
-#       } }
-#     }
-#   ]
-# }
+  maps = [
+    local.logscale_template,
+    local.logscale_service_account_annotations
+  ]
+}
 
-# output "merged" {
-#   value = module.logscale_values.merged
-# }
 resource "kubectl_manifest" "logscale" {
-  for_each  = data.merge_merge.logscale.output
-  yaml_body = yamlencode(data.merge_merge.logscale[each.key].output)
+  yaml_body = yamlencode(module.logscale_values.merged)
 }

@@ -87,5 +87,5 @@ data "merge_merge" "logscale" {
 # }
 resource "kubectl_manifest" "logscale" {
   for_each  = data.merge_merge.logscale.output
-  yaml_body = yamlencode(each.value)
+  yaml_body = yamlencode(data.merge_merge.logscale[each.key].output)
 }

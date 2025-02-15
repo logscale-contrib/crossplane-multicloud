@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: logscale
-      version: 7.1.0-next.27
+      version: 8.0.0-next.1
       sourceRef:
         kind: HelmRepository
         name: logscale-contrib-ls
@@ -38,7 +38,8 @@ spec:
 
     logscale:
       image:
-        repository: "humio/humio-core"
+        registry: "humio"
+        repository: "humio-core"
         tag: "1.175.0"
       drMode: bootstrap
 
@@ -64,13 +65,7 @@ spec:
       #   - name: logscale-license
       #     mountPath: "/mnt/logscale-license/logscale-license"
       #     readOnly: true
-      resources:
-        limits:
-          cpu: "2"
-          memory: 8Gi
-        requests:
-          cpu: "1"
-          memory: 2Gi
+
       dataVolumePersistentVolumeClaimSpecTemplate:
         storageClassName: cluster-block-base-ext4
         accessModes: [ReadWriteOnce]
@@ -97,6 +92,20 @@ spec:
           # linger.ms with high partition counts and sharding this small delay allows for optimal batch sizing
           # under high loads it will have no effect
           linger.ms: 5
+
+    nodePools:
+      - name: api
+        replicas: 1
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 500m
+          limits:
+            memory: 2Gi
+            cpu: 1
+        service:
+          type: ClusterIP
+
     setroot:
       enabled: false
     setDynamic:

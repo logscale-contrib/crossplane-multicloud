@@ -40,11 +40,10 @@ data "kubectl_file_documents" "logscale" {
 
 
 data "merge_merge" "logscale" {
-  for_each = data.kubectl_file_documents.logscale.manifests
 
   input {
     format = "yaml"
-    data   = yamldecode(each.value)
+    data   = yamldecode(data.kubectl_file_documents.logscale.manifests[0])
   }
 
   input {

@@ -44,6 +44,7 @@ locals {
     spec = { values = {
       logscale = {
         serviceAccount = {
+          name        = var.logscale_service_account_name
           annotations = var.logscale_service_account_annotations
         }
       }

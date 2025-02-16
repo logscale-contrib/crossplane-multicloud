@@ -9,19 +9,19 @@ data "aws_secretsmanager_secret" "secret-token" {
   name = var.authentik_token_ssm_name
 }
 data "aws_secretsmanager_secret_version" "secret-token" {
-  secret_id     = data.aws_secretsmanager_secret.secret-token.id
+  secret_id = data.aws_secretsmanager_secret.secret-token.id
 }
 
 data "authentik_flow" "default-authorization-flow" {
   slug = "default-provider-authorization-implicit-consent"
 }
 
-data "authentik_certificate_key_pair" "generated" {
-  name              = "authentik Self-signed Certificate"
-  fetch_certificate = true
-  fetch_key         = false
+# data "authentik_certificate_key_pair" "generated" {
+#   name              = "authentik Self-signed Certificate"
+#   fetch_certificate = true
+#   fetch_key         = false
 
-}
+# }
 
 data "authentik_property_mapping_provider_saml" "this" {
   managed_list = [
@@ -48,7 +48,8 @@ resource "authentik_provider_saml" "this" {
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   acs_url            = "https://${local.fqdn}/api/v1/saml/acs"
   sp_binding         = "post"
-  signing_kp         = data.authentik_certificate_key_pair.generated.id
+  signing_kp         = authentik_certificate_key_pair.saml.id
+  # signing_kp         = data.authentik_certificate_key_pair.generated.id
 
   audience          = "https://${local.fqdn}/api/v1/saml/metadata"
   property_mappings = data.authentik_property_mapping_provider_saml.this.ids

@@ -14,10 +14,11 @@ variable "from_email" {
 }
 
 variable "users" {
-  type        = map(object({
-    name  = string
-    username = string
-    email = string
+  type = map(object({
+    name      = string
+    email     = string
+    type      = string
+    is_active = bool
   }))
   description = "(optional) describe your variable"
 }

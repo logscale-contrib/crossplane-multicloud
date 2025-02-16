@@ -18,7 +18,7 @@ output "url" {
 }
 
 output "signing_certificate" {
-  value = data.authentik_certificate_key_pair.generated.certificate_data
+  value = resource.tls_self_signed_cert.saml.public_key_pem
 }
 
 output "issuer" {

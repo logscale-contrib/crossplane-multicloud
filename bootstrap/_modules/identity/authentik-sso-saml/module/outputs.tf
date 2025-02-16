@@ -25,7 +25,7 @@ output "issuer" {
   value = resource.authentik_provider_saml.this.issuer
 }
 
-output "scim_token" {
-  value     = random_password.scim.result
-  sensitive = true
-}
+# output "scim_token" {
+#   value     = random_password.scim.result
+#   sensitive = true
+# }

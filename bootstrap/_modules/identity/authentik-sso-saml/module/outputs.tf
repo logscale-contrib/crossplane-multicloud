@@ -18,7 +18,7 @@ output "url" {
 }
 
 output "signing_certificate" {
-  value = resource.tls_self_signed_cert.saml.public_key_pem
+  value = tls_self_signed_cert.cert.cert_pem
 }
 
 output "issuer" {

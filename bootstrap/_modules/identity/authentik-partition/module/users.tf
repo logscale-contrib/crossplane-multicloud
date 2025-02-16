@@ -4,6 +4,6 @@ resource "authentik_user" "name" {
   email     = each.value.email
   type      = each.value.type
   username  = each.key
-  is_active = each.value
+  is_active = each.value.is_active
   # groups   = [authentik_group.group.id]
 }

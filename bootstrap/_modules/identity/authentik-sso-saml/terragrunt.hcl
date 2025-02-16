@@ -24,7 +24,8 @@ locals {
   tenant    = yamldecode(file(find_in_parent_folders("tenant.yaml")))
 
   currentDir = get_terragrunt_dir()
-  nameSlug   = regex("^[^-]+-(.*)-[^-]$", basename(local.currentDir))[0]
+  tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
+  appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
 
 }
 
@@ -47,13 +48,13 @@ dependency "authentik-partition" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
   admin_email = local.partition.logscale.rootUser
-  app_name    = local.nameSlug
+  app_name    = local.appName
   token       = dependency.authentik.outputs.admin_token
   url         = dependency.authentik.outputs.url
 
   domain_name = dependency.dns_partition.outputs.zone_name
-  host_prefix = local.nameSlug
-  tenant      = local.tenant.name
+  host_prefix = local.tenantName
+  tenant      = local.tenant
 
   # management-cluster      = local.tenant.logscale.management-cluster
   # management-organization = local.tenant.logscale.management-organization

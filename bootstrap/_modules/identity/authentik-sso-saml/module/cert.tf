@@ -1,11 +1,11 @@
-resource "tls_private_key" "pair" {
+resource "tls_private_key" "kp" {
   algorithm   = "ECDSA"
   ecdsa_curve = "P384"
 }
 
 resource "tls_self_signed_cert" "cert" {
   key_algorithm   = "ECDSA"
-  private_key_pem = tls_private_key.pair.private_key_pem
+  private_key_pem = tls_private_key.kp.private_key_pem
 
   subject {
     common_name  = "${var.app_name} SAML Self Signed"

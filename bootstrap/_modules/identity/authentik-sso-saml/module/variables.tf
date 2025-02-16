@@ -12,7 +12,7 @@ variable "url" {
   type        = string
   description = "(optional) describe your variable"
 }
-variable "token" {
+variable "authentik_token_ssm_name" {
   type        = string
   description = "(optional) describe your variable"
 }

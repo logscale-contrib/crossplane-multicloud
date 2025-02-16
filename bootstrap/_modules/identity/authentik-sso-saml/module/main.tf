@@ -5,6 +5,13 @@ locals {
 }
 
 
+data "aws_secretsmanager_secret" "secret-token" {
+  name = var.authentik_token_ssm_name
+}
+data "aws_secretsmanager_secret_version" "secret-token" {
+  secret_id     = data.aws_secretsmanager_secret.secret-token.id
+}
+
 data "authentik_flow" "default-authorization-flow" {
   slug = "default-provider-authorization-implicit-consent"
 }

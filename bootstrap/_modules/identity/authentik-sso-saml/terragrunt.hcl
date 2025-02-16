@@ -41,16 +41,17 @@ dependency "authentik-partition" {
   skip_outputs = true
 }
 
+
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
 # These are the variables we have to pass in to use the module. This defines the parameters that are common across all
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  admin_email = local.partition.logscale.rootUser
-  app_name    = local.appName
-  token       = dependency.authentik.outputs.admin_token
-  url         = dependency.authentik.outputs.url
+  admin_email              = local.partition.logscale.rootUser
+  app_name                 = local.appName
+  authentik_token_ssm_name = dependency.authentik.outputs.authentik_token_ssm_name
+  url                      = dependency.authentik.outputs.url
 
   domain_name = dependency.dns_partition.outputs.zone_name
   host_prefix = local.tenantName

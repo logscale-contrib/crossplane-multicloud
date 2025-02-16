@@ -3,4 +3,4 @@ shared:
     name: aws
     region: green
 logscale:
-  mode: bootrap
+  mode: bootstrap

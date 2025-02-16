@@ -1,7 +1,7 @@
 
 provider "authentik" {
   url   = var.url
-  token = var.token
+  token = data.aws_secretsmanager_secret_version.secret-token.secret_string
 }
 
 
@@ -9,6 +9,10 @@ terraform {
   required_version = ">= 1.0"
 
   required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.87.0"
+    }
     authentik = {
       source  = "goauthentik/authentik"
       version = "2024.12.1"

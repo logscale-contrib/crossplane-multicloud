@@ -45,6 +45,7 @@ locals {
       logscale = {
         serviceAccount = {
           name        = var.logscale_service_account_name
+          create      = true
           annotations = var.logscale_service_account_annotations
         }
       }

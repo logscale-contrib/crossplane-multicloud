@@ -37,8 +37,7 @@ dependency "authentik" {
   config_path = "${get_terragrunt_dir()}/../../../../partition/authentik/"
 }
 dependency "authentik-partition" {
-  config_path  = "${get_terragrunt_dir()}/../../../../partition/authentik-partition/"
-  skip_outputs = true
+  config_path = "${get_terragrunt_dir()}/../../../../partition/authentik-partition/"
 }
 
 
@@ -51,7 +50,7 @@ inputs = {
   admin_email              = local.partition.logscale.rootUser
   app_name                 = local.appName
   authentik_token_ssm_name = dependency.authentik.outputs.authentik_token_ssm_name
-  url                      = dependency.authentik.outputs.url
+  url                      = dependency.authentik-partition.outputs.url
 
   domain_name = dependency.dns_partition.outputs.zone_name
   host_prefix = local.tenantName

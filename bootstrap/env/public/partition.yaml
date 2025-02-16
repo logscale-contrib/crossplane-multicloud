@@ -92,10 +92,16 @@ shared:
         backup: false
         replicaPrimary: green
         replicaSource: green
-sso:
+    managedUsers:
+      lsadmin@pub.logsr.life:
+        name: Logscale Admin
+        email: lsadmin@pub.logsr.life
+        type: internal
+        is_active: true
+
+logscale:
+  rootUser: lsadmin@pub.logsr.life
   managedUsers:
     lsadmin@pub.logsr.life:
       name: Logscale Admin
       email: lsadmin@pub.logsr.life
-      type: internal
-      is_active: true

@@ -41,5 +41,5 @@ inputs = {
   host        = "sso"
   from_email  = "NoReplyIdentityServices@${dependency.partition_zone.outputs.zone_name}"
 
-  users = local.partition.sso.managedUsers
+  users = local.partition.shared.sso.managedUsers
 }

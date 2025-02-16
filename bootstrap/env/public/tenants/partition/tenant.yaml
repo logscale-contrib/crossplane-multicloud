@@ -1,0 +1,6 @@
+shared:
+  provider:
+    name: aws
+    region: green
+logscale:
+  mode: bootrap

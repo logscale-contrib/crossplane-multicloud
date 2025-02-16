@@ -30,14 +30,14 @@ locals {
 }
 
 dependency "dns_partition" {
-  config_path = "${get_terragrunt_dir()}/../../../dns/"
+  config_path = "${get_terragrunt_dir()}/../../../../dns/"
 }
 
 dependency "authentik" {
-  config_path = "${get_terragrunt_dir()}/../../../partition/authentik/"
+  config_path = "${get_terragrunt_dir()}/../../../../partition/authentik/"
 }
 dependency "authentik-partition" {
-  config_path  = "${get_terragrunt_dir()}/../../../partition/authentik-partition/"
+  config_path  = "${get_terragrunt_dir()}/../../../../partition/authentik-partition/"
   skip_outputs = true
 }
 

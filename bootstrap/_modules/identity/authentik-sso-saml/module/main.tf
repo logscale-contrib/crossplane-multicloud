@@ -35,22 +35,22 @@ data "authentik_flow" "default-provider-invalidation-flow" {
   slug = "default-provider-invalidation-flow"
 }
 
-data "authentik_certificate_key_pair" "generated" {
-  name              = authentik_certificate_key_pair.saml.name
-  fetch_certificate = true
-  fetch_key         = false
-}
+# data "authentik_certificate_key_pair" "generated" {
+#   name              = authentik_certificate_key_pair.saml.name
+#   fetch_certificate = true
+#   fetch_key         = false
+# }
 
 resource "authentik_provider_saml" "this" {
   name = "${local.namespace}-saml"
 
-  issuer = "sso.${var.domain_name}"
+  # issuer = "sso.${var.domain_name}"
 
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   acs_url            = "https://${local.fqdn}/api/v1/saml/acs"
   sp_binding         = "post"
-  # signing_kp         = authentik_certificate_key_pair.saml.id
-  signing_kp = data.authentik_certificate_key_pair.generated.id
+  signing_kp         = authentik_certificate_key_pair.saml.id
+  # signing_kp = data.authentik_certificate_key_pair.generated.id
 
   audience          = "https://${local.fqdn}/api/v1/saml/metadata"
   property_mappings = data.authentik_property_mapping_provider_saml.this.ids

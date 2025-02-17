@@ -16,18 +16,18 @@
 
 
 # resource "authentik_group" "management-cluster" {
-#   name       = "${var.tenant}-${var.appName}-management-cluster"
-#   attributes = "{\"tenant\": \"${var.tenant}\", \"app\": \"${var.appName}\", \"LogScaleIsRoot\": true}"
+#   name       = "${var.tenantName}-${var.appName}-management-cluster"
+#   attributes = "{\"tenant\": \"${var.tenantName}\", \"app\": \"${var.appName}\", \"LogScaleIsRoot\": true}"
 #   users      = [for u in data.authentik_user.management-cluster : u.id]
 # }
 # resource "authentik_group" "management-organization" {
-#   name       = "${var.tenant}-${var.appName}-management-organization"
-#   attributes = "{\"tenant\": \"${var.tenant}\", \"app\": \"${var.appName}\", \"LogScaleIsRoot\": true}"
+#   name       = "${var.tenantName}-${var.appName}-management-organization"
+#   attributes = "{\"tenant\": \"${var.tenantName}\", \"app\": \"${var.appName}\", \"LogScaleIsRoot\": true}"
 #   users      = [for u in data.authentik_user.management-organization : u.id]
 # }
 
 # resource "authentik_group" "users" {
-#   name       = "${var.tenant}-${var.appName}-users"
-#   attributes = "{\"tenant\": \"${var.tenant}\", \"app\": \"${var.appName}\"}"
+#   name       = "${var.tenantName}-${var.appName}-users"
+#   attributes = "{\"tenant\": \"${var.tenantName}\", \"app\": \"${var.appName}\"}"
 #   users      = [for u in data.authentik_user.users : u.id]
 # }

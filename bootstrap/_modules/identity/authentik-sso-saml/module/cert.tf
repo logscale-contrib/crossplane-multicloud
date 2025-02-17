@@ -22,7 +22,7 @@ resource "tls_self_signed_cert" "cert" {
 }
 
 resource "authentik_certificate_key_pair" "saml" {
-  name             = "${var.tenant}-${var.appName} Self-signed SAML Certificate"
+  name             = "${var.tenantName}-${var.appName} Self-signed SAML Certificate"
   certificate_data = tls_self_signed_cert.cert.cert_pem
   key_data         = tls_private_key.kp.private_key_pem
 }

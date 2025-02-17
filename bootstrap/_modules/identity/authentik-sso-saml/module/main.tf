@@ -65,9 +65,9 @@ resource "random_uuid" "slug" {
 }
 
 resource "authentik_application" "name" {
-  name              = "${var.tenant}-${var.appName}"
+  name              = "${var.tenantName}-${var.appName}"
   slug              = resource.random_uuid.slug.result
-  group             = var.tenant
+  group             = var.tenantName
   protocol_provider = authentik_provider_saml.this.id
   # backchannel_providers = [
   #   authentik_provider_scim.logscale.id

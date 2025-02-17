@@ -48,7 +48,8 @@ dependency "authentik-partition" {
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
   admin_email              = local.partition.logscale.rootUser
-  app_name                 = local.appName
+  appName                  = local.appName
+  tenantName               = local.tenantName
   authentik_token_ssm_name = dependency.authentik.outputs.authentik_token_ssm_name
   url                      = dependency.authentik-partition.outputs.url
 

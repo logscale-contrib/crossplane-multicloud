@@ -16,11 +16,13 @@ variable "authentik_token_ssm_name" {
   type        = string
   description = "(optional) describe your variable"
 }
-variable "app_name" {
+variable "appName" {
   type        = string
   description = "(optional) describe your variable"
 }
+variable "tenantName" {
 
+}
 # variable "management-cluster" {
 #   type        = list(string)
 #   description = "(optional) describe your variable"

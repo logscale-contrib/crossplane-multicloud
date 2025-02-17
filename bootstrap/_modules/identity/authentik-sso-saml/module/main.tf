@@ -36,7 +36,6 @@ data "authentik_flow" "default-provider-invalidation-flow" {
 }
 
 data "authentik_certificate_key_pair" "generated" {
-  depends_on        = [authentik_certificate_key_pair.saml.id]
   name              = authentik_certificate_key_pair.saml.name
   fetch_certificate = true
   fetch_key         = false

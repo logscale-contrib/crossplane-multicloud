@@ -69,6 +69,7 @@ resource "authentik_application" "name" {
   slug              = resource.random_uuid.slug.result
   group             = var.tenantName
   protocol_provider = authentik_provider_saml.this.id
+  issuer = "https://sso.${var.domain_name}"
   # backchannel_providers = [
   #   authentik_provider_scim.logscale.id
   # ]

@@ -16,13 +16,6 @@ data "authentik_flow" "default-authorization-flow" {
   slug = "default-provider-authorization-implicit-consent"
 }
 
-# data "authentik_certificate_key_pair" "generated" {
-#   name              = "authentik Self-signed Certificate"
-#   fetch_certificate = true
-#   fetch_key         = false
-
-# }
-
 data "authentik_property_mapping_provider_saml" "this" {
   managed_list = [
     "goauthentik.io/providers/saml/email",
@@ -45,6 +38,9 @@ data "authentik_flow" "default-provider-invalidation-flow" {
 
 resource "authentik_provider_saml" "this" {
   name               = "${local.namespace}-saml"
+
+  issuer = "sso.${var.domain_name}"
+
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   acs_url            = "https://${local.fqdn}/api/v1/saml/acs"
   sp_binding         = "post"
@@ -69,7 +65,6 @@ resource "authentik_application" "name" {
   slug              = resource.random_uuid.slug.result
   group             = var.tenantName
   protocol_provider = authentik_provider_saml.this.id
-  issuer = "https://sso.${var.domain_name}"
   # backchannel_providers = [
   #   authentik_provider_scim.logscale.id
   # ]

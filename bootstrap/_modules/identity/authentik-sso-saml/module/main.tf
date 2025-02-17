@@ -44,7 +44,7 @@ data "authentik_flow" "default-provider-invalidation-flow" {
 resource "authentik_provider_saml" "this" {
   name = "${local.namespace}-saml"
 
-  # issuer = "sso.${var.domain_name}"
+  issuer = "https://sso.${var.domain_name}/source/saml/${resource.random_uuid.slug.result}"
 
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   acs_url            = "https://${local.fqdn}/api/v1/saml/acs"

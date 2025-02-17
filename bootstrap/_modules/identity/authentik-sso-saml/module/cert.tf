@@ -10,7 +10,7 @@ resource "tls_self_signed_cert" "cert" {
   private_key_pem = tls_private_key.kp.private_key_pem
 
   subject {
-    common_name  = "${var.appName} SAML Self Signed"
+    common_name  = "${var.tenantName}-${var.appName} SAML Self Signed"
     organization = var.domain_name
   }
 

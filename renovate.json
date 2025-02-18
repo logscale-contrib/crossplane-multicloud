@@ -8,5 +8,8 @@
     "fileMatch": [
       "[^\\/]+\\/.*\\.yaml$"
     ]
+  },
+  "digest": {
+    "masterIssueApproval": true
   }
 }

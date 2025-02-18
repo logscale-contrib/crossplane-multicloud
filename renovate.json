@@ -10,6 +10,6 @@
     ]
   },
   "digest": {
-    "masterIssueApproval": true
+    "dependencyDashboardApproval": true
   }
 }

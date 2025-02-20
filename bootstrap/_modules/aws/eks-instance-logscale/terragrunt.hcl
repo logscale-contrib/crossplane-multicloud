@@ -29,10 +29,10 @@ locals {
 }
 
 dependency "kubernetes_cluster" {
-  config_path = "${get_terragrunt_dir()}/../eks/"
+  config_path = "${get_terragrunt_dir()}/../../../../eks/"
 }
 dependency "bucket" {
-  config_path = "${get_terragrunt_dir()}/../bucket-data-dr/"
+  config_path = "${get_terragrunt_dir()}/../../../../bucket-data-dr/"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

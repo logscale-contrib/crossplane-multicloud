@@ -22,7 +22,10 @@ terraform {
 locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
   currentDir = get_terragrunt_dir()
-  nameSlug   = regex("^[^-]+-(.*)-[^-]+$", basename(local.currentDir))[0]
+
+  tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
+  appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
+
 }
 
 dependency "kubernetes_cluster" {
@@ -50,8 +53,8 @@ inputs = {
   data_bucket_arn = dependency.bucket.outputs.bucket_arn
   data_bucket_id  = dependency.bucket.outputs.bucket_id
 
-  bucket_prefix = local.nameSlug
+  bucket_prefix = local.tenantName
 
-  logscale_namespace = "${local.nameSlug}-logscale"
+  logscale_namespace = "${local.tenantName}-logscale"
 
 }

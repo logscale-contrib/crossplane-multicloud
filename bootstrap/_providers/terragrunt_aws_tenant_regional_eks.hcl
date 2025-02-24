@@ -7,7 +7,7 @@
 
 locals {
   partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = basename(dirname("${get_terragrunt_dir()}/../../../.."))
+  region    = basename(dirname("${get_terragrunt_dir()}/../../../../.."))
 }
 
 

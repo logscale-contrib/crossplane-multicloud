@@ -6,8 +6,11 @@
 
 
 locals {
-  partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = basename(dirname("${get_terragrunt_dir()}/../../../../.."))
+  partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
+  tenant  = yamldecode(file(find_in_parent_folders("tenant.yaml")))
+  currentDir = get_terragrunt_dir()
+  tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
+  appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
 }
 
 
@@ -76,6 +79,6 @@ EOF
 
 inputs = {
   provider_aws_tags             = local.partition.shared.provider.aws.tags
-  provider_aws_region           = local.partition.shared.provider.aws.regions[local.region].region
-  provider_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.region}-cp"
+  provider_aws_region           = local.partition.shared.provider.aws.regions[local.tenant.shared.provider.region].region
+  provider_aws_eks_cluster_name = "cloud-${local.partition.name}-${local.tenant.shared.provider.region}-cp"
 }

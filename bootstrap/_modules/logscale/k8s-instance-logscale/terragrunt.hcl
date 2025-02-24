@@ -21,31 +21,35 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region     = basename(dirname("${get_terragrunt_dir()}/../.."))
+  tenant  = yamldecode(file(find_in_parent_folders("tenant.yaml")))
   currentDir = get_terragrunt_dir()
-  nameSlug   = regex("^[^-]+-(.*)-[^-]$", basename(local.currentDir))[0]
+  tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
+  appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
+
+
 }
 
 dependency "kubernetes_cluster" {
-  config_path = "${get_terragrunt_dir()}/../eks/"
+  config_path = "${find_in_parent_folders("${local.tenant.shared.provider.name}/${local.tenant.shared.provider.region}")}/eks/"
 }
 dependency "kubernetes_cluster_cp_auth" {
-  config_path  = "${get_terragrunt_dir()}/../eks-cp-auth/"
-  skip_outputs = true
-}
-
-dependency "authentik-partition" {
-  config_path  = "${get_terragrunt_dir()}/../../../partition/authentik-partition/"
+  config_path  = "${find_in_parent_folders("${local.tenant.shared.provider.name}/${local.tenant.shared.provider.region}")}/eks-cp-auth/"
   skip_outputs = true
 }
 
 dependency "kafka-instance" {
-  config_path = "${get_terragrunt_dir()}/../k8s-shared-kafka/"
+  config_path = "${find_in_parent_folders("${local.tenant.shared.provider.name}/${local.tenant.shared.provider.region}")}/k8s-shared-kafka/"
 }
 
 dependency "infra-logscale" {
-  config_path = "${get_terragrunt_dir()}/../eks-partition-logscale/"
+  config_path = "${find_in_parent_folders("${local.tenant.shared.provider.name}/${local.tenant.shared.provider.region}")}/tenants/${local.tenantName}/logscale/instance/"
 }
+
+dependency "authentik-partition" {
+  config_path  = "${get_terragrunt_dir()}/../sso/"
+  skip_outputs = true
+}
+
 
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
@@ -56,8 +60,8 @@ inputs = {
   cluster_name       = dependency.kubernetes_cluster.outputs.cluster_name
   kafka_namespace    = dependency.kafka-instance.outputs.kafka_namespace
   kafka_name         = dependency.kafka-instance.outputs.kafka_name
-  logscale_name      = local.nameSlug
-  logscale_namespace = "${local.nameSlug}-logscale"
+  logscale_name      = local.tenantName
+  logscale_namespace = "${local.tenantName}-logscale"
 
   logscale_service_account_name        = dependency.infra-logscale.outputs.logscale_account
   logscale_service_account_annotations = dependency.infra-logscale.outputs.logscale_account_annotations

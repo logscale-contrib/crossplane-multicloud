@@ -52,13 +52,13 @@ jobs:
             tf:
               - '**/module/versions.tf'
 
-      - name: Cache terragrunt
-        id: cache-terragrunt
-        if: steps.changes.outputs.tf == 'true'
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
-          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
+      # - name: Cache terragrunt
+      #   id: cache-terragrunt
+      #   if: steps.changes.outputs.tf == 'true'
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+      #     key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
 
       - name: tg init-upgrade
         run: terragrunt run-all init -upgrade --terragrunt-non-interactive

@@ -44,12 +44,12 @@ jobs:
         uses: actions/checkout@main
 
 
-      - name: Cache terragrunt
-        id: cache-terragrunt
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
-          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
+      # - name: Cache terragrunt
+      #   id: cache-terragrunt
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+      #     key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
 
       - name: Deploy
         run: terragrunt run-all destroy --terragrunt-non-interactive

@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 env:
   tf_version: '1.10.2'
-  tg_version: '0.69.0'
+  tg_version: '0.73.14'
   working_dir: 'bootstrap/env/public'
   AWS_REGION: us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud

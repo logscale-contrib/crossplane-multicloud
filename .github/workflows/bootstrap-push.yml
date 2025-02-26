@@ -16,6 +16,7 @@ env:
   AWS_REGION: us-east-1
   AWS_ROLE: arn:aws:iam::042445652404:role/github-crossplane-multicloud
   TERRAGRUNT_DOWNLOAD: ${{ github.workspace }}/.terragrunt-cache
+  # TG_PROVIDER_CACHE_DIR: ${{ github.workspace }}/.terragrunt-provider-cache
 
 
 permissions:
@@ -61,7 +62,7 @@ jobs:
       #     key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
 
       - name: tg init-upgrade
-        run: terragrunt run-all init -upgrade --terragrunt-non-interactive
+        run: terragrunt run-all init -upgrade --terragrunt-non-interactive --provider-cache
         working-directory: ${{ env.working_dir }}
         if: steps.changes.outputs.tf == 'true'
         continue-on-error: true
@@ -88,13 +89,13 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@main
 
-      - name: Cache terragrunt
-        id: cache-terragrunt
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.TERRAGRUNT_DOWNLOAD }}
-          key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
+      # - name: Cache terragrunt
+      #   id: cache-terragrunt
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ${{ env.TERRAGRUNT_DOWNLOAD }}
+      #     key: ${{ runner.os }}-${{ runner.arch }}-terragrunt-${{ hashFiles('**/module/versions.tf') }}
 
       - name: Deploy
-        run: terragrunt run-all apply --terragrunt-non-interactive
+        run: terragrunt run-all apply --terragrunt-non-interactive --provider-cache
         working-directory: ${{ env.working_dir }}

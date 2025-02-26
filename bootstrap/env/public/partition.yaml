@@ -54,9 +54,9 @@ shared:
           kubernetes:
             node_groups:
               system:
-                min_size: 0
+                min_size: 6
                 max_size: 6
-                desired_size: 0
+                desired_size: 6
         blue:
           name: blue
           region: us-west-1
@@ -64,9 +64,9 @@ shared:
           kubernetes:
             node_groups:
               system:
-                min_size: 0
+                min_size: 6
                 max_size: 6
-                desired_size: 0
+                desired_size: 6
   sso:
     # sso should be disabled during a partition's primary deployment
     authentik:

@@ -61,7 +61,7 @@ jobs:
         with:
           terragrunt_version: ${{ env.tg_version }}
       - name: HashiCorp - Setup Terraform
-        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
+        uses: hashicorp/setup-terraform@e708d31c3d84ac0e520fa59e11a6c465913ebfc4
         with:
           terraform_version: ${{ env.tf_version }}
       - name: configure aws credentials

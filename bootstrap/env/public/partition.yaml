@@ -71,7 +71,7 @@ shared:
     # sso should be disabled during a partition's primary deployment
     authentik:
       green:
-        mode: disabled
+        mode: bootstrap
         name: green
       blue:
         mode: disabled

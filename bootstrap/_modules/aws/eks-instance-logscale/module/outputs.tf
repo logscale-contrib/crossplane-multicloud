@@ -18,7 +18,7 @@ output "logscale_buckets" {
   value = {
     type   = "aws"
     region = data.aws_region.current.name
-    id     = module.data-dr.s3_bucket_id
+    id     = var.data_bucket_id
     prefixes = {
       storage = "${local.bucket_prefix}/storage/"
       export  = "${local.bucket_prefix}/export/"

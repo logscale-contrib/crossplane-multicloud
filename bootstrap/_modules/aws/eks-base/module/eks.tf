@@ -117,7 +117,7 @@ module "eks" {
     }
     vpc-cni = {
       before_compute           = true
-      addon_version            = "v1.19.2-eksbuild.1"
+      addon_version            = "v1.19.3-eksbuild.1"
       service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
       configuration_values = jsonencode({
         env = {

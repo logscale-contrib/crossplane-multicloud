@@ -80,8 +80,8 @@ module "logscale_values" {
   maps = [
     local.logscale_template,
     local.logscale_service_account_annotations,
-    logscale_buckets,
-    logscale_buckets_prefixes
+    local.logscale_buckets,
+    local.logscale_buckets_prefixes
   ]
 }
 

@@ -103,8 +103,41 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
-          nodeSelector:
-            - kubernetes.io/arch: amd64
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                      - key: kubernetes.io/os
+                        operator: In
+                        values:
+                          - linux
+                      - key: karpenter.k8s.aws/instance-local-nvme
+                        operator: DoesNotExist
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: humio.com/node-pool
+                        operator: In
+                        values:
+                          - logscale-api
+                  topologyKey: kubernetes.io/hostname
+          topologySpreadConstraints:
+            - maxSkew: 2
+              minDomains: 2
+              whenUnsatisfiable: DoNotSchedule
+              topologyKey: topology.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                  - key: humio.com/node-pool
+                    operator: In
+                    values:
+                      - logscale-api
           dataVolumePersistentVolumeClaimSpecTemplate:
             accessModes:
               - ReadWriteOnce
@@ -123,8 +156,41 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
-          nodeSelector:
-            - kubernetes.io/arch: amd64
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                      - key: kubernetes.io/os
+                        operator: In
+                        values:
+                          - linux
+                      - key: karpenter.k8s.aws/instance-local-nvme
+                        operator: DoesNotExist
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: humio.com/node-pool
+                        operator: In
+                        values:
+                          - logscale-ui
+                  topologyKey: kubernetes.io/hostname
+          topologySpreadConstraints:
+            - maxSkew: 2
+              minDomains: 2
+              whenUnsatisfiable: DoNotSchedule
+              topologyKey: topology.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                  - key: humio.com/node-pool
+                    operator: In
+                    values:
+                      - logscale-ui
           dataVolumePersistentVolumeClaimSpecTemplate:
             accessModes:
               - ReadWriteOnce
@@ -143,8 +209,41 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
-          nodeSelector:
-            - kubernetes.io/arch: amd64
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                      - key: kubernetes.io/os
+                        operator: In
+                        values:
+                          - linux
+                      - key: karpenter.k8s.aws/instance-local-nvme
+                        operator: DoesNotExist
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: humio.com/node-pool
+                        operator: In
+                        values:
+                          - logscale-ingest
+                  topologyKey: kubernetes.io/hostname
+          topologySpreadConstraints:
+            - maxSkew: 2
+              minDomains: 2
+              whenUnsatisfiable: DoNotSchedule
+              topologyKey: topology.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                  - key: humio.com/node-pool
+                    operator: In
+                    values:
+                      - logscale-ingest
           dataVolumePersistentVolumeClaimSpecTemplate:
             accessModes:
               - ReadWriteOnce
@@ -154,7 +253,7 @@ spec:
             storageClassName: instancestore-nvme-ext4
           service:
             type: ClusterIP
-        - name: querycordinator
+        - name: query-coordinator
           replicas: 2
           resources:
             requests:
@@ -163,8 +262,41 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
-          nodeSelector:
-            - kubernetes.io/arch: amd64
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                      - key: kubernetes.io/os
+                        operator: In
+                        values:
+                          - linux
+                      - key: karpenter.k8s.aws/instance-local-nvme
+                        operator: DoesNotExist
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: humio.com/node-pool
+                        operator: In
+                        values:
+                          - logscale-query-coordinator
+                  topologyKey: kubernetes.io/hostname
+          topologySpreadConstraints:
+            - maxSkew: 2
+              minDomains: 2
+              whenUnsatisfiable: DoNotSchedule
+              topologyKey: topology.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                  - key: humio.com/node-pool
+                    operator: In
+                    values:
+                      - logscale-query-coordinator
           dataVolumePersistentVolumeClaimSpecTemplate:
             accessModes:
               - ReadWriteOnce
@@ -183,8 +315,41 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
-          nodeSelector:
-            - kubernetes.io/arch: amd64
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                      - key: kubernetes.io/os
+                        operator: In
+                        values:
+                          - linux
+                      - key: karpenter.k8s.aws/instance-local-nvme
+                        operator: Exists
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: humio.com/node-pool
+                        operator: In
+                        values:
+                          - logscale-segments
+                  topologyKey: kubernetes.io/hostname
+          topologySpreadConstraints:
+            - maxSkew: 2
+              minDomains: 2
+              whenUnsatisfiable: DoNotSchedule
+              topologyKey: topology.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                  - key: humio.com/node-pool
+                    operator: In
+                    values:
+                      - logscale-segments
           dataVolumePersistentVolumeClaimSpecTemplate:
             accessModes:
               - ReadWriteOnce

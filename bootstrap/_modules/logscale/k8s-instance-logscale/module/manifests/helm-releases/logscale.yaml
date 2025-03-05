@@ -66,12 +66,6 @@ spec:
       #     mountPath: "/mnt/logscale-license/logscale-license"
       #     readOnly: true
 
-      dataVolumePersistentVolumeClaimSpecTemplate:
-        storageClassName: cluster-block-base-ext4
-        accessModes: [ReadWriteOnce]
-        resources:
-          requests:
-            storage: 10Gi
       extraENV:
         - name: HUMIO_OPTS
           value: -Djava.security.manager=allow
@@ -144,7 +138,7 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: instancestore-nvme-ext4
+            storageClassName: cluster-block-base-ext4
           service:
             type: ClusterIP
         - name: ui
@@ -197,7 +191,7 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: instancestore-nvme-ext4
+            storageClassName: cluster-block-base-ext4
           service:
             type: ClusterIP
         - name: ingest
@@ -250,7 +244,7 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: instancestore-nvme-ext4
+            storageClassName: cluster-block-base-ext4
           service:
             type: ClusterIP
         - name: query-coordinator
@@ -303,7 +297,7 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: instancestore-nvme-ext4
+            storageClassName: cluster-block-base-ext4
           service:
             type: ClusterIP
         - name: segments

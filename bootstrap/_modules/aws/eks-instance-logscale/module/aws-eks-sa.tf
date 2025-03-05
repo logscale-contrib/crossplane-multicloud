@@ -1,6 +1,6 @@
 
 locals {
-  bucket_prefix = var.logscale_namespace == "partition" ? "partition/logscale" : "tenants/${var.logscale_namespace}/logscale"
+  bucket_prefix = var.logscale_namespace == "partition-logscale" ? "partition/logscale" : "tenants/${var.logscale_namespace}/logscale"
 }
 module "logscale_service_account" {
 

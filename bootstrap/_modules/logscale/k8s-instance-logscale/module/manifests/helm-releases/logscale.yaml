@@ -93,97 +93,97 @@ spec:
           # under high loads it will have no effect
           linger.ms: 5
 
-    nodePools:
-      - name: api
-        replicas: 2
-        resources:
-          requests:
-            memory: 4Gi
-            cpu: 500m
-          limits:
-            memory: 4Gi
-            cpu: 1
-        dataVolumePersistentVolumeClaimSpecTemplate:
-          accessModes:
-            - ReadWriteOnce
+      nodePools:
+        - name: api
+          replicas: 2
           resources:
             requests:
-              storage: 10Gi
-          storageClassName: instancestore-nvme-ext4
-        service:
-          type: ClusterIP
-      - name: ui
-        replicas: 2
-        resources:
-          requests:
-            memory: 4Gi
-            cpu: 500m
-          limits:
-            memory: 4Gi
-            cpu: 1
-        dataVolumePersistentVolumeClaimSpecTemplate:
-          accessModes:
-            - ReadWriteOnce
+              memory: 4Gi
+              cpu: 500m
+            limits:
+              memory: 4Gi
+              cpu: 1
+          dataVolumePersistentVolumeClaimSpecTemplate:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: instancestore-nvme-ext4
+          service:
+            type: ClusterIP
+        - name: ui
+          replicas: 2
           resources:
             requests:
-              storage: 10Gi
-          storageClassName: instancestore-nvme-ext4
-        service:
-          type: ClusterIP
-      - name: ingest
-        replicas: 3
-        resources:
-          requests:
-            memory: 4Gi
-            cpu: 500m
-          limits:
-            memory: 4Gi
-            cpu: 1
-        dataVolumePersistentVolumeClaimSpecTemplate:
-          accessModes:
-            - ReadWriteOnce
+              memory: 4Gi
+              cpu: 500m
+            limits:
+              memory: 4Gi
+              cpu: 1
+          dataVolumePersistentVolumeClaimSpecTemplate:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: instancestore-nvme-ext4
+          service:
+            type: ClusterIP
+        - name: ingest
+          replicas: 3
           resources:
             requests:
-              storage: 10Gi
-          storageClassName: instancestore-nvme-ext4
-        service:
-          type: ClusterIP
-      - name: querycordinator
-        replicas: 2
-        resources:
-          requests:
-            memory: 4Gi
-            cpu: 500m
-          limits:
-            memory: 4Gi
-            cpu: 1
-        dataVolumePersistentVolumeClaimSpecTemplate:
-          accessModes:
-            - ReadWriteOnce
+              memory: 4Gi
+              cpu: 500m
+            limits:
+              memory: 4Gi
+              cpu: 1
+          dataVolumePersistentVolumeClaimSpecTemplate:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: instancestore-nvme-ext4
+          service:
+            type: ClusterIP
+        - name: querycordinator
+          replicas: 2
           resources:
             requests:
-              storage: 10Gi
-          storageClassName: instancestore-nvme-ext4
-        service:
-          type: ClusterIP
-      - name: segments
-        replicas: 3
-        resources:
-          requests:
-            memory: 4Gi
-            cpu: 500m
-          limits:
-            memory: 4Gi
-            cpu: 1
-        dataVolumePersistentVolumeClaimSpecTemplate:
-          accessModes:
-            - ReadWriteOnce
+              memory: 4Gi
+              cpu: 500m
+            limits:
+              memory: 4Gi
+              cpu: 1
+          dataVolumePersistentVolumeClaimSpecTemplate:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: instancestore-nvme-ext4
+          service:
+            type: ClusterIP
+        - name: segments
+          replicas: 3
           resources:
             requests:
-              storage: 10Gi
-          storageClassName: instancestore-nvme-ext4
-        service:
-          type: ClusterIP
+              memory: 4Gi
+              cpu: 500m
+            limits:
+              memory: 4Gi
+              cpu: 1
+          dataVolumePersistentVolumeClaimSpecTemplate:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: instancestore-nvme-ext4
+          service:
+            type: ClusterIP
 
     setroot:
       enabled: false

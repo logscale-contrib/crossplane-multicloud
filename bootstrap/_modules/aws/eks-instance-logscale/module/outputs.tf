@@ -12,3 +12,17 @@ output "logscale_account_annotations" {
     "eks.amazonaws.com/role-arn" = module.logscale_service_account.iam_role_arn
   }
 }
+
+data "aws_region" "current" {}
+output "logscale_buckets" {
+  value = {
+    type   = "aws"
+    region = data.aws_region.current.name
+    id     = module.data-dr.s3_bucket_id
+    prefixes = {
+      storage = "${local.bucket_prefix}/storage/"
+      export  = "${local.bucket_prefix}/export/"
+      archive = "${local.bucket_prefix}/archive/"
+    }
+  }
+}

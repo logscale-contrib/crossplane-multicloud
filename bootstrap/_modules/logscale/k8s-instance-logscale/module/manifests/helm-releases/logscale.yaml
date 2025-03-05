@@ -49,7 +49,7 @@ spec:
       buckets:
         type: none
       auth:
-        method: single-user
+        method: none
       fqdn: logscale.${logscale_name}.pub.logsr.life
       fqdnInputs: logscale-ingest.${logscale_name}.pub.logsr.life
 

@@ -65,5 +65,5 @@ inputs = {
   logscale_service_account_name        = dependency.infra-logscale.outputs.logscale_account
   logscale_service_account_annotations = dependency.infra-logscale.outputs.logscale_account_annotations
 
-  logscale_buckets = dependency.infra-logscale.outputs.outputs.logscale_buckets
+  logscale_buckets = dependency.infra-logscale.outputs.logscale_buckets
 }

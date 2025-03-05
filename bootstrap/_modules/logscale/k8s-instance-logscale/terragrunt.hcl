@@ -21,7 +21,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  tenant  = yamldecode(file(find_in_parent_folders("tenant.yaml")))
+  tenant     = yamldecode(file(find_in_parent_folders("tenant.yaml")))
   currentDir = get_terragrunt_dir()
   tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
   appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
@@ -50,7 +50,9 @@ dependency "authentik-partition" {
   skip_outputs = true
 }
 
-
+dependency "bucket" {
+  config_path = "${find_in_parent_folders("${local.tenant.shared.provider.name}/${local.tenant.shared.provider.region}")}/bucket-data-dr/"
+}
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
 # These are the variables we have to pass in to use the module. This defines the parameters that are common across all
@@ -65,4 +67,6 @@ inputs = {
 
   logscale_service_account_name        = dependency.infra-logscale.outputs.logscale_account
   logscale_service_account_annotations = dependency.infra-logscale.outputs.logscale_account_annotations
+
+  logscale_buckets = dependency.bucket.outputs.logscale_buckets
 }

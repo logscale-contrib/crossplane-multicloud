@@ -35,3 +35,12 @@ variable "kafka_prefix_increment" {
   description = "(optional) describe your variable"
   default     = "0"
 }
+
+variable "logscale_buckets" {
+  type = map(object({
+    type     = string
+    region   = string
+    id       = string
+    prefixes = map(string)
+  }))
+}

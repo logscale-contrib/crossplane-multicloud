@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: logscale
-      version: 8.0.0-next.11
+      version: 8.0.0-next.12
       sourceRef:
         kind: HelmRepository
         name: logscale-contrib-ls
@@ -43,11 +43,8 @@ spec:
         tag: "1.177.0"
       drMode: bootstrap
 
-      # serviceAccount:
-      #   annotations:
+      # buckets: Merged from variables
 
-      buckets:
-        type: none
       auth:
         method: none
       fqdn: logscale.${logscale_name}.pub.logsr.life

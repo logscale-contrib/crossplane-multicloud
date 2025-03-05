@@ -51,6 +51,26 @@ locals {
       }
     } }
   }
+  logscale_buckets = {
+    spec = { values = {
+      logscale = {
+        buckets = var.logscale_buckets
+      }
+    } }
+  }
+  logscale_buckets_prefixes = {
+    spec = { values = {
+      logscale = {
+        buckets = {
+          prefixes = {
+            storage = "logscale/storage/${var.logscale_namespace}/${var.logscale_name}/"
+            export  = "logscale/export/${var.logscale_namespace}/${var.logscale_name}/"
+            archive = "logscale/archive/${var.logscale_namespace}/${var.logscale_name}/"
+          }
+        }
+      }
+    } }
+  }
 }
 
 module "logscale_values" {
@@ -59,7 +79,9 @@ module "logscale_values" {
 
   maps = [
     local.logscale_template,
-    local.logscale_service_account_annotations
+    local.logscale_service_account_annotations,
+    logscale_buckets,
+    logscale_buckets_prefixes
   ]
 }
 

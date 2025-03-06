@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: logscale
-      version: 8.0.0-next.19
+      version: 8.0.0-next.20
       sourceRef:
         kind: HelmRepository
         name: logscale-contrib-ls
@@ -89,6 +89,9 @@ spec:
           nodePoolFeatures:
             allowedAPIRequestTypes: [OperatorInternal]
           replicas: 2
+          podDisruptionBudget:
+            enabled: true
+            maxUnavailable: 33%
           updateStrategy:
             enableZoneAwareness: true
             maxUnavailable: 33%
@@ -151,6 +154,9 @@ spec:
             type: ClusterIP
         - name: ui
           replicas: 2
+          podDisruptionBudget:
+            enabled: true
+            maxUnavailable: 33%
           updateStrategy:
             enableZoneAwareness: true
             maxUnavailable: 33%
@@ -219,6 +225,9 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
+          podDisruptionBudget:
+            enabled: true
+            maxUnavailable: 33%
           nodePoolFeatures:
             allowedAPIRequestTypes: []
           resources:
@@ -283,6 +292,9 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
+          podDisruptionBudget:
+            enabled: true
+            maxUnavailable: 33%
           nodePoolFeatures:
             allowedAPIRequestTypes: []
           resources:
@@ -347,6 +359,9 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: ReplaceAllOnUpdate
+          podDisruptionBudget:
+            enabled: true
+            maxUnavailable: 33%
           nodePoolFeatures:
             allowedAPIRequestTypes: []
           resources:

@@ -100,7 +100,7 @@ shared:
         is_active: true
 
 logscale:
-  rootUser: lsadmin@pub.logsr.life
+  rootUser: akadmin
   managedUsers:
     lsadmin@pub.logsr.life:
       name: Logscale Admin

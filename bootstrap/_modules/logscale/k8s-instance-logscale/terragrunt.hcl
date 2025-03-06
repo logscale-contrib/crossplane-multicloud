@@ -50,10 +50,6 @@ dependency "authentik-partition" {
   skip_outputs = true
 }
 
-dependency "domain" {
-  config_path = "${find_in_parent_folders("${local.tenant.shared.provider.name}/${local.tenant.shared.provider.region}")}/bucket-data-dr/"
-}
-
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
 # These are the variables we have to pass in to use the module. This defines the parameters that are common across all

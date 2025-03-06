@@ -86,6 +86,7 @@ module "logscale_values_merged_lists" {
     module.logscale_values.merged,
     local.logscale_ingresses
   ]
+  deep_copy_list_enabled = true
 }
 resource "kubectl_manifest" "logscale" {
   yaml_body = yamlencode(module.logscale_values_merged_lists.merged)

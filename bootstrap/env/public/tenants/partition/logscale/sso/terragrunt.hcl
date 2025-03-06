@@ -20,7 +20,7 @@ include "root" {
 # Include the envcommon configuration for the component. The envcommon configuration contains settings that are common
 # for the component across all environments.
 include "module" {
-  path   = "${dirname(find_in_parent_folders())}/_modules/identity/authentik-sso-saml/terragrunt.hcl"
+  path   = "${dirname(find_in_parent_folders())}/_modules/identity/authentik-sso-logscale-saml/terragrunt.hcl"
   expose = true
 }
 

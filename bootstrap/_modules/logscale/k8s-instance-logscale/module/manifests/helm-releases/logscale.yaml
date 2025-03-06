@@ -43,11 +43,6 @@ spec:
         tag: "1.177.0"
       drMode: bootstrap
 
-      # buckets: Merged from variables
-
-      auth:
-        method: none
-
       existingLicenseSecretName: logscale-license-tmp
       # extraVolumes:
       #   - name: logscale-license

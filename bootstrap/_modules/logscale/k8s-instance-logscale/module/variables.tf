@@ -54,3 +54,8 @@ variable "logscale_ingress_common" {
   type    = any
   default = {}
 }
+
+variable "logscale_sso" {
+  type        = any
+
+}

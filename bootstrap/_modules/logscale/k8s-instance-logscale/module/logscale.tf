@@ -72,6 +72,13 @@ locals {
       }
     } }
   }
+  logscale_sso = {
+    spec = { values = {
+      logscale = {
+        auth = var.logscale_sso
+      }
+    } }
+  }
 }
 
 module "logscale_values" {
@@ -82,7 +89,8 @@ module "logscale_values" {
     local.logscale_template,
     local.logscale_service_account_annotations,
     local.logscale_buckets,
-    local.logscale_ingresses
+    local.logscale_ingresses,
+
   ]
 }
 

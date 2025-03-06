@@ -45,7 +45,7 @@ dependency "infra-logscale" {
   config_path = "${find_in_parent_folders("${local.tenant.shared.provider.name}/${local.tenant.shared.provider.region}")}/tenants/${local.tenantName}/logscale/instance/"
 }
 
-dependency "authentik-partition" {
+dependency "sso" {
   config_path  = "${get_terragrunt_dir()}/../sso/"
   skip_outputs = true
 }
@@ -69,4 +69,5 @@ inputs = {
 
   logscale_host           = "logscale.${local.tenantName}.${local.partition.name}.${local.partition.dns.parent_domain}"
   logscale_ingress_common = dependency.infra-logscale.outputs.logscale_ingress_common
+  logscale_sso            = dependency.sso.outputs.sso
 }

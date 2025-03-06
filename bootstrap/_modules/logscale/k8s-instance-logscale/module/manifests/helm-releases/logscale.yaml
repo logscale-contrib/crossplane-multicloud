@@ -162,7 +162,7 @@ spec:
             maxUnavailable: 33%
             type: RollingUpdate
           nodePoolFeatures:
-            allowedAPIRequestTypes: []
+            allowedAPIRequestTypes: [None]
           resources:
             requests:
               memory: 4Gi
@@ -229,7 +229,7 @@ spec:
             enabled: true
             maxUnavailable: 33%
           nodePoolFeatures:
-            allowedAPIRequestTypes: []
+            allowedAPIRequestTypes: [None]
           resources:
             requests:
               memory: 4Gi
@@ -296,7 +296,7 @@ spec:
             enabled: true
             maxUnavailable: 33%
           nodePoolFeatures:
-            allowedAPIRequestTypes: []
+            allowedAPIRequestTypes: [None]
           resources:
             requests:
               memory: 4Gi
@@ -363,7 +363,7 @@ spec:
             enabled: true
             maxUnavailable: 33%
           nodePoolFeatures:
-            allowedAPIRequestTypes: []
+            allowedAPIRequestTypes: [None]
           resources:
             requests:
               memory: 4Gi

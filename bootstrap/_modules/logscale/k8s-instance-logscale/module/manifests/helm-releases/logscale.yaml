@@ -87,7 +87,7 @@ spec:
       nodePools:
         - name: api
           nodePoolFeatures:
-            - OperatorInternal
+            allowedAPIRequestTypes: [OperatorInternal]
           replicas: 2
           updateStrategy:
             enableZoneAwareness: true
@@ -155,7 +155,8 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
-          nodePoolFeatures: []
+          nodePoolFeatures:
+            allowedAPIRequestTypes: []
           resources:
             requests:
               memory: 4Gi
@@ -218,7 +219,8 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
-          nodePoolFeatures: []
+          nodePoolFeatures:
+            allowedAPIRequestTypes: []
           resources:
             requests:
               memory: 4Gi
@@ -281,7 +283,8 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
-          nodePoolFeatures: []
+          nodePoolFeatures:
+            allowedAPIRequestTypes: []
           resources:
             requests:
               memory: 4Gi
@@ -344,7 +347,8 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: ReplaceAllOnUpdate
-          nodePoolFeatures: []
+          nodePoolFeatures:
+            allowedAPIRequestTypes: []
           resources:
             requests:
               memory: 4Gi

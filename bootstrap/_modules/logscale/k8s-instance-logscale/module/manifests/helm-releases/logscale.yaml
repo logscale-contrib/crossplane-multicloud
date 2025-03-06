@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: logscale
-      version: 8.0.0-next.12
+      version: 8.0.0-next.13
       sourceRef:
         kind: HelmRepository
         name: logscale-contrib-ls
@@ -86,6 +86,7 @@ spec:
 
       nodePools:
         - name: api
+          nodePoolFeatures: [OperatorInternal]
           replicas: 2
           resources:
             requests:
@@ -94,6 +95,11 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
+          environmentVariables:
+            - name: NODE_ROLES
+              value: "httponly"
+            - name: QUERY_COORDINATOR
+              value: "false"
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -140,6 +146,7 @@ spec:
             type: ClusterIP
         - name: ui
           replicas: 2
+          nodePoolFeatures: []
           resources:
             requests:
               memory: 4Gi
@@ -147,6 +154,11 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
+          environmentVariables:
+            - name: NODE_ROLES
+              value: "httponly"
+            - name: QUERY_COORDINATOR
+              value: "false"
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -193,6 +205,7 @@ spec:
             type: ClusterIP
         - name: ingest
           replicas: 3
+          nodePoolFeatures: []
           resources:
             requests:
               memory: 4Gi
@@ -200,6 +213,11 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
+          environmentVariables:
+            - name: NODE_ROLES
+              value: "ingestonly"
+            - name: QUERY_COORDINATOR
+              value: "false"
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -246,6 +264,7 @@ spec:
             type: ClusterIP
         - name: query-coordinator
           replicas: 2
+          nodePoolFeatures: []
           resources:
             requests:
               memory: 4Gi
@@ -253,6 +272,11 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
+          environmentVariables:
+            - name: NODE_ROLES
+              value: "httponly"
+            - name: QUERY_COORDINATOR
+              value: "true"
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -299,6 +323,7 @@ spec:
             type: ClusterIP
         - name: segments
           replicas: 3
+          nodePoolFeatures: []
           resources:
             requests:
               memory: 4Gi
@@ -306,6 +331,9 @@ spec:
             limits:
               memory: 4Gi
               cpu: 1
+          environmentVariables:
+            - name: QUERY_COORDINATOR
+              value: "false"
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:

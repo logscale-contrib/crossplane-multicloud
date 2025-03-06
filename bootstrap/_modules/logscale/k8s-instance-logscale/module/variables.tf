@@ -3,6 +3,11 @@ variable "cluster_name" {
   type        = string
   description = "(optional) describe your variable"
 }
+variable "logscale_host" {
+  type        = string
+  description = "(optional) describe your variable"
+
+}
 variable "logscale_name" {
 
 }

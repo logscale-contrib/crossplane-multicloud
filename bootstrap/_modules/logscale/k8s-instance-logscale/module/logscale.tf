@@ -78,20 +78,22 @@ module "logscale_values" {
   maps = [
     local.logscale_template,
     local.logscale_service_account_annotations,
-    local.logscale_buckets
-  ]
-}
-
-module "logscale_values_merged_lists" {
-  source  = "cloudposse/config/yaml//modules/deepmerge"
-  version = "1.0.2"
-
-  maps = [
-    module.logscale_values.merged,
+    local.logscale_buckets,
     local.logscale_ingresses
   ]
-  deep_copy_list_enabled = true
 }
+
+# module "logscale_values_merged_lists" {
+#   source  = "cloudposse/config/yaml//modules/deepmerge"
+#   version = "1.0.2"
+
+#   maps = [
+#     module.logscale_values.merged,
+#     local.logscale_ingresses
+#   ]
+#   deep_copy_list_enabled = true
+# }
+
 resource "kubectl_manifest" "logscale" {
-  yaml_body = yamlencode(module.logscale_values_merged_lists.merged)
+  yaml_body = yamlencode(module.logscale_values.merged)
 }

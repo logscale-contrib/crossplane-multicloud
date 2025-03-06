@@ -71,5 +71,6 @@ inputs = {
 
   logscale_buckets = dependency.infra-logscale.outputs.logscale_buckets
 
-  logscale_host = "logscale.${local.tenantName}.${local.partition.name}.${local.partition.dns.parent_domain}"
+  logscale_host           = "logscale.${local.tenantName}.${local.partition.name}.${local.partition.dns.parent_domain}"
+  logscale_ingress_common = dependency.infra-logscale.outputs.logscale_ingress_common
 }

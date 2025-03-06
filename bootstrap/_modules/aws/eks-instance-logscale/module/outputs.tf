@@ -26,3 +26,16 @@ output "logscale_buckets" {
     }
   }
 }
+locals {
+  ingress_group = var.logscale_namespace == "partition-logscale" ? "partition" : "region"
+}
+output "logscale_ingress_common" {
+  value = {
+    annotations = {
+      "alb.ingress.kubernetes.io/listen-ports" = "[{\"HTTP\": 80}, {\"HTTPS\":443}]"
+      "alb.ingress.kubernetes.io/ssl-redirect" = "443"
+    }
+    ingressClassName = "alb-${local.ingress_group}"
+    tls              = true
+  }
+}

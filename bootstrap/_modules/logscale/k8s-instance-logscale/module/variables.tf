@@ -49,3 +49,8 @@ variable "logscale_buckets" {
     prefixes = map(string)
   })
 }
+
+variable "logscale_ingress_common" {
+  type = list(object({
+  }))
+}

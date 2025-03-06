@@ -58,6 +58,13 @@ locals {
       }
     } }
   }
+  logscale_ingresses = {
+    spec = { values = {
+      logscale = {
+        ingresses = [for ingress in toset(local.logscale_template.spec.locscale.ingresses) : merge(var.logscale_ingress_common, ingress)]
+      }
+    } }
+  }
 }
 
 module "logscale_values" {
@@ -67,7 +74,8 @@ module "logscale_values" {
   maps = [
     local.logscale_template,
     local.logscale_service_account_annotations,
-    local.logscale_buckets
+    local.logscale_buckets,
+    local.logscale_ingresses
   ]
 }
 

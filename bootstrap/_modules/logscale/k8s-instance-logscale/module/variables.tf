@@ -51,6 +51,6 @@ variable "logscale_buckets" {
 }
 
 variable "logscale_ingress_common" {
-  type = list(object({
-  }))
+  type = object({
+  })
 }

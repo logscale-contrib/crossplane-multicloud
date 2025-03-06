@@ -74,11 +74,13 @@ module "logscale_values" {
   maps = [
     local.logscale_template,
     local.logscale_service_account_annotations,
-    local.logscale_buckets,
-    local.logscale_ingresses
+    local.logscale_buckets
   ]
 }
 
+locals {
+  logscale_values_final = merge(module.logscale_values.merged, local.logscale_ingresses)
+}
 resource "kubectl_manifest" "logscale" {
-  yaml_body = yamlencode(module.logscale_values.merged)
+  yaml_body = yamlencode(local.logscale_values_final)
 }

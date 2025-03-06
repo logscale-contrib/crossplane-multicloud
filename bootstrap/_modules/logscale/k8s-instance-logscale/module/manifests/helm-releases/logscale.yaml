@@ -86,7 +86,8 @@ spec:
 
       nodePools:
         - name: api
-          nodePoolFeatures: [OperatorInternal]
+          nodePoolFeatures:
+            - OperatorInternal
           replicas: 2
           enableZoneAwareness: true
           maxUnavailable: 33%

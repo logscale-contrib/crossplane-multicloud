@@ -20,8 +20,8 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  tenant     = yamldecode(file(find_in_parent_folders("tenant.yaml")))
   currentDir = get_terragrunt_dir()
+
   tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
 }
 

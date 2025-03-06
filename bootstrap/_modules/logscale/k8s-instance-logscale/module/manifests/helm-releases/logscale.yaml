@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: logscale
-      version: 8.0.0-next.14
+      version: 8.0.0-next.15
       sourceRef:
         kind: HelmRepository
         name: logscale-contrib-ls
@@ -88,6 +88,8 @@ spec:
         - name: api
           nodePoolFeatures: [OperatorInternal]
           replicas: 2
+          enableZoneAwareness: true
+          maxUnavailable: 33%
           resources:
             requests:
               memory: 4Gi
@@ -146,6 +148,8 @@ spec:
             type: ClusterIP
         - name: ui
           replicas: 2
+          enableZoneAwareness: true
+          maxUnavailable: 33%
           nodePoolFeatures: []
           resources:
             requests:
@@ -205,6 +209,8 @@ spec:
             type: ClusterIP
         - name: ingest
           replicas: 3
+          enableZoneAwareness: true
+          maxUnavailable: 33%
           nodePoolFeatures: []
           resources:
             requests:
@@ -264,6 +270,8 @@ spec:
             type: ClusterIP
         - name: query-coordinator
           replicas: 2
+          enableZoneAwareness: true
+          maxUnavailable: 33%
           nodePoolFeatures: []
           resources:
             requests:
@@ -323,6 +331,8 @@ spec:
             type: ClusterIP
         - name: segments
           replicas: 3
+          enableZoneAwareness: false
+          maxUnavailable: 100%
           nodePoolFeatures: []
           resources:
             requests:

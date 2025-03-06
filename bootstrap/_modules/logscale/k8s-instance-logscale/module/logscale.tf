@@ -89,6 +89,7 @@ module "logscale_values" {
     local.logscale_template,
     local.logscale_service_account_annotations,
     local.logscale_buckets,
+    local.logscale_sso,
     local.logscale_ingresses,
 
   ]

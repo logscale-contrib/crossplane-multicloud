@@ -59,3 +59,8 @@ variable "logscale_sso" {
   type        = any
 
 }
+
+variable "logscale_rootUser" {
+  type        = string
+  description = "(optional) describe your variable"
+}

@@ -46,8 +46,7 @@ dependency "infra-logscale" {
 }
 
 dependency "sso" {
-  config_path  = "${get_terragrunt_dir()}/../sso/"
-  skip_outputs = true
+  config_path = "${get_terragrunt_dir()}/../sso/"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

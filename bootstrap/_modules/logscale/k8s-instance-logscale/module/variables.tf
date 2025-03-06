@@ -51,5 +51,6 @@ variable "logscale_buckets" {
 }
 
 variable "logscale_ingress_common" {
-  type = object(any)
+  type    = any
+  default = {}
 }

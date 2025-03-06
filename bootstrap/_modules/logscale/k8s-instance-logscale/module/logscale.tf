@@ -61,7 +61,7 @@ locals {
   logscale_ingresses = {
     spec = { values = {
       logscale = {
-        ingresses = [for ingress in toset(local.logscale_template.spec.logscale.ingresses) : merge(var.logscale_ingress_common, ingress)]
+        ingresses = [for ingress in toset(local.logscale_template.spec.values.logscale.ingresses) : merge(var.logscale_ingress_common, ingress)]
       }
     } }
   }
@@ -78,9 +78,15 @@ module "logscale_values" {
   ]
 }
 
-locals {
-  logscale_values_final = merge(module.logscale_values.merged, local.logscale_ingresses)
+module "logscale_values_merged_lists" {
+  source  = "cloudposse/config/yaml//modules/deepmerge"
+  version = "1.0.2"
+
+  maps = [
+    module.logscale_values.merged,
+    local.logscale_ingresses
+  ]
 }
 resource "kubectl_manifest" "logscale" {
-  yaml_body = yamlencode(local.logscale_values_final)
+  yaml_body = yamlencode(module.logscale_values_merged_lists.merged)
 }

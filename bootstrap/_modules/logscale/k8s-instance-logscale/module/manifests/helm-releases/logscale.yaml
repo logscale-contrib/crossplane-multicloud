@@ -89,8 +89,10 @@ spec:
           nodePoolFeatures:
             - OperatorInternal
           replicas: 2
-          enableZoneAwareness: true
-          maxUnavailable: 33%
+          updateStrategy:
+            enableZoneAwareness: true
+            maxUnavailable: 33%
+            type: RollingUpdate
           resources:
             requests:
               memory: 4Gi

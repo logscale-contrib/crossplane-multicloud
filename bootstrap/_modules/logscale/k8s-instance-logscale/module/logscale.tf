@@ -61,7 +61,11 @@ locals {
   logscale_ingresses = {
     spec = { values = {
       logscale = {
-        ingresses = [for ingress in toset(local.logscale_template.spec.values.logscale.ingresses) : merge(var.logscale_ingress_common, ingress)]
+        ingresses = [for ingress in toset(local.logscale_template.spec.values.logscale.ingresses) : {
+          annotations = merge(var.logscale_ingress_common.annotations,ingress.annotations)
+          labels = merge(var.logscale_ingress_common.annotations,ingress.labels)
+          ingressClassName = ingress.ingressClassName ? ingress.ingressClassName : var.logscale_ingress_common.ingressClassName
+        }]
       }
     } }
   }

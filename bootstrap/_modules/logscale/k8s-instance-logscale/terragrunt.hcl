@@ -69,5 +69,5 @@ inputs = {
 
   logscale_host           = "logscale.${local.tenantName}.${local.partition.name}.${local.partition.dns.parent_domain}"
   logscale_ingress_common = dependency.infra-logscale.outputs.logscale_ingress_common
-  logscale_sso            = dependency.sso.outputs.sso
+  logscale_sso            = dependency.sso.outputs.logscale_sso
 }

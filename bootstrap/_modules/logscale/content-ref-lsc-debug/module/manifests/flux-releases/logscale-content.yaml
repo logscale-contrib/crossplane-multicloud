@@ -70,4 +70,4 @@ spec:
           name: debug-lsc
           parserName: debug-lsc
           repositoryName: ref-lsc-debug
-          tokenSecretName: ref-lsc-debug-lsc-ingest-token
+          tokenSecretName: ingest-token-ref-lsc-debug-lsc

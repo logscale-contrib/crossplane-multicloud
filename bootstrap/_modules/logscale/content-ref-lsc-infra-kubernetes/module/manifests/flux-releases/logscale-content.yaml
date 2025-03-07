@@ -46,3 +46,28 @@ spec:
           allowDataDeletion: ${allowDataDeletion}
           retention:
             timeInDays: 30
+      - |-
+        apiVersion: core.humio.com/v1alpha1
+        kind: HumioParser
+        metadata:
+          name: ref-lsc-infra-kubernetes
+        spec:
+          managedClusterName: logscale
+          name: "infra-kubernetes"
+          parserScript: "parseJson()"
+          repositoryName: "ref-lsc-infra-kubernetes"
+          # tagFields:
+          # - "@somefield"
+          # testData:
+          # - "@rawstring data"
+      - |-
+        apiVersion: core.humio.com/v1alpha1
+        kind: HumioIngestToken
+        metadata:
+          name: ref-lsc-debug-lsc
+        spec:
+          managedClusterName: logscale
+          name: infra-kubernetes-lsc
+          parserName: infra-kubernetes-lsc
+          repositoryName: ref-lsc-infra-kubernetes
+          tokenSecretName: ingest-token-ref-lsc-infra-kubernetes

@@ -88,6 +88,13 @@ spec:
               pool: query-coordinator
             - path: /
               pool: ui
+        - name: ingest
+          annotations:
+            "helm.sh/resource-policy": "keep"
+          host: ingest-${host}
+          endpoints:
+            - path: /
+              pool: logscale-ingest
 
       nodePools:
         - name: api

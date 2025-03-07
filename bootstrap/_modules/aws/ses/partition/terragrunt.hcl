@@ -35,8 +35,8 @@ inputs = {
   partition      = local.partition.name
   domain         = dependency.parent_zone.outputs.zone_name
   domain_zone_id = dependency.parent_zone.outputs.zone_id
-  region         = local.partition.shared.provider.aws.regions[local.region].name
+  region         = local.partition.shared.provider.aws.regions[local.region].region
 
 
-  email_user_name_prefix = "${local.partition.name}-${local.region}"
+  email_user_name_prefix = "${local.partition.name}"
 }

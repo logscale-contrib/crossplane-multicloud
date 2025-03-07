@@ -26,7 +26,7 @@ locals {
   appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
 }
 dependency "logscale" {
-  config_path = "${get_terragrunt_dir()}/../instance/"
+  config_path = "${get_terragrunt_dir()}/../../instance/"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

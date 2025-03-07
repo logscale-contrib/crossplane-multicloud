@@ -62,7 +62,7 @@ spec:
       trustManagerConfigMap: cluster-trust-bundle
       kafka:
         manager: external
-        serviceBindingSecret: partition-logscale-user-access
+        serviceBindingSecret: ${logscale_name}-logscale-user-access
         prefixEnable: true
         topicPrefix: ${logscale_namespace}-${kafka_prefix}
         extraConfigCommon:

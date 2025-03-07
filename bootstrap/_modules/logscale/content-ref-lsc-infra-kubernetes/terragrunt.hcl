@@ -11,32 +11,31 @@
 # deployed version.
 
 terraform {
-  source = "${dirname(find_in_parent_folders())}/_modules/aws/ses/partition/module/"
+  //source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v19.21.0"
+  source = "${dirname(find_in_parent_folders())}/_modules/logscale/content-ref-lsc-infra-kubernetes/module/"
 }
-
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  partition = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  region    = basename(dirname("${get_terragrunt_dir()}/../.."))
+  partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
+  tenant     = yamldecode(file(find_in_parent_folders("tenant.yaml")))
+  currentDir = get_terragrunt_dir()
+  tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
+  appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
+}
+dependency "logscale" {
+  config_path = "${get_terragrunt_dir()}/../instance/"
 }
 
-dependency "parent_zone" {
-  config_path = "${get_terragrunt_dir()}/../../../dns/"
-  mock_outputs = {
-    zone_name = "example.com"
-    zone_id   = "A123456789"
-  }
-}
-
+# ---------------------------------------------------------------------------------------------------------------------
+# MODULE PARAMETERS
+# These are the variables we have to pass in to use the module. This defines the parameters that are common across all
+# environments.
+# ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  partition      = local.partition.name
-  domain         = dependency.parent_zone.outputs.zone_name
-  domain_zone_id = dependency.parent_zone.outputs.zone_id
-  region         = local.partition.shared.provider.aws.regions[local.region].region
-
-
-  email_user_name_prefix = local.partition.name
+  cluster_name       = dependency.logscale.outputs.cluster_name
+  logscale_name      = local.tenantName
+  logscale_namespace = "${local.tenantName}-logscale"
 }

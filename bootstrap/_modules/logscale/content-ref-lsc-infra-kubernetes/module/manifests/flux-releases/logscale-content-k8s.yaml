@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: ${logscale_name}-content-ref-lsc-infra-kubernetes
+  namespace: ${logscale_namespace}
+spec:
+  interval: 10m
+  timeout: 5m
+  chart:
+    spec:
+      chart: raw
+      version: "2.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: bedag
+        namespace: flux-repos
+      interval: 5m
+  releaseName: logscale-content-k8s
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: false
+  driftDetection:
+    mode: warn
+    ignore:
+      - paths: ["/spec/replicas"]
+        target:
+          kind: Deployment
+  dependsOn:
+    - name: ${logscale_name}
+  values:
+    templates:
+      - |-
+        apiVersion: core.humio.com/v1alpha1
+        kind: HumioRepository
+        metadata:
+          name: ref-lsc-infra-kubernetes
+        spec:
+          managedClusterName: ${logscale_name}
+          name: "ref-lsc-infra-kubernetes"
+          description: "Reference Kubernetes infrastructure logs using Logscale Collector"
+          allowDataDeletion: ${allowDataDeletion}
+          retention:
+            timeInDays: 30

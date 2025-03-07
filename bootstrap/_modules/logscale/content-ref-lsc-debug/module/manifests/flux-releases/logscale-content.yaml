@@ -38,11 +38,11 @@ spec:
         apiVersion: core.humio.com/v1alpha1
         kind: HumioRepository
         metadata:
-          name: ref-lsc-infra-kubernetes
+          name: ref-lsc-debug
         spec:
           managedClusterName: logscale
-          name: "ref-lsc-infra-kubernetes"
-          description: "Reference Kubernetes infrastructure logs using Logscale Collector"
+          name: "ref-lsc-debug"
+          description: "Reference repo for logscale collector debug logs"
           allowDataDeletion: ${allowDataDeletion}
           retention:
             timeInDays: 30

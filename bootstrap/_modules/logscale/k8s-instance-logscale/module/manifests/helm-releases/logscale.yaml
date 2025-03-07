@@ -426,7 +426,7 @@ spec:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 10Gi
+                storage: 468Gi
             storageClassName: instancestore-nvme-ext4
           service:
             type: ClusterIP

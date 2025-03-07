@@ -15,7 +15,7 @@ spec:
         name: bedag
         namespace: flux-repos
       interval: 5m
-  releaseName: logscale-content-k8s
+  releaseName: logscale-content-ref-lsc-infra-kubernetes
   install:
     remediation:
       retries: 3

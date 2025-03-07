@@ -35,7 +35,7 @@ spec:
     imagePullPolicy: IfNotPresent
     humioAddress: https://ingest-logscale.team.pub.logsr.life
     humioIngestTokenSecretName: ingest-token-ref-lsc-infra-kubernetes
-    # humioIngestTokenSecretKey:
+    humioIngestTokenSecretKey: token
     humioDebugTokenSecretName: ingest-token-ref-lsc-debug-lsc
-    # humioDebugTokenSecretKey:
+    humioDebugTokenSecretKey: token
     collectJournal: true

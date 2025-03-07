@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: ${logscale_name}-content-ref-lsc-infra-kubernetes
+  name: logscale-content-ref-lsc-infra-kubernetes
   namespace: ${logscale_namespace}
 spec:
   interval: 10m
@@ -31,7 +31,7 @@ spec:
         target:
           kind: Deployment
   dependsOn:
-    - name: ${logscale_name}
+    - name: logscale
   values:
     templates:
       - |-

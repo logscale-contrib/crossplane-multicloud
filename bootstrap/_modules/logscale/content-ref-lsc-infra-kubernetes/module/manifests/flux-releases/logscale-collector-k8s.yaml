@@ -39,3 +39,14 @@ spec:
     humioDebugTokenSecretName: ingest-token-ref-lsc-debug-lsc
     humioDebugTokenSecretKey: token
     collectJournal: true
+    additionalEnv:
+      - name: HUMIO_INGEST_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: ingest-token-ref-lsc-infra-kubernetes
+            key: token
+      - name: HUMIO_DEBUG_LOG_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: ingest-token-ref-lsc-debug-lsc
+            key: token

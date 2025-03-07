@@ -64,7 +64,7 @@ spec:
         apiVersion: core.humio.com/v1alpha1
         kind: HumioIngestToken
         metadata:
-          name: ref-lsc-debug-lsc
+          name: ref-lsc-infra-kubernetes
         spec:
           managedClusterName: logscale
           name: infra-kubernetes-lsc

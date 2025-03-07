@@ -69,5 +69,5 @@ spec:
           managedClusterName: logscale
           name: debug-lsc
           parserName: debug-lsc
-          repositoryName: ref-lsc-debug-lsc
+          repositoryName: ref-lsc-debug
           tokenSecretName: ref-lsc-debug-lsc-ingest-token

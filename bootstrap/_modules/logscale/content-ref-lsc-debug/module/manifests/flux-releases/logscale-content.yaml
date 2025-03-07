@@ -46,3 +46,28 @@ spec:
           allowDataDeletion: ${allowDataDeletion}
           retention:
             timeInDays: 30
+      - |-
+        apiVersion: core.humio.com/v1alpha1
+        kind: HumioParser
+        metadata:
+          name: ref-lsc-debug-lsc
+        spec:
+          managedClusterName: logscale
+          name: "debug-lsc"
+          parserScript: "parseJson()"
+          repositoryName: "ref-lsc-debug"
+          # tagFields:
+          # - "@somefield"
+          # testData:
+          # - "@rawstring data"
+      - |-
+        apiVersion: core.humio.com/v1alpha1
+        kind: HumioIngestToken
+        metadata:
+          name: ref-lsc-debug-lsc
+        spec:
+          managedClusterName: logscale
+          name: debug-lsc
+          parserName: debug-lsc
+          repositoryName: humio
+          tokenSecretName: ref-lsc-debug-lsc

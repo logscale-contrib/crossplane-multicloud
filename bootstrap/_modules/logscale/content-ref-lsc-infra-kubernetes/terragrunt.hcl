@@ -26,7 +26,8 @@ locals {
   appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
 }
 dependency "logscale" {
-  config_path = "${get_terragrunt_dir()}/../../instance/"
+  config_path  = "${get_terragrunt_dir()}/../../instance/"
+  skip_outputs = true
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -35,7 +36,6 @@ dependency "logscale" {
 # environments.
 # ---------------------------------------------------------------------------------------------------------------------
 inputs = {
-  cluster_name       = dependency.logscale.outputs.cluster_name
   logscale_name      = local.tenantName
   logscale_namespace = "${local.tenantName}-logscale"
 }

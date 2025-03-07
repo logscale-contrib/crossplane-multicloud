@@ -110,11 +110,11 @@ spec:
             type: RollingUpdate
           resources:
             requests:
-              memory: 4Gi
-              cpu: 500m
-            limits:
-              memory: 4Gi
+              memory: 12Gi
               cpu: 1
+            limits:
+              memory: 12Gi
+              cpu: 2
           environmentVariables:
             - name: NODE_ROLES
               value: "httponly"
@@ -177,11 +177,11 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 4Gi
-              cpu: 500m
-            limits:
-              memory: 4Gi
+              memory: 12Gi
               cpu: 1
+            limits:
+              memory: 12Gi
+              cpu: 2
           environmentVariables:
             - name: NODE_ROLES
               value: "httponly"
@@ -244,11 +244,11 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 4Gi
-              cpu: 500m
-            limits:
-              memory: 4Gi
+              memory: 12Gi
               cpu: 1
+            limits:
+              memory: 12Gi
+              cpu: 2
           environmentVariables:
             - name: NODE_ROLES
               value: "ingestonly"
@@ -311,11 +311,11 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 4Gi
-              cpu: 500m
-            limits:
-              memory: 4Gi
+              memory: 12Gi
               cpu: 1
+            limits:
+              memory: 12Gi
+              cpu: 2
           environmentVariables:
             - name: NODE_ROLES
               value: "httponly"
@@ -378,11 +378,11 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 4Gi
-              cpu: 500m
+              memory: 64Gi
+              cpu: 16
             limits:
-              memory: 4Gi
-              cpu: 1
+              memory: 64Gi
+              cpu: 16
           environmentVariables:
             - name: QUERY_COORDINATOR
               value: "false"

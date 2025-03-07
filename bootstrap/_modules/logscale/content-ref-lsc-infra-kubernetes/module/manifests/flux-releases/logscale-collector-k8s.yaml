@@ -51,3 +51,10 @@ spec:
           secretKeyRef:
             name: ingest-token-ref-lsc-debug-lsc
             key: token
+    resources:
+      requests:
+        cpu: 100m
+        memory: 2Gi
+      limits:
+        cpu: 2
+        memory: 4Gi

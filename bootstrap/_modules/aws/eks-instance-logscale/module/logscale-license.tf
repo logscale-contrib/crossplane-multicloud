@@ -4,7 +4,7 @@ data "aws_canonical_user_id" "current" {}
 
 
 resource "aws_iam_policy" "logscale-license" {
-  name        = "logscale-license_secrets_policy"
+  name_prefix = "logscale-license_secrets_policy"
   path        = var.iam_role_path
   description = "Read logscale-license Secrets"
 

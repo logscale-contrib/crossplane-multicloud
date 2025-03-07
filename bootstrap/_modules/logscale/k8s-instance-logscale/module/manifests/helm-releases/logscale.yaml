@@ -94,7 +94,7 @@ spec:
           host: ingest-${host}
           endpoints:
             - path: /
-              pool: logscale-ingest
+              pool: ingest
 
       nodePools:
         - name: api

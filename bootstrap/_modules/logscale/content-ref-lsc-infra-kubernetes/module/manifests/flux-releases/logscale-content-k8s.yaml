@@ -40,7 +40,7 @@ spec:
         metadata:
           name: ref-lsc-infra-kubernetes
         spec:
-          managedClusterName: ${logscale_name}
+          managedClusterName: logscale
           name: "ref-lsc-infra-kubernetes"
           description: "Reference Kubernetes infrastructure logs using Logscale Collector"
           allowDataDeletion: ${allowDataDeletion}

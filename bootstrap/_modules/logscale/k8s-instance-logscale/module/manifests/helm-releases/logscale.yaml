@@ -251,7 +251,7 @@ spec:
               cpu: 2
           environmentVariables:
             - name: NODE_ROLES
-              value: "ingestonly"
+              value: "httponly"
             - name: QUERY_COORDINATOR
               value: "false"
           affinity:

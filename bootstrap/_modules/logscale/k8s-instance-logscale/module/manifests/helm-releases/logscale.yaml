@@ -378,11 +378,11 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 64Gi
-              cpu: 16
+              memory: 48Gi
+              cpu: 8
             limits:
-              memory: 64Gi
-              cpu: 16
+              memory: 48Gi
+              cpu: 8
           environmentVariables:
             - name: QUERY_COORDINATOR
               value: "false"
@@ -426,7 +426,7 @@ spec:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 468Gi
+                storage: 2Ti
             storageClassName: instancestore-nvme-ext4
           service:
             type: ClusterIP

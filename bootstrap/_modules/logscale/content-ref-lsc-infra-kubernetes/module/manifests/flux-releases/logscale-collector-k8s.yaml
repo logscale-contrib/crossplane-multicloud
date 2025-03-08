@@ -39,6 +39,11 @@ spec:
     humioIngestTokenSecretKey: token
     humioDebugTokenSecretName: ingest-token-ref-lsc-debug-lsc
     humioDebugTokenSecretKey: token
+    fleetManagement:
+      url: https://logscale.team.pub.logsr.life
+    managedSecrets:
+      enrollmentToken: ByI4NIpa0ECTphlVKQqs8A75Z8yCoClW
+
     collectJournal: true
     additionalEnv:
       - name: HUMIO_INGEST_TOKEN

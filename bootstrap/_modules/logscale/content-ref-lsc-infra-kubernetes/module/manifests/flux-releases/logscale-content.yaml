@@ -68,6 +68,6 @@ spec:
         spec:
           managedClusterName: logscale
           name: infra-kubernetes-lsc
-          parserName: infra-kubernetes
+          # parserName: infra-kubernetes
           repositoryName: ref-lsc-infra-kubernetes
           tokenSecretName: ingest-token-ref-lsc-infra-kubernetes

@@ -126,7 +126,7 @@ resource "time_sleep" "wait_30_seconds" {
 resource "dns_address_validation" "logscale" {
   depends_on = [kubectl_manifest.logscale]
   provider   = dns-validation
-  for_each   = toset(local.logscale_ingresses.spec.values.logscale.ingresses[*].host)
+  for_each   = toset(module.logscale_values.merged.spec.values.logscale.ingresses[*].host)
 
   name = each.value
   timeouts {

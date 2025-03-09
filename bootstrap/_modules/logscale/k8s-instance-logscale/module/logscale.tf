@@ -118,7 +118,7 @@ resource "time_sleep" "wait_30_seconds" {
   destroy_duration = "90s"
 
   triggers = {
-    module_logscale_values_merged = module.logscale_values.merged
+    module_logscale_values_merged = yamlencode(module.logscale_values.merged)
   }
 }
 

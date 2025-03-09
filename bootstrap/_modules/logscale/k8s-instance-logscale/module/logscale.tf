@@ -110,3 +110,26 @@ module "logscale_values" {
 resource "kubectl_manifest" "logscale" {
   yaml_body = yamlencode(module.logscale_values.merged)
 }
+
+
+resource "time_sleep" "wait_30_seconds" {
+  depends_on       = [kubectl_manifest.logscale]
+  create_duration  = "180s"
+  destroy_duration = "90s"
+
+  triggers = {
+    module_logscale_values_merged = module.logscale_values.merged
+  }
+}
+
+
+resource "dns_address_validation" "logscale" {
+  depends_on = [kubectl_manifest.logscale]
+  provider   = dns-validation
+  for_each   = module.logscale_values.merged.spec.values.logscale.ingresses
+
+  name = each.value.host
+  timeouts {
+    create = "10m"
+  }
+}

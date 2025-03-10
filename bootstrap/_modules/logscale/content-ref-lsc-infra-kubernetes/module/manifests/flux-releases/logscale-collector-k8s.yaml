@@ -45,17 +45,17 @@ spec:
       enrollmentToken: eyJpbnN0YWxsVG9rZW4iOiJDMVhMOVM4QWg4NE1Ib3JBM1YxaXB0UEpnNXFXTFBrMyIsInVybCI6Imh0dHBzOi8vbG9nc2NhbGUudGVhbS5wdWIubG9nc3IubGlmZSJ9
 
     collectJournal: true
-    additionalEnv:
-      - name: HUMIO_INGEST_TOKEN
-        valueFrom:
-          secretKeyRef:
-            name: ingest-token-ref-lsc-infra-kubernetes
-            key: token
-            # - name: HUMIO_DEBUG_LOG_TOKEN
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: ingest-token-ref-lsc-debug-lsc
-            #       key: token
+    # additionalEnv:
+    #   - name: HUMIO_INGEST_TOKEN
+    #     valueFrom:
+    #       secretKeyRef:
+    #         name: ingest-token-ref-lsc-infra-kubernetes
+    #         key: token
+    # - name: HUMIO_DEBUG_LOG_TOKEN
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: ingest-token-ref-lsc-debug-lsc
+    #       key: token
     resources:
       requests:
         cpu: 100m

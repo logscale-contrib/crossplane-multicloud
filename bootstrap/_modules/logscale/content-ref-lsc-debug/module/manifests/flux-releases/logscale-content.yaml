@@ -71,7 +71,7 @@ spec:
             ************************************************************/
             | ecs.version := "8.11.0"
             | Cps.version := "1.0.0"
-            | Parser.version := "1.0.0"
+            | Parser.version := "1.0.1"
             | Vendor := "CrowdStrike"
             | event.module := "lsc"
             | event.dataset := "lsc.debug"
@@ -86,14 +86,19 @@ spec:
             ****** Normalize fields to data model
             ************************************************************/
 
-          | parseJson(prefix="Vendor.")
-          | case {
-            message=* | rename(field=Vendor.message,as=@rawstring) ;
+            | parseJson(prefix="Vendor.")
+            | case {
+            Vendor.message=* | rename(field=Vendor.message,as=@rawstring) ;
             * ;
-          }
-          | rename(field="Vendor.MACHINEID", as="@collector.id")
-          | rename(field=Vendor.HOSTNAME,as="@collecor.host")
-          | parseTimestamp(field="Vendor.time",format=millis,addErrors=true)
+            }
+            | rename(field="Vendor.MACHINEID", as="@collector.id")
+            | rename(field=Vendor.HOSTNAME,as="@collecor.host")
+            | rename(field=Vendor.level, as="log.level")
+            | Vendor.caller=/(?<log.origin.file.name>.*):(?<log.origin.file.line>\d+)/
+            | rename(field=Vendor.VERSION,as="observer.version")
+            | rename(field=Vendor.GOARCH,as="host.architecture")
+            | rename(field=Vendor.GOOS,as="os.type")
+            | parseTimestamp(field="Vendor.time",format=millis,addErrors=true)
 
 
             // #endregion
@@ -104,9 +109,10 @@ spec:
             ****** Custom parser logic needed after normalization
             ************************************************************/
 
-            | drop([Vendor.COMPILEDAT,Vendor.time,Vendor.GITCOMMIT,Vendor.GITDATE,Vendor.GOVERSION,Vendor.PID])
+            | drop([Vendor.COMPILEDAT,Vendor.time,Vendor.GITCOMMIT,Vendor.GITDATE,Vendor.GOVERSION,Vendor.PID,Vendor.caller])
 
             // #endregion
+
 
           repositoryName: "ref-lsc-debug"
           tagFields:

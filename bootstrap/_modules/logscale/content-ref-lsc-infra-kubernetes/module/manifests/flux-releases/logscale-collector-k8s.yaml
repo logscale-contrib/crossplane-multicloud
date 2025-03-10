@@ -37,8 +37,8 @@ spec:
     humioDebugLogAddress: https://ingest-logscale.team.pub.logsr.life/
     humioIngestTokenSecretName: ingest-token-ref-lsc-infra-kubernetes
     humioIngestTokenSecretKey: token
-    # humioDebugTokenSecretName: ingest-token-ref-lsc-debug-lsc
-    # humioDebugTokenSecretKey: token
+    humioDebugTokenSecretName: ingest-token-ref-lsc-debug-lsc
+    humioDebugTokenSecretKey: token
     fleetManagement:
       url: https://logscale.team.pub.logsr.life
     managedSecrets:

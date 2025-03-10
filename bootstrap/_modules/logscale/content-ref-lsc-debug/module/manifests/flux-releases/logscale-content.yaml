@@ -104,10 +104,10 @@ spec:
             ****** Custom parser logic needed after normalization
             ************************************************************/
 
+            | drop([Vendor.COMPILEDAT,Vendor.time,Vendor.GITCOMMIT,Vendor.GITDATE,Vendor.GOVERSION,Vendor.PID])
 
             // #endregion
 
-            | drop([Vendor.COMPILEDAT,Vendor.time,Vendor.GITCOMMIT,Vendor.GITDATE,Vendor.GOVERSION,Vendor.PID])
           repositoryName: "ref-lsc-debug"
           tagFields:
           - Cps.version

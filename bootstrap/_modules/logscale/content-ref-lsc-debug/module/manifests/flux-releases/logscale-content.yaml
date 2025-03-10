@@ -55,18 +55,69 @@ spec:
           managedClusterName: logscale
           name: "debug-lsc"
           parserScript: |
-            parseJson()
-            | case {
-              message=* | rename(field=message,as=@rawstring) ;
-              * ;
-            }
-            | rename(field="MACHINEID", as="@collector.id")
-            | rename(field=HOSTNAME,as="@collecor.host")
-            | parseTimestamp(field="time",format=millis,addErrors=true)
-            | drop([COMPILEDAT,time,GITCOMMIT,GITDATE,GOVERSION,PID])
+            // #region PREPARSE
+            /************************************************************
+            ****** Parse timestamp and log headers
+            ****** Extract message field for parsing
+            ****** Parse structured data
+            ************************************************************/
+
+
+            // #endregion
+
+            // #region METADATA
+            /************************************************************
+            ****** Static Metadata Definitions
+            ************************************************************/
+            | ecs.version := "8.11.0"
+            | Cps.version := "1.0.0"
+            | Parser.version := "1.0.0"
+            | Vendor := "CrowdStrike"
+            | event.module := "lsc"
+            | event.dataset := "lsc.debug"
+            | event.kind := "event"
+            | event.category[0] := "unknown"
+            | event.type[0] := "info"
+            // #endregion
+
+            // #region NORMALIZATION
+            /************************************************************
+            ****** Parse unstructured data (i.e. message field)
+            ****** Normalize fields to data model
+            ************************************************************/
+
+          | parseJson(prefix="Vendor.")
+          | case {
+            message=* | rename(field=Vendor.message,as=@rawstring) ;
+            * ;
+          }
+          | rename(field="Vendor.MACHINEID", as="@collector.id")
+          | rename(field=Vendor.HOSTNAME,as="@collecor.host")
+          | parseTimestamp(field="Vendor.time",format=millis,addErrors=true)
+
+
+            // #endregion
+
+            // #region POST-NORMALIZATION
+            /************************************************************
+            ****** Post Normalization
+            ****** Custom parser logic needed after normalization
+            ************************************************************/
+
+
+            // #endregion
+
+            | drop([Vendor.COMPILEDAT,Vendor.time,Vendor.GITCOMMIT,Vendor.GITDATE,Vendor.GOVERSION,Vendor.PID])
           repositoryName: "ref-lsc-debug"
-          # tagFields:
-          # - "@somefield"
+          tagFields:
+          - Cps.version
+          - Vendor
+          - ecs.version
+          - event.dataset
+          - event.kind
+          - event.module
+          - event.outcome
+          - observer.type
           testData:
           - |
             {"level":"debug","HOSTNAME":"ip-10-0-35-227.ec2.internal","GOOS":"linux","GOARCH":"amd64","GOVERSION":"go1.23.2","PID":"451038","MACHINEID":"8052e591-7ee2-4b52-89bd-8d5f6ca37ed9","VERSION":"1.8.1","GITCOMMIT":"00312e65af50405da47af7bb45e34f74be2ee42a","GITDATE":"2024-11-26T09:34:17Z","COMPILEDAT":"2024-11-26T10:10:41Z","time":1741452036251,"caller":"go.crwd.dev/lc/log-collector/internal/fleet/metrics.go:274","message":"Sent metric event"}

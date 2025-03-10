@@ -42,7 +42,7 @@ spec:
     fleetManagement:
       url: https://logscale.team.pub.logsr.life
     managedSecrets:
-      enrollmentToken: 93b108bb-51c5-42b5-b54b-b523bc3df8e7
+      enrollmentToken: eyJpbnN0YWxsVG9rZW4iOiJDMVhMOVM4QWg4NE1Ib3JBM1YxaXB0UEpnNXFXTFBrMyIsInVybCI6Imh0dHBzOi8vbG9nc2NhbGUudGVhbS5wdWIubG9nc3IubGlmZSJ9
 
     collectJournal: true
     additionalEnv:

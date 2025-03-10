@@ -68,7 +68,8 @@ spec:
           # tagFields:
           # - "@somefield"
           testData:
-          - {"level":"debug","HOSTNAME":"ip-10-0-35-227.ec2.internal","GOOS":"linux","GOARCH":"amd64","GOVERSION":"go1.23.2","PID":"451038","MACHINEID":"8052e591-7ee2-4b52-89bd-8d5f6ca37ed9","VERSION":"1.8.1","GITCOMMIT":"00312e65af50405da47af7bb45e34f74be2ee42a","GITDATE":"2024-11-26T09:34:17Z","COMPILEDAT":"2024-11-26T10:10:41Z","time":1741452036251,"caller":"go.crwd.dev/lc/log-collector/internal/fleet/metrics.go:274","message":"Sent metric event"}
+          - |
+            {"level":"debug","HOSTNAME":"ip-10-0-35-227.ec2.internal","GOOS":"linux","GOARCH":"amd64","GOVERSION":"go1.23.2","PID":"451038","MACHINEID":"8052e591-7ee2-4b52-89bd-8d5f6ca37ed9","VERSION":"1.8.1","GITCOMMIT":"00312e65af50405da47af7bb45e34f74be2ee42a","GITDATE":"2024-11-26T09:34:17Z","COMPILEDAT":"2024-11-26T10:10:41Z","time":1741452036251,"caller":"go.crwd.dev/lc/log-collector/internal/fleet/metrics.go:274","message":"Sent metric event"}
       - |-
         apiVersion: core.humio.com/v1alpha1
         kind: HumioIngestToken

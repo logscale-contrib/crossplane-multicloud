@@ -2,7 +2,7 @@
 module "authentik_db_irsa" {
 
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.53.0"
+  version = "5.54.0"
 
   role_name_prefix = var.authentik_namespace
   role_path        = var.iam_role_path
@@ -31,7 +31,7 @@ module "authentik_db_irsa" {
 
 module "iam_iam-policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "5.53.0"
+  version = "5.54.0"
 
   name_prefix = "${var.authentik_namespace}_${var.authentik_service_account}"
   path        = var.iam_role_path

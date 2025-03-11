@@ -33,6 +33,11 @@ module "log_bucket" {
       noncurrent_version_expiration = {
         days = 14
       }
+      expiration = {
+        days                         = 31
+        expired_object_delete_marker = true
+      }
+
     }
   ]
 

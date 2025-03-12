@@ -31,7 +31,7 @@ spec:
     - name: logscale-content-ref-lsc-debug
     - name: logscale-content-ref-lsc-infra-kubernetes
   values:
-    image: registry.crowdstrike.com/log-collector/us-1/release/logscale-collector:1.8.1@sha256:ff405eac8dc04f143b348843d41e04a47718f29ce3dcb920fdaa4c253a9b176a
+    image: registry.crowdstrike.com/log-collector/us-1/release/logscale-collector:1.8.2@sha256:27b4fb31a8161a98c0cb78ff983075a2ce37adbd1648ad241a4c449d264ce9b1
     imagePullPolicy: IfNotPresent
     humioAddress: https://ingest-logscale.team.pub.logsr.life/
     humioDebugLogAddress: https://ingest-logscale.team.pub.logsr.life/

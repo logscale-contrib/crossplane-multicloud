@@ -64,6 +64,15 @@ spec:
                         operator: In
                         values:
                           - linux
+            topologySpreadConstraints:
+              - maxSkew: 2
+                whenUnsatisfiable: ScheduleAnyway
+                topologyKey: topology.kubernetes.io/zone
+                labelSelector:
+                  matchLabels:
+                    cnpg.io/cluster: authentik-db-${region_name}
+                matchLabelKeys:
+                  - pod-template-hash
           replica:
             primary: authentik-db-${primary}
             source: authentik-db-${source}

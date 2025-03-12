@@ -27,3 +27,6 @@ variable "cidr" {
   type        = string
   description = "(optional) describe your variable"
 }
+variable "log_s3_bucket_arn" {
+
+}

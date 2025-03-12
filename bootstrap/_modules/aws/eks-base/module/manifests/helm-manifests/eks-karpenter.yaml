@@ -79,7 +79,7 @@ spec:
                   values:
                     - linux
     topologySpreadConstraints:
-      - maxSkew: 2
+      - maxSkew: 1
         minDomains: 2
         whenUnsatisfiable: DoNotSchedule
         topologyKey: topology.kubernetes.io/zone

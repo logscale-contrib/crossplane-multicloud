@@ -36,9 +36,13 @@ module "vpc" {
   }
 
 
-  enable_flow_log                                 = true
-  create_flow_log_cloudwatch_iam_role             = true
-  create_flow_log_cloudwatch_log_group            = true
+  enable_flow_log = true
+  # create_flow_log_cloudwatch_iam_role             = true
+  # create_flow_log_cloudwatch_log_group            = true
+  flow_log_destination_arn  = var.log_s3_bucket_arn
+  flow_log_destination_type = "s3"
+  flow_log_file_format      = "plain-text"
+
   flow_log_cloudwatch_log_group_retention_in_days = 1
   tags = {
 

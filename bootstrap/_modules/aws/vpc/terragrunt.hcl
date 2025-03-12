@@ -29,6 +29,10 @@ locals {
 dependency "azs" {
   config_path = "${get_terragrunt_dir()}/../azs/"
 }
+dependency "bucket" {
+  config_path = "${get_terragrunt_dir()}/../bucket-logs/"
+
+}
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE PARAMETERS
 # These are the variables we have to pass in to use the module. This defines the parameters that are common across all
@@ -44,5 +48,6 @@ inputs = {
   public_subnet_ipv6_prefixes  = dependency.azs.outputs.public_subnet_ipv6_prefixes
   private_subnet_ipv6_prefixes = dependency.azs.outputs.private_subnet_ipv6_prefixes
 
+  log_s3_bucket_arn = dependency.bucket.outputs.log_s3_bucket_arn
 
 }

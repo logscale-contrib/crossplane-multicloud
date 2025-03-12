@@ -110,10 +110,10 @@ spec:
             type: RollingUpdate
           resources:
             requests:
-              memory: 12Gi
-              cpu: 1
+              memory: 8Gi
+              cpu: 1000m
             limits:
-              memory: 12Gi
+              memory: 8Gi
               cpu: 2
           environmentVariables:
             - name: NODE_ROLES
@@ -177,10 +177,10 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 12Gi
-              cpu: 1
+              memory: 8Gi
+              cpu: 1000m
             limits:
-              memory: 12Gi
+              memory: 8Gi
               cpu: 2
           environmentVariables:
             - name: NODE_ROLES
@@ -244,10 +244,10 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 12Gi
-              cpu: 1
+              memory: 8Gi
+              cpu: 1000m
             limits:
-              memory: 12Gi
+              memory: 8Gi
               cpu: 2
           environmentVariables:
             - name: NODE_ROLES
@@ -311,10 +311,10 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 12Gi
-              cpu: 1
+              memory: 8Gi
+              cpu: 1000m
             limits:
-              memory: 12Gi
+              memory: 8Gi
               cpu: 2
           environmentVariables:
             - name: NODE_ROLES
@@ -378,11 +378,11 @@ spec:
             allowedAPIRequestTypes: [None]
           resources:
             requests:
-              memory: 48Gi
-              cpu: 8
+              memory: 16Gi
+              cpu: 4
             limits:
-              memory: 48Gi
-              cpu: 8
+              memory: 16Gi
+              cpu: 4
           environmentVariables:
             - name: QUERY_COORDINATOR
               value: "false"
@@ -426,7 +426,7 @@ spec:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 2Ti
+                storage: 500Gi
             storageClassName: instancestore-nvme-ext4
           service:
             type: ClusterIP

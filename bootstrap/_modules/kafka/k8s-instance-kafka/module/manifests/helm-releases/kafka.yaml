@@ -36,10 +36,10 @@ spec:
           # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
           limits:
             cpu: 4
-            memory: 12Gi
+            memory: 16Gi
           requests:
             cpu: 4
-            memory: 12Gi
+            memory: 16Gi
         template:
           pod:
             affinity:
@@ -111,10 +111,10 @@ spec:
           # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
           limits:
             cpu: 1
-            memory: 8Gi
+            memory: 6Gi
           requests:
-            cpu: 100m
-            memory: 4Gi
+            cpu: 1000m
+            memory: 6Gi
         storage:
           type: persistent-claim
           size: 64Gi

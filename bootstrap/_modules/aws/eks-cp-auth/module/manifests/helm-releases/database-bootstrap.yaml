@@ -45,6 +45,7 @@ spec:
           storage:
             storageClass: cluster-block-base-ext4
             size: 50Gi
+          enablePDB: true
           affinity:
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:

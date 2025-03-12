@@ -34,8 +34,7 @@ module "log_bucket" {
         days = 14
       }
       expiration = {
-        days                         = 31
-        expired_object_delete_marker = true
+        days = 31
       }
 
     }

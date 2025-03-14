@@ -76,6 +76,7 @@ resource "aws_iam_role" "replication" {
     yor_name             = "replication"
     yor_trace            = "0a83d95a-8fa4-4535-acf5-aa1973164c1a"
   }
+
 }
 
 resource "aws_iam_policy" "replication_policy" {
@@ -121,6 +122,13 @@ resource "aws_s3_bucket_replication_configuration" "blue_green" {
 
     destination {
       bucket = var.bucket_arn_green
+
+      metrics {
+        event_threshold {
+          minutes = 15
+        }
+        status = "Enabled"
+      }
     }
   }
 }

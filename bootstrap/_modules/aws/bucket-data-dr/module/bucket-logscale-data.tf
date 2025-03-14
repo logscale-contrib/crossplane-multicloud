@@ -22,8 +22,13 @@ module "data-dr" {
     {
       id                                     = "storage"
       enabled                                = true
-      abort_incomplete_multipart_upload_days = 7
-
+      abort_incomplete_multipart_upload_days = 3
+      noncurrent_version_expiration = {
+        days = 7
+      }
+      expiration = {
+        days = 180
+      }
     }
   ]
   server_side_encryption_configuration = {

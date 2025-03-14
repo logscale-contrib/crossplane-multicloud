@@ -28,10 +28,10 @@ module "log_bucket" {
     {
       id                                     = "logs"
       enabled                                = true
-      abort_incomplete_multipart_upload_days = 7
+      abort_incomplete_multipart_upload_days = 2
 
       noncurrent_version_expiration = {
-        days = 14
+        days = 7
       }
       expiration = {
         days = 31

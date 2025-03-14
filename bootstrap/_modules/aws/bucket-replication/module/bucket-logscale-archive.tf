@@ -124,9 +124,9 @@ resource "aws_s3_bucket_replication_configuration" "blue_green" {
       bucket = var.bucket_arn_green
 
       metrics {
-        event_threshold {
-          minutes = 15
-        }
+        # event_threshold {
+        #   minutes = 15
+        # }
         status = "Enabled"
       }
     }

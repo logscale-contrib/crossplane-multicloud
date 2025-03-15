@@ -198,7 +198,7 @@ spec:
               kafka:
                 protocol_version: 2.0.0
                 brokers: $${KAFKA_BOOTSTRAP_SERVERS}
-                resolve_canonical_bootstrap_servers_only: true
+                # resolve_canonical_bootstrap_servers_only: true
                 client_id: otel-node
                 partition_traces_by_id: true
                 partition_metrics_by_resource_attributes: true

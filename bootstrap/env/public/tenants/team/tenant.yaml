@@ -4,3 +4,6 @@ shared:
     region: green
 logscale:
   mode: bootstrap
+  content:
+    otelK8s:
+      prefix: "ref-"

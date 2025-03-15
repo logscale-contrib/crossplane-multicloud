@@ -195,7 +195,7 @@ spec:
                 timeout: 5s
 
             exporters:
-              # debug: {}
+              debug: {}
               kafka:
                 protocol_version: 3.8.0
                 brokers:
@@ -222,12 +222,12 @@ spec:
                 logs:
                   receivers: [otlp]
                   processors: [memory_limiter, batch]
-                  exporters: [kafka]
+                  exporters: [debug, kafka]
                 traces:
                   receivers: [otlp]
                   processors: [memory_limiter, batch]
-                  exporters: [kafka]
+                  exporters: [debug, kafka]
                 metrics:
                   receivers: [otlp]
                   processors: [memory_limiter, batch]
-                  exporters: [kafka]
+                  exporters: [debug, kafka]

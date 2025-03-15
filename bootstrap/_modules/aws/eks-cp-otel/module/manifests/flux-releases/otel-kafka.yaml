@@ -165,12 +165,13 @@ spec:
 
           volumes:
             - name: kafka-trust-store
+
               secret:
                 # Provide the name of the ConfigMap containing the files you want
                 # to add to the container
                 secretName: otel-producer
                 items:
-                  - key: ssl.truststore.crt
+                  - key: cluster-bundle.pem
                     path: bundle.pem
           volumeMounts:
             - name: kafka-trust-store

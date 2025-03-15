@@ -26,100 +26,101 @@ spec:
   test:
     enable: false
   values:
-    - apiVersion: kafka.strimzi.io/v1beta2
-      kind: KafkaTopic
-      metadata:
-        name: otlp-spans
-        annotations:
-          helm.sh/resource-policy: "keep"
-        labels:
-          strimzi.io/cluster: shared
-      spec:
-        topicName: otlp_spans
-        partitions: 64
-        replicas: 3
-        config:
-          cleanup.policy: "delete"
-          compression.type: producer
-          min.insync.replicas: 2
-          retention.ms: 86400000
-          retention.bytes: -1
-    - apiVersion: kafka.strimzi.io/v1beta2
-      kind: KafkaTopic
-      metadata:
-        name: otlp_metrics
-        annotations:
-          helm.sh/resource-policy: "keep"
-        labels:
-          strimzi.io/cluster: shared
-      spec:
-        topicName: otlp_metrics
-        partitions: 64
-        replicas: 3
-        config:
-          cleanup.policy: "delete"
-          compression.type: producer
-          min.insync.replicas: 2
-          retention.ms: 86400000
-          retention.bytes: -1
-    - apiVersion: kafka.strimzi.io/v1beta2
-      kind: KafkaTopic
-      metadata:
-        name: otlp-logs
-        annotations:
-          helm.sh/resource-policy: "keep"
-        labels:
-          strimzi.io/cluster: shared
-      spec:
-        topicName: otlp_logs
-        partitions: 64
-        replicas: 3
-        config:
-          cleanup.policy: "delete"
-          compression.type: producer
-          min.insync.replicas: 2
-          retention.ms: 86400000
-          retention.bytes: -1
-    - apiVersion: kafka.strimzi.io/v1beta2
-      kind: KafkaUser
-      metadata:
-        name: otel-producer
-        labels:
-          strimzi.io/cluster: shared
-      spec:
-        authentication:
-          type: tls-external
-        authorization:
-          type: simple
-          acls:
-            # Example ACL rules for consuming from my-topic using consumer group my-group
-            - resource:
-                type: cluster
-              operations:
-                - Describe
-            - resource:
-                type: topic
-                name: otlp_
-                patternType: prefix
-              operations:
-                - Delete
-                - Describe
-                - DescribeConfigs
-                - Read
-                - Write
-              host: "*"
-    - apiVersion: access.strimzi.io/v1alpha1
-      kind: KafkaAccess
-      metadata:
-        name: otel-producer
-        namespace: kube-system
-      spec:
-        kafka:
-          name: shared
-          namespace: shared-kafka
-          listener: tls
-        user:
-          kind: KafkaUser
-          apiGroup: kafka.strimzi.io
+    resources:
+      - apiVersion: kafka.strimzi.io/v1beta2
+        kind: KafkaTopic
+        metadata:
+          name: otlp-spans
+          annotations:
+            helm.sh/resource-policy: "keep"
+          labels:
+            strimzi.io/cluster: shared
+        spec:
+          topicName: otlp_spans
+          partitions: 64
+          replicas: 3
+          config:
+            cleanup.policy: "delete"
+            compression.type: producer
+            min.insync.replicas: 2
+            retention.ms: 86400000
+            retention.bytes: -1
+      - apiVersion: kafka.strimzi.io/v1beta2
+        kind: KafkaTopic
+        metadata:
+          name: otlp_metrics
+          annotations:
+            helm.sh/resource-policy: "keep"
+          labels:
+            strimzi.io/cluster: shared
+        spec:
+          topicName: otlp_metrics
+          partitions: 64
+          replicas: 3
+          config:
+            cleanup.policy: "delete"
+            compression.type: producer
+            min.insync.replicas: 2
+            retention.ms: 86400000
+            retention.bytes: -1
+      - apiVersion: kafka.strimzi.io/v1beta2
+        kind: KafkaTopic
+        metadata:
+          name: otlp-logs
+          annotations:
+            helm.sh/resource-policy: "keep"
+          labels:
+            strimzi.io/cluster: shared
+        spec:
+          topicName: otlp_logs
+          partitions: 64
+          replicas: 3
+          config:
+            cleanup.policy: "delete"
+            compression.type: producer
+            min.insync.replicas: 2
+            retention.ms: 86400000
+            retention.bytes: -1
+      - apiVersion: kafka.strimzi.io/v1beta2
+        kind: KafkaUser
+        metadata:
           name: otel-producer
-          namespace: shared-kafka
+          labels:
+            strimzi.io/cluster: shared
+        spec:
+          authentication:
+            type: tls-external
+          authorization:
+            type: simple
+            acls:
+              # Example ACL rules for consuming from my-topic using consumer group my-group
+              - resource:
+                  type: cluster
+                operations:
+                  - Describe
+              - resource:
+                  type: topic
+                  name: otlp_
+                  patternType: prefix
+                operations:
+                  - Delete
+                  - Describe
+                  - DescribeConfigs
+                  - Read
+                  - Write
+                host: "*"
+      - apiVersion: access.strimzi.io/v1alpha1
+        kind: KafkaAccess
+        metadata:
+          name: otel-producer
+          namespace: kube-system
+        spec:
+          kafka:
+            name: shared
+            namespace: shared-kafka
+            listener: tls
+          user:
+            kind: KafkaUser
+            apiGroup: kafka.strimzi.io
+            name: otel-producer
+            namespace: shared-kafka

@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: otel-kafka
+  name: otel-collector
   namespace: kube-system
 spec:
   interval: 10m
@@ -16,7 +16,7 @@ spec:
         namespace: flux-repos
       interval: 5m
   releaseName: otel-kafka
-  targetNamespace: shared-kafka
+  targetNamespace: kube-system
   install:
     remediation:
       retries: 3

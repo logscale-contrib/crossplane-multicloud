@@ -89,7 +89,7 @@ spec:
             strimzi.io/cluster: shared
         spec:
           authentication:
-            type: tls-external
+            type: scram-sha-512
           authorization:
             type: simple
             acls:

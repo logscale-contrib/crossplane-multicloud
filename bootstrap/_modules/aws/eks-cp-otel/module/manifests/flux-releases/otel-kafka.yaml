@@ -190,11 +190,11 @@ spec:
                 limit_percentage: 75
                 spike_limit_percentage: 15
               batch:
-                send_batch_size: 10000
+                send_batch_size: 1000
                 timeout: 10s
 
             exporters:
-              debug: {}
+              # debug: {}
               kafka:
                 protocol_version: 2.0.0
                 brokers: $${KAFKA_BOOTSTRAP_SERVERS}
@@ -216,7 +216,15 @@ spec:
                   flush_max_messages: 1000
             service:
               pipelines:
+                logs:
+                  receivers: [otlp]
+                  processors: [memory_limiter, batch]
+                  exporters: [kafka]
                 traces:
                   receivers: [otlp]
                   processors: [memory_limiter, batch]
-                  exporters: [debug]
+                  exporters: [kafka]
+                metrics:
+                  receivers: [otlp]
+                  processors: [memory_limiter, batch]
+                  exporters: [kafka]

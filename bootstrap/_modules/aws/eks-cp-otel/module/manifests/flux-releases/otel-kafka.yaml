@@ -48,7 +48,7 @@ spec:
       - apiVersion: kafka.strimzi.io/v1beta2
         kind: KafkaTopic
         metadata:
-          name: otlp_metrics
+          name: otlp-metrics
           annotations:
             helm.sh/resource-policy: "keep"
           labels:

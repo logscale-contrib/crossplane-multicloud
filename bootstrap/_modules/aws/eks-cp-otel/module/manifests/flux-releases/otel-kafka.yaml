@@ -196,8 +196,9 @@ spec:
             exporters:
               # debug: {}
               kafka:
-                protocol_version: 2.0.0
-                brokers: $${KAFKA_BOOTSTRAP_SERVERS}
+                protocol_version: 3.8.0
+                brokers:
+                  - $${KAFKA_BOOTSTRAP_SERVERS}
                 # resolve_canonical_bootstrap_servers_only: true
                 client_id: otel-node
                 partition_traces_by_id: true
@@ -211,7 +212,7 @@ spec:
                     version: 1
                   tls:
                     ca_file: /mnt/kafka/truststore/bundle.pem
-                    insecure_skip_verify: true
+                    insecure_skip_verify: false
                 producer:
                   compression: lz4
                   flush_max_messages: 1000

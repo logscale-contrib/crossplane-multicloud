@@ -27,7 +27,7 @@ locals {
 
 }
 dependency "logscale" {
-  config_path  = "${get_terragrunt_dir()}/../../../../../tenants/${local.tenantName}/logscale/instance/"
+  config_path  = "${get_terragrunt_dir()}/../../../../../../tenants/${local.tenantName}/logscale/instance/"
   skip_outputs = true
 }
 

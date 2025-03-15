@@ -147,17 +147,17 @@ spec:
                 secretKeyRef:
                   name: otel-producer
                   key: bootstrap.servers
-            - NAME: KAFKA_SASL_USERNAME
+            - name: KAFKA_SASL_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: otel-producer
                   key: username
-            - NAME: KAFKA_SASL_PASSWORD
+            - name: KAFKA_SASL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: otel-producer
                   key: password
-            - NAME: KAFKA_SASL_MECHANISM
+            - name: KAFKA_SASL_MECHANISM
               valueFrom:
                 secretKeyRef:
                   name: otel-producer

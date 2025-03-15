@@ -169,7 +169,7 @@ spec:
               configMap:
                 # Provide the name of the ConfigMap containing the files you want
                 # to add to the container
-                name: otel-producer
+                name: cluster-trust-bundle
                 items:
                   - key: cluster-bundle.pem
                     path: bundle.pem

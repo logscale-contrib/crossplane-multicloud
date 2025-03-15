@@ -146,11 +146,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: otel-producer
-                  key: bootstrapServers
-            - name: KAFKA_BOOTSTRAP_SERVERS
-              valueFrom:
-                secretKeyRef:
-                  name: otel-producer
                   key: bootstrap.servers
             - NAME: KAFKA_SASL_USERNAME
               valueFrom:

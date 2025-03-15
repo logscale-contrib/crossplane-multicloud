@@ -29,7 +29,6 @@ data "kubectl_file_documents" "logscale" {
       # saml_url                 = var.saml_url
       # rootUser                 = var.LogScaleRoot
       # ingest_role_arn          = module.ingest-role.iam_role_arn
-      # scim_token               = var.scim_token
       # smtp_server              = var.smtp_server
       # smtp_port                = var.smtp_port
       # smtp_use_tls             = var.smtp_use_tls

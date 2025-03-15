@@ -139,6 +139,33 @@ spec:
             type: RollingUpdate
           tolerations:
             - operator: Exists
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                secretKeyRef:
+                  name: otel-producer
+                  key: bootstrapServers
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                secretKeyRef:
+                  name: otel-producer
+                  key: bootstrap.servers
+            - NAME: KAFKA_SASL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: otel-producer
+                  key: username
+            - NAME: KAFKA_SASL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: otel-producer
+                  key: password
+            - NAME: KAFKA_SASL_MECHANISM
+              valueFrom:
+                secretKeyRef:
+                  name: otel-producer
+                  key: sasl.mechanism
+
           volumes:
             - name: kafka-trust-store
               secret:
@@ -171,7 +198,25 @@ spec:
 
             exporters:
               debug: {}
-
+              kafka:
+                protocol_version: 2.0.0
+                brokers: ${KAFKA_BOOTSTRAP_SERVERS}
+                resolve_canonical_bootstrap_servers_only: true
+                client_id: otel-node
+                partition_traces_by_id: true
+                partition_metrics_by_resource_attributes: true
+                partition_logs_by_resource_attributes: true
+                auth:
+                  sasl:
+                    username: ${KAFKA_SASL_USERNAME}
+                    password: ${KAFKA_SASL_PASSWORD}
+                    mechanism: ${KAFKA_SASL_MECHANISM
+                    version: 1
+                  tls:
+                    ca_file: /mnt/kafka/truststore/bundle.pem
+                producer:
+                  compression: lz4
+                  flush_max_messages: 1000
             service:
               pipelines:
                 traces:

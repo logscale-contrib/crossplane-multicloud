@@ -200,7 +200,7 @@ spec:
               debug: {}
               kafka:
                 protocol_version: 2.0.0
-                brokers: ${KAFKA_BOOTSTRAP_SERVERS}
+                brokers: $${KAFKA_BOOTSTRAP_SERVERS}
                 resolve_canonical_bootstrap_servers_only: true
                 client_id: otel-node
                 partition_traces_by_id: true
@@ -208,9 +208,9 @@ spec:
                 partition_logs_by_resource_attributes: true
                 auth:
                   sasl:
-                    username: ${KAFKA_SASL_USERNAME}
-                    password: ${KAFKA_SASL_PASSWORD}
-                    mechanism: ${KAFKA_SASL_MECHANISM
+                    username: $${KAFKA_SASL_USERNAME}
+                    password: $${KAFKA_SASL_PASSWORD}
+                    mechanism: $${KAFKA_SASL_MECHANISM
                     version: 1
                   tls:
                     ca_file: /mnt/kafka/truststore/bundle.pem

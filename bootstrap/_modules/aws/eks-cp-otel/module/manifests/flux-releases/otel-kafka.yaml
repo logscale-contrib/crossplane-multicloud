@@ -131,6 +131,27 @@ spec:
           namespace: kube-system
         spec:
           mode: daemonset
+          priorityClassName: system-node-critical
+          updateStrategy:
+            rollingUpdate:
+              maxSurge: 0
+              maxUnavailable: 25%
+            type: RollingUpdate
+          tolerations:
+            - operator: Exists
+          volumes:
+            - name: kafka-trust-store
+              secret:
+                # Provide the name of the ConfigMap containing the files you want
+                # to add to the container
+                secretName: otel-producer
+                items:
+                  - key: ssl.truststore.crt
+                    path: bundle.pem
+          volumeMounts:
+            - name: kafka-trust-store
+              mountPath: /mnt/kafka/truststore
+              readOnly: true
           config:
             receivers:
               otlp:

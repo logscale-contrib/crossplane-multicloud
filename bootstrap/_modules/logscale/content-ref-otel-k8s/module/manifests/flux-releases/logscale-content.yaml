@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: logscale-content-${preifx}otel-k8s
+  name: logscale-content-${prefix}otel-k8s
   namespace: ${logscale_namespace}
 spec:
   interval: 10m
@@ -15,7 +15,7 @@ spec:
         name: bedag
         namespace: flux-repos
       interval: 5m
-  releaseName: logscale-content-${preifx}otel-k8s
+  releaseName: logscale-content-${prefix}otel-k8s
   install:
     remediation:
       retries: 3
@@ -38,10 +38,10 @@ spec:
         apiVersion: core.humio.com/v1alpha1
         kind: HumioRepository
         metadata:
-          name: ${preifx}otel-k8s
+          name: ${prefix}otel-k8s
         spec:
           managedClusterName: logscale
-          name: "${preifx}otel-k8s"
+          name: "${prefix}otel-k8s"
           description: "Reference repo for otel collector k8s"
           allowDataDeletion: ${allowDataDeletion}
           retention:
@@ -50,7 +50,7 @@ spec:
         apiVersion: core.humio.com/v1alpha1
         kind: HumioParser
         metadata:
-          name: ${preifx}otel-k8s
+          name: ${prefix}otel-k8s
         spec:
           managedClusterName: logscale
           name: "otel"
@@ -99,7 +99,7 @@ spec:
             // #endregion
 
 
-          repositoryName: "${preifx}otel-k8s"
+          repositoryName: "${prefix}otel-k8s"
           tagFields:
           - Cps.version
           - Vendor
@@ -116,10 +116,10 @@ spec:
         apiVersion: core.humio.com/v1alpha1
         kind: HumioIngestToken
         metadata:
-          name: ${preifx}otel-k8s
+          name: ${prefix}otel-k8s
         spec:
           managedClusterName: logscale
           name: otel
           parserName: otel
-          repositoryName: ${preifx}otel-k8s
-          tokenSecretName: ingest-token-${preifx}otel-k8s
+          repositoryName: ${prefix}otel-k8s
+          tokenSecretName: ingest-token-${prefix}otel-k8s

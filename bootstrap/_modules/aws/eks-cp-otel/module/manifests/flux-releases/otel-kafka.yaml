@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: otel-kafka
-  namespace: shared-kafka
+  namespace: kube-system
 spec:
   interval: 10m
   timeout: 5m
@@ -31,6 +31,7 @@ spec:
         kind: KafkaTopic
         metadata:
           name: otlp-spans
+          namespace: shared-kafka
           annotations:
             helm.sh/resource-policy: "keep"
           labels:
@@ -49,6 +50,7 @@ spec:
         kind: KafkaTopic
         metadata:
           name: otlp-metrics
+          namespace: shared-kafka
           annotations:
             helm.sh/resource-policy: "keep"
           labels:
@@ -67,6 +69,7 @@ spec:
         kind: KafkaTopic
         metadata:
           name: otlp-logs
+          namespace: shared-kafka
           annotations:
             helm.sh/resource-policy: "keep"
           labels:
@@ -85,6 +88,7 @@ spec:
         kind: KafkaUser
         metadata:
           name: otel-producer
+          namespace: shared-kafka
           labels:
             strimzi.io/cluster: shared
         spec:
@@ -113,7 +117,6 @@ spec:
         kind: KafkaAccess
         metadata:
           name: otel-producer
-          namespace: kube-system
         spec:
           kafka:
             name: shared
@@ -128,7 +131,6 @@ spec:
         kind: OpenTelemetryCollector
         metadata:
           name: otel-node
-          namespace: kube-system
         spec:
           mode: daemonset
           priorityClassName: system-node-critical
@@ -210,7 +212,7 @@ spec:
                   sasl:
                     username: $${KAFKA_SASL_USERNAME}
                     password: $${KAFKA_SASL_PASSWORD}
-                    mechanism: $${KAFKA_SASL_MECHANISM
+                    mechanism: $${KAFKA_SASL_MECHANISM}
                     version: 1
                   tls:
                     ca_file: /mnt/kafka/truststore/bundle.pem

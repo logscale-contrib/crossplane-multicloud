@@ -29,11 +29,11 @@ spec:
     - apiVersion: kafka.strimzi.io/v1beta2
       kind: KafkaTopic
       metadata:
-        name: otlp_spans
+        name: otlp-spans
         annotations:
           helm.sh/resource-policy: "keep"
         labels:
-          strimzi.io/cluster: shared-kafka
+          strimzi.io/cluster: shared
       spec:
         topicName: otlp_spans
         partitions: 64
@@ -51,7 +51,7 @@ spec:
         annotations:
           helm.sh/resource-policy: "keep"
         labels:
-          strimzi.io/cluster: shared-kafka
+          strimzi.io/cluster: shared
       spec:
         topicName: otlp_metrics
         partitions: 64
@@ -65,11 +65,11 @@ spec:
     - apiVersion: kafka.strimzi.io/v1beta2
       kind: KafkaTopic
       metadata:
-        name: otlp_logs
+        name: otlp-logs
         annotations:
           helm.sh/resource-policy: "keep"
         labels:
-          strimzi.io/cluster: shared-kafka
+          strimzi.io/cluster: shared
       spec:
         topicName: otlp_logs
         partitions: 64
@@ -85,7 +85,7 @@ spec:
       metadata:
         name: otel-producer
         labels:
-          strimzi.io/cluster: shared-kafka
+          strimzi.io/cluster: shared
       spec:
         authentication:
           type: tls-external
@@ -115,7 +115,7 @@ spec:
         namespace: kube-system
       spec:
         kafka:
-          name: shared-kafka
+          name: shared
           namespace: shared-kafka
           listener: tls
         user:

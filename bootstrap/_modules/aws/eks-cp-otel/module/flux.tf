@@ -4,9 +4,9 @@ data "kubectl_path_documents" "flux2-repos" {
 }
 
 resource "kubectl_manifest" "flux2-repos" {
-  depends_on = [
-    kubectl_manifest.namespaces
-  ]
+  # depends_on = [
+  #   kubectl_manifest.namespaces
+  # ]
   for_each  = data.kubectl_path_documents.flux2-repos.manifests
   yaml_body = each.value
 }

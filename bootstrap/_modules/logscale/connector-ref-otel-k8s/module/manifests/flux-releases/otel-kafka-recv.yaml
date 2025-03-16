@@ -75,7 +75,7 @@ spec:
         metadata:
           name: otel-${logscale_namespace}
         spec:
-          mode: Deployment
+          mode: deployment
           priorityClassName: tenant-low
           replicas: 1
           env:

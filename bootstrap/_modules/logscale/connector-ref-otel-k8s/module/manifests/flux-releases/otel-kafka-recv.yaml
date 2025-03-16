@@ -59,7 +59,7 @@ spec:
         kind: KafkaAccess
         metadata:
           name: otel-${logscale_namespace}-consumer
-          namespace: shared-kafka
+          namespace: ${logscale_namespace}
         spec:
           kafka:
             name: shared

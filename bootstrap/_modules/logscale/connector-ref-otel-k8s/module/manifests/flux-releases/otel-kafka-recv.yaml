@@ -139,7 +139,7 @@ spec:
                 brokers:
                   - $${KAFKA_BOOTSTRAP_SERVERS}
                 # resolve_canonical_bootstrap_servers_only: true
-                group_id: $${logscale_namespace}
+                group_id: ${logscale_namespace}
                 client_id: otel-recv
                 initial_offset: earliest
                 auth:

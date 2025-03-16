@@ -164,8 +164,10 @@ spec:
                   key: sasl.mechanism
 
           volumes:
+            - name: varlogpods
+              hostPath:
+                path: /var/log/pods
             - name: kafka-trust-store
-
               configMap:
                 # Provide the name of the ConfigMap containing the files you want
                 # to add to the container
@@ -174,6 +176,9 @@ spec:
                   - key: cluster-bundle.pem
                     path: bundle.pem
           volumeMounts:
+            - name: varlogpods
+              mountPath: /var/log/pods
+              readOnly: true
             - name: kafka-trust-store
               mountPath: /mnt/kafka/truststore
               readOnly: true

@@ -30,7 +30,7 @@ spec:
       - apiVersion: kafka.strimzi.io/v1beta2
         kind: KafkaUser
         metadata:
-          name: otel-${logscale_namespace}
+          name: otel-${logscale_namespace}-consumer
           namespace: shared-kafka
           labels:
             strimzi.io/cluster: shared
@@ -58,7 +58,7 @@ spec:
       - apiVersion: access.strimzi.io/v1alpha1
         kind: KafkaAccess
         metadata:
-          name: otel-${logscale_namespace}
+          name: otel-${logscale_namespace}-consumer
           namespace: shared-kafka
         spec:
           kafka:
@@ -89,22 +89,22 @@ spec:
             - name: KAFKA_BOOTSTRAP_SERVERS
               valueFrom:
                 secretKeyRef:
-                  name: otel-producer
+                  name: otel-${logscale_namespace}-consumer
                   key: bootstrap.servers
             - name: KAFKA_SASL_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: otel-producer
+                  name: otel-${logscale_namespace}-consumer
                   key: username
             - name: KAFKA_SASL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: otel-producer
+                  name: otel-${logscale_namespace}-consumer
                   key: password
             - name: KAFKA_SASL_MECHANISM
               valueFrom:
                 secretKeyRef:
-                  name: otel-producer
+                  name: otel-${logscale_namespace}-consumer
                   key: sasl.mechanism
 
           volumes:

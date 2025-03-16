@@ -54,7 +54,12 @@ spec:
                   - DescribeConfigs
                   - Read
                   - Write
-                host: "*"
+              - resource:
+                  type: group
+                  name: $${logscale_namespace}
+                  patternType: literal
+                operations:
+                  - Read
       - apiVersion: access.strimzi.io/v1alpha1
         kind: KafkaAccess
         metadata:

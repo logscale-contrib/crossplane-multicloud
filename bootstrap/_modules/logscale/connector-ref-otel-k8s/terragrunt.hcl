@@ -25,6 +25,8 @@ locals {
   tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
   appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
 
+  tenant = yamldecode(file("${get_terragrunt_dir()}/../../../../../../tenants/${local.tenantName}/tenant.yaml"))
+
 }
 dependency "logscale" {
   config_path  = "${get_terragrunt_dir()}/../../../../../../tenants/${local.tenantName}/logscale/instance/"

@@ -179,6 +179,13 @@ spec:
               readOnly: true
           config:
             receivers:
+              filelog:
+                include_file_path: true
+                include:
+                  - /var/log/pods/*/*/*.log
+                operators:
+                  - id: container-parser
+                    type: container
               otlp:
                 protocols:
                   grpc:

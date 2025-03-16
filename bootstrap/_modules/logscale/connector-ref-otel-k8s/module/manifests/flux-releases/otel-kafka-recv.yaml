@@ -68,7 +68,7 @@ spec:
           user:
             kind: KafkaUser
             apiGroup: kafka.strimzi.io
-            name: otel-${logscale_namespace}
+            name: otel-${logscale_namespace}-consumer
             namespace: shared-kafka
       - apiVersion: opentelemetry.io/v1beta1
         kind: OpenTelemetryCollector

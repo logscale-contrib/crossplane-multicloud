@@ -140,9 +140,6 @@ spec:
                   tls:
                     ca_file: /mnt/kafka/truststore/bundle.pem
                     insecure_skip_verify: false
-                producer:
-                  compression: lz4
-                  flush_max_messages: 1000
             processors:
               memory_limiter:
                 check_interval: 1s

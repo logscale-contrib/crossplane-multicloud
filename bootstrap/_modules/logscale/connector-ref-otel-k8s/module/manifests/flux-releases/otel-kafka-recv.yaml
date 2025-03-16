@@ -56,7 +56,7 @@ spec:
                   - Write
               - resource:
                   type: group
-                  name: $${logscale_namespace}
+                  name: ${logscale_namespace}
                   patternType: literal
                 operations:
                   - Read
@@ -111,7 +111,13 @@ spec:
                 secretKeyRef:
                   name: otel-${logscale_namespace}-consumer
                   key: sasl.mechanism
-
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 100m
+            limits:
+              memory: 128Mi
+              cpu: 1
           volumes:
             - name: kafka-trust-store
               configMap:

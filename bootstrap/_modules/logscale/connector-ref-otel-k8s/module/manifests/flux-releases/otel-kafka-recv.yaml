@@ -91,6 +91,11 @@ spec:
                 secretKeyRef:
                   name: ingest-token-ref-otel-k8s
                   key: token
+            - name: LOGSCALE_OTEL_DEBUG_INGEST_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: ingest-token-${prefix}otel-collector-telemetry
+                  key: token
             - name: KAFKA_BOOTSTRAP_SERVERS
               valueFrom:
                 secretKeyRef:
@@ -163,7 +168,7 @@ spec:
             exporters:
               debug: {}
               otlphttp:
-                endpoint: $${LOGSCALE_INGEST_URI}
+                endpoint: $${LOGSCALE_INGEST_URI}/api/v1/ingest/otlp
                 tls:
                   insecure: true
                 timeout: 20s
@@ -192,3 +197,14 @@ spec:
                   exporters:
                     - otlphttp
                     - debug
+              telemetry:
+                logs:
+                  processors:
+                    - batch:
+                        exporter:
+                          otlphttp:
+                            # protocol: http/text
+                            endpoint: https://${LOGSCALE_INGEST_URI}:8080/api/v1/ingest/otlp
+                            headers:
+                              Authorization: Bearer $${LOGSCALE_OTEL_DEBUG_INGEST_TOKEN}
+                            compression: gzip

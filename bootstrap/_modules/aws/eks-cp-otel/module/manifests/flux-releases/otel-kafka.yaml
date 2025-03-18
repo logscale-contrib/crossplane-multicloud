@@ -207,7 +207,8 @@ spec:
                 timeout: 5s
 
             exporters:
-              debug: {}
+              debug:
+                verbosity: detailed
               kafka:
                 protocol_version: 3.8.0
                 brokers:
@@ -243,3 +244,8 @@ spec:
                   receivers: [otlp]
                   processors: [memory_limiter, batch]
                   exporters: [debug, kafka]
+              telemetry:
+                metrics:
+                  address: 0.0.0.0:8888
+                logs:
+                  level: DEBUG

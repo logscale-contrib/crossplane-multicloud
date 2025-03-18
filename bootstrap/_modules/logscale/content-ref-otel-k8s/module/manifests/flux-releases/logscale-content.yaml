@@ -139,7 +139,7 @@ spec:
         apiVersion: core.humio.com/v1alpha1
         kind: HumioParser
         metadata:
-          name: ${prefix}otel-k8s
+          name: ${prefix}otel-debug
         spec:
           managedClusterName: logscale
           name: "otel"

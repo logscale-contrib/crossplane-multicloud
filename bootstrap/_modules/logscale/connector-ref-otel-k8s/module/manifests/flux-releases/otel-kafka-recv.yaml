@@ -197,21 +197,21 @@ spec:
                   exporters:
                     - otlphttp
                     - debug
-                  telemetry:
-                    logs:
-                      processors:
-                        - batch:
-                            exporter:
-                              otlphttp:
-                                # protocol: http/text
-                                endpoint: http://$${LOGSCALE_INGEST_URI}:8080/api/v1/ingest/otlp
-                                headers:
-                                  Authorization: Bearer $${LOGSCALE_OTEL_DEBUG_INGEST_TOKEN}
-                                compression: gzip
-                                tls:
-                                  insecure: true
-                                timeout: 20s
-                                sending_queue:
-                                  enabled: true
-                                  num_consumers: 2
-                                  queue_size: 10
+              telemetry:
+                logs:
+                  processors:
+                    - batch:
+                        exporter:
+                          otlphttp:
+                            # protocol: http/text
+                            endpoint: http://$${LOGSCALE_INGEST_URI}:8080/api/v1/ingest/otlp
+                            headers:
+                              Authorization: Bearer $${LOGSCALE_OTEL_DEBUG_INGEST_TOKEN}
+                            compression: gzip
+                            tls:
+                              insecure: true
+                            timeout: 20s
+                            sending_queue:
+                              enabled: true
+                              num_consumers: 2
+                              queue_size: 10

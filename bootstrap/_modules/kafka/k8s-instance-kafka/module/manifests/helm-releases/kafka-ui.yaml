@@ -15,7 +15,7 @@ spec:
         name: kafka-ui
         namespace: flux-repos
       interval: 5m
-  releaseName: ${namespace}-ui
+  releaseName: kafka-ui
   install:
     remediation:
       retries: 3

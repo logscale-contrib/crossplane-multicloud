@@ -204,7 +204,7 @@ spec:
                         exporter:
                           otlphttp:
                             # protocol: http/text
-                            endpoint: https://${LOGSCALE_INGEST_URI}:8080/api/v1/ingest/otlp
+                            endpoint: https://$${LOGSCALE_INGEST_URI}:8080/api/v1/ingest/otlp
                             headers:
                               Authorization: Bearer $${LOGSCALE_OTEL_DEBUG_INGEST_TOKEN}
                             compression: gzip

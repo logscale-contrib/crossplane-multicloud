@@ -188,7 +188,7 @@ spec:
             // #endregion
 
 
-          repositoryName: "${prefix}otel-k8s"
+          repositoryName: "${prefix}otel-collector-telemetry"
           tagFields:
           - Cps.version
           - Vendor

@@ -123,3 +123,92 @@ spec:
           parserName: otel
           repositoryName: ${prefix}otel-k8s
           tokenSecretName: ingest-token-${prefix}otel-k8s
+      - |-
+        apiVersion: core.humio.com/v1alpha1
+        kind: HumioRepository
+        metadata:
+          name: ${prefix}otel-collector-telemetry
+        spec:
+          managedClusterName: logscale
+          name: "${prefix}otel-collector-telemetry"
+          description: "Reference repo for otel collector k8s"
+          allowDataDeletion: ${allowDataDeletion}
+          retention:
+            timeInDays: 7
+      - |-
+        apiVersion: core.humio.com/v1alpha1
+        kind: HumioParser
+        metadata:
+          name: ${prefix}otel-k8s
+        spec:
+          managedClusterName: logscale
+          name: "otel"
+          parserScript: |
+            // #region PREPARSE
+            /************************************************************
+            ****** Parse timestamp and log headers
+            ****** Extract message field for parsing
+            ****** Parse structured data
+            ************************************************************/
+
+
+            // #endregion
+
+            // #region METADATA
+            /************************************************************
+            ****** Static Metadata Definitions
+            ************************************************************/
+            | ecs.version := "8.11.0"
+            | Cps.version := "1.0.0"
+            | Parser.version := "1.0.0"
+            | Vendor := "OpenTelemetry"
+            | event.module := "coll"
+            | event.dataset := "logs"
+            | event.kind := "event"
+            | event.category[0] := "unknown"
+            | event.type[0] := "info"
+            // #endregion
+
+            // #region NORMALIZATION
+            /************************************************************
+            ****** Parse unstructured data (i.e. message field)
+            ****** Normalize fields to data model
+            ************************************************************/
+
+
+            // #endregion
+
+            // #region POST-NORMALIZATION
+            /************************************************************
+            ****** Post Normalization
+            ****** Custom parser logic needed after normalization
+            ************************************************************/
+
+
+            // #endregion
+
+
+          repositoryName: "${prefix}otel-k8s"
+          tagFields:
+          - Cps.version
+          - Vendor
+          - ecs.version
+          - event.dataset
+          - event.kind
+          - event.module
+          - event.outcome
+          - observer.type
+          testData:
+          - |
+            {"level":"debug","HOSTNAME":"ip-10-0-35-227.ec2.internal","GOOS":"linux","GOARCH":"amd64","GOVERSION":"go1.23.2","PID":"451038","MACHINEID":"8052e591-7ee2-4b52-89bd-8d5f6ca37ed9","VERSION":"1.8.1","GITCOMMIT":"00312e65af50405da47af7bb45e34f74be2ee42a","GITDATE":"2024-11-26T09:34:17Z","COMPILEDAT":"2024-11-26T10:10:41Z","time":1741452036251,"caller":"go.crwd.dev/lc/log-collector/internal/fleet/metrics.go:274","message":"Sent metric event"}
+      - |-
+        apiVersion: core.humio.com/v1alpha1
+        kind: HumioIngestToken
+        metadata:
+          name: ${prefix}otel-collector-telemetry
+        spec:
+          managedClusterName: logscale
+          name: otel
+          parserName: otel
+          repositoryName: ${prefix}otel-collector-telemetry
+          tokenSecretName: ingest-token-${prefix}otel-collector-telemetry

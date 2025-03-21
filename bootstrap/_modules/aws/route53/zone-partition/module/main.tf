@@ -1,6 +1,6 @@
 module "zone" {
   source  = "terraform-aws-modules/route53/aws//modules/zones"
-  version = "4.1.0"
+  version = "5.0.0"
 
   zones = {
     "${var.child_domain}.${var.parent_domain}" = {
@@ -25,7 +25,7 @@ data "aws_route53_zone" "selected" {
 
 module "delegation_records" {
   source  = "terraform-aws-modules/route53/aws//modules/records"
-  version = "4.1.0"
+  version = "5.0.0"
 
   zone_id = data.aws_route53_zone.selected.zone_id
   records = [{

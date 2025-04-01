@@ -118,7 +118,7 @@ spec:
           environmentVariables:
             - name: NODE_ROLES
               value: "httponly"
-            - name: INITIAL_DISABLED_NODE_TASK
+            - name: INITIAL_DISABLED_NODE_TASKS
               value: query
           affinity:
             nodeAffinity:
@@ -185,7 +185,7 @@ spec:
           environmentVariables:
             - name: NODE_ROLES
               value: "httponly"
-            - name: INITIAL_DISABLED_NODE_TASK
+            - name: INITIAL_DISABLED_NODE_TASKS
               value: query
           affinity:
             nodeAffinity:
@@ -380,7 +380,7 @@ spec:
               memory: 16Gi
               cpu: 4
           environmentVariables:
-            - name: INITIAL_DISABLED_NODE_TASK
+            - name: INITIAL_DISABLED_NODE_TASKS
               value: query
           affinity:
             nodeAffinity:

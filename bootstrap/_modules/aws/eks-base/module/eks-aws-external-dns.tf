@@ -2,7 +2,7 @@
 
 module "edns_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.54.0"
+  version = "5.54.1"
 
   role_name_prefix = "external-dns"
   role_path        = var.iam_role_path

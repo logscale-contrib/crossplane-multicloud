@@ -118,8 +118,8 @@ spec:
           environmentVariables:
             - name: NODE_ROLES
               value: "httponly"
-            - name: QUERY_COORDINATOR
-              value: "false"
+            - name: INITIAL_DISABLED_NODE_TASK
+              value: query
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -185,8 +185,8 @@ spec:
           environmentVariables:
             - name: NODE_ROLES
               value: "httponly"
-            - name: QUERY_COORDINATOR
-              value: "false"
+            - name: INITIAL_DISABLED_NODE_TASK
+              value: query
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -251,9 +251,7 @@ spec:
               cpu: 2
           environmentVariables:
             - name: NODE_ROLES
-              value: "httponly"
-            - name: QUERY_COORDINATOR
-              value: "false"
+              value: "ingestonly"
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -319,8 +317,6 @@ spec:
           environmentVariables:
             - name: NODE_ROLES
               value: "httponly"
-            - name: QUERY_COORDINATOR
-              value: "true"
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -384,8 +380,8 @@ spec:
               memory: 16Gi
               cpu: 4
           environmentVariables:
-            - name: QUERY_COORDINATOR
-              value: "false"
+            - name: INITIAL_DISABLED_NODE_TASK
+              value: query
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:

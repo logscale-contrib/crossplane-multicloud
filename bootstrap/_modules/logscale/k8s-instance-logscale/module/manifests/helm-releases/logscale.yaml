@@ -438,6 +438,13 @@ spec:
       enabled: false
     pdfRenderService:
       enabled: true
+      resources:
+        requests:
+          memory: 2Gi
+          cpu: 1000m
+        limits:
+          memory: 4Gi
+          cpu: 2
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

@@ -1,7 +1,7 @@
 module "authentik_server" {
 
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.54.0"
+  version = "5.54.1"
 
   role_name_prefix = "${var.authentik_namespace}-server"
   role_path        = var.iam_role_path
@@ -31,7 +31,7 @@ module "authentik_server" {
 module "authentik_worker" {
 
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.54.0"
+  version = "5.54.1"
 
   role_name_prefix = "${var.authentik_namespace}-woker"
   role_path        = var.iam_role_path

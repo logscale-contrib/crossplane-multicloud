@@ -40,7 +40,7 @@ spec:
       image:
         registry: "humio"
         repository: "humio-core"
-        tag: "1.180.0"
+        tag: "1.181.0"
       drMode: bootstrap
 
       existingLicenseSecretName: logscale-license-tmp

@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: jetstack
-  namespace: kafka-ui
+  name: kafka-ui
+  namespace: flux-repos
 spec:
   interval: 60m
   url: https://provectus.github.io/kafka-ui-charts

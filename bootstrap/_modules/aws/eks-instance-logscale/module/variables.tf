@@ -39,3 +39,30 @@ variable "data_bucket_id" {
 variable "bucket_prefix" {
 
 }
+
+variable "smtp_server" {
+  type        = string
+  description = "(optional) describe your variable"
+}
+variable "smtp_port" {
+  type        = string
+  default     = "587"
+  description = "(optional) describe your variable"
+}
+variable "smtp_tls" {
+  type        = bool
+  default     = true
+  description = "(optional) describe your variable"
+}
+
+variable "from_email" {
+  type        = string
+  description = "(optional) describe your variable"
+}
+
+variable "arn_raw" {
+
+}
+variable "aws_sesv2_configuration_set_arn" {
+
+}

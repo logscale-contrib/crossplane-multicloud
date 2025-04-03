@@ -40,7 +40,7 @@ spec:
       image:
         registry: "humio"
         repository: "humio-core"
-        tag: "1.181.0"
+        tag: "1.181.2"
       drMode: none
 
       existingLicenseSecretName: logscale-license-tmp
@@ -56,9 +56,7 @@ spec:
           mountPath: "/mnt/logscale-license/logscale-license"
           readOnly: true
 
-      extraENV:
-        - name: HUMIO_OPTS
-          value: -Djava.security.manager=allow
+      # extraENV:
       trustManagerConfigMap: cluster-trust-bundle
       kafka:
         manager: external

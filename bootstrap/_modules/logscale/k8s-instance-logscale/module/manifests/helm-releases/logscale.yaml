@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: logscale
-      version: 8.0.1-next.4
+      version: 8.1.0
       sourceRef:
         kind: HelmRepository
         name: logscale-contrib-ls

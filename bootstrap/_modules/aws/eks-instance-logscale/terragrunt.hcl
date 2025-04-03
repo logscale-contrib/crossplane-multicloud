@@ -34,7 +34,7 @@ dependency "kubernetes_cluster" {
 dependency "bucket" {
   config_path = "${get_terragrunt_dir()}/../../../../bucket-data-dr/"
 }
-dependency "smtp" {
+dependency "mail" {
   config_path = "${get_terragrunt_dir()}/../../../../ses/"
 }
 # ---------------------------------------------------------------------------------------------------------------------
@@ -59,12 +59,13 @@ inputs = {
 
   logscale_namespace = "${local.tenantName}-logscale"
 
+  smtp_server = dependency.mail.outputs.smtp_server
+  smtp_port   = dependency.mail.outputs.smtp_port
+  smtp_tls    = dependency.mail.outputs.smtp_use_tls
+
+  arn_raw                         = dependency.mail.outputs.arn_raw
+  aws_sesv2_configuration_set_arn = dependency.mail.outputs.aws_sesv2_configuration_set_arn
+
+  from_email = "${local.tenantName}-logscale@${dependency.partition_zone.outputs.zone_name}"
+
 }
-smtp_server = dependency.smtp.outputs.smtp_server
-smtp_port   = dependency.smtp.outputs.smtp_port
-smtp_tls    = dependency.smtp.outputs.smtp_use_tls
-
-arn_raw                         = dependency.smtp.outputs.arn_raw
-aws_sesv2_configuration_set_arn = dependency.smtp.outputs.aws_sesv2_configuration_set_arn
-
-from_email = "${local.tenantName}-logscale@${dependency.partition_zone.outputs.zone_name}"

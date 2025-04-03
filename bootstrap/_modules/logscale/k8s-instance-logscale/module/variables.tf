@@ -67,10 +67,10 @@ variable "logscale_rootUser" {
 
 variable "logscale_smtp" {
   type = object({
-    host   = string
+    host     = string
     port     = number
     startTLS = bool
-    user     = string
+    username = string
     password = string
     sender   = string
   })

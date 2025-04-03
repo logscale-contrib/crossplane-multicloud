@@ -62,9 +62,9 @@ inputs = {
 
   logscale_namespace = "${local.tenantName}-logscale"
 
-  smtp_server = dependency.mail.outputs.smtp_server
-  smtp_port   = dependency.mail.outputs.smtp_port
-  smtp_tls    = dependency.mail.outputs.smtp_use_tls
+  smtp_server   = dependency.mail.outputs.smtp_server
+  smtp_port     = dependency.mail.outputs.smtp_port
+  smtp_startTls = dependency.mail.outputs.smtp_use_tls
 
   arn_raw                         = dependency.mail.outputs.arn_raw
   aws_sesv2_configuration_set_arn = dependency.mail.outputs.aws_sesv2_configuration_set_arn

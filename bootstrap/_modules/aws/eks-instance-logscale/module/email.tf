@@ -6,7 +6,7 @@ resource "aws_iam_policy" "send_mail" {
   path   = var.iam_role_path
   tags = {
 
-    git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/logscale-email.tf"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale/module/email.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
     git_org              = "logscale-contrib"
@@ -48,7 +48,7 @@ module "iam_ses_user" {
   path = var.iam_role_path
   tags = {
 
-    git_file             = "bootstrap/_modules/aws/eks-cp-regional/module/logscale-email.tf"
+    git_file             = "bootstrap/_modules/aws/eks-instance-logscale/module/email.tf"
     git_last_modified_by = "ryan@dss-i.com"
     git_modifiers        = "ryan"
     git_org              = "logscale-contrib"

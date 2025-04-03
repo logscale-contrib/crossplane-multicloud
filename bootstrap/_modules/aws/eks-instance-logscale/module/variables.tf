@@ -49,7 +49,7 @@ variable "smtp_port" {
   default     = "587"
   description = "(optional) describe your variable"
 }
-variable "smtp_tls" {
+variable "smtp_startTls" {
   type        = bool
   default     = true
   description = "(optional) describe your variable"

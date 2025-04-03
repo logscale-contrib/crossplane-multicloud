@@ -44,7 +44,7 @@ output "smtp" {
   value = {
     server   = var.smtp_server
     port     = var.smtp_port
-    tls      = var.smtp_startTls
+    startTLS      = var.smtp_startTls
     sender   = var.from_email
     user     = module.iam_ses_user.iam_access_key_id
     password = module.iam_ses_user.iam_access_key_ses_smtp_password_v4

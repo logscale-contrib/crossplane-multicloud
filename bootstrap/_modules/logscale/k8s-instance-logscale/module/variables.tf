@@ -56,11 +56,23 @@ variable "logscale_ingress_common" {
 }
 
 variable "logscale_sso" {
-  type        = any
+  type = any
 
 }
 
 variable "logscale_rootUser" {
   type        = string
+  description = "(optional) describe your variable"
+}
+
+variable "logscale_smtp" {
+  type = object({
+    server   = string
+    port     = number
+    startTLS = bool
+    user     = string
+    password = string
+    sender   = string
+  })
   description = "(optional) describe your variable"
 }

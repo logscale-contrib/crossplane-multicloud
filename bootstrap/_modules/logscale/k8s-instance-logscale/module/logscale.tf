@@ -29,12 +29,6 @@ data "kubectl_file_documents" "logscale" {
       # saml_url                 = var.saml_url
       # rootUser                 = var.LogScaleRoot
       # ingest_role_arn          = module.ingest-role.iam_role_arn
-      # smtp_server              = var.smtp_server
-      # smtp_port                = var.smtp_port
-      # smtp_use_tls             = var.smtp_use_tls
-      # smtp_user                = var.smtp_user
-      # smtp_password            = var.smtp_password
-      # smtp_sender              = var.smtp_sender
   })
 }
 
@@ -79,6 +73,16 @@ locals {
       }
     } }
   }
+  logscale_email = {
+    spec = { values = {
+      logscale = {
+        email = {
+          mode = "smtp"
+          smtp = var.logscale_smtp
+        }
+      }
+    } }
+  }
 }
 
 module "logscale_values" {
@@ -91,7 +95,7 @@ module "logscale_values" {
     local.logscale_buckets,
     local.logscale_sso,
     local.logscale_ingresses,
-
+    local.logscale_email
   ]
 }
 

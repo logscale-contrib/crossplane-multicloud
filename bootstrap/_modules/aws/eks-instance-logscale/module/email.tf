@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "send_mail" {
   statement {
     actions = ["ses:SendRawEmail"]
     resources = [
-      # aws_sesv2_email_identity.main.arn,
+      var.arn_raw,
       var.aws_sesv2_configuration_set_arn
     ]
   }

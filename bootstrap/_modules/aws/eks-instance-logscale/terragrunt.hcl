@@ -35,7 +35,7 @@ dependency "bucket" {
   config_path = "${get_terragrunt_dir()}/../../../../bucket-data-dr/"
 }
 dependency "partition_zone" {
-  config_path = "${get_terragrunt_dir()}/../../../../dns/"
+  config_path = "${get_terragrunt_dir()}/../../../../../dns/"
 }
 dependency "mail" {
   config_path = "${get_terragrunt_dir()}/../../../../ses/"

@@ -41,7 +41,7 @@ spec:
         registry: "humio"
         repository: "humio-core"
         tag: "1.181.0"
-      drMode: bootstrap
+      drMode: none
 
       existingLicenseSecretName: logscale-license-tmp
       extraVolumes:

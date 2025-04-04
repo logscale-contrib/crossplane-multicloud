@@ -437,7 +437,7 @@ spec:
     pdfRenderService:
       enabled: true
       config:
-        debug: true
+        debug: false
       podSecurityContext: {}
       # fsGroup: 20000
       # runAsUser: 10000

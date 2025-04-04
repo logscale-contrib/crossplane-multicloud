@@ -438,6 +438,15 @@ spec:
       enabled: true
       config:
         debug: true
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 10000
+        runAsGroup: 20000
+        capabilities:
+          drop:
+            - ALL
       resources:
         requests:
           memory: 2Gi

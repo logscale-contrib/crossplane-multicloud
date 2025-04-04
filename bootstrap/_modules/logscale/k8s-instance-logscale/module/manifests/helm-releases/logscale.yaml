@@ -442,8 +442,8 @@ spec:
         debug: false
       hostUsers: false
       podSecurityContext:
-        # runAsUser: 10000
-        # runAsGroup: 20000
+        runAsUser: 10000
+        runAsGroup: 20000
         fsGroup: 20000
         fsGroupChangePolicy: "OnRootMismatch"
       containerSecurityContext:
@@ -451,8 +451,8 @@ spec:
         readOnlyRootFilesystem: true
         runAsNonRoot: false
         privileged: false
-        # runAsUser: 10000
-        # runAsGroup: 20000
+        runAsUser: 10000
+        runAsGroup: 20000
         capabilities:
           drop:
             - ALL

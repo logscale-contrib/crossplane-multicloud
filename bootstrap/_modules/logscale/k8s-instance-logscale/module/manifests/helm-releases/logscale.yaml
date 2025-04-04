@@ -440,6 +440,7 @@ spec:
         tag: 0.0.60--build-102--sha-c8eb95329236ba5fc65659b83af1d84b4703cb1e
       config:
         debug: false
+      hostUsers: false
       podSecurityContext:
         # runAsUser: 10000
         # runAsGroup: 20000

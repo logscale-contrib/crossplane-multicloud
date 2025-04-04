@@ -444,17 +444,17 @@ spec:
         fsGroup: 20000
         fsGroupChangePolicy: "OnRootMismatch"
       containerSecurityContext:
-        allowPrivilegeEscalation: true
+        # allowPrivilegeEscalation: true
         readOnlyRootFilesystem: true
-        runAsNonRoot: false
-        privileged: false
-        runAsUser: 10000
-        runAsGroup: 20000
-        capabilities:
-          drop:
-            - ALL
-          add:
-            - SYS_ADMIN
+        # runAsNonRoot: false
+        # privileged: false
+        # runAsUser: 10000
+        # runAsGroup: 20000
+        # capabilities:
+        #   drop:
+        #     - ALL
+        #   add:
+        #     - SYS_ADMIN
       resources:
         requests:
           memory: 2Gi

@@ -447,7 +447,7 @@ spec:
       containerSecurityContext:
         allowPrivilegeEscalation: false
         readOnlyRootFilesystem: true
-        runAsNonRoot: true
+        # runAsNonRoot: true
         runAsUser: 10000
         runAsGroup: 20000
         capabilities:

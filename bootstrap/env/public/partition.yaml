@@ -24,7 +24,7 @@ shared:
       kubernetes:
         version: 1.32
         componentVersions:
-          cilium: 1.17.2
+          cilium: 1.17.1
         access_entries:
           gh:
             kubernetes_groups: []

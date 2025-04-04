@@ -445,7 +445,7 @@ spec:
       # hostUsers: false
       podSecurityContext:
         # runAsUser: 10000
-        runAsGroup: 20000
+        # runAsGroup: 20000
         fsGroup: 20000
         fsGroupChangePolicy: "OnRootMismatch"
       containerSecurityContext:

@@ -111,14 +111,26 @@ module "logscale_values" {
 # }
 
 resource "kubectl_manifest" "logscale" {
-  yaml_body = yamlencode(module.logscale_values.merged)
+  depends_on = [time_sleep.pre_logscale]
+  yaml_body  = yamlencode(module.logscale_values.merged)
 }
 
 
-resource "time_sleep" "wait_30_seconds" {
+resource "time_sleep" "pre_logscale" {
+  # depends_on       = [kubectl_manifest.logscale]
+  create_duration  = "1s"
+  destroy_duration = "180s"
+
+  triggers = {
+    module_logscale_values_merged = yamlencode(module.logscale_values.merged)
+  }
+}
+
+
+resource "time_sleep" "post_logscale" {
   depends_on       = [kubectl_manifest.logscale]
   create_duration  = "180s"
-  destroy_duration = "90s"
+  destroy_duration = "1s"
 
   triggers = {
     module_logscale_values_merged = yamlencode(module.logscale_values.merged)

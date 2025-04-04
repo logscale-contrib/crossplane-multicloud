@@ -436,25 +436,27 @@ spec:
       enabled: false
     pdfRenderService:
       enabled: true
+      image:
+        tag: 0.0.60--build-102--sha-c8eb95329236ba5fc65659b83af1d84b4703cb1e
       config:
         debug: false
       podSecurityContext:
-        runAsUser: 10000
-        runAsGroup: 20000
+        # runAsUser: 10000
+        # runAsGroup: 20000
         fsGroup: 20000
         fsGroupChangePolicy: "OnRootMismatch"
       containerSecurityContext:
-        # allowPrivilegeEscalation: true
+        allowPrivilegeEscalation: true
         readOnlyRootFilesystem: true
-        # runAsNonRoot: false
-        # privileged: false
+        runAsNonRoot: false
+        privileged: false
         # runAsUser: 10000
         # runAsGroup: 20000
-        # capabilities:
-        #   drop:
-        #     - ALL
-        #   add:
-        #     - SYS_ADMIN
+        capabilities:
+          drop:
+            - ALL
+          add:
+            - SYS_ADMIN
       resources:
         requests:
           memory: 2Gi

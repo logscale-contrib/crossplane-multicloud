@@ -444,15 +444,15 @@ spec:
       # runAsGroup: 20000
       # seLinuxOptions:
       #   level: "s0:c123,c456"
-      containerSecurityContext: {}
-      # allowPrivilegeEscalation: false
-      # readOnlyRootFilesystem: false
-      # runAsNonRoot: true
-      # runAsUser: 10000
-      # runAsGroup: 20000
-      # capabilities:
-      #   drop:
-      #     - ALL
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 10000
+        runAsGroup: 20000
+        capabilities:
+          drop:
+            - ALL
       resources:
         requests:
           memory: 2Gi

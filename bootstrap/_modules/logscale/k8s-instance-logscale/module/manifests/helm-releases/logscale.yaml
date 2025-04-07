@@ -101,7 +101,7 @@ spec:
           replicas: 2
           podDisruptionBudget:
             enabled: true
-            maxUnavailable: 33%
+            minAvailable: 1
           updateStrategy:
             enableZoneAwareness: true
             maxUnavailable: 33%
@@ -166,7 +166,7 @@ spec:
           replicas: 2
           podDisruptionBudget:
             enabled: true
-            maxUnavailable: 33%
+            minAvailable: 1
           updateStrategy:
             enableZoneAwareness: true
             maxUnavailable: 33%
@@ -237,7 +237,7 @@ spec:
             type: RollingUpdate
           podDisruptionBudget:
             enabled: true
-            maxUnavailable: 33%
+            minAvailable: 2
           nodePoolFeatures:
             allowedAPIRequestTypes: [None]
           resources:
@@ -304,7 +304,7 @@ spec:
             type: RollingUpdate
           podDisruptionBudget:
             enabled: true
-            maxUnavailable: 33%
+            minAvailable: 1
           nodePoolFeatures:
             allowedAPIRequestTypes: [None]
           resources:
@@ -371,7 +371,7 @@ spec:
             type: ReplaceAllOnUpdate
           podDisruptionBudget:
             enabled: true
-            maxUnavailable: 33%
+            minAvailable: 2
           nodePoolFeatures:
             allowedAPIRequestTypes: [None]
           resources:

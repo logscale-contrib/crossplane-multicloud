@@ -159,7 +159,7 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: cluster-block-base-ext4
+            storageClassName: cluster-block-hdd-ext4
           service:
             type: ClusterIP
         - name: ui
@@ -226,7 +226,7 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: cluster-block-base-ext4
+            storageClassName: cluster-block-hdd-ext4
           service:
             type: ClusterIP
         - name: ingest
@@ -293,7 +293,7 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: cluster-block-base-ext4
+            storageClassName: cluster-block-hdd-ext4
           service:
             type: ClusterIP
         - name: query-coordinator
@@ -360,7 +360,7 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: cluster-block-base-ext4
+            storageClassName: cluster-block-hdd-ext4
           service:
             type: ClusterIP
         - name: segments
@@ -372,6 +372,7 @@ spec:
           podDisruptionBudget:
             enabled: true
             minAvailable: 2
+            unhealthyPodEvictionPolicy: IfHealthyBudget
           nodePoolFeatures:
             allowedAPIRequestTypes: [None]
           resources:

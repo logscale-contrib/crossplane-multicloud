@@ -1,7 +1,7 @@
 
 module "data-dr" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "4.6.0"
+  version = "4.6.1"
 
   bucket_prefix = var.name
   # acl           = "private"

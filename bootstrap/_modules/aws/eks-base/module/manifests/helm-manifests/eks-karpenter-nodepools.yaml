@@ -39,7 +39,7 @@ spec:
         apiVersion: karpenter.sh/v1
         kind: NodePool
         metadata:
-          name: general-v1
+          name: general-v2
         spec:
           template:
             metadata:
@@ -66,6 +66,9 @@ spec:
                 - key: "karpenter.k8s.aws/instance-category"
                   operator: In
                   values: ["c", "m", "r"]
+                - key: "karpenter.k8s.aws/instance-cpu"
+                  operator: Gt
+                  values: ["8"]
               startupTaints:
                 - key: node.cilium.io/agent-not-ready
                   value: "true"
@@ -86,7 +89,7 @@ spec:
         apiVersion: karpenter.sh/v1
         kind: NodePool
         metadata:
-          name: storage-v1
+          name: storage-v2
         spec:
           template:
             metadata:
@@ -119,7 +122,7 @@ spec:
                   values: ["i"]
                 - key: "karpenter.k8s.aws/instance-cpu"
                   operator: Gt
-                  values: ["4"]
+                  values: ["8"]
                 - key: "karpenter.k8s.aws/instance-local-nvme"
                   operator: Exists
               startupTaints:

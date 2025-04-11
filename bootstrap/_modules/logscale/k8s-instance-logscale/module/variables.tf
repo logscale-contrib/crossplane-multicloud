@@ -76,3 +76,9 @@ variable "logscale_smtp" {
   })
   description = "(optional) describe your variable"
 }
+
+variable "logscale_priority_class_prefix" {
+  type        = string
+  description = "(optional) describe your variable"
+  default     = "tenant"
+}

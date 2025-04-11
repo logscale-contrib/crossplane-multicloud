@@ -20,12 +20,12 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  partition  = yamldecode(file(find_in_parent_folders("partition.yaml")))
-  tenant     = yamldecode(file(find_in_parent_folders("tenant.yaml")))
-  currentDir = get_terragrunt_dir()
-  tenantName = regex("tenants/([^/]+)/", local.currentDir)[0]
-  appName    = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
-
+  partition         = yamldecode(file(find_in_parent_folders("partition.yaml")))
+  tenant            = yamldecode(file(find_in_parent_folders("tenant.yaml")))
+  currentDir        = get_terragrunt_dir()
+  tenantName        = regex("tenants/([^/]+)/", local.currentDir)[0]
+  appName           = regex("tenants/[^/]+/([^/]+)/", local.currentDir)[0]
+  priorityClassName = local.tenantName == "partition" ? "partition" : "tenant"
 
 }
 
@@ -72,4 +72,6 @@ inputs = {
 
   logscale_rootUser = local.partition.logscale.rootUser
   logscale_smtp     = dependency.infra-logscale.outputs.smtp
+
+  logscale_priority_class_prefix = local.priorityClassName
 }

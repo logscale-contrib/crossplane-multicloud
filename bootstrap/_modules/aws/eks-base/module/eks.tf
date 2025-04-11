@@ -140,7 +140,7 @@ module "eks" {
     "controllerManager",
     "scheduler"
   ]
-  cloudwatch_log_group_retention_in_days = 3
+  cloudwatch_log_group_retention_in_days = 1
 
   enable_cluster_creator_admin_permissions = false
   access_entries                           = var.access_entries

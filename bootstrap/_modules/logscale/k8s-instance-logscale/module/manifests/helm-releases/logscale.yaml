@@ -99,6 +99,7 @@ spec:
           nodePoolFeatures:
             allowedAPIRequestTypes: [OperatorInternal]
           replicas: 2
+          priorityClassName: ${logscale_priorityClassName}-medium
           podDisruptionBudget:
             enabled: true
             minAvailable: 1
@@ -164,6 +165,7 @@ spec:
             type: ClusterIP
         - name: ui
           replicas: 2
+          priorityClassName: ${logscale_priorityClassName}-medium
           podDisruptionBudget:
             enabled: true
             minAvailable: 1
@@ -235,6 +237,7 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
+          priorityClassName: ${logscale_priorityClassName}-medium
           podDisruptionBudget:
             enabled: true
             minAvailable: 2
@@ -302,6 +305,7 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
+          priorityClassName: ${logscale_priorityClassName}-medium
           podDisruptionBudget:
             enabled: true
             minAvailable: 1
@@ -369,6 +373,7 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: ReplaceAllOnUpdate
+          priorityClassName: ${logscale_priorityClassName}-high
           podDisruptionBudget:
             enabled: true
             minAvailable: 2

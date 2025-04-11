@@ -3,11 +3,12 @@ data "kubectl_file_documents" "logscale" {
   content = templatefile(
     "./manifests/helm-releases/logscale.yaml",
     {
-      kafka_prefix       = "${format("g%03s", counters_monotonic.kafka_prefix.value)}"
-      logscale_name      = var.logscale_name
-      logscale_namespace = var.logscale_namespace
-      host               = var.logscale_host
-      logscale_rootUser  = var.logscale_rootUser
+      kafka_prefix                   = "${format("g%03s", counters_monotonic.kafka_prefix.value)}"
+      logscale_name                  = var.logscale_name
+      logscale_namespace             = var.logscale_namespace
+      host                           = var.logscale_host
+      logscale_rootUser              = var.logscale_rootUser
+      logscale_priority_class_prefix = var.logscale_priority_class_prefix
       # namespace                = local.namespace
       # region                   = var.region
       # platformType             = "aws"

@@ -99,7 +99,7 @@ spec:
           nodePoolFeatures:
             allowedAPIRequestTypes: [OperatorInternal]
           replicas: 2
-          # priorityClassName: ${logscale_priorityClassName}-medium
+          priorityClassName: ${logscale_priorityClassName}-medium
           podDisruptionBudget:
             enabled: true
             minAvailable: 1
@@ -165,7 +165,7 @@ spec:
             type: ClusterIP
         - name: ui
           replicas: 2
-          # priorityClassName: ${logscale_priorityClassName}-medium
+          priorityClassName: ${logscale_priorityClassName}-medium
           podDisruptionBudget:
             enabled: true
             minAvailable: 1
@@ -200,8 +200,8 @@ spec:
                         operator: In
                         values:
                           - linux
-                      - key: karpenter.k8s.aws/instance-local-nvme
-                        operator: DoesNotExist
+                          # - key: karpenter.k8s.aws/instance-local-nvme
+                          #   operator: DoesNotExist
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
                 - labelSelector:
@@ -237,7 +237,7 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
-          # priorityClassName: ${logscale_priorityClassName}-medium
+          priorityClassName: ${logscale_priorityClassName}-medium
           podDisruptionBudget:
             enabled: true
             minAvailable: 2
@@ -268,8 +268,8 @@ spec:
                         operator: In
                         values:
                           - linux
-                      - key: karpenter.k8s.aws/instance-local-nvme
-                        operator: DoesNotExist
+                          # - key: karpenter.k8s.aws/instance-local-nvme
+                          #   operator: DoesNotExist
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
                 - labelSelector:
@@ -305,7 +305,7 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: RollingUpdate
-          # priorityClassName: ${logscale_priorityClassName}-medium
+          priorityClassName: ${logscale_priorityClassName}-medium
           podDisruptionBudget:
             enabled: true
             minAvailable: 1
@@ -336,8 +336,8 @@ spec:
                         operator: In
                         values:
                           - linux
-                      - key: karpenter.k8s.aws/instance-local-nvme
-                        operator: DoesNotExist
+                          # - key: karpenter.k8s.aws/instance-local-nvme
+                          #   operator: DoesNotExist
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
                 - labelSelector:
@@ -373,7 +373,7 @@ spec:
             enableZoneAwareness: true
             maxUnavailable: 33%
             type: ReplaceAllOnUpdate
-          # priorityClassName: ${logscale_priorityClassName}-high
+          priorityClassName: ${logscale_priorityClassName}-high
           podDisruptionBudget:
             enabled: true
             minAvailable: 2
@@ -486,8 +486,8 @@ spec:
                     operator: In
                     values:
                       - linux
-                  - key: karpenter.k8s.aws/instance-local-nvme
-                    operator: DoesNotExist
+                      # - key: karpenter.k8s.aws/instance-local-nvme
+                      #   operator: DoesNotExist
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:

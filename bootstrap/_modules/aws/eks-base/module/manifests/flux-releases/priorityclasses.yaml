@@ -97,3 +97,10 @@ spec:
         value: 7000000
         globalDefault: false
         description: "tenant Level Services only"
+      - apiVersion: scheduling.k8s.io/v1
+        kind: PriorityClass
+        metadata:
+          name: not-set-by-deployment
+        value: 6000000
+        globalDefault: true
+        description: "Default when not provided by deployment"

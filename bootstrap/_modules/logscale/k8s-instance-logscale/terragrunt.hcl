@@ -73,5 +73,5 @@ inputs = {
   logscale_rootUser = local.partition.logscale.rootUser
   logscale_smtp     = dependency.infra-logscale.outputs.smtp
 
-  logscale_priority_class_prefix = local.priorityClassName
+  logscale_priorityClassName = local.priorityClassName
 }

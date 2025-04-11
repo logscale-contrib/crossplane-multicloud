@@ -8,7 +8,7 @@ data "kubectl_file_documents" "logscale" {
       logscale_namespace             = var.logscale_namespace
       host                           = var.logscale_host
       logscale_rootUser              = var.logscale_rootUser
-      logscale_priority_class_prefix = var.logscale_priority_class_prefix
+      logscale_priorityClassName = var.logscale_priorityClassName
       # namespace                = local.namespace
       # region                   = var.region
       # platformType             = "aws"

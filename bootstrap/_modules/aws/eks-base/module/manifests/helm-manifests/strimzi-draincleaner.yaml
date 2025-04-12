@@ -42,15 +42,6 @@ spec:
         limits:
           cpu: 1
           memory: 128Gi
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-                - key: name
-                  operator: In
-                  values:
-                    - strimzi-cluster-operator
-            topologyKey: kubernetes.io/hostname
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
@@ -61,7 +52,7 @@ spec:
                     - linux
 
     topologySpreadConstraints:
-      - maxSkew: 2
+      - maxSkew: 1
         minDomains: 2
         whenUnsatisfiable: DoNotSchedule
         topologyKey: topology.kubernetes.io/zone

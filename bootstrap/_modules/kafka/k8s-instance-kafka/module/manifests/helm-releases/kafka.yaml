@@ -47,11 +47,30 @@ spec:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   - labelSelector:
                       matchExpressions:
+                        - key: strimzi.io/cluster
+                          operator: In
+                          values:
+                            - ${kafka_name}
                         - key: strimzi.io/pool-name
                           operator: In
                           values:
                             - kafka
                     topologyKey: kubernetes.io/hostname
+              podAffinity:
+                PreferredDuringSchedulingIgnoredDuringExecution:
+                  - weight: 100
+                    podAffinityTerm:
+                      labelSelector:
+                        matchExpressions:
+                          - key: strimzi.io/cluster
+                            operator: In
+                            values:
+                              - ${kafka_name}
+                          - key: strimzi.io/pool-name
+                            operator: In
+                            values:
+                              - controller
+                      topologyKey: topology.kubernetes.io/zone
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
@@ -62,13 +81,21 @@ spec:
                             - linux
                         - key: karpenter.k8s.aws/instance-local-nvme
                           operator: DoesNotExist
-
+                preferredDuringSchedulingIgnoredDuringExecution:
+                  - weight: 100
+                    preference:
+                      matchExpressions:
+                        - key: kubernetes.io/arch
+                          operator: In
+                          values:
+                            - arm64
             topologySpreadConstraints:
-              - maxSkew: 2
+              - maxSkew: 1
                 whenUnsatisfiable: ScheduleAnyway
                 topologyKey: topology.kubernetes.io/zone
                 labelSelector:
                   matchLabels:
+                    strimzi.io/cluster: ${kafka_name}
                     strimzi.io/pool-name: kafka
                 matchLabelKeys:
                   - pod-template-hash
@@ -143,12 +170,22 @@ spec:
                             - linux
                         - key: karpenter.k8s.aws/instance-local-nvme
                           operator: DoesNotExist
+                preferredDuringSchedulingIgnoredDuringExecution:
+                  - weight: 100
+                    preference:
+                      matchExpressions:
+                        - key: kubernetes.io/arch
+                          operator: In
+                          values:
+                            - arm64
+
             topologySpreadConstraints:
-              - maxSkew: 2
+              - maxSkew: 1
                 whenUnsatisfiable: ScheduleAnyway
                 topologyKey: topology.kubernetes.io/zone
                 labelSelector:
                   matchLabels:
+                    strimzi.io/cluster: ${kafka_name}
                     strimzi.io/pool-name: controller
                 matchLabelKeys:
                   - pod-template-hash
@@ -173,6 +210,21 @@ spec:
         # targetMemoryUtilizationPercentage: 80
 
       affinity:
+        podAffinity:
+          PreferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: strimzi.io/cluster
+                      operator: In
+                      values:
+                        - ${kafka_name}
+                    - key: strimzi.io/pool-name
+                      operator: In
+                      values:
+                        - kafka
+                topologyKey: topology.kubernetes.io/zone
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -181,7 +233,16 @@ spec:
                     operator: In
                     values:
                       - linux
-
+                  - key: karpenter.k8s.aws/instance-local-nvme
+                    operator: DoesNotExist
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - arm64
     topicOperator:
       resources:
         # We usually recommend not to specify default resources and to leave this as a conscious
@@ -201,6 +262,40 @@ spec:
         maxReplicas: 100
         targetCPUUtilizationPercentage: 80
         # targetMemoryUtilizationPercentage: 80
+      affinity:
+        podAffinity:
+          PreferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: strimzi.io/cluster
+                      operator: In
+                      values:
+                        - ${kafka_name}
+                    - key: strimzi.io/pool-name
+                      operator: In
+                      values:
+                        - kafka
+                topologyKey: topology.kubernetes.io/zone
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
+                  - key: karpenter.k8s.aws/instance-local-nvme
+                    operator: DoesNotExist
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - arm64
 
     userOperator:
       resources:
@@ -221,6 +316,41 @@ spec:
         maxReplicas: 100
         targetCPUUtilizationPercentage: 80
         # targetMemoryUtilizationPercentage: 80
+
+      affinity:
+        podAffinity:
+          PreferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: strimzi.io/cluster
+                      operator: In
+                      values:
+                        - ${kafka_name}
+                    - key: strimzi.io/pool-name
+                      operator: In
+                      values:
+                        - kafka
+                topologyKey: topology.kubernetes.io/zone
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
+                  - key: karpenter.k8s.aws/instance-local-nvme
+                    operator: DoesNotExist
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - arm64
 
     kafka:
       config:

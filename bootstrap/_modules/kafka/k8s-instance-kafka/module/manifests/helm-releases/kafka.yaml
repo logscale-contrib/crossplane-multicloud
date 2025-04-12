@@ -113,22 +113,22 @@ spec:
               type: persistent-claim
               size: 1Ti
               deleteClaim: true
-              class: cluster-block-hdd-ext4
+              class: cluster-block-base-ext4
             - id: 2
               type: persistent-claim
               size: 1Ti
               deleteClaim: true
-              class: cluster-block-hdd-ext4
+              class: cluster-block-base-ext4
             - id: 3
               type: persistent-claim
               size: 1Ti
               deleteClaim: true
-              class: cluster-block-hdd-ext4
+              class: cluster-block-base-ext4
               # type: persistent-claim
               # size: 1500Gi
               # deleteClaim: false
               # # Must be SSD or NVME like storage IOPs is the primary node constraint
-              # class: cluster-block-hdd-ext4
+              # class: cluster-block-base-ext4
 
       controller:
         resources:
@@ -147,7 +147,7 @@ spec:
           size: 64Gi
           deleteClaim: true
           # Must be SSD or NVME like storage IOPs is the primary node constraint
-          class: cluster-block-hdd-ext4
+          class: cluster-block-base-ext4
         template:
           pod:
             affinity:

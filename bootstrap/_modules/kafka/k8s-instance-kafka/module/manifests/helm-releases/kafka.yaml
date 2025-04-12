@@ -58,21 +58,21 @@ spec:
                           values:
                             - kafka
                     topologyKey: kubernetes.io/hostname
-              podAffinity:
-                PreferredDuringSchedulingIgnoredDuringExecution:
-                  - weight: 100
-                    podAffinityTerm:
-                      labelSelector:
-                        matchExpressions:
-                          - key: strimzi.io/cluster
-                            operator: In
-                            values:
-                              - ${kafka_name}
-                          - key: strimzi.io/pool-name
-                            operator: In
-                            values:
-                              - controller
-                      topologyKey: topology.kubernetes.io/zone
+              # podAffinity:
+              #   PreferredDuringSchedulingIgnoredDuringExecution:
+              #     - weight: 100
+              #       podAffinityTerm:
+              #         labelSelector:
+              #           matchExpressions:
+              #             - key: strimzi.io/cluster
+              #               operator: In
+              #               values:
+              #                 - ${kafka_name}
+              #             - key: strimzi.io/pool-name
+              #               operator: In
+              #               values:
+              #                 - controller
+              #         topologyKey: topology.kubernetes.io/zone
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:

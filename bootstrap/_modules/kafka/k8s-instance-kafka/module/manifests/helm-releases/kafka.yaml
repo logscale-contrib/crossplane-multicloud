@@ -16,6 +16,8 @@ spec:
         namespace: flux-repos
       interval: 5m
   releaseName: ${namespace}
+  driftDetection:
+    mode: enabled
   install:
     remediation:
       retries: 3

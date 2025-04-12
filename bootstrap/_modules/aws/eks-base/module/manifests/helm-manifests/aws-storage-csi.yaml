@@ -36,8 +36,6 @@ spec:
         kind: StorageClass
         metadata:
           name: cluster-block-base-ext4
-          annotations:
-            storageclass.kubernetes.io/is-default-class: "true"
         parameters:
           fsType: ext4
           type: gp3

@@ -107,7 +107,7 @@ spec:
               type: persistent-claim
               size: 1Ti
               deleteClaim: true
-              class: cluster-block-block-ext4
+              class: cluster-block-base-ext4
               kraftMetadata: shared
             - id: 1
               type: persistent-claim

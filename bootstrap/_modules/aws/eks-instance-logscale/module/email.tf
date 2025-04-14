@@ -35,7 +35,7 @@ resource "random_string" "random" {
 
 module "iam_ses_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-  version = "5.54.1"
+  version = "5.55.0"
 
   name = "logscale-send-mail-${random_string.random.result}"
 
